@@ -10,6 +10,7 @@ compose-bom = "2023.10.01"
 kotlin = "1.9.21"
 material3 = "1.1.2"
 compose-ui = "1.5.4"
+ktlint = "11.0.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -30,6 +31,7 @@ material3 = { group = "androidx.compose.material3", name = "material3", version.
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jlleitschuh-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 
 [bundles]
 
