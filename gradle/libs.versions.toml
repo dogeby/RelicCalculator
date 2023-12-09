@@ -11,6 +11,9 @@ kotlin = "1.9.21"
 material3 = "1.1.2"
 compose-ui = "1.5.4"
 ktlint = "12.0.2"
+retrofit = "2.9.0"
+retrofit-kotlinx-serialization-json = "1.0.0"
+kotlinx-serialization-json = "1.6.2"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -27,11 +30,17 @@ ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview
 ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "compose-ui" }
 ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "compose-ui" }
 material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
+retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-kotlinx-serialization-json" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jlleitschuh-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+com-android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 [bundles]
 

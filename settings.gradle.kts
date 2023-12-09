@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "RelicCalculator"
 include(":app")
+include(":core:network")
