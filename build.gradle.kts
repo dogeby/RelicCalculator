@@ -1,3 +1,5 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 plugins {
     alias(libs.plugins.com.android.application) apply false
     alias(libs.plugins.org.jetbrains.kotlin.android) apply false
@@ -8,9 +10,9 @@ subprojects {
     apply {
         plugin(rootProject.libs.plugins.jlleitschuh.ktlint.get().pluginId)
     }
-}
-
-ktlint {
-    android = true
-    ignoreFailures = false
+    ktlint {
+        reporters {
+            reporter(ReporterType.CHECKSTYLE)
+        }
+    }
 }
