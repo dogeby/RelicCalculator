@@ -14,6 +14,7 @@ ktlint = "12.0.2"
 retrofit = "2.9.0"
 retrofit-kotlinx-serialization-json = "1.0.0"
 kotlinx-serialization-json = "1.6.2"
+secrets = "2.0.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -41,6 +42,7 @@ jlleitschuh-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktli
 com-android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }
 
 [bundles]
 

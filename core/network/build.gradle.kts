@@ -2,11 +2,16 @@ plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.secrets)
 }
 
 android {
     namespace = "com.dogeby.reliccalculator.core.network"
-    compileSdk = 33
+    compileSdk = 34
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         minSdk = 26
@@ -31,6 +36,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+}
+
+secrets {
+    defaultPropertiesFileName = "local.defaults.properties"
 }
 
 dependencies {
