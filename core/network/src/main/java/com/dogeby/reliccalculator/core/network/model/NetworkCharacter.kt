@@ -1,5 +1,6 @@
 package com.dogeby.reliccalculator.core.network.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -11,9 +12,9 @@ data class NetworkCharacter(
     val portrait: String,
     val path: NetworkPath,
     val element: NetworkElement,
-    val lightCone: NetworkLightCone,
+    @SerialName("light_cone") val lightCone: NetworkLightCone,
     val relics: List<NetworkRelic>,
-    val relicSets: List<NetworkRelicSet>,
+    @SerialName("relic_sets") val relicSets: List<NetworkRelicSet>,
     val attributes: List<NetworkAttribute>,
     val additions: List<NetworkAttribute>,
 )
