@@ -1,0 +1,87 @@
+{
+  "player": {
+    "uid": "800000000",
+    "nickname": "별명",
+    "space_info": {
+      "achievement_count": 10
+    }
+  },
+  "characters": [
+    {
+      "id": "8002",
+      "name": "캐릭터",
+      "icon": "icon/character/8002.png",
+      "preview": "image/character_preview/8002.png",
+      "portrait": "image/character_portrait/8002.png",
+      "path": {
+        "id": "Warrior",
+        "name": "파멸",
+        "icon": "icon/path/Destruction.png"
+      },
+      "element": {
+        "id": "Physical",
+        "name": "물리",
+        "icon": "icon/element/Physical.png"
+      },
+      "light_cone": {
+        "id": "20002",
+        "name": "천경",
+        "icon":"icon/light_cone/20002.png",
+        "portrait": "image/light_cone_portrait/20002.png"
+      },
+      "relics": [],
+      "relic_sets": [],
+      "attributes": [
+        {
+          "field": "hp",
+          "name": "HP",
+          "icon": "icon/property/IconMaxHP.png",
+          "value": 218.448,
+          "display": "218",
+          "percent": false
+        },
+        {
+          "field": "atk",
+          "name": "공격력",
+          "icon": "icon/property/IconAttack.png",
+          "value": 109.728,
+          "display": "109",
+          "percent": false
+        },
+        {
+          "field": "def",
+          "name": "방어력",
+          "icon": "icon/property/IconDefence.png",
+          "value": 77.97,
+          "display": "77",
+          "percent": false
+        },
+        {
+          "field": "spd",
+          "name": "속도",
+          "icon": "icon/property/IconSpeed.png",
+          "value": 100.0,
+          "display": "100",
+          "percent": false
+        },
+        {
+          "field": "crit_rate",
+          "name": "치명타 확률",
+          "icon": "icon/property/IconCriticalChance.png",
+          "value": 0.05,
+          "display": "5.0%",
+          "percent": true
+        },
+        {
+          "field": "crit_dmg",
+          "name": "치명타 피해",
+          "icon": "icon/property/IconCriticalDamage.png",
+          "value": 0.5,
+          "display": "50.0%",
+          "percent": true
+        }
+      ],
+      "additions": []
+    }
+  ]
+}
