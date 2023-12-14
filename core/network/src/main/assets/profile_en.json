@@ -1,0 +1,87 @@
+{
+  "player": {
+    "uid": "800000000",
+    "nickname": "nickname",
+    "space_info": {
+      "achievement_count": 5
+    }
+  },
+  "characters": [
+    {
+      "id": "8002",
+      "name": "character",
+      "icon": "icon/character/8002.png",
+      "preview": "image/character_preview/8002.png",
+      "portrait": "image/character_portrait/8002.png",
+      "path": {
+        "id": "Warrior",
+        "name": "Destruction",
+        "icon": "icon/path/Destruction.png"
+      },
+      "element": {
+        "id": "Physical",
+        "name": "Physical",
+        "icon": "icon/element/Physical.png"
+      },
+      "light_cone": {
+        "id": "20002",
+        "name": "Collapsing Sky",
+        "icon":"icon/light_cone/20002.png",
+        "portrait": "image/light_cone_portrait/20002.png"
+      },
+      "relics": [],
+      "relic_sets": [],
+      "attributes": [
+        {
+          "field": "hp",
+          "name": "HP",
+          "icon": "icon/property/IconMaxHP.png",
+          "value": 218.448,
+          "display": "218",
+          "percent": false
+        },
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "value": 109.728,
+          "display": "109",
+          "percent": false
+        },
+        {
+          "field": "def",
+          "name": "DEF",
+          "icon": "icon/property/IconDefence.png",
+          "value": 77.97,
+          "display": "77",
+          "percent": false
+        },
+        {
+          "field": "spd",
+          "name": "SPD",
+          "icon": "icon/property/IconSpeed.png",
+          "value": 100.0,
+          "display": "100",
+          "percent": false
+        },
+        {
+          "field": "crit_rate",
+          "name": "CRIT Rate",
+          "icon": "icon/property/IconCriticalChance.png",
+          "value": 0.05,
+          "display": "5.0%",
+          "percent": true
+        },
+        {
+          "field": "crit_dmg",
+          "name": "CRIT DMG",
+          "icon": "icon/property/IconCriticalDamage.png",
+          "value": 0.5,
+          "display": "50.0%",
+          "percent": true
+        }
+      ],
+      "additions": []
+    }
+  ]
+}
