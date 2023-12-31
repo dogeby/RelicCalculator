@@ -1,4 +1,4 @@
-package com.dogeby.reliccalculator.core.model.data
+package com.dogeby.reliccalculator.core.model.data.hoyo
 
 data class SubAffix(
     val type: String,

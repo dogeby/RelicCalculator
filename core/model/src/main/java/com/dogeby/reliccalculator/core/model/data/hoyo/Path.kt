@@ -1,4 +1,4 @@
-package com.dogeby.reliccalculator.core.model.data
+package com.dogeby.reliccalculator.core.model.data.hoyo
 
 data class Path(
     val id: String,
