@@ -1,4 +1,4 @@
-package com.dogeby.reliccalculator.core.network.model
+package com.dogeby.reliccalculator.core.network.model.hoyo
 
 import kotlinx.serialization.Serializable
 

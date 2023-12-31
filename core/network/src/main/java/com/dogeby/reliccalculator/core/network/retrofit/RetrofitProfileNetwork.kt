@@ -2,7 +2,7 @@ package com.dogeby.reliccalculator.core.network.retrofit
 
 import com.dogeby.reliccalculator.core.network.BuildConfig
 import com.dogeby.reliccalculator.core.network.ProfileNetworkDataSource
-import com.dogeby.reliccalculator.core.network.model.NetworkProfile
+import com.dogeby.reliccalculator.core.network.model.hoyo.NetworkProfile
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -1,9 +1,9 @@
-package com.dogeby.reliccalculator.core.network.model
+package com.dogeby.reliccalculator.core.network.model.hoyo
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NetworkPath(
+data class NetworkElement(
     val id: String,
     val name: String,
     val icon: String,

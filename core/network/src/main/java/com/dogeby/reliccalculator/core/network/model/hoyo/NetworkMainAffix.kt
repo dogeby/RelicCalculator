@@ -1,14 +1,13 @@
-package com.dogeby.reliccalculator.core.network.model
+package com.dogeby.reliccalculator.core.network.model.hoyo
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NetworkSubAffix(
+data class NetworkMainAffix(
     val type: String,
     val name: String,
     val icon: String,
     val value: Double,
     val display: String,
     val percent: Boolean,
-    val count: Int,
 )

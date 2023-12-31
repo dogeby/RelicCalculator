@@ -20,7 +20,7 @@ import JvmUnitTestFakeAssetManager
 import com.dogeby.reliccalculator.core.network.Dispatcher
 import com.dogeby.reliccalculator.core.network.NetworkDispatchers
 import com.dogeby.reliccalculator.core.network.ProfileNetworkDataSource
-import com.dogeby.reliccalculator.core.network.model.NetworkProfile
+import com.dogeby.reliccalculator.core.network.model.hoyo.NetworkProfile
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
