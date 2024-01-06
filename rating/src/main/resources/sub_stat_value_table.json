@@ -6,59 +6,59 @@
       "High": 2.6
     },
     "HPDelta": {
-      "Low": 33.87,
-      "Med": 38.103755,
-      "High": 42.33751
+      "Low": 33.0,
+      "Med": 38.0,
+      "High": 42.0
     },
     "AttackDelta": {
-      "Low": 16.935,
-      "Med": 19.051877,
-      "High": 21.168754
+      "Low": 16.0,
+      "Med": 19.0,
+      "High": 21.0
     },
     "DefenceDelta": {
-      "Low": 16.935,
-      "Med": 19.051877,
-      "High": 21.168754
+      "Low": 16.0,
+      "Med": 19.0,
+      "High": 21.0
     },
     "HPAddedRatio": {
-      "Low": 3.456,
-      "Med": 3.888,
-      "High": 4.32
+      "Low": 0.034,
+      "Med": 0.038,
+      "High": 0.043
     },
     "AttackAddedRatio": {
-      "Low": 3.456,
-      "Med": 3.888,
-      "High": 4.32
+      "Low": 0.034,
+      "Med": 0.038,
+      "High": 0.043
     },
     "DefenceAddedRatio": {
-      "Low": 4.32,
-      "Med": 4.86,
-      "High": 5.4
+      "Low": 0.043,
+      "Med": 0.048,
+      "High": 0.054
     },
     "BreakDamageAddedRatioBase": {
-      "Low": 5.184,
-      "Med": 5.832,
-      "High": 6.48
+      "Low": 0.051,
+      "Med": 0.058,
+      "High": 0.064
     },
     "StatusProbabilityBase": {
-      "Low": 3.456,
-      "Med": 3.888,
-      "High": 4.32
+      "Low": 0.034,
+      "Med": 0.038,
+      "High": 0.043
     },
     "StatusResistanceBase": {
-      "Low": 3.456,
-      "Med": 3.888,
-      "High": 4.32
+      "Low": 0.034,
+      "Med": 0.038,
+      "High": 0.043
     },
     "CriticalChanceBase": {
-      "Low": 2.592,
-      "Med": 2.916,
-      "High": 3.24
+      "Low": 0.025,
+      "Med": 0.029,
+      "High": 0.032
     },
     "CriticalDamageBase": {
-      "Low": 5.184,
-      "Med": 5.832,
-      "High": 6.48
+      "Low": 0.051,
+      "Med": 0.058,
+      "High": 0.064
     }
   }
 }
