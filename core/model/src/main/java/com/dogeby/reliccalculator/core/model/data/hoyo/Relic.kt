@@ -9,5 +9,5 @@ data class Relic(
     val level: Int,
     val icon: String,
     val mainAffix: MainAffix,
-    val subAffix: SubAffix,
+    val subAffix: List<SubAffix>,
 )
