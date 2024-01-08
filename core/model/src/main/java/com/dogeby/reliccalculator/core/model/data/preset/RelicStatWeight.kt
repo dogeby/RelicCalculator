@@ -1,6 +1,6 @@
 package com.dogeby.reliccalculator.core.model.data.preset
 
-data class RelicWeight(
-    val relicPart: RelicPart,
+data class RelicStatWeight(
+    val type: String,
     val weight: Float,
 )

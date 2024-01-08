@@ -4,5 +4,5 @@ data class CharacterPreset(
     val id: String,
     val characterId: String,
     val relicSetIds: List<String>,
-    val relicWeights: List<RelicWeight>,
+    val relicStatWeights: List<RelicStatWeight>,
 )
