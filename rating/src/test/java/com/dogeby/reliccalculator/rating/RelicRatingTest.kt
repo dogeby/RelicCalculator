@@ -66,10 +66,10 @@ class RelicRatingTest {
     )
 
     @Test
-    fun test_calculate_stat_score() {
+    fun test_calculate_sub_affix_score() {
         val expectedResult = listOf(4.5f, 5.0f, 4.1f, 4.0f)
         relic.subAffix.forEachIndexed { index, subAffix ->
-            val actualResult = relicRating.calculateStatScore(subAffix)
+            val actualResult = relicRating.calculateSubAffixScore(subAffix)
             Assert.assertEquals(expectedResult[index], actualResult)
         }
     }

@@ -13,7 +13,7 @@ object RelicRating {
     )
     private const val HIGH = "High"
 
-    fun calculateStatScore(subAffix: SubAffix): Float {
+    fun calculateSubAffixScore(subAffix: SubAffix): Float {
         val statIncreaseValues = subStatValueTable.stats[subAffix.type] ?: emptyMap()
         val maxStat = statIncreaseValues.getOrDefault(HIGH, 0.0) * subAffix.count
         return (floor(subAffix.value * 50 / maxStat) / 10).toFloat().run {
