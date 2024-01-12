@@ -3,6 +3,8 @@ package com.dogeby.reliccalculator.rating
 import com.dogeby.reliccalculator.core.model.data.hoyo.MainAffix
 import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.data.hoyo.SubAffix
+import com.dogeby.reliccalculator.core.model.data.preset.CharacterPreset
+import com.dogeby.reliccalculator.core.model.data.preset.RelicStatWeight
 import org.junit.Assert
 import org.junit.Test
 
@@ -12,7 +14,7 @@ class RelicRatingTest {
     private val relic: Relic = Relic(
         id = "",
         name = "",
-        setId = "",
+        setId = "104",
         setName = "",
         rarity = 5,
         level = 15,
@@ -64,6 +66,25 @@ class RelicRatingTest {
             ),
         ),
     )
+    private val preset = CharacterPreset(
+        id = "",
+        characterId = "",
+        relicSetIds = listOf("104"),
+        relicStatWeights = listOf(
+            RelicStatWeight(
+                type = "AttackAddedRatio",
+                weight = 0.75f,
+            ),
+            RelicStatWeight(
+                type = "SpeedDelta",
+                weight = 1f,
+            ),
+            RelicStatWeight(
+                type = "CriticalDamageBase",
+                weight = 1f,
+            ),
+        ),
+    )
 
     @Test
     fun test_calculate_sub_affix_score() {
@@ -72,5 +93,10 @@ class RelicRatingTest {
             val actualResult = relicRating.calculateSubAffixScore(subAffix)
             Assert.assertEquals(expectedResult[index], actualResult)
         }
+    }
+
+    @Test
+    fun test_calculate_relic_score() {
+        Assert.assertEquals(4.6f, relicRating.calculateRelicScore(relic, preset).score)
     }
 }
