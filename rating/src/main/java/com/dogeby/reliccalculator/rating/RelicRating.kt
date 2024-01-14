@@ -1,9 +1,11 @@
 package com.dogeby.reliccalculator.rating
 
+import com.dogeby.reliccalculator.core.model.data.hoyo.Character
 import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.data.hoyo.SubAffix
 import com.dogeby.reliccalculator.core.model.data.preset.CharacterPreset
 import com.dogeby.reliccalculator.core.model.data.report.AffixReport
+import com.dogeby.reliccalculator.core.model.data.report.CharacterReport
 import com.dogeby.reliccalculator.core.model.data.report.RelicReport
 import com.dogeby.reliccalculator.rating.model.SubStatValueTable
 import java.io.File
@@ -20,6 +22,7 @@ object RelicRating {
     private const val HAND_MAIN_AFFIX_TYPE = "AttackDelta"
     private const val RELIC_MAX_LEVEL = 15
     private const val RELIC_MAX_RARITY = 5
+    private const val MAX_RELICS = 6
 
     private fun Float.convertRatingExpression(
         minScore: Float = 0f,
@@ -89,6 +92,25 @@ object RelicRating {
             score = relicScore.convertRatingExpression(),
             mainAffixReport = mainAffixReport,
             subAffixReports = subAffixReports,
+        )
+    }
+
+    fun calculateCharacterScore(
+        character: Character,
+        preset: CharacterPreset,
+    ): CharacterReport {
+        val relicReports = character.relics.map {
+            calculateRelicScore(it, preset)
+        }
+
+        val characterScore = relicReports.fold(0f) { acc, relicReport ->
+            acc + relicReport.score
+        } / MAX_RELICS
+
+        return CharacterReport(
+            character = character,
+            score = characterScore.convertRatingExpression(),
+            relicReports = relicReports,
         )
     }
 }

@@ -1,6 +1,10 @@
 package com.dogeby.reliccalculator.rating
 
+import com.dogeby.reliccalculator.core.model.data.hoyo.Character
+import com.dogeby.reliccalculator.core.model.data.hoyo.Element
+import com.dogeby.reliccalculator.core.model.data.hoyo.LightCone
 import com.dogeby.reliccalculator.core.model.data.hoyo.MainAffix
+import com.dogeby.reliccalculator.core.model.data.hoyo.Path
 import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.data.hoyo.SubAffix
 import com.dogeby.reliccalculator.core.model.data.preset.CharacterPreset
@@ -66,6 +70,20 @@ class RelicRatingTest {
             ),
         ),
     )
+    private val character = Character(
+        id = "",
+        name = "",
+        icon = "",
+        preview = "",
+        portrait = "",
+        path = Path("", "", ""),
+        element = Element("", "", ""),
+        lightCone = LightCone("", "", "", ""),
+        relics = listOf(relic),
+        relicSets = emptyList(),
+        attributes = emptyList(),
+        additions = emptyList(),
+    )
     private val preset = CharacterPreset(
         id = "",
         characterId = "",
@@ -98,5 +116,10 @@ class RelicRatingTest {
     @Test
     fun test_calculate_relic_score() {
         Assert.assertEquals(4.6f, relicRating.calculateRelicScore(relic, preset).score)
+    }
+
+    @Test
+    fun test_calculate_character_score() {
+        Assert.assertEquals(0.7f, relicRating.calculateCharacterScore(character, preset).score)
     }
 }
