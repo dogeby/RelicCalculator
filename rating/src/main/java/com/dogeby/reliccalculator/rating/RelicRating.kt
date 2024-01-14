@@ -18,6 +18,8 @@ object RelicRating {
     private const val HIGH = "High"
     private const val HEAD_MAIN_AFFIX_TYPE = "HPDelta"
     private const val HAND_MAIN_AFFIX_TYPE = "AttackDelta"
+    private const val RELIC_MAX_LEVEL = 15
+    private const val RELIC_MAX_RARITY = 5
 
     private fun Float.convertRatingExpression(
         minScore: Float = 0f,
@@ -78,7 +80,9 @@ object RelicRating {
         val subAffixesScore = subAffixReports.fold(0f) { acc, affixReport ->
             acc + affixReport.score
         } / topWeightsSum * 4f
-        val relicScore = (relicSetScore + mainAffixScore + subAffixesScore) / 7
+        val relicScore = (relicSetScore + mainAffixScore + subAffixesScore) *
+            relic.rarity * relic.level /
+            RELIC_MAX_LEVEL / RELIC_MAX_RARITY / 7
 
         return RelicReport(
             id = relic.id,
