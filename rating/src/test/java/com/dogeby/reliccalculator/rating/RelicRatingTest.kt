@@ -6,6 +6,7 @@ import com.dogeby.reliccalculator.core.model.data.hoyo.LightCone
 import com.dogeby.reliccalculator.core.model.data.hoyo.MainAffix
 import com.dogeby.reliccalculator.core.model.data.hoyo.Path
 import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
+import com.dogeby.reliccalculator.core.model.data.hoyo.RelicSet
 import com.dogeby.reliccalculator.core.model.data.hoyo.SubAffix
 import com.dogeby.reliccalculator.core.model.data.preset.CharacterPreset
 import com.dogeby.reliccalculator.core.model.data.preset.RelicStatWeight
@@ -80,7 +81,7 @@ class RelicRatingTest {
         element = Element("", "", ""),
         lightCone = LightCone("", "", "", ""),
         relics = listOf(relic),
-        relicSets = emptyList(),
+        relicSets = List(3) { RelicSet("", "", "") },
         attributes = emptyList(),
         additions = emptyList(),
     )
@@ -121,5 +122,19 @@ class RelicRatingTest {
     @Test
     fun test_calculate_character_score() {
         Assert.assertEquals(0.7f, relicRating.calculateCharacterScore(character, preset).score)
+    }
+
+    @Test
+    fun test_calculate_character_score_with_mismatched_relic_sets() {
+        val mismatchedRelicSetsCharacter = character.copy(
+            relicSets = List(2) { RelicSet("", "", "") },
+        )
+        Assert.assertEquals(
+            0.2f,
+            relicRating.calculateCharacterScore(
+                mismatchedRelicSetsCharacter,
+                preset,
+            ).score,
+        )
     }
 }

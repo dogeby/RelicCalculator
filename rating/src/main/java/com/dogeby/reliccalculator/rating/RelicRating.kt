@@ -23,6 +23,9 @@ object RelicRating {
     private const val RELIC_MAX_LEVEL = 15
     private const val RELIC_MAX_RARITY = 5
     private const val MAX_RELICS = 6
+    private const val MIN_ACTIVE_RELIC_SETS = 0
+    private const val MAX_ACTIVE_RELIC_SETS = 3
+    private const val RELIC_SET_DEMERIT = 0.5f
 
     private fun Float.convertRatingExpression(
         minScore: Float = 0f,
@@ -84,8 +87,8 @@ object RelicRating {
             acc + affixReport.score
         } / topWeightsSum * 4f
         val relicScore = (relicSetScore + mainAffixScore + subAffixesScore) *
-            relic.rarity * relic.level /
-            RELIC_MAX_LEVEL / RELIC_MAX_RARITY / 7
+            relic.rarity / RELIC_MAX_RARITY *
+            relic.level / RELIC_MAX_LEVEL / 7
 
         return RelicReport(
             id = relic.id,
@@ -103,9 +106,13 @@ object RelicRating {
             calculateRelicScore(it, preset)
         }
 
+        val relicSetDemerit = (MAX_ACTIVE_RELIC_SETS - character.relicSets.count())
+            .coerceIn(MIN_ACTIVE_RELIC_SETS..MAX_ACTIVE_RELIC_SETS) *
+            RELIC_SET_DEMERIT
+
         val characterScore = relicReports.fold(0f) { acc, relicReport ->
             acc + relicReport.score
-        } / MAX_RELICS
+        } / MAX_RELICS - relicSetDemerit
 
         return CharacterReport(
             character = character,
