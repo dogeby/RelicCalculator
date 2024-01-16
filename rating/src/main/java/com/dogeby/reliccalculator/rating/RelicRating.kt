@@ -20,16 +20,30 @@ object RelicRating {
     private const val HIGH = "High"
     private const val HEAD_MAIN_AFFIX_TYPE = "HPDelta"
     private const val HAND_MAIN_AFFIX_TYPE = "AttackDelta"
+
+    private const val STAT_INCREASE_DEFAULT = 0.0
+    private const val MAX_STAT_WEIGHT = 1f
+
     private const val RELIC_MAX_LEVEL = 15
     private const val RELIC_MAX_RARITY = 5
     private const val MAX_RELICS = 6
     private const val MIN_ACTIVE_RELIC_SETS = 0
     private const val MAX_ACTIVE_RELIC_SETS = 3
+    private const val MAX_SUB_AFFIXES = 4
+
+    private const val MIN_SCORE = 0f
+    private const val MAX_SCORE = 5f
     private const val RELIC_SET_DEMERIT = 0.5f
 
+    private const val RELIC_SET_SCORE_WEIGHT = 1f
+    private const val MAIN_AFFIX_SCORE_WEIGHT = 2f
+    private const val SUB_AFFIX_SCORE_WEIGHT = 4f
+    private const val TOTAL_RELIC_SCORE_WEIGHT = RELIC_SET_SCORE_WEIGHT +
+        MAIN_AFFIX_SCORE_WEIGHT + SUB_AFFIX_SCORE_WEIGHT
+
     private fun Float.convertRatingExpression(
-        minScore: Float = 0f,
-        maxScore: Float = 5f,
+        minScore: Float = MIN_SCORE,
+        maxScore: Float = MAX_SCORE,
     ): Float {
         require(minScore <= maxScore) { "minScore must be less than or equal to maxScore" }
         return (floor(this * 10) / 10).run {
@@ -46,8 +60,8 @@ object RelicRating {
 
     fun calculateSubAffixScore(subAffix: SubAffix): Float {
         val statIncreaseValues = subStatValueTable.stats[subAffix.type] ?: emptyMap()
-        val maxStat = statIncreaseValues.getOrDefault(HIGH, 0.0) * subAffix.count
-        return (subAffix.value * 5 / maxStat).toFloat().convertRatingExpression()
+        val maxStat = statIncreaseValues.getOrDefault(HIGH, STAT_INCREASE_DEFAULT) * subAffix.count
+        return (subAffix.value * MAX_SCORE / maxStat).toFloat().convertRatingExpression()
     }
 
     fun calculateRelicScore(
@@ -56,13 +70,13 @@ object RelicRating {
     ): RelicReport {
         val mainAffixReport = relic.mainAffix.run {
             val weight = if (type == HEAD_MAIN_AFFIX_TYPE || type == HAND_MAIN_AFFIX_TYPE) {
-                1f
+                MAX_STAT_WEIGHT
             } else {
                 getRelicStatTypeWeight(type, preset)
             }
             AffixReport(
                 type = type,
-                score = 5.0f * weight,
+                score = MAX_SCORE * weight,
             )
         }
 
@@ -70,7 +84,7 @@ object RelicRating {
             .asSequence()
             .filter { subStatValueTable.stats.contains(it.type) }
             .sortedByDescending { it.weight }
-            .take(4)
+            .take(MAX_SUB_AFFIXES)
             .map { it.weight }
             .sum()
         val subAffixReports = relic.subAffix.map { subAffix ->
@@ -81,14 +95,15 @@ object RelicRating {
             )
         }
 
-        val relicSetScore = if (relic.setId in preset.relicSetIds) 5.0f else 0f
-        val mainAffixScore = mainAffixReport.score * 2f
+        val relicSetScore = (if (relic.setId in preset.relicSetIds) MAX_SCORE else MIN_SCORE) *
+            RELIC_SET_SCORE_WEIGHT
+        val mainAffixScore = mainAffixReport.score * MAIN_AFFIX_SCORE_WEIGHT
         val subAffixesScore = subAffixReports.fold(0f) { acc, affixReport ->
             acc + affixReport.score
-        } / topWeightsSum * 4f
+        } / topWeightsSum * SUB_AFFIX_SCORE_WEIGHT
         val relicScore = (relicSetScore + mainAffixScore + subAffixesScore) *
             relic.rarity / RELIC_MAX_RARITY *
-            relic.level / RELIC_MAX_LEVEL / 7
+            relic.level / RELIC_MAX_LEVEL / TOTAL_RELIC_SCORE_WEIGHT
 
         return RelicReport(
             id = relic.id,
