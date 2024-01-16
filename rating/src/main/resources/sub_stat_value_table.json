@@ -1,0 +1,64 @@
+{
+  "stats" : {
+    "SpeedDelta": {
+      "Low": 2.0,
+      "Med": 2.3,
+      "High": 2.6
+    },
+    "HPDelta": {
+      "Low": 33.0,
+      "Med": 38.0,
+      "High": 42.0
+    },
+    "AttackDelta": {
+      "Low": 16.0,
+      "Med": 19.0,
+      "High": 21.0
+    },
+    "DefenceDelta": {
+      "Low": 16.0,
+      "Med": 19.0,
+      "High": 21.0
+    },
+    "HPAddedRatio": {
+      "Low": 0.034,
+      "Med": 0.038,
+      "High": 0.043
+    },
+    "AttackAddedRatio": {
+      "Low": 0.034,
+      "Med": 0.038,
+      "High": 0.043
+    },
+    "DefenceAddedRatio": {
+      "Low": 0.043,
+      "Med": 0.048,
+      "High": 0.054
+    },
+    "BreakDamageAddedRatioBase": {
+      "Low": 0.051,
+      "Med": 0.058,
+      "High": 0.064
+    },
+    "StatusProbabilityBase": {
+      "Low": 0.034,
+      "Med": 0.038,
+      "High": 0.043
+    },
+    "StatusResistanceBase": {
+      "Low": 0.034,
+      "Med": 0.038,
+      "High": 0.043
+    },
+    "CriticalChanceBase": {
+      "Low": 0.025,
+      "Med": 0.029,
+      "High": 0.032
+    },
+    "CriticalDamageBase": {
+      "Low": 0.051,
+      "Med": 0.058,
+      "High": 0.064
+    }
+  }
+}
