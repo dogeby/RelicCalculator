@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.dogeby.core.database.model.hoyo.DatabaseAttribute
 import com.dogeby.core.database.model.hoyo.DatabaseRelic
 import com.dogeby.core.database.model.hoyo.DatabaseRelicSet
+import com.dogeby.core.database.model.preset.DatabaseRelicStatWeight
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -19,17 +20,37 @@ class RelicListConverter {
 class RelicSetListConverter {
 
     @TypeConverter
-    fun relicSetToString(relicSets: List<DatabaseRelicSet>) = Json.encodeToString(relicSets)
+    fun relicSetListToString(relicSets: List<DatabaseRelicSet>) = Json.encodeToString(relicSets)
 
     @TypeConverter
-    fun stringToRelicSet(json: String) = Json.decodeFromString<List<DatabaseRelicSet>>(json)
+    fun stringToRelicSetList(json: String) = Json.decodeFromString<List<DatabaseRelicSet>>(json)
 }
 
 class AttributeListConverter {
 
     @TypeConverter
-    fun attributeToString(attributes: List<DatabaseAttribute>) = Json.encodeToString(attributes)
+    fun attributeListToString(attributes: List<DatabaseAttribute>) = Json.encodeToString(attributes)
 
     @TypeConverter
-    fun stringToAttribute(json: String) = Json.decodeFromString<List<DatabaseAttribute>>(json)
+    fun stringToAttributeList(json: String) = Json.decodeFromString<List<DatabaseAttribute>>(json)
+}
+
+class RelicSetIdListConverter {
+
+    @TypeConverter
+    fun relicSetIdListToString(relicSetIds: List<String>) = Json.encodeToString(relicSetIds)
+
+    @TypeConverter
+    fun stringToRelicSetIdList(json: String) = Json.decodeFromString<List<String>>(json)
+}
+
+class RelicStatWeightListConverter {
+
+    @TypeConverter
+    fun relicStatWeightListToString(relicStatWeights: List<DatabaseRelicStatWeight>) =
+        Json.encodeToString(relicStatWeights)
+
+    @TypeConverter
+    fun stringToRelicStatWeightList(json: String) =
+        Json.decodeFromString<List<DatabaseRelicStatWeight>>(json)
 }
