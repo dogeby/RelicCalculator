@@ -38,7 +38,7 @@ class CharacterPresetDaoTest {
     fun test_characterPresetDao_insert_succeed() = runTest {
         val size = 3
         val result = characterPresetDao.insertOrIgnoreCharacterPresets(
-            List(size) { characterPreset.copy(id = "test$it") },
+            List(size) { characterPreset.copy(characterId = "test$it") },
         )
 
         Assert.assertEquals(List(size) { it + 1L }, result)
@@ -47,10 +47,10 @@ class CharacterPresetDaoTest {
     @Test
     fun test_characterPresetDao_update_succeed() = runTest {
         characterPresetDao.insertOrIgnoreCharacterPresets(
-            listOf(characterPreset.copy(characterId = "oldId")),
+            listOf(characterPreset),
         )
         val result = characterPresetDao.updateCharacterPresets(
-            listOf(characterPreset.copy(characterId = "oldId")),
+            listOf(characterPreset.copy(relicSetIds = emptyList())),
         )
 
         Assert.assertEquals(1, result)
@@ -59,13 +59,13 @@ class CharacterPresetDaoTest {
     @Test
     fun test_characterPresetDao_upsert_succeed() = runTest {
         val size = 3
-        val characters = List(size) { characterPreset.copy(id = "test$it") }
+        val characters = List(size) { characterPreset.copy(characterId = "test$it") }
         val insertResult = characterPresetDao.upsertCharacterPresets(characters)
 
         Assert.assertEquals(List(size) { it + 1L }, insertResult)
 
         val newCharacters = characters.map { characterEntity ->
-            characterEntity.copy(characterId = "newId")
+            characterEntity.copy(relicSetIds = emptyList())
         }
         val updateResult = characterPresetDao.updateCharacterPresets(newCharacters)
         val updatedCharacters = characterPresetDao.getCharacterPresets().first()
@@ -84,7 +84,7 @@ class CharacterPresetDaoTest {
 
     @Test
     fun test_characterPresetDao_getAllCharacters_succeed() = runTest {
-        val characters = List(3) { characterPreset.copy(id = "test$it") }
+        val characters = List(3) { characterPreset.copy(characterId = "test$it") }
         characterPresetDao.insertOrIgnoreCharacterPresets(characters)
         val result = characterPresetDao.getCharacterPresets().first()
 
@@ -96,7 +96,7 @@ class CharacterPresetDaoTest {
         val ids = mutableListOf<String>()
         val characters = List(3) { index ->
             val id = "test$index".also { ids.add(it) }
-            characterPreset.copy(id = id)
+            characterPreset.copy(characterId = id)
         }
         characterPresetDao.insertOrIgnoreCharacterPresets(characters)
         val result = characterPresetDao.getCharacterPresets(ids.toSet()).first()

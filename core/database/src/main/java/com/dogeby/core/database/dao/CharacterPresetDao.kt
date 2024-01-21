@@ -31,7 +31,7 @@ interface CharacterPresetDao {
     @Query(
         value = """
         SELECT * FROM character_presets
-        WHERE id IN (:ids)
+        WHERE character_id IN (:ids)
     """,
     )
     fun getCharacterPresets(ids: Set<String>): Flow<List<CharacterPresetEntity>>

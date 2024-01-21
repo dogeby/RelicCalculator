@@ -14,15 +14,15 @@ import org.jetbrains.annotations.TestOnly
     RelicStatWeightListConverter::class,
 )
 data class CharacterPresetEntity(
-    @PrimaryKey val id: String,
-    @ColumnInfo(name = "character_id") val characterId: String,
+    @PrimaryKey
+    @ColumnInfo(name = "character_id")
+    val characterId: String,
     @ColumnInfo(name = "relic_set_ids") val relicSetIds: List<String>,
     @ColumnInfo(name = "relic_stat_weights") val relicStatWeights: List<DatabaseRelicStatWeight>,
 )
 
 @TestOnly
 val sampleCharacterPresetEntity = CharacterPresetEntity(
-    id = "0",
     characterId = "1212",
     relicSetIds = listOf("00", "01"),
     relicStatWeights = listOf(
