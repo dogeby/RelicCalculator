@@ -26,7 +26,7 @@ interface CharacterDao {
     suspend fun deleteCharacters(characters: List<CharacterEntity>): Int
 
     @Query(value = "SELECT * FROM characters")
-    fun getCharacterEntities(): Flow<List<CharacterEntity>>
+    fun getCharacters(): Flow<List<CharacterEntity>>
 
     @Query(
         value = """
@@ -34,5 +34,5 @@ interface CharacterDao {
         WHERE character_id IN (:ids)
     """,
     )
-    fun getCharacterEntities(ids: Set<String>): Flow<List<CharacterEntity>>
+    fun getCharacters(ids: Set<String>): Flow<List<CharacterEntity>>
 }

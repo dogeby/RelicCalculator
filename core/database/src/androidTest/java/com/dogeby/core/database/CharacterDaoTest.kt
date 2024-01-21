@@ -64,7 +64,7 @@ class CharacterDaoTest {
             characterEntity.copy(name = "newName")
         }
         val updateResult = characterDao.updateCharacters(newCharacters)
-        val updatedCharacters = characterDao.getCharacterEntities().first()
+        val updatedCharacters = characterDao.getCharacters().first()
 
         Assert.assertEquals(size, updateResult)
         Assert.assertEquals(newCharacters, updatedCharacters)
@@ -82,7 +82,7 @@ class CharacterDaoTest {
     fun test_characterDao_getAllCharacters_succeed() = runTest {
         val characters = List(3) { character.copy(id = "test$it") }
         characterDao.insertOrIgnoreCharacters(characters)
-        val result = characterDao.getCharacterEntities().first()
+        val result = characterDao.getCharacters().first()
 
         Assert.assertEquals(characters, result)
     }
@@ -95,7 +95,7 @@ class CharacterDaoTest {
             character.copy(id = id)
         }
         characterDao.insertOrIgnoreCharacters(characters)
-        val result = characterDao.getCharacterEntities(ids.toSet()).first()
+        val result = characterDao.getCharacters(ids.toSet()).first()
 
         Assert.assertEquals(characters, result)
     }
