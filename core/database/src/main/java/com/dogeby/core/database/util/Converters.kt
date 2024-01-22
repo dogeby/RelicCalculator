@@ -5,6 +5,7 @@ import com.dogeby.core.database.model.hoyo.DatabaseAttribute
 import com.dogeby.core.database.model.hoyo.DatabaseRelic
 import com.dogeby.core.database.model.hoyo.DatabaseRelicSet
 import com.dogeby.core.database.model.preset.DatabaseRelicStatWeight
+import com.dogeby.core.database.model.report.DatabaseRelicReport
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -53,4 +54,15 @@ class RelicStatWeightListConverter {
     @TypeConverter
     fun stringToRelicStatWeightList(json: String) =
         Json.decodeFromString<List<DatabaseRelicStatWeight>>(json)
+}
+
+class RelicReportListConverter {
+
+    @TypeConverter
+    fun relicReportListToString(relicReports: List<DatabaseRelicReport>) =
+        Json.encodeToString(relicReports)
+
+    @TypeConverter
+    fun stringToRelicReportList(json: String) =
+        Json.decodeFromString<List<DatabaseRelicReport>>(json)
 }
