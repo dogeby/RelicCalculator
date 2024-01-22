@@ -36,7 +36,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:model"))
     implementation(libs.core.ktx)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
