@@ -13,6 +13,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        api-level: [ 26 ]
+        target: [ default ]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -45,6 +49,15 @@ jobs:
 
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest
+
+      - name: Android Emulator Runner
+        uses: ReactiveCircus/android-emulator-runner@v2.29.0
+        with:
+          api-level: ${{ matrix.api-level }}
+          target: ${{ matrix.target }}
+          arch: x86_64
+          profile: Nexus 6
+          script: ./gradlew connectedCheck
 
       - name: Create android test report
         uses: asadmansr/android-test-report-action@v1.2.0
