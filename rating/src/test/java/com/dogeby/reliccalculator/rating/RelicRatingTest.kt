@@ -8,7 +8,7 @@ import com.dogeby.reliccalculator.core.model.data.hoyo.Path
 import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.data.hoyo.RelicSet
 import com.dogeby.reliccalculator.core.model.data.hoyo.SubAffix
-import com.dogeby.reliccalculator.core.model.data.preset.CharacterPreset
+import com.dogeby.reliccalculator.core.model.data.preset.Preset
 import com.dogeby.reliccalculator.core.model.data.preset.RelicStatWeight
 import org.junit.Assert
 import org.junit.Test
@@ -85,8 +85,7 @@ class RelicRatingTest {
         attributes = emptyList(),
         additions = emptyList(),
     )
-    private val preset = CharacterPreset(
-        id = "",
+    private val preset = Preset(
         characterId = "",
         relicSetIds = listOf("104"),
         relicStatWeights = listOf(

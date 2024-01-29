@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NetworkCharacterPresetData(
+data class NetworkPresetData(
     @SerialName("update_date") val updateDate: String,
-    @SerialName("character_presets") val characterPresets: List<NetworkCharacterPreset>
+    @SerialName("presets") val presets: List<NetworkPreset>,
 )

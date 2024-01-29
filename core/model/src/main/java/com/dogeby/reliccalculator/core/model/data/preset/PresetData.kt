@@ -1,6 +1,6 @@
 package com.dogeby.reliccalculator.core.model.data.preset
 
-data class CharacterPresetData(
+data class PresetData(
     val updateDate: String,
-    val characterPresets: List<CharacterPreset>
+    val presets: List<Preset>,
 )
