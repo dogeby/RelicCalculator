@@ -27,7 +27,9 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
+import org.jetbrains.annotations.TestOnly
 
+@TestOnly
 class FakeProfileNetworkDataSource @Inject constructor(
     @Dispatcher(NetworkDispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
     private val networkJson: Json,
