@@ -3,7 +3,7 @@ package com.dogeby.reliccalculator.rating
 import com.dogeby.reliccalculator.core.model.data.hoyo.Character
 import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.data.hoyo.SubAffix
-import com.dogeby.reliccalculator.core.model.data.preset.CharacterPreset
+import com.dogeby.reliccalculator.core.model.data.preset.Preset
 import com.dogeby.reliccalculator.core.model.data.report.AffixReport
 import com.dogeby.reliccalculator.core.model.data.report.CharacterReport
 import com.dogeby.reliccalculator.core.model.data.report.RelicReport
@@ -53,7 +53,7 @@ object RelicRating {
 
     private fun getRelicStatTypeWeight(
         type: String,
-        preset: CharacterPreset,
+        preset: Preset,
     ): Float {
         return preset.relicStatWeights.find { type == it.type }?.weight ?: 0f
     }
@@ -66,7 +66,7 @@ object RelicRating {
 
     fun calculateRelicScore(
         relic: Relic,
-        preset: CharacterPreset,
+        preset: Preset,
     ): RelicReport {
         val mainAffixReport = relic.mainAffix.run {
             val weight = if (type == HEAD_MAIN_AFFIX_TYPE || type == HAND_MAIN_AFFIX_TYPE) {
@@ -115,7 +115,7 @@ object RelicRating {
 
     fun calculateCharacterScore(
         character: Character,
-        preset: CharacterPreset,
+        preset: Preset,
     ): CharacterReport {
         val relicReports = character.relics.map {
             calculateRelicScore(it, preset)

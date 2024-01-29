@@ -2,8 +2,8 @@ package com.dogeby.core.database.di
 
 import com.dogeby.core.database.RelicCalculatorDatabase
 import com.dogeby.core.database.dao.CharacterDao
-import com.dogeby.core.database.dao.CharacterPresetDao
 import com.dogeby.core.database.dao.CharacterReportDao
+import com.dogeby.core.database.dao.PresetDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,13 +15,12 @@ object DaoModule {
 
     @Provides
     fun providesCharacterDao(database: RelicCalculatorDatabase): CharacterDao =
-        database.CharacterDao()
+        database.characterDao()
 
     @Provides
-    fun providesCharacterPresetDao(database: RelicCalculatorDatabase): CharacterPresetDao =
-        database.CharacterPresetDao()
+    fun providesPresetDao(database: RelicCalculatorDatabase): PresetDao = database.presetDao()
 
     @Provides
     fun providesCharacterReportDao(database: RelicCalculatorDatabase): CharacterReportDao =
-        database.CharacterReportDao()
+        database.characterReportDao()
 }

@@ -25,7 +25,7 @@ class FakeProfileNetworkDataSourceUnitTest {
     }
 
     @Test
-    fun test_get_profile_success() = runTest(testDispatcher) {
+    fun test_getProfile_success() = runTest(testDispatcher) {
         Assert.assertEquals(
             uid,
             fakeProfileNetwork.getProfile(uid, "en").getOrThrow().player.uid,
@@ -33,7 +33,7 @@ class FakeProfileNetworkDataSourceUnitTest {
     }
 
     @Test
-    fun test_get_profile_lang_en() = runTest(testDispatcher) {
+    fun test_getProfile_langEn_success() = runTest(testDispatcher) {
         Assert.assertTrue(
             fakeProfileNetwork.getProfile(uid, "en").getOrThrow()
                 .characters.first().path.name.matches("[A-z]+".toRegex()),
@@ -41,7 +41,7 @@ class FakeProfileNetworkDataSourceUnitTest {
     }
 
     @Test
-    fun test_get_profile_lang_kr() = runTest(testDispatcher) {
+    fun test_getProfile_langEn_fail() = runTest(testDispatcher) {
         Assert.assertFalse(
             fakeProfileNetwork.getProfile(uid, "kr").getOrThrow()
                 .characters.first().path.name.matches("[A-z]+".toRegex()),

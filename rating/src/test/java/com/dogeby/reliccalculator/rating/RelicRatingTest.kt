@@ -8,7 +8,7 @@ import com.dogeby.reliccalculator.core.model.data.hoyo.Path
 import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.data.hoyo.RelicSet
 import com.dogeby.reliccalculator.core.model.data.hoyo.SubAffix
-import com.dogeby.reliccalculator.core.model.data.preset.CharacterPreset
+import com.dogeby.reliccalculator.core.model.data.preset.Preset
 import com.dogeby.reliccalculator.core.model.data.preset.RelicStatWeight
 import org.junit.Assert
 import org.junit.Test
@@ -85,8 +85,7 @@ class RelicRatingTest {
         attributes = emptyList(),
         additions = emptyList(),
     )
-    private val preset = CharacterPreset(
-        id = "",
+    private val preset = Preset(
         characterId = "",
         relicSetIds = listOf("104"),
         relicStatWeights = listOf(
@@ -106,7 +105,7 @@ class RelicRatingTest {
     )
 
     @Test
-    fun test_calculate_sub_affix_score() {
+    fun test_calculateSubAffixScore_success() {
         val expectedResult = listOf(4.5f, 5.0f, 4.1f, 4.0f)
         relic.subAffix.forEachIndexed { index, subAffix ->
             val actualResult = relicRating.calculateSubAffixScore(subAffix)
@@ -115,17 +114,17 @@ class RelicRatingTest {
     }
 
     @Test
-    fun test_calculate_relic_score() {
+    fun test_calculateRelicScore_success() {
         Assert.assertEquals(4.6f, relicRating.calculateRelicScore(relic, preset).score)
     }
 
     @Test
-    fun test_calculate_character_score() {
+    fun test_calculateCharacterScore_success() {
         Assert.assertEquals(0.7f, relicRating.calculateCharacterScore(character, preset).score)
     }
 
     @Test
-    fun test_calculate_character_score_with_mismatched_relic_sets() {
+    fun test_calculateCharacterScore_mismatchedRelicSets() {
         val mismatchedRelicSetsCharacter = character.copy(
             relicSets = List(2) { RelicSet("", "", "") },
         )

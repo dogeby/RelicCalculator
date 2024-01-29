@@ -30,8 +30,8 @@ class CharacterReportDaoTest {
             context,
             RelicCalculatorDatabase::class.java,
         ).build()
-        characterReportDao = db.CharacterReportDao()
-        characterDao = db.CharacterDao()
+        characterReportDao = db.characterReportDao()
+        characterDao = db.characterDao()
     }
 
     @After

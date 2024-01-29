@@ -8,12 +8,12 @@ import com.dogeby.core.database.util.RelicSetIdListConverter
 import com.dogeby.core.database.util.RelicStatWeightListConverter
 import org.jetbrains.annotations.TestOnly
 
-@Entity(tableName = "character_presets")
+@Entity(tableName = "presets")
 @TypeConverters(
     RelicSetIdListConverter::class,
     RelicStatWeightListConverter::class,
 )
-data class CharacterPresetEntity(
+data class PresetEntity(
     @PrimaryKey
     @ColumnInfo(name = "character_id")
     val characterId: String,
@@ -22,7 +22,7 @@ data class CharacterPresetEntity(
 )
 
 @TestOnly
-val sampleCharacterPresetEntity = CharacterPresetEntity(
+val samplePresetEntity = PresetEntity(
     characterId = "1212",
     relicSetIds = listOf("00", "01"),
     relicStatWeights = listOf(

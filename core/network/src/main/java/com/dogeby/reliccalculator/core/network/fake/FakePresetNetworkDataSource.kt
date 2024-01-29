@@ -19,8 +19,8 @@ package com.dogeby.reliccalculator.core.network.fake
 import JvmUnitTestFakeAssetManager
 import com.dogeby.reliccalculator.core.network.Dispatcher
 import com.dogeby.reliccalculator.core.network.NetworkDispatchers
-import com.dogeby.reliccalculator.core.network.ProfileNetworkDataSource
-import com.dogeby.reliccalculator.core.network.model.hoyo.NetworkProfile
+import com.dogeby.reliccalculator.core.network.PresetNetworkDataSource
+import com.dogeby.reliccalculator.core.network.model.preset.NetworkPresetData
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -30,28 +30,22 @@ import kotlinx.serialization.json.decodeFromStream
 import org.jetbrains.annotations.TestOnly
 
 @TestOnly
-class FakeProfileNetworkDataSource @Inject constructor(
+class FakePresetNetworkDataSource @Inject constructor(
     @Dispatcher(NetworkDispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
     private val networkJson: Json,
     private val assets: FakeAssetManager = JvmUnitTestFakeAssetManager,
-) : ProfileNetworkDataSource {
+) : PresetNetworkDataSource {
 
     @OptIn(ExperimentalSerializationApi::class)
-    override suspend fun getProfile(
-        uid: String,
-        language: String,
-    ): Result<NetworkProfile> {
+    override suspend fun getDefaultPreset(): Result<NetworkPresetData> {
         return Result.success(
             withContext(ioDispatcher) {
-                assets.open(
-                    if (language == "kr") PROFILE_KR_ASSET else PROFILE_EN_ASSET,
-                ).use(networkJson::decodeFromStream)
+                assets.open(DEFAULT_PRESET_ASSET).use(networkJson::decodeFromStream)
             },
         )
     }
 
     companion object {
-        private const val PROFILE_EN_ASSET = "profile_en.json"
-        private const val PROFILE_KR_ASSET = "profile_kr.json"
+        private const val DEFAULT_PRESET_ASSET = "star_rail_default_preset.json"
     }
 }
