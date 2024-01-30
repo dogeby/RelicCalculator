@@ -17,7 +17,7 @@ class RelicRatingTest {
 
     private val relicRating = RelicRating
     private val relic: Relic = Relic(
-        id = "",
+        id = "61091",
         name = "",
         setId = "104",
         setName = "",
