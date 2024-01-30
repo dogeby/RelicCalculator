@@ -4,7 +4,7 @@ import androidx.room.TypeConverter
 import com.dogeby.core.database.model.hoyo.DatabaseAttribute
 import com.dogeby.core.database.model.hoyo.DatabaseRelic
 import com.dogeby.core.database.model.hoyo.DatabaseRelicSet
-import com.dogeby.core.database.model.preset.DatabaseRelicStatWeight
+import com.dogeby.core.database.model.preset.DatabaseAffixWeight
 import com.dogeby.core.database.model.report.DatabaseRelicReport
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -45,15 +45,27 @@ class RelicSetIdListConverter {
     fun stringToRelicSetIdList(json: String) = Json.decodeFromString<List<String>>(json)
 }
 
-class RelicStatWeightListConverter {
+class PieceMainAffixWeightMapConverter {
 
     @TypeConverter
-    fun relicStatWeightListToString(relicStatWeights: List<DatabaseRelicStatWeight>) =
+    fun pieceMainAffixWeightMapToString(
+        pieceMainAffixWeights: Map<Int, List<DatabaseAffixWeight>>,
+    ) = Json.encodeToString(pieceMainAffixWeights)
+
+    @TypeConverter
+    fun stringToPieceMainAffixWeightMap(json: String) =
+        Json.decodeFromString<Map<Int, List<DatabaseAffixWeight>>>(json)
+}
+
+class SubAffixWeightListConverter {
+
+    @TypeConverter
+    fun relicStatWeightListToString(relicStatWeights: List<DatabaseAffixWeight>) =
         Json.encodeToString(relicStatWeights)
 
     @TypeConverter
     fun stringToRelicStatWeightList(json: String) =
-        Json.decodeFromString<List<DatabaseRelicStatWeight>>(json)
+        Json.decodeFromString<List<DatabaseAffixWeight>>(json)
 }
 
 class RelicReportListConverter {
