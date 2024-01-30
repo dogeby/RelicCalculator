@@ -8,8 +8,8 @@ import com.dogeby.reliccalculator.core.model.data.hoyo.Path
 import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.data.hoyo.RelicSet
 import com.dogeby.reliccalculator.core.model.data.hoyo.SubAffix
+import com.dogeby.reliccalculator.core.model.data.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.data.preset.Preset
-import com.dogeby.reliccalculator.core.model.data.preset.RelicStatWeight
 import org.junit.Assert
 import org.junit.Test
 
@@ -17,7 +17,7 @@ class RelicRatingTest {
 
     private val relicRating = RelicRating
     private val relic: Relic = Relic(
-        id = "",
+        id = "61091",
         name = "",
         setId = "104",
         setName = "",
@@ -88,16 +88,24 @@ class RelicRatingTest {
     private val preset = Preset(
         characterId = "",
         relicSetIds = listOf("104"),
-        relicStatWeights = listOf(
-            RelicStatWeight(
+        pieceMainAffixWeights = mapOf(
+            Pair(1, listOf(AffixWeight("HPDelta", 1.0f))),
+            Pair(2, listOf(AffixWeight("AttackDelta", 1.0f))),
+            Pair(3, listOf(AffixWeight("CriticalChanceBase", 1.0f))),
+            Pair(4, listOf(AffixWeight("SpeedDelta", 1.0f))),
+            Pair(5, listOf(AffixWeight("PhysicalAddedRatio", 1.0f))),
+            Pair(6, listOf(AffixWeight("SPRatioBase", 1.0f))),
+        ),
+        subAffixWeights = listOf(
+            AffixWeight(
                 type = "AttackAddedRatio",
                 weight = 0.75f,
             ),
-            RelicStatWeight(
+            AffixWeight(
                 type = "SpeedDelta",
                 weight = 1f,
             ),
-            RelicStatWeight(
+            AffixWeight(
                 type = "CriticalDamageBase",
                 weight = 1f,
             ),

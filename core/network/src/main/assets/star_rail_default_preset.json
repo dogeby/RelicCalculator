@@ -1,1 +1,2005 @@
-{"update_date":"24:01:29:09:20:50","presets":[{"character_id":"1001","relic_set_ids":["103","106","114","302","304","308"],"relic_stat_weights":[{"type":"DefenceAddedRatio","weight":1.0},{"type":"SpeedDelta","weight":1.0},{"type":"SPRatioBase","weight":1.0},{"type":"HPAddedRatio","weight":0.5},{"type":"StatusProbabilityBase","weight":0.5},{"type":"StatusResistanceBase","weight":0.5}]},{"character_id":"1002","relic_set_ids":["102","108","110","116","301","305","306","309","311"],"relic_stat_weights":[{"type":"CriticalChanceBase","weight":1.0},{"type":"CriticalDamageBase","weight":1.0},{"type":"WindAddedRatio","weight":1.0},{"type":"AttackAddedRatio","weight":0.75},{"type":"SpeedDelta","weight":0.75},{"type":"SPRatioBase","weight":0.5}]},{"character_id":"1003","relic_set_ids":["102","107","111","115","116","301","305","306","309"],"relic_stat_weights":[{"type":"CriticalChanceBase","weight":1.0},{"type":"CriticalDamageBase","weight":1.0},{"type":"FireAddedRatio","weight":1.0},{"type":"AttackAddedRatio","weight":0.75},{"type":"SpeedDelta","weight":0.75},{"type":"BreakDamageAddedRatioBase","weight":0.5},{"type":"SPRatioBase","weight":0.5}]},{"character_id":"1004","relic_set_ids":["102","111","112","116","301","303","306","308","309"],"relic_stat_weights":[{"type":"SpeedDelta","weight":1.0},{"type":"CriticalChanceBase","weight":1.0},{"type":"CriticalDamageBase","weight":1.0},{"type":"StatusProbabilityBase","weight":1.0},{"type":"ImaginaryAddedRatio","weight":1.0},{"type":"AttackAddedRatio","weight":0.75},{"type":"BreakDamageAddedRatioBase","weight":0.5},{"type":"SPRatioBase","weight":0.5}]},{"character_id":"1005","relic_set_ids":["102","109","114","116","301","302","311"],"relic_stat_weights":[{"type":"AttackAddedRatio","weight":1.0},{"type":"SpeedDelta","weight":1.0},{"type":"ThunderAddedRatio","weight":1.0},{"type":"CriticalChanceBase","weight":0.5},{"type":"CriticalDamageBase","weight":0.5},{"type":"BreakDamageAddedRatioBase","weight":0.5},{"type":"SPRatioBase","weight":0.5},{"type":"StatusProbabilityBase","weight":0.5}]},{"character_id":"1006","relic_set_ids":["102","108","114","116","301","303","306","308","312"],"relic_stat_weights":[{"type":"SpeedDelta","weight":1.0},{"type":"CriticalChanceBase","weight":1.0},{"type":"CriticalDamageBase","weight":1.0},{"type":"StatusProbabilityBase","weight":1.0},{"type":"QuantumAddedRatio","weight":1.0},{"type":"AttackAddedRatio","weight":0.75},{"type":"BreakDamageAddedRatioBase","weight":0.5},{"type":"SPRatioBase","weight":0.5},{"type":"StatusResistanceBase","weight":0.5}]},{"character_id":"1008","relic_set_ids":["101","109","113","116","301","305","306","307","309"],"relic_stat_weights":[{"type":"CriticalChanceBase","weight":1.0},{"type":"CriticalDamageBase","weight":1.0},{"type":"ThunderAddedRatio","weight":1.0},{"type":"AttackAddedRatio","weight":0.75},{"type":"SpeedDelta","weight":0.75},{"type":"SPRatioBase","weight":0.5}]},{"character_id":"1009","relic_set_ids":["102","107","111","114","115","116","301","302","307","308","310","312"],"relic_stat_weights":[{"type":"HPAddedRatio","weight":1.0},{"type":"SpeedDelta","weight":1.0},{"type":"SPRatioBase","weight":1.0},{"type":"StatusProbabilityBase","weight":1.0},{"type":"FireAddedRatio","weight":1.0},{"type":"DefenceAddedRatio","weight":0.75},{"type":"BreakDamageAddedRatioBase","weight":0.75},{"type":"AttackDelta","weight":0.5},{"type":"StatusResistanceBase","weight":0.5}]},{"character_id":"1013","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1101","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1102","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1103","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1104","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1105","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1106","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1107","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1108","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1109","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1110","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1111","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1112","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1201","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1202","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1203","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1204","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1205","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1206","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1207","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1208","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1209","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1210","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1211","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1212","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1213","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1214","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1215","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1217","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1302","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1303","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"1305","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"8001","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"8002","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"8003","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]},{"character_id":"8004","relic_set_ids":["101"],"relic_stat_weights":[{"type":"HPDelta","weight":1.0}]}]}
+{
+  "update_date": "24:01:30:02:05:36",
+  "presets": [
+    {
+      "character_id": "1001",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1002",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1003",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1004",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1005",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1006",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1008",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1009",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1013",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1101",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1102",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1103",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1104",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1105",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1106",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1107",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1108",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1109",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1110",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1111",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1112",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1201",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1202",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1203",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1204",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1205",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1206",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1207",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1208",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1209",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1210",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1211",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1212",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1213",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1214",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1215",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1217",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1302",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1303",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    },
+    {
+      "character_id": "1305",
+      "relic_set_ids": [
+        "101"
+      ],
+      "piece_main_affix_weights": {
+        "1": [
+          {
+            "type": "HPDelta",
+            "weight": 1.0
+          }
+        ],
+        "2": [
+          {
+            "type": "AttackDelta",
+            "weight": 1.0
+          }
+        ],
+        "3": [
+          {
+            "type": "CriticalChanceBase",
+            "weight": 1.0
+          }
+        ],
+        "4": [
+          {
+            "type": "SpeedDelta",
+            "weight": 1.0
+          }
+        ],
+        "5": [
+          {
+            "type": "PhysicalAddedRatio",
+            "weight": 1.0
+          }
+        ],
+        "6": [
+          {
+            "type": "SPRatioBase",
+            "weight": 1.0
+          }
+        ]
+      },
+      "sub_affix_weights": [
+        {
+          "type": "AttackDelta",
+          "weight": 1.0
+        }
+      ]
+    }
+  ]
+}

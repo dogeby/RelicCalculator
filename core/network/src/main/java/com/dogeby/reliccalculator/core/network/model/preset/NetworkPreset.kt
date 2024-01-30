@@ -7,5 +7,7 @@ import kotlinx.serialization.Serializable
 data class NetworkPreset(
     @SerialName("character_id") val characterId: String,
     @SerialName("relic_set_ids") val relicSetIds: List<String>,
-    @SerialName("relic_stat_weights") val relicStatWeights: List<NetworkRelicStatWeight>,
+    @SerialName("piece_main_affix_weights")
+    val pieceMainAffixWeights: Map<Int, List<NetworkAffixWeight>>,
+    @SerialName("sub_affix_weights") val subAffixWeights: List<NetworkAffixWeight>,
 )
