@@ -1,4 +1,4 @@
-package com.dogeby.core.ui.ui.theme
+package com.dogeby.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

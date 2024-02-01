@@ -1,4 +1,4 @@
-package com.dogeby.core.ui.ui.theme
+package com.dogeby.core.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
