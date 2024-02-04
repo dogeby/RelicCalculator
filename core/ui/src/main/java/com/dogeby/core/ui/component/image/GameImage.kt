@@ -63,7 +63,7 @@ fun GameImage(
     )
 }
 
-private fun String.modifyExtension(newExtension: String): String {
+fun String.modifyExtension(newExtension: String): String {
     if ('.' in newExtension) {
         throw IllegalArgumentException("Invalid extension: $newExtension")
     }
@@ -72,10 +72,10 @@ private fun String.modifyExtension(newExtension: String): String {
 
 @Preview(showBackground = true)
 @Composable
-fun GameImagePreview() {
+private fun GameImagePreview() {
     RelicCalculatorTheme {
         GameImage(
-            src = "",
+            src = "icon/property/IconSpeed.png",
             placeholder = rememberVectorPainter(image = Icons.Default.BrokenImage),
         )
     }
