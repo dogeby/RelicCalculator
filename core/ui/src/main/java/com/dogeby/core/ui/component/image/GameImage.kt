@@ -1,4 +1,4 @@
-package com.dogeby.core.ui.component
+package com.dogeby.core.ui.component.image
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BrokenImage
