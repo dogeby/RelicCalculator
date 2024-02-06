@@ -5,4 +5,6 @@ import com.dogeby.reliccalculator.core.network.model.preset.NetworkPresetData
 interface PresetNetworkDataSource {
 
     suspend fun getDefaultPreset(): Result<NetworkPresetData>
+
+    suspend fun getDefaultPresetJson(): Result<String>
 }

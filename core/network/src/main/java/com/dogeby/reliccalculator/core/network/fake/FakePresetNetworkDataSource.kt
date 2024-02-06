@@ -45,6 +45,16 @@ class FakePresetNetworkDataSource @Inject constructor(
         )
     }
 
+    override suspend fun getDefaultPresetJson(): Result<String> {
+        return Result.success(
+            withContext(ioDispatcher) {
+                assets.open(DEFAULT_PRESET_ASSET).use {
+                    it.readBytes().decodeToString()
+                }
+            },
+        )
+    }
+
     companion object {
         private const val DEFAULT_PRESET_ASSET = "star_rail_default_preset.json"
     }

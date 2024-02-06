@@ -32,4 +32,14 @@ class FakePresetNetworkDataSourceUnitTest {
             result.updateDate,
         )
     }
+
+    @Test
+    fun test_getDefaultPresetString_success() = runTest(testDispatcher) {
+        val result = fakePresetNetworkDataSource.getDefaultPresetJson().getOrThrow()
+
+        Assert.assertEquals(
+            39023,
+            result.length,
+        )
+    }
 }
