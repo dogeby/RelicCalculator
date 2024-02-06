@@ -5,4 +5,5 @@ data class Preset(
     val relicSetIds: List<String>,
     val pieceMainAffixWeights: Map<Int, List<AffixWeight>>,
     val subAffixWeights: List<AffixWeight>,
+    val isAutoUpdate: Boolean,
 )
