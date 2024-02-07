@@ -37,6 +37,7 @@ android {
 dependencies {
 
     implementation(project(":core:model"))
+    implementation(project(":core:common"))
 
     implementation(libs.core.ktx)
     implementation(libs.hilt.android)
@@ -47,4 +48,5 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
 }
