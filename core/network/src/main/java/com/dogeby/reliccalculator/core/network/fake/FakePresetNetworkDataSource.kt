@@ -17,8 +17,8 @@
 package com.dogeby.reliccalculator.core.network.fake
 
 import JvmUnitTestFakeAssetManager
-import com.dogeby.reliccalculator.core.network.Dispatcher
-import com.dogeby.reliccalculator.core.network.NetworkDispatchers
+import com.dogeby.core.common.dispatcher.Dispatcher
+import com.dogeby.core.common.dispatcher.RcDispatchers
 import com.dogeby.reliccalculator.core.network.PresetNetworkDataSource
 import com.dogeby.reliccalculator.core.network.model.preset.NetworkPresetData
 import javax.inject.Inject
@@ -31,7 +31,7 @@ import org.jetbrains.annotations.TestOnly
 
 @TestOnly
 class FakePresetNetworkDataSource @Inject constructor(
-    @Dispatcher(NetworkDispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
+    @Dispatcher(RcDispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
     private val networkJson: Json,
     private val assets: FakeAssetManager = JvmUnitTestFakeAssetManager,
 ) : PresetNetworkDataSource {
