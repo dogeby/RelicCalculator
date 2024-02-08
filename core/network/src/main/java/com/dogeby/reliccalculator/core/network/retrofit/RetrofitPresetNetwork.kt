@@ -8,6 +8,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.ResponseBody
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
 
@@ -32,10 +34,25 @@ class RetrofitPresetNetwork @Inject constructor(
             networkApi.getDefaultPreset()
         }
     }
+
+    override suspend fun getDefaultPresetJson(): Result<String> {
+        return runCatching {
+            networkApi
+                .getDefaultPresetResponseBody()
+                .body()
+                ?.byteStream()
+                ?.use {
+                    it.readBytes().decodeToString()
+                } ?: throw NullPointerException()
+        }
+    }
 }
 
 private interface RetrofitPresetNetworkApi {
 
     @GET("star_rail_default_preset.json")
     suspend fun getDefaultPreset(): NetworkPresetData
+
+    @GET("star_rail_default_preset.json")
+    suspend fun getDefaultPresetResponseBody(): Response<ResponseBody>
 }

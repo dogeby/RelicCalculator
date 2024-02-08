@@ -23,6 +23,7 @@ data class PresetEntity(
     @ColumnInfo(name = "piece_main_affix_weights")
     val pieceMainAffixWeights: Map<Int, List<DatabaseAffixWeight>>,
     @ColumnInfo(name = "sub_affix_weights") val subAffixWeights: List<DatabaseAffixWeight>,
+    @ColumnInfo(name = "is_auto_update") val isAutoUpdate: Boolean,
 )
 
 @TestOnly
@@ -47,4 +48,5 @@ val samplePresetEntity = PresetEntity(
             weight = 0.5f,
         ),
     ),
+    isAutoUpdate = false,
 )

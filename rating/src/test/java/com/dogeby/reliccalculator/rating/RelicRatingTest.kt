@@ -110,6 +110,7 @@ class RelicRatingTest {
                 weight = 1f,
             ),
         ),
+        isAutoUpdate = false,
     )
 
     @Test
