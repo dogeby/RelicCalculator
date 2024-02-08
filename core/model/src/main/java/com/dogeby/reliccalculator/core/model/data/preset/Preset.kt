@@ -11,5 +11,5 @@ data class Preset(
     @SerialName("piece_main_affix_weights")
     val pieceMainAffixWeights: Map<Int, List<AffixWeight>>,
     @SerialName("sub_affix_weights") val subAffixWeights: List<AffixWeight>,
-    @Transient val isAutoUpdate: Boolean = false,
+    @Transient val isAutoUpdate: Boolean = true,
 )
