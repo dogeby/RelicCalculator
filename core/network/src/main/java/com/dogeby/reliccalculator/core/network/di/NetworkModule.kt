@@ -17,7 +17,11 @@
 package com.dogeby.reliccalculator.core.network.di
 
 import android.content.Context
+import com.dogeby.reliccalculator.core.network.PresetNetworkDataSource
+import com.dogeby.reliccalculator.core.network.ProfileNetworkDataSource
 import com.dogeby.reliccalculator.core.network.fake.FakeAssetManager
+import com.dogeby.reliccalculator.core.network.retrofit.RetrofitPresetNetwork
+import com.dogeby.reliccalculator.core.network.retrofit.RetrofitProfileNetwork
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,4 +44,16 @@ object NetworkModule {
     @Singleton
     fun providesFakeAssetManager(@ApplicationContext context: Context): FakeAssetManager =
         FakeAssetManager(context.assets::open)
+
+    @Provides
+    @Singleton
+    fun providesPresetNetworkDataSource(
+        retrofitPresetNetwork: RetrofitPresetNetwork,
+    ): PresetNetworkDataSource = retrofitPresetNetwork
+
+    @Provides
+    @Singleton
+    fun providesProfileNetworkDataSource(
+        retrofitProfileNetwork: RetrofitProfileNetwork,
+    ): ProfileNetworkDataSource = retrofitProfileNetwork
 }
