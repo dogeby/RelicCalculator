@@ -54,20 +54,20 @@ class CharacterDaoTest {
 
     @Test
     fun test_characterDao_upsert_success() = runTest {
-        val size = 3
-        val characters = List(size) { character.copy(id = "test$it") }
-        val insertResult = characterDao.upsertCharacters(characters)
+        val initialCharactersSize = 3
+        val initialCharacters = List(initialCharactersSize) { character.copy(id = "test$it") }
+        val insertRowIds = characterDao.insertOrIgnoreCharacters(initialCharacters)
 
-        Assert.assertEquals(List(size) { it + 1L }, insertResult)
+        Assert.assertEquals(List(initialCharactersSize) { it + 1L }, insertRowIds)
 
-        val newCharacters = characters.map { characterEntity ->
-            characterEntity.copy(name = "newName")
-        }
-        val updateResult = characterDao.updateCharacters(newCharacters)
-        val updatedCharacters = characterDao.getCharacters().first()
+        val updatedCharacter = initialCharacters.last().copy(name = "newName")
+        val newCharacter = character.copy(id = "newCharacterId")
+        val charactersToUpsert = initialCharacters.dropLast(1) +
+            updatedCharacter + newCharacter
+        characterDao.upsertCharacters(charactersToUpsert)
+        val upsertedCharacters = characterDao.getCharacters().first()
 
-        Assert.assertEquals(size, updateResult)
-        Assert.assertEquals(newCharacters, updatedCharacters)
+        Assert.assertEquals(charactersToUpsert, upsertedCharacters)
     }
 
     @Test

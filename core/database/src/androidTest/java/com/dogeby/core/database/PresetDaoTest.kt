@@ -58,20 +58,20 @@ class PresetDaoTest {
 
     @Test
     fun test_presetDao_upsert_success() = runTest {
-        val size = 3
-        val presets = List(size) { samplePreset.copy(characterId = "test$it") }
-        val insertResult = presetDao.upsertPresets(presets)
+        val initialPresetsSize = 3
+        val initialPresets = List(initialPresetsSize) { samplePreset.copy(characterId = "test$it") }
+        val insertRowIds = presetDao.upsertPresets(initialPresets)
 
-        Assert.assertEquals(List(size) { it + 1L }, insertResult)
+        Assert.assertEquals(List(initialPresetsSize) { it + 1L }, insertRowIds)
 
-        val newPresets = presets.map { presetEntity ->
-            presetEntity.copy(relicSetIds = emptyList())
-        }
-        val updateResult = presetDao.updatePresets(newPresets)
-        val updatedPresets = presetDao.getPresets().first()
+        val updatedPreset = initialPresets.last().copy(relicSetIds = emptyList())
+        val newPreset = samplePreset.copy(characterId = "newCharacterId")
+        val presetsToUpsert = initialPresets.dropLast(1) +
+            updatedPreset + newPreset
+        presetDao.upsertPresets(presetsToUpsert)
+        val upsertedPresets = presetDao.getPresets().first()
 
-        Assert.assertEquals(size, updateResult)
-        Assert.assertEquals(newPresets, updatedPresets)
+        Assert.assertEquals(presetsToUpsert, upsertedPresets)
     }
 
     @Test
