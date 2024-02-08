@@ -2,6 +2,8 @@ package com.dogeby.core.storage
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
+import java.io.FileNotFoundException
+import java.io.IOException
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
@@ -71,7 +73,9 @@ class InternalStorageManagerTest {
             path = path,
         )
 
-        Assert.assertTrue(result.isFailure)
+        Assert.assertThrows(IOException::class.java) {
+            result.getOrThrow()
+        }
     }
 
     @Test
@@ -89,6 +93,20 @@ class InternalStorageManagerTest {
             path = "incorrect_$path",
         )
 
-        Assert.assertTrue(result.isFailure)
+        Assert.assertThrows(IOException::class.java) {
+            result.getOrThrow()
+        }
+    }
+
+    @Test
+    fun test_loadStringFromFile_fileIsNotExist() = runTest(testDispatcher) {
+        val result = storageManager.loadStringFromFile(
+            fileName = "test_fileIsNotExist_fileName",
+            path = path,
+        )
+
+        Assert.assertThrows(FileNotFoundException::class.java) {
+            result.getOrThrow()
+        }
     }
 }

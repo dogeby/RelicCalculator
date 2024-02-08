@@ -5,6 +5,7 @@ import com.dogeby.core.common.dispatcher.Dispatcher
 import com.dogeby.core.common.dispatcher.RcDispatchers
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
+import java.io.FileNotFoundException
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.CoroutineDispatcher
@@ -36,7 +37,9 @@ class InternalStorageManager @Inject constructor(
         fileName: String,
         path: String,
     ) = runCatching {
-        File("${context.filesDir.path}$path", fileName).run {
+        val parent = "${context.filesDir.path}$path"
+        File(parent, fileName).run {
+            if (exists().not()) throw FileNotFoundException("$parent/$fileName")
             withContext(dispatcher) {
                 bufferedReader().use {
                     it.readText()
