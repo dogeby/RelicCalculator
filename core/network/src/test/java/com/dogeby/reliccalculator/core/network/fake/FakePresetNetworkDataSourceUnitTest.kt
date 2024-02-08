@@ -30,7 +30,7 @@ class FakePresetNetworkDataSourceUnitTest {
         val result = fakePresetNetworkDataSource.getDefaultPreset().getOrThrow()
 
         Assert.assertEquals(
-            "24:01:30:02:05:36",
+            "24-02-08 14:35:35",
             result.updateDate,
         )
     }
