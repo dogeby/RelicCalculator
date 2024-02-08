@@ -2,10 +2,10 @@ package com.dogeby.core.common.util
 
 import com.dogeby.core.common.util.DateUtil.toDate
 import com.dogeby.core.common.util.DateUtil.toString
-import org.junit.Assert
-import org.junit.Test
 import java.util.Date
 import java.util.Locale
+import org.junit.Assert
+import org.junit.Test
 
 class DateUtilTest {
 
