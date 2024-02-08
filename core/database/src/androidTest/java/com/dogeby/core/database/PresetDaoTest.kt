@@ -35,7 +35,7 @@ class PresetDaoTest {
     }
 
     @Test
-    fun test_presetDao_insert_succeed() = runTest {
+    fun test_presetDao_insert_success() = runTest {
         val size = 3
         val result = presetDao.insertOrIgnorePresets(
             List(size) { samplePreset.copy(characterId = "test$it") },
@@ -45,7 +45,7 @@ class PresetDaoTest {
     }
 
     @Test
-    fun test_presetDao_update_succeed() = runTest {
+    fun test_presetDao_update_success() = runTest {
         presetDao.insertOrIgnorePresets(
             listOf(samplePreset),
         )
@@ -57,7 +57,7 @@ class PresetDaoTest {
     }
 
     @Test
-    fun test_presetDao_upsert_succeed() = runTest {
+    fun test_presetDao_upsert_success() = runTest {
         val size = 3
         val presets = List(size) { samplePreset.copy(characterId = "test$it") }
         val insertResult = presetDao.upsertPresets(presets)
@@ -75,7 +75,7 @@ class PresetDaoTest {
     }
 
     @Test
-    fun test_presetDao_delete_succeed() = runTest {
+    fun test_presetDao_delete_success() = runTest {
         presetDao.insertOrIgnorePresets(listOf(samplePreset))
         val result = presetDao.deletePresets(listOf(samplePreset))
 
@@ -83,7 +83,7 @@ class PresetDaoTest {
     }
 
     @Test
-    fun test_presetDao_getAllPresets_succeed() = runTest {
+    fun test_presetDao_getAllPresets_success() = runTest {
         val presets = List(3) { samplePreset.copy(characterId = "test$it") }
         presetDao.insertOrIgnorePresets(presets)
         val result = presetDao.getPresets().first()
@@ -92,7 +92,7 @@ class PresetDaoTest {
     }
 
     @Test
-    fun test_presetDao_getPresets_succeed() = runTest {
+    fun test_presetDao_getPresets_success() = runTest {
         val ids = mutableListOf<String>()
         val presets = List(3) { index ->
             val id = "test$index".also { ids.add(it) }
