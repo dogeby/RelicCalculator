@@ -1,8 +1,8 @@
 package com.dogeby.reliccalculator.core.network.fake
 
 import JvmUnitTestFakeAssetManager
+import com.dogeby.core.common.di.CommonModule
 import com.dogeby.reliccalculator.core.model.data.preset.PresetData
-import com.dogeby.reliccalculator.core.network.di.NetworkModule
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
@@ -20,7 +20,7 @@ class FakePresetNetworkDataSourceUnitTest {
     fun setUp() {
         fakePresetNetworkDataSource = FakePresetNetworkDataSource(
             ioDispatcher = testDispatcher,
-            networkJson = NetworkModule.providesNetworkJson(),
+            networkJson = CommonModule.providesJson(),
             assets = JvmUnitTestFakeAssetManager,
         )
     }
