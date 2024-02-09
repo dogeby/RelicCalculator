@@ -7,6 +7,7 @@ import androidx.room.TypeConverters
 import com.dogeby.core.database.util.PieceMainAffixWeightMapConverter
 import com.dogeby.core.database.util.RelicSetIdListConverter
 import com.dogeby.core.database.util.SubAffixWeightListConverter
+import com.dogeby.reliccalculator.core.model.data.preset.Preset
 import org.jetbrains.annotations.TestOnly
 
 @Entity(tableName = "presets")
@@ -24,6 +25,16 @@ data class PresetEntity(
     val pieceMainAffixWeights: Map<Int, List<DatabaseAffixWeight>>,
     @ColumnInfo(name = "sub_affix_weights") val subAffixWeights: List<DatabaseAffixWeight>,
     @ColumnInfo(name = "is_auto_update") val isAutoUpdate: Boolean,
+)
+
+fun PresetEntity.toPreset() = Preset(
+    characterId = characterId,
+    relicSetIds = relicSetIds,
+    pieceMainAffixWeights = pieceMainAffixWeights.mapValues {
+        it.value.map(DatabaseAffixWeight::toAffixWeight)
+    },
+    subAffixWeights = subAffixWeights.map(DatabaseAffixWeight::toAffixWeight),
+    isAutoUpdate = isAutoUpdate,
 )
 
 @TestOnly

@@ -17,14 +17,17 @@
 package com.dogeby.reliccalculator.core.network.di
 
 import android.content.Context
+import com.dogeby.reliccalculator.core.network.PresetNetworkDataSource
+import com.dogeby.reliccalculator.core.network.ProfileNetworkDataSource
 import com.dogeby.reliccalculator.core.network.fake.FakeAssetManager
+import com.dogeby.reliccalculator.core.network.retrofit.RetrofitPresetNetwork
+import com.dogeby.reliccalculator.core.network.retrofit.RetrofitProfileNetwork
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import kotlinx.serialization.json.Json
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -32,12 +35,18 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providesNetworkJson(): Json = Json {
-        ignoreUnknownKeys = true
-    }
+    fun providesFakeAssetManager(@ApplicationContext context: Context): FakeAssetManager =
+        FakeAssetManager(context.assets::open)
 
     @Provides
     @Singleton
-    fun providesFakeAssetManager(@ApplicationContext context: Context): FakeAssetManager =
-        FakeAssetManager(context.assets::open)
+    fun providesPresetNetworkDataSource(
+        retrofitPresetNetwork: RetrofitPresetNetwork,
+    ): PresetNetworkDataSource = retrofitPresetNetwork
+
+    @Provides
+    @Singleton
+    fun providesProfileNetworkDataSource(
+        retrofitProfileNetwork: RetrofitProfileNetwork,
+    ): ProfileNetworkDataSource = retrofitProfileNetwork
 }

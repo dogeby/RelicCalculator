@@ -19,8 +19,8 @@ package com.dogeby.reliccalculator.core.network.fake
 import JvmUnitTestFakeAssetManager
 import com.dogeby.core.common.dispatcher.Dispatcher
 import com.dogeby.core.common.dispatcher.RcDispatchers
+import com.dogeby.reliccalculator.core.model.data.preset.PresetData
 import com.dogeby.reliccalculator.core.network.PresetNetworkDataSource
-import com.dogeby.reliccalculator.core.network.model.preset.NetworkPresetData
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -37,7 +37,7 @@ class FakePresetNetworkDataSource @Inject constructor(
 ) : PresetNetworkDataSource {
 
     @OptIn(ExperimentalSerializationApi::class)
-    override suspend fun getDefaultPreset(): Result<NetworkPresetData> {
+    override suspend fun getDefaultPreset(): Result<PresetData> {
         return Result.success(
             withContext(ioDispatcher) {
                 assets.open(DEFAULT_PRESET_ASSET).use(networkJson::decodeFromStream)

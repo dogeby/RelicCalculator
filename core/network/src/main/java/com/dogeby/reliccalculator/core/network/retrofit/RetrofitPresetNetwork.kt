@@ -1,8 +1,8 @@
 package com.dogeby.reliccalculator.core.network.retrofit
 
+import com.dogeby.reliccalculator.core.model.data.preset.PresetData
 import com.dogeby.reliccalculator.core.network.BuildConfig
 import com.dogeby.reliccalculator.core.network.PresetNetworkDataSource
-import com.dogeby.reliccalculator.core.network.model.preset.NetworkPresetData
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -29,7 +29,7 @@ class RetrofitPresetNetwork @Inject constructor(
             .build()
             .create(RetrofitPresetNetworkApi::class.java)
 
-    override suspend fun getDefaultPreset(): Result<NetworkPresetData> {
+    override suspend fun getDefaultPreset(): Result<PresetData> {
         return runCatching {
             networkApi.getDefaultPreset()
         }
@@ -51,7 +51,7 @@ class RetrofitPresetNetwork @Inject constructor(
 private interface RetrofitPresetNetworkApi {
 
     @GET("star_rail_default_preset.json")
-    suspend fun getDefaultPreset(): NetworkPresetData
+    suspend fun getDefaultPreset(): PresetData
 
     @GET("star_rail_default_preset.json")
     suspend fun getDefaultPresetResponseBody(): Response<ResponseBody>

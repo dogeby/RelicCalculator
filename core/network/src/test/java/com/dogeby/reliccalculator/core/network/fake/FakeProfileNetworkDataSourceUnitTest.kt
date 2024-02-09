@@ -1,7 +1,7 @@
 package com.dogeby.reliccalculator.core.network.fake
 
 import JvmUnitTestFakeAssetManager
-import com.dogeby.reliccalculator.core.network.di.NetworkModule
+import com.dogeby.core.common.di.CommonModule
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
@@ -19,7 +19,7 @@ class FakeProfileNetworkDataSourceUnitTest {
     fun setUp() {
         fakeProfileNetwork = FakeProfileNetworkDataSource(
             ioDispatcher = testDispatcher,
-            networkJson = NetworkModule.providesNetworkJson(),
+            networkJson = CommonModule.providesJson(),
             assets = JvmUnitTestFakeAssetManager,
         )
     }

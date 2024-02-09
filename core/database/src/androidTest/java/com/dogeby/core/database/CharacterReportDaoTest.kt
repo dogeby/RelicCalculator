@@ -40,7 +40,7 @@ class CharacterReportDaoTest {
     }
 
     @Test
-    fun test_characterReportDao_insert_succeed() = runTest {
+    fun test_characterReportDao_insert_success() = runTest {
         val size = 3
         val result = characterReportDao.insertOrIgnoreCharacterReports(
             List(size) { characterReport },
@@ -50,7 +50,7 @@ class CharacterReportDaoTest {
     }
 
     @Test
-    fun test_characterReportDao_update_succeed() = runTest {
+    fun test_characterReportDao_update_success() = runTest {
         val id = characterReportDao.insertOrIgnoreCharacterReports(
             listOf(characterReport.copy(characterId = "oldId")),
         )
@@ -63,25 +63,42 @@ class CharacterReportDaoTest {
     }
 
     @Test
-    fun test_characterReportDao_upsert_succeed() = runTest {
-        val size = 3
-        val characterReports = List(size) { characterReport }
-        val insertResult = characterReportDao.upsertCharacterReports(characterReports)
+    fun test_characterReportDao_upsert_success() = runTest {
+        val initialCharacterReportsSize = 3
+        val initialCharacterReports = List(initialCharacterReportsSize) { characterReport }
+        val insertRowIds = characterReportDao.insertOrIgnoreCharacterReports(
+            initialCharacterReports,
+        )
 
-        Assert.assertEquals(List(size) { it + 1L }, insertResult)
+        Assert.assertEquals(List(initialCharacterReportsSize) { it + 1L }, insertRowIds)
 
-        val newCharacterReports = characterReports.mapIndexed { index, characterEntity ->
-            characterEntity.copy(id = insertResult[index].toInt(), characterId = "newId")
-        }
-        val updateResult = characterReportDao.updateCharacterReports(newCharacterReports)
-        val updatedCharacterReports = characterReportDao.getCharacterReports().first()
+        val updatedCharacterReport = initialCharacterReports.last().copy(
+            id = insertRowIds.last().toInt(),
+            characterId = "newCharacterId",
+        )
+        val newCharacterReport = characterReport
+        val characterReportsToUpsert = initialCharacterReports
+            .dropLast(1)
+            .mapIndexed { index, characterEntity ->
+                characterEntity.copy(id = insertRowIds[index].toInt())
+            } + updatedCharacterReport + newCharacterReport
+        val newCharacterReportId = characterReportDao.upsertCharacterReports(
+            characterReportsToUpsert,
+        ).last()
+        val upsertedCharacterReports = characterReportDao.getCharacterReports().first()
 
-        Assert.assertEquals(size, updateResult)
-        Assert.assertEquals(newCharacterReports, updatedCharacterReports)
+        Assert.assertEquals(
+            characterReportsToUpsert.dropLast(1),
+            upsertedCharacterReports.dropLast(1),
+        )
+        Assert.assertEquals(
+            characterReportsToUpsert.last().copy(id = newCharacterReportId.toInt()),
+            upsertedCharacterReports.last(),
+        )
     }
 
     @Test
-    fun test_characterReportDao_delete_succeed() = runTest {
+    fun test_characterReportDao_delete_success() = runTest {
         val id = characterReportDao.insertOrIgnoreCharacterReports(
             listOf(characterReport),
         ).first().toInt()
@@ -93,7 +110,7 @@ class CharacterReportDaoTest {
     }
 
     @Test
-    fun test_characterReportDao_getAllCharacterReports_succeed() = runTest {
+    fun test_characterReportDao_getAllCharacterReports_success() = runTest {
         val characterReports =
             List(3) { characterReport }.run {
                 val ids = characterReportDao.insertOrIgnoreCharacterReports(this)
@@ -107,7 +124,7 @@ class CharacterReportDaoTest {
     }
 
     @Test
-    fun test_characterReportDao_getCharacterReports_succeed() = runTest {
+    fun test_characterReportDao_getCharacterReports_success() = runTest {
         val characterReports =
             List(3) { characterReport }.run {
                 val ids = characterReportDao.insertOrIgnoreCharacterReports(this)
@@ -123,7 +140,7 @@ class CharacterReportDaoTest {
     }
 
     @Test
-    fun test_characterReportDao_getCharacterWithReports_succeed() = runTest {
+    fun test_characterReportDao_getCharacterWithReports_success() = runTest {
         characterDao.insertOrIgnoreCharacters(listOf(character))
         val characterReports = List(3) {
             characterReport.copy(characterId = character.id)
@@ -141,7 +158,7 @@ class CharacterReportDaoTest {
     }
 
     @Test
-    fun test_characterReportDao_getCharacterWithReportsById_succeed() = runTest {
+    fun test_characterReportDao_getCharacterWithReportsById_success() = runTest {
         val characters = List(3) {
             character.copy(id = "$it")
         }

@@ -35,7 +35,7 @@ class CharacterDaoTest {
     }
 
     @Test
-    fun test_characterDao_insert_succeed() = runTest {
+    fun test_characterDao_insert_success() = runTest {
         val size = 3
         val result = characterDao.insertOrIgnoreCharacters(
             List(size) { character.copy(id = "test$it") },
@@ -45,7 +45,7 @@ class CharacterDaoTest {
     }
 
     @Test
-    fun test_characterDao_update_succeed() = runTest {
+    fun test_characterDao_update_success() = runTest {
         characterDao.insertOrIgnoreCharacters(listOf(character.copy(name = "oldName")))
         val result = characterDao.updateCharacters(listOf(character.copy(name = "newName")))
 
@@ -53,25 +53,25 @@ class CharacterDaoTest {
     }
 
     @Test
-    fun test_characterDao_upsert_succeed() = runTest {
-        val size = 3
-        val characters = List(size) { character.copy(id = "test$it") }
-        val insertResult = characterDao.upsertCharacters(characters)
+    fun test_characterDao_upsert_success() = runTest {
+        val initialCharactersSize = 3
+        val initialCharacters = List(initialCharactersSize) { character.copy(id = "test$it") }
+        val insertRowIds = characterDao.insertOrIgnoreCharacters(initialCharacters)
 
-        Assert.assertEquals(List(size) { it + 1L }, insertResult)
+        Assert.assertEquals(List(initialCharactersSize) { it + 1L }, insertRowIds)
 
-        val newCharacters = characters.map { characterEntity ->
-            characterEntity.copy(name = "newName")
-        }
-        val updateResult = characterDao.updateCharacters(newCharacters)
-        val updatedCharacters = characterDao.getCharacters().first()
+        val updatedCharacter = initialCharacters.last().copy(name = "newName")
+        val newCharacter = character.copy(id = "newCharacterId")
+        val charactersToUpsert = initialCharacters.dropLast(1) +
+            updatedCharacter + newCharacter
+        characterDao.upsertCharacters(charactersToUpsert)
+        val upsertedCharacters = characterDao.getCharacters().first()
 
-        Assert.assertEquals(size, updateResult)
-        Assert.assertEquals(newCharacters, updatedCharacters)
+        Assert.assertEquals(charactersToUpsert, upsertedCharacters)
     }
 
     @Test
-    fun test_characterDao_delete_succeed() = runTest {
+    fun test_characterDao_delete_success() = runTest {
         characterDao.insertOrIgnoreCharacters(listOf(character))
         val result = characterDao.deleteCharacters(listOf(character))
 
@@ -79,7 +79,7 @@ class CharacterDaoTest {
     }
 
     @Test
-    fun test_characterDao_getAllCharacters_succeed() = runTest {
+    fun test_characterDao_getAllCharacters_success() = runTest {
         val characters = List(3) { character.copy(id = "test$it") }
         characterDao.insertOrIgnoreCharacters(characters)
         val result = characterDao.getCharacters().first()
@@ -88,7 +88,7 @@ class CharacterDaoTest {
     }
 
     @Test
-    fun test_characterDao_getCharacters_succeed() = runTest {
+    fun test_characterDao_getCharacters_success() = runTest {
         val ids = mutableListOf<String>()
         val characters = List(3) { index ->
             val id = "test$index".also { ids.add(it) }

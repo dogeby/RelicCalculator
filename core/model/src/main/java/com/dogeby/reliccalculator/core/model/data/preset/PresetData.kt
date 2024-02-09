@@ -1,6 +1,10 @@
 package com.dogeby.reliccalculator.core.model.data.preset
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class PresetData(
-    val updateDate: String,
+    @SerialName("update_date") val updateDate: String,
     val presets: List<Preset>,
 )

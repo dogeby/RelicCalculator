@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -39,4 +40,8 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.serialization.json)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
 }
