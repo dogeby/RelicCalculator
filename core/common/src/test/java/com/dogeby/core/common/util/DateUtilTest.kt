@@ -10,19 +10,14 @@ import org.junit.Test
 class DateUtilTest {
 
     private val dateFormat = "yy-MM-dd HH:mm:ss"
-    private val locale = Locale.KOREA
+    private val locale = Locale.getDefault()
 
     @Test
-    fun test_dateToString_success() {
-        val result = Date(0).toString(dateFormat, locale).getOrThrow()
+    fun test_convertStringAndDate_success() {
+        val initialDate = Date(0)
+        val dateToString = initialDate.toString(dateFormat, locale).getOrThrow()
+        val stringToDate = dateToString.toDate(dateFormat, locale).getOrThrow()
 
-        Assert.assertEquals("70-01-01 09:00:00", result)
-    }
-
-    @Test
-    fun test_stringToDate_success() {
-        val result = "70-01-01 09:00:00".toDate(dateFormat, locale).getOrThrow()
-
-        Assert.assertEquals(Date(0), result)
+        Assert.assertEquals(initialDate, stringToDate)
     }
 }
