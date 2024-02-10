@@ -1,5 +1,9 @@
 package com.dogeby.reliccalculator.core.model.data.hoyo
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Character(
     val id: String,
     val name: String,
@@ -8,9 +12,9 @@ data class Character(
     val portrait: String,
     val path: Path,
     val element: Element,
-    val lightCone: LightCone,
+    @SerialName("light_cone") val lightCone: LightCone,
     val relics: List<Relic>,
-    val relicSets: List<RelicSet>,
+    @SerialName("relic_sets") val relicSets: List<RelicSet>,
     val attributes: List<Attribute>,
     val additions: List<Attribute>,
 )

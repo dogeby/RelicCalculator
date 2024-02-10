@@ -1,8 +1,8 @@
 package com.dogeby.reliccalculator.core.network.retrofit
 
+import com.dogeby.reliccalculator.core.model.data.hoyo.Profile
 import com.dogeby.reliccalculator.core.network.BuildConfig
 import com.dogeby.reliccalculator.core.network.ProfileNetworkDataSource
-import com.dogeby.reliccalculator.core.network.model.hoyo.NetworkProfile
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -32,7 +32,7 @@ class RetrofitProfileNetwork @Inject constructor(
     override suspend fun getProfile(
         uid: String,
         language: String,
-    ): Result<NetworkProfile> {
+    ): Result<Profile> {
         return runCatching {
             networkApi.getProfile(uid, language)
         }
@@ -45,5 +45,5 @@ private interface RetrofitProfileNetworkApi {
     suspend fun getProfile(
         @Path("uid") uid: String,
         @Query("lang") language: String,
-    ): NetworkProfile
+    ): Profile
 }

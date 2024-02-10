@@ -1,5 +1,5 @@
 package com.dogeby.core.data.exception
 
-import java.util.Date
+import kotlinx.datetime.Instant
 
-class NoUpdateNeededException(date: Date) : Exception(date.toString())
+class NoUpdateNeededException(instant: Instant) : Exception(instant.toString())

@@ -1,5 +1,6 @@
 package com.dogeby.reliccalculator.rating
 
+import com.dogeby.reliccalculator.core.model.data.hoyo.Attribute
 import com.dogeby.reliccalculator.core.model.data.hoyo.Character
 import com.dogeby.reliccalculator.core.model.data.hoyo.Element
 import com.dogeby.reliccalculator.core.model.data.hoyo.LightCone
@@ -9,6 +10,8 @@ import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.data.hoyo.RelicSet
 import com.dogeby.reliccalculator.core.model.data.hoyo.SubAffix
 import com.dogeby.reliccalculator.core.model.data.preset.AffixWeight
+import com.dogeby.reliccalculator.core.model.data.preset.AttrComparison
+import com.dogeby.reliccalculator.core.model.data.preset.ComparisonOperator
 import com.dogeby.reliccalculator.core.model.data.preset.Preset
 import org.junit.Assert
 import org.junit.Test
@@ -82,8 +85,26 @@ class RelicRatingTest {
         lightCone = LightCone("", "", "", ""),
         relics = listOf(relic),
         relicSets = List(3) { RelicSet("", "", "") },
-        attributes = emptyList(),
-        additions = emptyList(),
+        attributes = listOf(
+            Attribute(
+                field = "atk",
+                name = "ATK",
+                icon = "icon/property/IconAttack.png",
+                value = 1266.5520000000001,
+                display = "1266",
+                percent = false,
+            ),
+        ),
+        additions = listOf(
+            Attribute(
+                field = "atk",
+                name = "ATK",
+                icon = "icon/property/IconAttack.png",
+                value = 2010.1731806723133,
+                display = "2010",
+                percent = false,
+            ),
+        ),
     )
     private val preset = Preset(
         characterId = "",
@@ -111,6 +132,17 @@ class RelicRatingTest {
             ),
         ),
         isAutoUpdate = false,
+        attrComparisons = listOf(
+            AttrComparison(
+                field = "atk",
+                name = "ATK",
+                icon = "icon/property/IconAttack.png",
+                comparedValue = 500.0f,
+                display = "500",
+                percent = false,
+                comparisonOperator = ComparisonOperator.GREATER_THAN,
+            ),
+        ),
     )
 
     @Test
@@ -125,6 +157,16 @@ class RelicRatingTest {
     @Test
     fun test_calculateRelicScore_success() {
         Assert.assertEquals(4.6f, relicRating.calculateRelicScore(relic, preset).score)
+    }
+
+    @Test
+    fun test_calculateAttrComparison_success() {
+        Assert.assertTrue(
+            relicRating.calculateAttrComparison(
+                character = character,
+                attrComparison = preset.attrComparisons.first(),
+            )?.isPass ?: false,
+        )
     }
 
     @Test

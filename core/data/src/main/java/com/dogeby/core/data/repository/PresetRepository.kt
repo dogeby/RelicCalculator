@@ -2,8 +2,8 @@ package com.dogeby.core.data.repository
 
 import com.dogeby.reliccalculator.core.model.data.preset.Preset
 import com.dogeby.reliccalculator.core.model.data.preset.PresetData
-import java.util.Date
 import kotlinx.coroutines.flow.Flow
+import kotlinx.datetime.Instant
 
 interface PresetRepository {
 
@@ -25,7 +25,7 @@ interface PresetRepository {
 
     suspend fun downloadDefaultPresetData(): Result<PresetData>
 
-    suspend fun updateDefaultPresetDataInStorage(presetData: PresetData): Result<Date>
+    suspend fun updateDefaultPresetDataInStorage(presetData: PresetData): Result<Instant>
 
     suspend fun updateDefaultPresetsInDb(presets: List<Preset>): Result<Int>
 }

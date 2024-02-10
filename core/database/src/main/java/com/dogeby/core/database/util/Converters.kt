@@ -1,39 +1,41 @@
 package com.dogeby.core.database.util
 
 import androidx.room.TypeConverter
-import com.dogeby.core.database.model.hoyo.DatabaseAttribute
-import com.dogeby.core.database.model.hoyo.DatabaseRelic
-import com.dogeby.core.database.model.hoyo.DatabaseRelicSet
-import com.dogeby.core.database.model.preset.DatabaseAffixWeight
-import com.dogeby.core.database.model.report.DatabaseRelicReport
+import com.dogeby.reliccalculator.core.model.data.hoyo.Attribute
+import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
+import com.dogeby.reliccalculator.core.model.data.hoyo.RelicSet
+import com.dogeby.reliccalculator.core.model.data.preset.AffixWeight
+import com.dogeby.reliccalculator.core.model.data.preset.AttrComparison
+import com.dogeby.reliccalculator.core.model.data.report.AttrComparisonReport
+import com.dogeby.reliccalculator.core.model.data.report.RelicReport
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class RelicListConverter {
 
     @TypeConverter
-    fun relicListToString(relics: List<DatabaseRelic>) = Json.encodeToString(relics)
+    fun relicListToString(relics: List<Relic>) = Json.encodeToString(relics)
 
     @TypeConverter
-    fun stringToRelicList(json: String) = Json.decodeFromString<List<DatabaseRelic>>(json)
+    fun stringToRelicList(json: String) = Json.decodeFromString<List<Relic>>(json)
 }
 
 class RelicSetListConverter {
 
     @TypeConverter
-    fun relicSetListToString(relicSets: List<DatabaseRelicSet>) = Json.encodeToString(relicSets)
+    fun relicSetListToString(relicSets: List<RelicSet>) = Json.encodeToString(relicSets)
 
     @TypeConverter
-    fun stringToRelicSetList(json: String) = Json.decodeFromString<List<DatabaseRelicSet>>(json)
+    fun stringToRelicSetList(json: String) = Json.decodeFromString<List<RelicSet>>(json)
 }
 
 class AttributeListConverter {
 
     @TypeConverter
-    fun attributeListToString(attributes: List<DatabaseAttribute>) = Json.encodeToString(attributes)
+    fun attributeListToString(attributes: List<Attribute>) = Json.encodeToString(attributes)
 
     @TypeConverter
-    fun stringToAttributeList(json: String) = Json.decodeFromString<List<DatabaseAttribute>>(json)
+    fun stringToAttributeList(json: String) = Json.decodeFromString<List<Attribute>>(json)
 }
 
 class RelicSetIdListConverter {
@@ -45,36 +47,52 @@ class RelicSetIdListConverter {
     fun stringToRelicSetIdList(json: String) = Json.decodeFromString<List<String>>(json)
 }
 
-class PieceMainAffixWeightMapConverter {
+class AffixWeightMapConverter {
 
     @TypeConverter
-    fun pieceMainAffixWeightMapToString(
-        pieceMainAffixWeights: Map<Int, List<DatabaseAffixWeight>>,
-    ) = Json.encodeToString(pieceMainAffixWeights)
+    fun affixWeightMapToString(affixWeights: Map<Int, List<AffixWeight>>) =
+        Json.encodeToString(affixWeights)
 
     @TypeConverter
-    fun stringToPieceMainAffixWeightMap(json: String) =
-        Json.decodeFromString<Map<Int, List<DatabaseAffixWeight>>>(json)
+    fun stringToAffixWeightMap(json: String) =
+        Json.decodeFromString<Map<Int, List<AffixWeight>>>(json)
 }
 
-class SubAffixWeightListConverter {
+class AffixWeightListConverter {
 
     @TypeConverter
-    fun relicStatWeightListToString(relicStatWeights: List<DatabaseAffixWeight>) =
-        Json.encodeToString(relicStatWeights)
+    fun affixWeightListToString(affixWeights: List<AffixWeight>) = Json.encodeToString(affixWeights)
 
     @TypeConverter
-    fun stringToRelicStatWeightList(json: String) =
-        Json.decodeFromString<List<DatabaseAffixWeight>>(json)
+    fun stringToAffixWeightList(json: String) = Json.decodeFromString<List<AffixWeight>>(json)
 }
 
 class RelicReportListConverter {
 
     @TypeConverter
-    fun relicReportListToString(relicReports: List<DatabaseRelicReport>) =
-        Json.encodeToString(relicReports)
+    fun relicReportListToString(relicReports: List<RelicReport>) = Json.encodeToString(relicReports)
 
     @TypeConverter
-    fun stringToRelicReportList(json: String) =
-        Json.decodeFromString<List<DatabaseRelicReport>>(json)
+    fun stringToRelicReportList(json: String) = Json.decodeFromString<List<RelicReport>>(json)
+}
+
+class AttrComparisonListConverter {
+
+    @TypeConverter
+    fun attrComparisonListToString(attrComparisons: List<AttrComparison>) =
+        Json.encodeToString(attrComparisons)
+
+    @TypeConverter
+    fun stringToAttrComparisonList(json: String) = Json.decodeFromString<List<AttrComparison>>(json)
+}
+
+class AttrComparisonReportListConverter {
+
+    @TypeConverter
+    fun attrComparisonReportListToString(attrComparisonReports: List<AttrComparisonReport>) =
+        Json.encodeToString(attrComparisonReports)
+
+    @TypeConverter
+    fun stringToAttrComparisonReportList(json: String) =
+        Json.decodeFromString<List<AttrComparisonReport>>(json)
 }

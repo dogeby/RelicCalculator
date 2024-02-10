@@ -1,6 +1,5 @@
 package com.dogeby.core.data.repository
 
-import com.dogeby.core.common.util.DateUtil.toDate
 import com.dogeby.core.data.exception.NoUpdateNeededException
 import com.dogeby.core.data.model.toPresetEntity
 import com.dogeby.core.database.dao.PresetDao
@@ -12,13 +11,12 @@ import com.dogeby.reliccalculator.core.model.data.preset.Preset
 import com.dogeby.reliccalculator.core.model.data.preset.PresetData
 import com.dogeby.reliccalculator.core.network.PresetNetworkDataSource
 import java.io.FileNotFoundException
-import java.util.Date
-import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.datetime.Instant
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -29,8 +27,6 @@ class PresetRepositoryImpl @Inject constructor(
     private val presetNetworkDataSource: PresetNetworkDataSource,
     @StorageManagerModule.InternalStorage private val storageManager: StorageManager,
 ) : PresetRepository {
-
-    private val defaultPresetLocale = Locale.KOREA
 
     override fun getPresets(): Flow<List<Preset>> =
         presetDao.getPresets().map { it.map(PresetEntity::toPreset) }
@@ -73,13 +69,9 @@ class PresetRepositoryImpl @Inject constructor(
         return presetNetworkDataSource.getDefaultPreset()
     }
 
-    override suspend fun updateDefaultPresetDataInStorage(presetData: PresetData): Result<Date> =
+    override suspend fun updateDefaultPresetDataInStorage(presetData: PresetData): Result<Instant> =
         runCatching {
-            val inputDataUpdateDate = presetData.updateDate.toDate(
-                DATE_FORMAT,
-                defaultPresetLocale,
-            ).getOrThrow()
-            val saveInStorage: suspend PresetData.() -> Date = {
+            val saveInStorage: suspend PresetData.() -> Instant = {
                 storageManager.saveStringToFile(
                     data = dataJson.encodeToString(this),
                     fileName = DEFAULT_PRESET_FILE_NAME,
@@ -87,7 +79,7 @@ class PresetRepositoryImpl @Inject constructor(
                 ).onFailure {
                     throw it
                 }
-                inputDataUpdateDate
+                presetData.updateDate
             }
             val presetDataInStorage = storageManager
                 .loadStringFromFile(
@@ -103,11 +95,8 @@ class PresetRepositoryImpl @Inject constructor(
                 .run {
                     dataJson.decodeFromString<PresetData>(this)
                 }
-            if (presetDataInStorage.isLatestVersion(
-                    presetData,
-                )
-            ) {
-                throw NoUpdateNeededException(inputDataUpdateDate)
+            if (presetDataInStorage.updateDate >= presetData.updateDate) {
+                throw NoUpdateNeededException(presetData.updateDate)
             }
 
             presetData.saveInStorage()
@@ -126,20 +115,8 @@ class PresetRepositoryImpl @Inject constructor(
             upsertPresets(newPresets).getOrThrow().size
         }
 
-    private fun PresetData.isLatestVersion(comparedPresetData: PresetData): Boolean {
-        return updateDate.toDate(
-            DATE_FORMAT,
-            defaultPresetLocale,
-        ).getOrThrow() >=
-            comparedPresetData.updateDate.toDate(
-                DATE_FORMAT,
-                defaultPresetLocale,
-            ).getOrThrow()
-    }
-
     companion object {
 
-        private const val DATE_FORMAT = "yy-MM-dd HH:mm:ss"
         private const val DEFAULT_PRESET_FILE_NAME = "star_rail_default_preset.json"
         private const val PRESET_PATH = "preset"
     }

@@ -19,8 +19,8 @@ package com.dogeby.reliccalculator.core.network.fake
 import JvmUnitTestFakeAssetManager
 import com.dogeby.core.common.dispatcher.Dispatcher
 import com.dogeby.core.common.dispatcher.RcDispatchers
+import com.dogeby.reliccalculator.core.model.data.hoyo.Profile
 import com.dogeby.reliccalculator.core.network.ProfileNetworkDataSource
-import com.dogeby.reliccalculator.core.network.model.hoyo.NetworkProfile
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -40,7 +40,7 @@ class FakeProfileNetworkDataSource @Inject constructor(
     override suspend fun getProfile(
         uid: String,
         language: String,
-    ): Result<NetworkProfile> {
+    ): Result<Profile> {
         return Result.success(
             withContext(ioDispatcher) {
                 assets.open(
