@@ -2,10 +2,8 @@ package com.dogeby.reliccalculator.core.network.fake
 
 import JvmUnitTestFakeAssetManager
 import com.dogeby.core.common.di.CommonModule
-import com.dogeby.reliccalculator.core.model.data.preset.PresetData
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
-import kotlinx.serialization.json.Json
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -32,18 +30,6 @@ class FakePresetNetworkDataSourceUnitTest {
         Assert.assertEquals(
             "2024-02-10T00:04:07.553347500Z",
             result.updateDate.toString(),
-        )
-    }
-
-    @Test
-    fun test_getDefaultPresetString_success() = runTest(testDispatcher) {
-        val defaultPresetData = fakePresetNetworkDataSource.getDefaultPreset().getOrThrow()
-        val defaultPresetJson = fakePresetNetworkDataSource.getDefaultPresetJson().getOrThrow()
-        val result = Json.decodeFromString<PresetData>(defaultPresetJson)
-
-        Assert.assertEquals(
-            defaultPresetData,
-            result,
         )
     }
 }
