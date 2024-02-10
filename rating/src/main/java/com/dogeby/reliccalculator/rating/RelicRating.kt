@@ -139,9 +139,6 @@ object RelicRating {
         }.getOrElse { return null }
 
         val isPass = when (attrComparison.comparisonOperator) {
-            ComparisonOperator.EQUAL -> {
-                attrValue == attrComparison.comparedValue.toDouble()
-            }
             ComparisonOperator.GREATER_THAN -> {
                 attrValue > attrComparison.comparedValue.toDouble()
             }
