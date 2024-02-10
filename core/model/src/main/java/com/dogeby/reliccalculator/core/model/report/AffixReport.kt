@@ -1,4 +1,4 @@
-package com.dogeby.reliccalculator.core.model.data.report
+package com.dogeby.reliccalculator.core.model.report
 
 import kotlinx.serialization.Serializable
 

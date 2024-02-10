@@ -1,6 +1,6 @@
 package com.dogeby.reliccalculator.core.network.retrofit
 
-import com.dogeby.reliccalculator.core.model.data.preset.PresetData
+import com.dogeby.reliccalculator.core.model.preset.PresetData
 import com.dogeby.reliccalculator.core.network.BuildConfig
 import com.dogeby.reliccalculator.core.network.PresetNetworkDataSource
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory

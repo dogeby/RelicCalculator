@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.dogeby.core.database.util.AttrComparisonReportListConverter
 import com.dogeby.core.database.util.RelicReportListConverter
-import com.dogeby.reliccalculator.core.model.data.preset.ComparisonOperator
-import com.dogeby.reliccalculator.core.model.data.report.AffixReport
-import com.dogeby.reliccalculator.core.model.data.report.AttrComparisonReport
-import com.dogeby.reliccalculator.core.model.data.report.RelicReport
+import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
+import com.dogeby.reliccalculator.core.model.report.AffixReport
+import com.dogeby.reliccalculator.core.model.report.AttrComparisonReport
+import com.dogeby.reliccalculator.core.model.report.RelicReport
 import org.jetbrains.annotations.TestOnly
 
 @Entity(tableName = "character_reports")

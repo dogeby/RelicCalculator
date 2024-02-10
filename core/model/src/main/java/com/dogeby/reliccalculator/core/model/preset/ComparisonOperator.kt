@@ -1,4 +1,4 @@
-package com.dogeby.reliccalculator.core.model.data.preset
+package com.dogeby.reliccalculator.core.model.preset
 
 enum class ComparisonOperator(val symbol: String) {
     GREATER_THAN(">"),

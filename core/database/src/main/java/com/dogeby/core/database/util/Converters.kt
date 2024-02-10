@@ -1,13 +1,13 @@
 package com.dogeby.core.database.util
 
 import androidx.room.TypeConverter
-import com.dogeby.reliccalculator.core.model.data.hoyo.Attribute
-import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
-import com.dogeby.reliccalculator.core.model.data.hoyo.RelicSet
-import com.dogeby.reliccalculator.core.model.data.preset.AffixWeight
-import com.dogeby.reliccalculator.core.model.data.preset.AttrComparison
-import com.dogeby.reliccalculator.core.model.data.report.AttrComparisonReport
-import com.dogeby.reliccalculator.core.model.data.report.RelicReport
+import com.dogeby.reliccalculator.core.model.hoyo.Attribute
+import com.dogeby.reliccalculator.core.model.hoyo.Relic
+import com.dogeby.reliccalculator.core.model.hoyo.RelicSet
+import com.dogeby.reliccalculator.core.model.preset.AffixWeight
+import com.dogeby.reliccalculator.core.model.preset.AttrComparison
+import com.dogeby.reliccalculator.core.model.report.AttrComparisonReport
+import com.dogeby.reliccalculator.core.model.report.RelicReport
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 

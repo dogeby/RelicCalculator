@@ -1,6 +1,6 @@
 package com.dogeby.reliccalculator.core.network
 
-import com.dogeby.reliccalculator.core.model.data.preset.PresetData
+import com.dogeby.reliccalculator.core.model.preset.PresetData
 
 interface PresetNetworkDataSource {
 

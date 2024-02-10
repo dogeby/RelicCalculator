@@ -1,7 +1,7 @@
 package com.dogeby.core.data.repository
 
-import com.dogeby.reliccalculator.core.model.data.preset.Preset
-import com.dogeby.reliccalculator.core.model.data.preset.PresetData
+import com.dogeby.reliccalculator.core.model.preset.Preset
+import com.dogeby.reliccalculator.core.model.preset.PresetData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.Instant
 

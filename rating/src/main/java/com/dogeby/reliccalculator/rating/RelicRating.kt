@@ -1,16 +1,16 @@
 package com.dogeby.reliccalculator.rating
 
-import com.dogeby.reliccalculator.core.model.data.hoyo.Character
-import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
-import com.dogeby.reliccalculator.core.model.data.hoyo.SubAffix
-import com.dogeby.reliccalculator.core.model.data.preset.AffixWeight
-import com.dogeby.reliccalculator.core.model.data.preset.AttrComparison
-import com.dogeby.reliccalculator.core.model.data.preset.ComparisonOperator
-import com.dogeby.reliccalculator.core.model.data.preset.Preset
-import com.dogeby.reliccalculator.core.model.data.report.AffixReport
-import com.dogeby.reliccalculator.core.model.data.report.AttrComparisonReport
-import com.dogeby.reliccalculator.core.model.data.report.CharacterReport
-import com.dogeby.reliccalculator.core.model.data.report.RelicReport
+import com.dogeby.reliccalculator.core.model.hoyo.Character
+import com.dogeby.reliccalculator.core.model.hoyo.Relic
+import com.dogeby.reliccalculator.core.model.hoyo.SubAffix
+import com.dogeby.reliccalculator.core.model.preset.AffixWeight
+import com.dogeby.reliccalculator.core.model.preset.AttrComparison
+import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
+import com.dogeby.reliccalculator.core.model.preset.Preset
+import com.dogeby.reliccalculator.core.model.report.AffixReport
+import com.dogeby.reliccalculator.core.model.report.AttrComparisonReport
+import com.dogeby.reliccalculator.core.model.report.CharacterReport
+import com.dogeby.reliccalculator.core.model.report.RelicReport
 import com.dogeby.reliccalculator.rating.model.SubAffixValueTable
 import java.io.File
 import kotlin.math.floor

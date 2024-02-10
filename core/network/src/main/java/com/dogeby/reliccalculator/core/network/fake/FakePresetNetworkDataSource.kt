@@ -19,7 +19,7 @@ package com.dogeby.reliccalculator.core.network.fake
 import JvmUnitTestFakeAssetManager
 import com.dogeby.core.common.dispatcher.Dispatcher
 import com.dogeby.core.common.dispatcher.RcDispatchers
-import com.dogeby.reliccalculator.core.model.data.preset.PresetData
+import com.dogeby.reliccalculator.core.model.preset.PresetData
 import com.dogeby.reliccalculator.core.network.PresetNetworkDataSource
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher

@@ -1,9 +1,9 @@
-package com.dogeby.reliccalculator.core.model.data.hoyo
+package com.dogeby.reliccalculator.core.model.hoyo
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Path(
+data class RelicSet(
     val id: String,
     val name: String,
     val icon: String,

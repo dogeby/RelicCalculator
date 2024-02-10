@@ -1,13 +1,15 @@
-package com.dogeby.reliccalculator.core.model.data.report
+package com.dogeby.reliccalculator.core.model.preset
 
-import com.dogeby.reliccalculator.core.model.data.preset.ComparisonOperator
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AttrComparisonReport(
+data class AttrComparison(
     val field: String,
+    val name: String,
+    val icon: String,
     @SerialName("compared_value") val comparedValue: Float,
+    val display: String,
+    val percent: Boolean,
     @SerialName("comparison_operator") val comparisonOperator: ComparisonOperator,
-    @SerialName("is_pass") val isPass: Boolean,
 )

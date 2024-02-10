@@ -1,6 +1,6 @@
 package com.dogeby.reliccalculator.core.network.retrofit
 
-import com.dogeby.reliccalculator.core.model.data.hoyo.Profile
+import com.dogeby.reliccalculator.core.model.hoyo.Profile
 import com.dogeby.reliccalculator.core.network.BuildConfig
 import com.dogeby.reliccalculator.core.network.ProfileNetworkDataSource
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory

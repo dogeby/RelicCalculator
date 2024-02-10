@@ -1,4 +1,4 @@
-package com.dogeby.reliccalculator.core.model.data.preset
+package com.dogeby.reliccalculator.core.model.preset
 
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
