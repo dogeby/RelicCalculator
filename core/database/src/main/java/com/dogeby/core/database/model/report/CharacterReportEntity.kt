@@ -24,8 +24,8 @@ data class CharacterReportEntity(
     @ColumnInfo(name = "character_id") val characterId: String,
     @ColumnInfo(name = "character_score") val score: Float,
     @ColumnInfo(name = "relic_reports") val relicReports: List<RelicReport>,
-    @ColumnInfo(name = "attr_comparison_reports") val attrComparisonReports:
-    List<AttrComparisonReport>,
+    @ColumnInfo(name = "attr_comparison_reports")
+    val attrComparisonReports: List<AttrComparisonReport>,
 )
 
 @TestOnly
