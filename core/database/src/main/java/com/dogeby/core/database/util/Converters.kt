@@ -5,6 +5,7 @@ import com.dogeby.core.database.model.hoyo.DatabaseAttribute
 import com.dogeby.core.database.model.hoyo.DatabaseRelic
 import com.dogeby.core.database.model.hoyo.DatabaseRelicSet
 import com.dogeby.core.database.model.preset.DatabaseAffixWeight
+import com.dogeby.core.database.model.preset.DatabaseAttrComparison
 import com.dogeby.core.database.model.report.DatabaseRelicReport
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -45,26 +46,25 @@ class RelicSetIdListConverter {
     fun stringToRelicSetIdList(json: String) = Json.decodeFromString<List<String>>(json)
 }
 
-class PieceMainAffixWeightMapConverter {
+class AffixWeightMapConverter {
 
     @TypeConverter
-    fun pieceMainAffixWeightMapToString(
-        pieceMainAffixWeights: Map<Int, List<DatabaseAffixWeight>>,
-    ) = Json.encodeToString(pieceMainAffixWeights)
+    fun affixWeightMapToString(affixWeights: Map<Int, List<DatabaseAffixWeight>>) =
+        Json.encodeToString(affixWeights)
 
     @TypeConverter
-    fun stringToPieceMainAffixWeightMap(json: String) =
+    fun stringToAffixWeightMap(json: String) =
         Json.decodeFromString<Map<Int, List<DatabaseAffixWeight>>>(json)
 }
 
-class SubAffixWeightListConverter {
+class AffixWeightListConverter {
 
     @TypeConverter
-    fun relicStatWeightListToString(relicStatWeights: List<DatabaseAffixWeight>) =
-        Json.encodeToString(relicStatWeights)
+    fun affixWeightListToString(affixWeights: List<DatabaseAffixWeight>) =
+        Json.encodeToString(affixWeights)
 
     @TypeConverter
-    fun stringToRelicStatWeightList(json: String) =
+    fun stringToAffixWeightList(json: String) =
         Json.decodeFromString<List<DatabaseAffixWeight>>(json)
 }
 
@@ -77,4 +77,15 @@ class RelicReportListConverter {
     @TypeConverter
     fun stringToRelicReportList(json: String) =
         Json.decodeFromString<List<DatabaseRelicReport>>(json)
+}
+
+class AttrComparisonListConverter {
+
+    @TypeConverter
+    fun attrComparisonListToString(attrComparisons: List<DatabaseAttrComparison>) =
+        Json.encodeToString(attrComparisons)
+
+    @TypeConverter
+    fun stringToAttrComparisonList(json: String) =
+        Json.decodeFromString<List<DatabaseAttrComparison>>(json)
 }

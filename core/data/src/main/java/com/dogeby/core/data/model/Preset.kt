@@ -2,6 +2,7 @@ package com.dogeby.core.data.model
 
 import com.dogeby.core.database.model.preset.PresetEntity
 import com.dogeby.reliccalculator.core.model.data.preset.AffixWeight
+import com.dogeby.reliccalculator.core.model.data.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.data.preset.Preset
 
 fun Preset.toPresetEntity() = PresetEntity(
@@ -12,4 +13,5 @@ fun Preset.toPresetEntity() = PresetEntity(
     },
     subAffixWeights = subAffixWeights.map(AffixWeight::toDatabaseAffixWeight),
     isAutoUpdate = isAutoUpdate,
+    attrComparisons = attrComparisons.map(AttrComparison::toDatabaseAttrComparison),
 )

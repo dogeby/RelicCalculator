@@ -49,6 +49,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -98,6 +108,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -149,6 +169,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -198,6 +228,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -249,6 +289,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -298,6 +348,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -349,6 +409,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -398,6 +468,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -449,6 +529,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -498,6 +588,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -549,6 +649,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -598,6 +708,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -649,6 +769,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -698,6 +828,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -749,6 +889,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -798,6 +948,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -849,6 +1009,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -898,6 +1068,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -949,6 +1129,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -998,6 +1188,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -1049,6 +1249,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -1098,6 +1308,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -1149,6 +1369,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -1198,6 +1428,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -1249,6 +1489,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -1298,6 +1548,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -1349,6 +1609,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -1398,6 +1668,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -1449,6 +1729,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -1498,6 +1788,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -1549,6 +1849,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -1598,6 +1908,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -1649,6 +1969,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -1698,6 +2028,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -1749,6 +2089,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -1798,6 +2148,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -1849,6 +2209,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -1898,6 +2268,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     },
@@ -1949,6 +2329,16 @@
           "type": "AttackDelta",
           "weight": 1.0
         }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
+        }
       ]
     },
     {
@@ -1998,6 +2388,16 @@
         {
           "type": "AttackDelta",
           "weight": 1.0
+        }
+      ],
+      "attr_comparisons": [
+        {
+          "field": "atk",
+          "name": "ATK",
+          "icon": "icon/property/IconAttack.png",
+          "percent": false,
+          "compared_value": 500.0,
+          "comparison_operator": "GREATER_THAN"
         }
       ]
     }

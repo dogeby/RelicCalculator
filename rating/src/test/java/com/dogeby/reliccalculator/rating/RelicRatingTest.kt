@@ -9,6 +9,8 @@ import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.data.hoyo.RelicSet
 import com.dogeby.reliccalculator.core.model.data.hoyo.SubAffix
 import com.dogeby.reliccalculator.core.model.data.preset.AffixWeight
+import com.dogeby.reliccalculator.core.model.data.preset.AttrComparison
+import com.dogeby.reliccalculator.core.model.data.preset.ComparisonOperator
 import com.dogeby.reliccalculator.core.model.data.preset.Preset
 import org.junit.Assert
 import org.junit.Test
@@ -111,6 +113,16 @@ class RelicRatingTest {
             ),
         ),
         isAutoUpdate = false,
+        attrComparisons = listOf(
+            AttrComparison(
+                field = "atk",
+                name = "ATK",
+                icon = "icon/property/IconAttack.png",
+                percent = false,
+                comparedValue = 500.0f,
+                comparisonOperator = ComparisonOperator.GREATER_THAN,
+            ),
+        ),
     )
 
     @Test
