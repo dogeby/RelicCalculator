@@ -55,8 +55,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -115,8 +116,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -175,8 +177,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -235,8 +238,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -295,8 +299,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -355,8 +360,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -415,8 +421,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -475,8 +482,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -535,8 +543,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -595,8 +604,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -655,8 +665,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -715,8 +726,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -775,8 +787,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -835,8 +848,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -895,8 +909,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -955,8 +970,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1015,8 +1031,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1075,8 +1092,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1135,8 +1153,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1195,8 +1214,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1255,8 +1275,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1315,8 +1336,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1375,8 +1397,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1435,8 +1458,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1495,8 +1519,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1555,8 +1580,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1615,8 +1641,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1675,8 +1702,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1735,8 +1763,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1795,8 +1824,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1855,8 +1885,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1915,8 +1946,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -1975,8 +2007,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -2035,8 +2068,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -2095,8 +2129,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -2155,8 +2190,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -2215,8 +2251,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -2275,8 +2312,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -2335,8 +2373,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
@@ -2395,8 +2434,9 @@
           "field": "atk",
           "name": "ATK",
           "icon": "icon/property/IconAttack.png",
-          "percent": false,
           "compared_value": 500.0,
+          "display": "500",
+          "percent": false,
           "comparison_operator": "GREATER_THAN"
         }
       ]
