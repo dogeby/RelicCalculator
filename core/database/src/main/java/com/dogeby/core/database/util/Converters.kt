@@ -6,6 +6,7 @@ import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.data.hoyo.RelicSet
 import com.dogeby.reliccalculator.core.model.data.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.data.preset.AttrComparison
+import com.dogeby.reliccalculator.core.model.data.report.AttrComparisonReport
 import com.dogeby.reliccalculator.core.model.data.report.RelicReport
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -83,4 +84,15 @@ class AttrComparisonListConverter {
 
     @TypeConverter
     fun stringToAttrComparisonList(json: String) = Json.decodeFromString<List<AttrComparison>>(json)
+}
+
+class AttrComparisonReportListConverter {
+
+    @TypeConverter
+    fun attrComparisonReportListToString(attrComparisonReports: List<AttrComparisonReport>) =
+        Json.encodeToString(attrComparisonReports)
+
+    @TypeConverter
+    fun stringToAttrComparisonReportList(json: String) =
+        Json.decodeFromString<List<AttrComparisonReport>>(json)
 }

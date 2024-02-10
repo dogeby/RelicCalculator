@@ -6,4 +6,5 @@ data class CharacterReport(
     val character: Character,
     val score: Float,
     val relicReports: List<RelicReport>,
+    val attrComparisonReports: List<AttrComparisonReport>,
 )
