@@ -182,6 +182,7 @@ object RelicRating {
 
         return CharacterReport(
             character = character,
+            preset = preset,
             score = characterScore.convertRatingExpression(),
             relicReports = relicReports,
             attrComparisonReports = attrComparisonReports,
