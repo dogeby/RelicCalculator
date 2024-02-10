@@ -1,5 +1,8 @@
 package com.dogeby.reliccalculator.core.model.data.hoyo
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Attribute(
     val field: String,
     val name: String,

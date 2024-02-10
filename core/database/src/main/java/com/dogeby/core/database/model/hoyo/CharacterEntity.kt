@@ -8,6 +8,9 @@ import androidx.room.TypeConverters
 import com.dogeby.core.database.util.AttributeListConverter
 import com.dogeby.core.database.util.RelicListConverter
 import com.dogeby.core.database.util.RelicSetListConverter
+import com.dogeby.reliccalculator.core.model.data.hoyo.Attribute
+import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
+import com.dogeby.reliccalculator.core.model.data.hoyo.RelicSet
 import org.jetbrains.annotations.TestOnly
 
 @Entity(tableName = "characters")
@@ -27,10 +30,10 @@ data class CharacterEntity(
     @Embedded val path: DatabasePath,
     @Embedded val element: DatabaseElement,
     @Embedded val lightCone: DatabaseLightCone,
-    @ColumnInfo(name = "character_relics") val relics: List<DatabaseRelic>,
-    @ColumnInfo(name = "character_relic_sets") val relicSets: List<DatabaseRelicSet>,
-    @ColumnInfo(name = "character_attributes") val attributes: List<DatabaseAttribute>,
-    @ColumnInfo(name = "character_additions") val additions: List<DatabaseAttribute>,
+    @ColumnInfo(name = "character_relics") val relics: List<Relic>,
+    @ColumnInfo(name = "character_relic_sets") val relicSets: List<RelicSet>,
+    @ColumnInfo(name = "character_attributes") val attributes: List<Attribute>,
+    @ColumnInfo(name = "character_additions") val additions: List<Attribute>,
 )
 
 @TestOnly
