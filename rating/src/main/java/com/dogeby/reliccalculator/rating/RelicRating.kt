@@ -7,6 +7,7 @@ import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
 import com.dogeby.reliccalculator.core.model.preset.Preset
+import com.dogeby.reliccalculator.core.model.report.AffixCount
 import com.dogeby.reliccalculator.core.model.report.AffixReport
 import com.dogeby.reliccalculator.core.model.report.AttrComparisonReport
 import com.dogeby.reliccalculator.core.model.report.CharacterReport
@@ -161,6 +162,32 @@ object RelicRating {
         )
     }
 
+    fun countValidAffixes(
+        character: Character,
+        preset: Preset,
+    ): List<AffixCount> {
+        val validAffixes = preset
+            .subAffixWeights
+            .filter { it.weight > 0 }
+        val validAffixesCounts = mutableMapOf<String, Int>()
+
+        character.relics.forEach { relic ->
+            relic.subAffix.forEach { subAffix ->
+                if (validAffixes.any { it.type == subAffix.type }) {
+                    validAffixesCounts[subAffix.type] =
+                        validAffixesCounts.getOrDefault(subAffix.type, 0) + subAffix.count
+                }
+            }
+        }
+
+        return validAffixesCounts.map {
+            AffixCount(
+                type = it.key,
+                count = it.value,
+            )
+        }
+    }
+
     fun calculateCharacterScore(
         character: Character,
         preset: Preset,
@@ -181,12 +208,15 @@ object RelicRating {
             calculateAttrComparison(character, it)
         }
 
+        val validAffixCounts = countValidAffixes(character, preset)
+
         return CharacterReport(
             character = character,
             preset = preset,
             score = characterScore.convertRatingExpression(),
             relicReports = relicReports,
             attrComparisonReports = attrComparisonReports,
+            validAffixCounts = validAffixCounts,
             generationTime = Clock.System.now(),
         )
     }

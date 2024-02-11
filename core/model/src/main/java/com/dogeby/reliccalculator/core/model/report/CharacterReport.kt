@@ -10,5 +10,6 @@ data class CharacterReport(
     val score: Float,
     val relicReports: List<RelicReport>,
     val attrComparisonReports: List<AttrComparisonReport>,
+    val validAffixCounts: List<AffixCount>,
     val generationTime: Instant,
 )

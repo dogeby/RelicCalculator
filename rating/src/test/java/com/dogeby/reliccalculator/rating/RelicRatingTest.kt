@@ -13,6 +13,7 @@ import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
 import com.dogeby.reliccalculator.core.model.preset.Preset
+import com.dogeby.reliccalculator.core.model.report.AffixCount
 import org.junit.Assert
 import org.junit.Test
 
@@ -166,6 +167,29 @@ class RelicRatingTest {
                 character = character,
                 attrComparison = preset.attrComparisons.first(),
             )?.isPass ?: false,
+        )
+    }
+
+    @Test
+    fun test_countValidAffixes_success() {
+        val validAffixCounts = listOf(
+            AffixCount(
+                type = "AttackAddedRatio",
+                count = 1,
+            ),
+            AffixCount(
+                type = "SpeedDelta",
+                count = 5,
+            ),
+            AffixCount(
+                type = "CriticalDamageBase",
+                count = 1,
+            ),
+        )
+
+        Assert.assertEquals(
+            validAffixCounts,
+            relicRating.countValidAffixes(character, preset),
         )
     }
 
