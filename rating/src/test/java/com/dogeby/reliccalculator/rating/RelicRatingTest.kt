@@ -1,18 +1,19 @@
 package com.dogeby.reliccalculator.rating
 
-import com.dogeby.reliccalculator.core.model.data.hoyo.Attribute
-import com.dogeby.reliccalculator.core.model.data.hoyo.Character
-import com.dogeby.reliccalculator.core.model.data.hoyo.Element
-import com.dogeby.reliccalculator.core.model.data.hoyo.LightCone
-import com.dogeby.reliccalculator.core.model.data.hoyo.MainAffix
-import com.dogeby.reliccalculator.core.model.data.hoyo.Path
-import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
-import com.dogeby.reliccalculator.core.model.data.hoyo.RelicSet
-import com.dogeby.reliccalculator.core.model.data.hoyo.SubAffix
-import com.dogeby.reliccalculator.core.model.data.preset.AffixWeight
-import com.dogeby.reliccalculator.core.model.data.preset.AttrComparison
-import com.dogeby.reliccalculator.core.model.data.preset.ComparisonOperator
-import com.dogeby.reliccalculator.core.model.data.preset.Preset
+import com.dogeby.reliccalculator.core.model.hoyo.Attribute
+import com.dogeby.reliccalculator.core.model.hoyo.Character
+import com.dogeby.reliccalculator.core.model.hoyo.Element
+import com.dogeby.reliccalculator.core.model.hoyo.LightCone
+import com.dogeby.reliccalculator.core.model.hoyo.MainAffix
+import com.dogeby.reliccalculator.core.model.hoyo.Path
+import com.dogeby.reliccalculator.core.model.hoyo.Relic
+import com.dogeby.reliccalculator.core.model.hoyo.RelicSet
+import com.dogeby.reliccalculator.core.model.hoyo.SubAffix
+import com.dogeby.reliccalculator.core.model.preset.AffixWeight
+import com.dogeby.reliccalculator.core.model.preset.AttrComparison
+import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
+import com.dogeby.reliccalculator.core.model.preset.Preset
+import com.dogeby.reliccalculator.core.model.report.AffixCount
 import org.junit.Assert
 import org.junit.Test
 
@@ -166,6 +167,29 @@ class RelicRatingTest {
                 character = character,
                 attrComparison = preset.attrComparisons.first(),
             )?.isPass ?: false,
+        )
+    }
+
+    @Test
+    fun test_countValidAffixes_success() {
+        val validAffixCounts = listOf(
+            AffixCount(
+                type = "AttackAddedRatio",
+                count = 1,
+            ),
+            AffixCount(
+                type = "SpeedDelta",
+                count = 5,
+            ),
+            AffixCount(
+                type = "CriticalDamageBase",
+                count = 1,
+            ),
+        )
+
+        Assert.assertEquals(
+            validAffixCounts,
+            relicRating.countValidAffixes(character, preset),
         )
     }
 

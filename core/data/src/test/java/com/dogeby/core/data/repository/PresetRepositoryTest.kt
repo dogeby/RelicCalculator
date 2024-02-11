@@ -6,8 +6,8 @@ import com.dogeby.core.data.fake.FakePresetDao
 import com.dogeby.core.data.fake.FakeStorageManager
 import com.dogeby.core.data.model.toPresetEntity
 import com.dogeby.core.database.dao.PresetDao
-import com.dogeby.reliccalculator.core.model.data.preset.Preset
-import com.dogeby.reliccalculator.core.model.data.preset.PresetData
+import com.dogeby.reliccalculator.core.model.preset.Preset
+import com.dogeby.reliccalculator.core.model.preset.PresetData
 import com.dogeby.reliccalculator.core.network.PresetNetworkDataSource
 import com.dogeby.reliccalculator.core.network.fake.FakePresetNetworkDataSource
 import kotlinx.coroutines.flow.first

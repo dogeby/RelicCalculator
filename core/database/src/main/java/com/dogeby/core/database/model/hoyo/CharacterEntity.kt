@@ -8,9 +8,9 @@ import androidx.room.TypeConverters
 import com.dogeby.core.database.util.AttributeListConverter
 import com.dogeby.core.database.util.RelicListConverter
 import com.dogeby.core.database.util.RelicSetListConverter
-import com.dogeby.reliccalculator.core.model.data.hoyo.Attribute
-import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
-import com.dogeby.reliccalculator.core.model.data.hoyo.RelicSet
+import com.dogeby.reliccalculator.core.model.hoyo.Attribute
+import com.dogeby.reliccalculator.core.model.hoyo.Relic
+import com.dogeby.reliccalculator.core.model.hoyo.RelicSet
 import org.jetbrains.annotations.TestOnly
 
 @Entity(tableName = "characters")

@@ -8,10 +8,10 @@ import com.dogeby.core.database.util.AffixWeightListConverter
 import com.dogeby.core.database.util.AffixWeightMapConverter
 import com.dogeby.core.database.util.AttrComparisonListConverter
 import com.dogeby.core.database.util.RelicSetIdListConverter
-import com.dogeby.reliccalculator.core.model.data.preset.AffixWeight
-import com.dogeby.reliccalculator.core.model.data.preset.AttrComparison
-import com.dogeby.reliccalculator.core.model.data.preset.ComparisonOperator
-import com.dogeby.reliccalculator.core.model.data.preset.Preset
+import com.dogeby.reliccalculator.core.model.preset.AffixWeight
+import com.dogeby.reliccalculator.core.model.preset.AttrComparison
+import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
+import com.dogeby.reliccalculator.core.model.preset.Preset
 import org.jetbrains.annotations.TestOnly
 
 @Entity(tableName = "presets")

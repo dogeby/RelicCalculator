@@ -47,6 +47,7 @@ dependencies {
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.datetime)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.runner)

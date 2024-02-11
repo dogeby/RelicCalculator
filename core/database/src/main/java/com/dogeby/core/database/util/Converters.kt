@@ -1,13 +1,15 @@
 package com.dogeby.core.database.util
 
 import androidx.room.TypeConverter
-import com.dogeby.reliccalculator.core.model.data.hoyo.Attribute
-import com.dogeby.reliccalculator.core.model.data.hoyo.Relic
-import com.dogeby.reliccalculator.core.model.data.hoyo.RelicSet
-import com.dogeby.reliccalculator.core.model.data.preset.AffixWeight
-import com.dogeby.reliccalculator.core.model.data.preset.AttrComparison
-import com.dogeby.reliccalculator.core.model.data.report.AttrComparisonReport
-import com.dogeby.reliccalculator.core.model.data.report.RelicReport
+import com.dogeby.reliccalculator.core.model.hoyo.Attribute
+import com.dogeby.reliccalculator.core.model.hoyo.Relic
+import com.dogeby.reliccalculator.core.model.hoyo.RelicSet
+import com.dogeby.reliccalculator.core.model.preset.AffixWeight
+import com.dogeby.reliccalculator.core.model.preset.AttrComparison
+import com.dogeby.reliccalculator.core.model.report.AffixCount
+import com.dogeby.reliccalculator.core.model.report.AttrComparisonReport
+import com.dogeby.reliccalculator.core.model.report.RelicReport
+import kotlinx.datetime.Instant
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -95,4 +97,22 @@ class AttrComparisonReportListConverter {
     @TypeConverter
     fun stringToAttrComparisonReportList(json: String) =
         Json.decodeFromString<List<AttrComparisonReport>>(json)
+}
+
+class InstantConverter {
+
+    @TypeConverter
+    fun instantToString(instant: Instant) = Json.encodeToString(instant)
+
+    @TypeConverter
+    fun stringToInstant(json: String) = Json.decodeFromString<Instant>(json)
+}
+
+class AffixCountListConverter {
+
+    @TypeConverter
+    fun affixCountListToString(affixCounts: List<AffixCount>) = Json.encodeToString(affixCounts)
+
+    @TypeConverter
+    fun stringToAffixCountList(json: String) = Json.decodeFromString<List<AffixCount>>(json)
 }

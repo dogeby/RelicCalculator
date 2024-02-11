@@ -7,8 +7,8 @@ import com.dogeby.core.database.model.preset.PresetEntity
 import com.dogeby.core.database.model.preset.toPreset
 import com.dogeby.core.storage.StorageManager
 import com.dogeby.core.storage.di.StorageManagerModule
-import com.dogeby.reliccalculator.core.model.data.preset.Preset
-import com.dogeby.reliccalculator.core.model.data.preset.PresetData
+import com.dogeby.reliccalculator.core.model.preset.Preset
+import com.dogeby.reliccalculator.core.model.preset.PresetData
 import com.dogeby.reliccalculator.core.network.PresetNetworkDataSource
 import java.io.FileNotFoundException
 import javax.inject.Inject
