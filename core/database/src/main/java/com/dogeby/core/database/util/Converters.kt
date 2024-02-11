@@ -8,6 +8,7 @@ import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.report.AttrComparisonReport
 import com.dogeby.reliccalculator.core.model.report.RelicReport
+import kotlinx.datetime.Instant
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -95,4 +96,13 @@ class AttrComparisonReportListConverter {
     @TypeConverter
     fun stringToAttrComparisonReportList(json: String) =
         Json.decodeFromString<List<AttrComparisonReport>>(json)
+}
+
+class InstantConverter {
+
+    @TypeConverter
+    fun instantToString(instant: Instant) = Json.encodeToString(instant)
+
+    @TypeConverter
+    fun stringToInstant(json: String) = Json.decodeFromString<Instant>(json)
 }

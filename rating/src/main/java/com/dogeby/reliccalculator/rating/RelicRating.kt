@@ -14,6 +14,7 @@ import com.dogeby.reliccalculator.core.model.report.RelicReport
 import com.dogeby.reliccalculator.rating.model.SubAffixValueTable
 import java.io.File
 import kotlin.math.floor
+import kotlinx.datetime.Clock
 import kotlinx.serialization.json.Json
 
 object RelicRating {
@@ -186,6 +187,7 @@ object RelicRating {
             score = characterScore.convertRatingExpression(),
             relicReports = relicReports,
             attrComparisonReports = attrComparisonReports,
+            generationTime = Clock.System.now(),
         )
     }
 }
