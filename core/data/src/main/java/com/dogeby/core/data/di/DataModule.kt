@@ -1,5 +1,7 @@
 package com.dogeby.core.data.di
 
+import com.dogeby.core.data.repository.GameResRepository
+import com.dogeby.core.data.repository.GameResRepositoryImpl
 import com.dogeby.core.data.repository.PreferencesRepository
 import com.dogeby.core.data.repository.PreferencesRepositoryImpl
 import com.dogeby.core.data.repository.PresetRepository
@@ -25,4 +27,10 @@ abstract class DataModule {
     abstract fun bindsPreferencesRepository(
         preferencesRepositoryImpl: PreferencesRepositoryImpl,
     ): PreferencesRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindsGameResRepository(
+        gameResRepositoryImpl: GameResRepositoryImpl,
+    ): GameResRepository
 }
