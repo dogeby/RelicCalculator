@@ -1,4 +1,4 @@
-package com.dogeby.reliccalculator.rating.model
+package com.dogeby.game.rating.model
 
 import kotlinx.serialization.Serializable
 

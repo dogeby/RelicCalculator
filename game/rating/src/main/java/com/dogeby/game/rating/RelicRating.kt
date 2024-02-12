@@ -1,5 +1,6 @@
-package com.dogeby.reliccalculator.rating
+package com.dogeby.game.rating
 
+import com.dogeby.game.rating.model.SubAffixValueTable
 import com.dogeby.reliccalculator.core.model.hoyo.Character
 import com.dogeby.reliccalculator.core.model.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.hoyo.SubAffix
@@ -12,7 +13,6 @@ import com.dogeby.reliccalculator.core.model.report.AffixReport
 import com.dogeby.reliccalculator.core.model.report.AttrComparisonReport
 import com.dogeby.reliccalculator.core.model.report.CharacterReport
 import com.dogeby.reliccalculator.core.model.report.RelicReport
-import com.dogeby.reliccalculator.rating.model.SubAffixValueTable
 import java.io.File
 import kotlin.math.floor
 import kotlinx.datetime.Clock
