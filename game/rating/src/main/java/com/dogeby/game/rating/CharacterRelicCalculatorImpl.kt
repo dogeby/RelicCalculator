@@ -14,65 +14,27 @@ import com.dogeby.reliccalculator.core.model.report.AttrComparisonReport
 import com.dogeby.reliccalculator.core.model.report.CharacterReport
 import com.dogeby.reliccalculator.core.model.report.RelicReport
 import java.io.File
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.math.floor
 import kotlinx.datetime.Clock
 import kotlinx.serialization.json.Json
 
-object RelicRating {
-
-    private const val SUB_AFFIX_VALUE_TABLE_PATH = "src/main/resources/sub_affix_value_table.json"
-
-    private const val HIGH = "High"
-
-    private const val AFFIX_INCREASE_DEFAULT = 0.0
-    private const val DEFAULT_AFFIX_WEIGHT = 0f
-
-    private const val RELIC_MAX_LEVEL = 15
-    private const val RELIC_MAX_RARITY = 5
-    private const val MAX_RELICS = 6
-    private const val MIN_ACTIVE_RELIC_SETS = 0
-    private const val MAX_ACTIVE_RELIC_SETS = 3
-    private const val MAX_SUB_AFFIXES = 4
-
-    private const val MIN_SCORE = 0f
-    private const val MAX_SCORE = 5f
-    private const val RELIC_SET_DEMERIT = 0.5f
-
-    private const val RELIC_SET_SCORE_WEIGHT = 1f
-    private const val MAIN_AFFIX_SCORE_WEIGHT = 2f
-    private const val SUB_AFFIX_SCORE_WEIGHT = 4f
-    private const val TOTAL_RELIC_SCORE_WEIGHT = RELIC_SET_SCORE_WEIGHT +
-        MAIN_AFFIX_SCORE_WEIGHT + SUB_AFFIX_SCORE_WEIGHT
+@Singleton
+class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalculator {
 
     private val subAffixValueTable: SubAffixValueTable = Json.decodeFromString(
         File(SUB_AFFIX_VALUE_TABLE_PATH).readText(),
     )
 
-    private fun Float.convertRatingExpression(
-        minScore: Float = MIN_SCORE,
-        maxScore: Float = MAX_SCORE,
-    ): Float {
-        require(minScore <= maxScore) { "minScore must be less than or equal to maxScore" }
-        return (floor(this * 10) / 10).run {
-            coerceIn(minScore, maxScore)
-        }
-    }
-
-    private fun getAffixTypeWeight(
-        type: String,
-        affixWeights: List<AffixWeight>,
-    ): Float {
-        return affixWeights.find { type == it.type }?.weight ?: DEFAULT_AFFIX_WEIGHT
-    }
-
-    fun calculateSubAffixScore(subAffix: SubAffix): Float {
+    override fun calculateSubAffixScore(subAffix: SubAffix): Float {
         val affixIncreaseValues = subAffixValueTable.affixes[subAffix.type] ?: emptyMap()
         val maxAffix = affixIncreaseValues.getOrDefault(HIGH, AFFIX_INCREASE_DEFAULT) *
             subAffix.count
         return (subAffix.value * MAX_SCORE / maxAffix).toFloat().convertRatingExpression()
     }
 
-    private fun calculateMainAffixReport(
+    override fun calculateMainAffixReport(
         relic: Relic,
         preset: Preset,
     ): AffixReport {
@@ -89,7 +51,7 @@ object RelicRating {
         )
     }
 
-    fun calculateRelicScore(
+    override fun calculateRelicScore(
         relic: Relic,
         preset: Preset,
     ): RelicReport {
@@ -131,7 +93,7 @@ object RelicRating {
         )
     }
 
-    fun calculateAttrComparison(
+    override fun calculateAttrComparison(
         character: Character,
         attrComparison: AttrComparison,
     ): AttrComparisonReport? {
@@ -162,7 +124,7 @@ object RelicRating {
         )
     }
 
-    fun countValidAffixes(
+    override fun countValidAffixes(
         character: Character,
         preset: Preset,
     ): List<AffixCount> {
@@ -188,7 +150,7 @@ object RelicRating {
         }
     }
 
-    fun calculateCharacterScore(
+    override fun calculateCharacterScore(
         character: Character,
         preset: Preset,
     ): CharacterReport {
@@ -219,5 +181,48 @@ object RelicRating {
             validAffixCounts = validAffixCounts,
             generationTime = Clock.System.now(),
         )
+    }
+
+    private fun Float.convertRatingExpression(
+        minScore: Float = MIN_SCORE,
+        maxScore: Float = MAX_SCORE,
+    ): Float {
+        require(minScore <= maxScore) { "minScore must be less than or equal to maxScore" }
+        return (floor(this * 10) / 10).run {
+            coerceIn(minScore, maxScore)
+        }
+    }
+
+    private fun getAffixTypeWeight(
+        type: String,
+        affixWeights: List<AffixWeight>,
+    ): Float {
+        return affixWeights.find { type == it.type }?.weight ?: DEFAULT_AFFIX_WEIGHT
+    }
+
+    private companion object {
+        const val SUB_AFFIX_VALUE_TABLE_PATH = "src/main/resources/sub_affix_value_table.json"
+
+        const val HIGH = "High"
+
+        const val AFFIX_INCREASE_DEFAULT = 0.0
+        const val DEFAULT_AFFIX_WEIGHT = 0f
+
+        const val RELIC_MAX_LEVEL = 15
+        const val RELIC_MAX_RARITY = 5
+        const val MAX_RELICS = 6
+        const val MIN_ACTIVE_RELIC_SETS = 0
+        const val MAX_ACTIVE_RELIC_SETS = 3
+        const val MAX_SUB_AFFIXES = 4
+
+        const val MIN_SCORE = 0f
+        const val MAX_SCORE = 5f
+        const val RELIC_SET_DEMERIT = 0.5f
+
+        const val RELIC_SET_SCORE_WEIGHT = 1f
+        const val MAIN_AFFIX_SCORE_WEIGHT = 2f
+        const val SUB_AFFIX_SCORE_WEIGHT = 4f
+        const val TOTAL_RELIC_SCORE_WEIGHT = RELIC_SET_SCORE_WEIGHT +
+            MAIN_AFFIX_SCORE_WEIGHT + SUB_AFFIX_SCORE_WEIGHT
     }
 }
