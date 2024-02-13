@@ -30,7 +30,5 @@ abstract class DataModule {
 
     @Binds
     @Singleton
-    abstract fun bindsGameRepository(
-        gameRepositoryImpl: GameRepositoryImpl,
-    ): GameRepository
+    abstract fun bindsGameRepository(gameRepositoryImpl: GameRepositoryImpl): GameRepository
 }

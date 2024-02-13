@@ -1,7 +1,9 @@
 package com.dogeby.core.data.repository
 
+import com.dogeby.game.rating.CharacterRelicCalculator
 import com.dogeby.game.resource.GameResDataSource
 import com.dogeby.reliccalculator.core.model.GameTextLanguage
+import com.dogeby.reliccalculator.core.model.hoyo.Character
 import com.dogeby.reliccalculator.core.model.hoyo.index.AffixData
 import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.ElementInfo
@@ -10,12 +12,15 @@ import com.dogeby.reliccalculator.core.model.hoyo.index.PathInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.PropertyInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.RelicInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.RelicSetInfo
+import com.dogeby.reliccalculator.core.model.preset.Preset
+import com.dogeby.reliccalculator.core.model.report.CharacterReport
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class GameRepositoryImpl @Inject constructor(
     private val gameResDataSource: GameResDataSource,
+    private val characterRelicCalculator: CharacterRelicCalculator,
 ) : GameRepository {
 
     override suspend fun getCharacters(lang: GameTextLanguage): Result<Map<String, CharacterInfo>> =
@@ -46,4 +51,12 @@ class GameRepositoryImpl @Inject constructor(
     override suspend fun getRelicSubAffixes(
         lang: GameTextLanguage,
     ): Result<Map<String, AffixData>> = gameResDataSource.getRelicSubAffixes(lang)
+
+    override fun calculateCharacterScore(
+        character: Character,
+        preset: Preset,
+    ): CharacterReport = characterRelicCalculator.calculateCharacterScore(
+        character = character,
+        preset = preset,
+    )
 }
