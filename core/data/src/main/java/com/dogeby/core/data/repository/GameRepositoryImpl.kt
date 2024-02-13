@@ -14,9 +14,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GameResRepositoryImpl @Inject constructor(
+class GameRepositoryImpl @Inject constructor(
     private val gameResDataSource: GameResDataSource,
-) : GameResRepository {
+) : GameRepository {
 
     override suspend fun getCharacters(lang: GameTextLanguage): Result<Map<String, CharacterInfo>> =
         gameResDataSource.getCharacters(lang)

@@ -10,7 +10,7 @@ import com.dogeby.reliccalculator.core.model.hoyo.index.PropertyInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.RelicInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.RelicSetInfo
 
-interface GameResRepository {
+interface GameRepository {
 
     suspend fun getCharacters(lang: GameTextLanguage): Result<Map<String, CharacterInfo>>
 
