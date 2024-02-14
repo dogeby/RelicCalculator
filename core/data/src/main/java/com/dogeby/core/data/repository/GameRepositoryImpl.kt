@@ -60,6 +60,7 @@ class GameRepositoryImpl @Inject constructor(
         characterRelicCalculator.calculateCharacterScore(
             character = character,
             preset = preset,
+            relicsInfo = getRelics(lang).getOrThrow(),
             subAffixesData = getRelicSubAffixes(lang).getOrThrow(),
         )
     }

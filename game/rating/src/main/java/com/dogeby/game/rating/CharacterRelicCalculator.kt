@@ -5,6 +5,8 @@ import com.dogeby.reliccalculator.core.model.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.hoyo.SubAffix
 import com.dogeby.reliccalculator.core.model.hoyo.index.AffixData
 import com.dogeby.reliccalculator.core.model.hoyo.index.AffixInfo
+import com.dogeby.reliccalculator.core.model.hoyo.index.RelicInfo
+import com.dogeby.reliccalculator.core.model.hoyo.index.RelicPiece
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.preset.Preset
 import com.dogeby.reliccalculator.core.model.report.AffixCount
@@ -21,13 +23,15 @@ interface CharacterRelicCalculator {
     ): Float
 
     fun calculateMainAffixReport(
-        relic: Relic,
+        piece: RelicPiece,
+        affixType: String,
         preset: Preset,
     ): AffixReport
 
     fun calculateRelicScore(
         relic: Relic,
         preset: Preset,
+        relicInfo: RelicInfo,
         subAffixesData: Map<String, AffixData>,
     ): RelicReport
 
@@ -44,6 +48,7 @@ interface CharacterRelicCalculator {
     fun calculateCharacterScore(
         character: Character,
         preset: Preset,
+        relicsInfo: Map<String, RelicInfo>,
         subAffixesData: Map<String, AffixData>,
     ): CharacterReport
 }

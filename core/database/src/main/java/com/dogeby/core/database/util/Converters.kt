@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.dogeby.reliccalculator.core.model.hoyo.Attribute
 import com.dogeby.reliccalculator.core.model.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.hoyo.RelicSet
+import com.dogeby.reliccalculator.core.model.hoyo.index.RelicPiece
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.report.AffixCount
@@ -49,15 +50,15 @@ class RelicSetIdListConverter {
     fun stringToRelicSetIdList(json: String) = Json.decodeFromString<List<String>>(json)
 }
 
-class AffixWeightMapConverter {
+class MainAffixWeightMapConverter {
 
     @TypeConverter
-    fun affixWeightMapToString(affixWeights: Map<Int, List<AffixWeight>>) =
+    fun affixWeightMapToString(affixWeights: Map<RelicPiece, List<AffixWeight>>) =
         Json.encodeToString(affixWeights)
 
     @TypeConverter
     fun stringToAffixWeightMap(json: String) =
-        Json.decodeFromString<Map<Int, List<AffixWeight>>>(json)
+        Json.decodeFromString<Map<RelicPiece, List<AffixWeight>>>(json)
 }
 
 class AffixWeightListConverter {

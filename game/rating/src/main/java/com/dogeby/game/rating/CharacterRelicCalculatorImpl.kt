@@ -5,6 +5,8 @@ import com.dogeby.reliccalculator.core.model.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.hoyo.SubAffix
 import com.dogeby.reliccalculator.core.model.hoyo.index.AffixData
 import com.dogeby.reliccalculator.core.model.hoyo.index.AffixInfo
+import com.dogeby.reliccalculator.core.model.hoyo.index.RelicInfo
+import com.dogeby.reliccalculator.core.model.hoyo.index.RelicPiece
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
@@ -37,18 +39,18 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
     }
 
     override fun calculateMainAffixReport(
-        relic: Relic,
+        piece: RelicPiece,
+        affixType: String,
         preset: Preset,
     ): AffixReport {
-        val piece = relic.id.last().digitToInt()
         val affixWeights = preset.pieceMainAffixWeights.getOrDefault(piece, emptyList())
         val weight = getAffixTypeWeight(
-            type = relic.mainAffix.type,
+            type = affixType,
             affixWeights = affixWeights,
         )
 
         return AffixReport(
-            type = relic.mainAffix.type,
+            type = affixType,
             score = MAX_SCORE * weight,
         )
     }
@@ -56,6 +58,7 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
     override fun calculateRelicScore(
         relic: Relic,
         preset: Preset,
+        relicInfo: RelicInfo,
         subAffixesData: Map<String, AffixData>,
     ): RelicReport {
         val affixTypeToSubAffixes = subAffixesData[relic.rarity.toString()]?.affixes?.mapKeys {
@@ -63,7 +66,8 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
         } ?: emptyMap()
 
         val mainAffixReport = calculateMainAffixReport(
-            relic = relic,
+            piece = relicInfo.type,
+            affixType = relic.mainAffix.type,
             preset = preset,
         )
 
@@ -162,12 +166,17 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
     override fun calculateCharacterScore(
         character: Character,
         preset: Preset,
+        relicsInfo: Map<String, RelicInfo>,
         subAffixesData: Map<String, AffixData>,
     ): CharacterReport {
         val relicReports = character.relics.map { relic ->
             calculateRelicScore(
                 relic = relic,
                 preset = preset,
+                relicInfo = relicsInfo[relic.id]
+                    ?: throw IllegalArgumentException(
+                        "Relic id: ${relic.id}, RelicsInfoKeys: ${relicsInfo.keys}",
+                    ),
                 subAffixesData = subAffixesData,
             )
         }
