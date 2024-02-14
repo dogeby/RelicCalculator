@@ -26,6 +26,8 @@ class GameResDataSourceImpl @Inject constructor(
     @Dispatcher(RcDispatchers.IO) private val dispatcher: CoroutineDispatcher,
 ) : GameResDataSource {
 
+    private val jsonCache = mutableMapOf<String, String>()
+
     override suspend fun getCharacters(lang: GameTextLanguage): Result<Map<String, CharacterInfo>> =
         runCatching {
             dataJson.decodeFromString<Map<String, CharacterInfo>>(
@@ -92,14 +94,17 @@ class GameResDataSourceImpl @Inject constructor(
     }
 
     private suspend fun getIndexJson(
-        fileName: String,
+        indexFileName: String,
         lang: GameTextLanguage,
     ): Result<String> = runCatching {
-        withContext(dispatcher) {
-            context.assets
-                .open("$INDEX_PATH${lang.code}/$fileName")
-                .bufferedReader()
-                .readText()
+        val cacheKey = "$INDEX_PATH${lang.code}/$indexFileName"
+        jsonCache.getOrPut(cacheKey) {
+            withContext(dispatcher) {
+                context.assets
+                    .open(cacheKey)
+                    .bufferedReader()
+                    .readText()
+            }
         }
     }
 

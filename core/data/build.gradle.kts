@@ -49,6 +49,7 @@ dependencies {
     implementation(project(":core:storage"))
     implementation(project(":core:datastore"))
     implementation(project(":game:resource"))
+    implementation(project(":game:rating"))
 
     implementation(libs.core.ktx)
     implementation(libs.hilt.android)

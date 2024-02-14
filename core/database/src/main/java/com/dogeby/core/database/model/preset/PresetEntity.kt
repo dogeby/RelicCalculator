@@ -5,9 +5,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.dogeby.core.database.util.AffixWeightListConverter
-import com.dogeby.core.database.util.AffixWeightMapConverter
 import com.dogeby.core.database.util.AttrComparisonListConverter
+import com.dogeby.core.database.util.MainAffixWeightMapConverter
 import com.dogeby.core.database.util.RelicSetIdListConverter
+import com.dogeby.reliccalculator.core.model.hoyo.index.RelicPiece
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
@@ -17,7 +18,7 @@ import org.jetbrains.annotations.TestOnly
 @Entity(tableName = "presets")
 @TypeConverters(
     RelicSetIdListConverter::class,
-    AffixWeightMapConverter::class,
+    MainAffixWeightMapConverter::class,
     AffixWeightListConverter::class,
     AttrComparisonListConverter::class,
 )
@@ -27,7 +28,7 @@ data class PresetEntity(
     val characterId: String,
     @ColumnInfo(name = "relic_set_ids") val relicSetIds: List<String>,
     @ColumnInfo(name = "piece_main_affix_weights")
-    val pieceMainAffixWeights: Map<Int, List<AffixWeight>>,
+    val pieceMainAffixWeights: Map<RelicPiece, List<AffixWeight>>,
     @ColumnInfo(name = "sub_affix_weights") val subAffixWeights: List<AffixWeight>,
     @ColumnInfo(name = "is_auto_update") val isAutoUpdate: Boolean,
     @ColumnInfo(name = "attr_comparisons") val attrComparisons: List<AttrComparison>,
@@ -47,20 +48,22 @@ val samplePresetEntity = PresetEntity(
     characterId = "1212",
     relicSetIds = listOf("00", "01"),
     pieceMainAffixWeights = mapOf(
-        Pair(1, listOf(AffixWeight("HPDelta", 1.0f))),
-        Pair(2, listOf(AffixWeight("AttackDelta", 1.0f))),
-        Pair(3, listOf(AffixWeight("CriticalChanceBase", 1.0f))),
-        Pair(4, listOf(AffixWeight("SpeedDelta", 1.0f))),
-        Pair(5, listOf(AffixWeight("PhysicalAddedRatio", 1.0f))),
-        Pair(6, listOf(AffixWeight("SPRatioBase", 1.0f))),
+        Pair(RelicPiece.HEAD, listOf(AffixWeight("1", "HPDelta", 1.0f))),
+        Pair(RelicPiece.HAND, listOf(AffixWeight("1", "AttackDelta", 1.0f))),
+        Pair(RelicPiece.BODY, listOf(AffixWeight("4", "CriticalChanceBase", 1.0f))),
+        Pair(RelicPiece.FOOT, listOf(AffixWeight("4", "SpeedDelta", 1.0f))),
+        Pair(RelicPiece.NECK, listOf(AffixWeight("4", "PhysicalAddedRatio", 1.0f))),
+        Pair(RelicPiece.OBJECT, listOf(AffixWeight("2", "SPRatioBase", 1.0f))),
     ),
     subAffixWeights = listOf(
         AffixWeight(
-            type = "type0",
+            affixId = "1",
+            type = "type1",
             weight = 1.0f,
         ),
         AffixWeight(
-            type = "type1",
+            affixId = "2",
+            type = "type2",
             weight = 0.5f,
         ),
     ),
