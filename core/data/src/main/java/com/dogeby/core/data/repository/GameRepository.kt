@@ -33,8 +33,9 @@ interface GameRepository {
 
     suspend fun getRelicSubAffixes(lang: GameTextLanguage): Result<Map<String, AffixData>>
 
-    fun calculateCharacterScore(
+    suspend fun calculateCharacterScore(
         character: Character,
         preset: Preset,
-    ): CharacterReport
+        lang: GameTextLanguage,
+    ): Result<CharacterReport>
 }

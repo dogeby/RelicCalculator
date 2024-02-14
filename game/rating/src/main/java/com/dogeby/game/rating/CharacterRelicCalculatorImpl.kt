@@ -1,9 +1,10 @@
 package com.dogeby.game.rating
 
-import com.dogeby.game.rating.model.SubAffixValueTable
 import com.dogeby.reliccalculator.core.model.hoyo.Character
 import com.dogeby.reliccalculator.core.model.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.hoyo.SubAffix
+import com.dogeby.reliccalculator.core.model.hoyo.index.AffixData
+import com.dogeby.reliccalculator.core.model.hoyo.index.AffixInfo
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
@@ -13,24 +14,25 @@ import com.dogeby.reliccalculator.core.model.report.AffixReport
 import com.dogeby.reliccalculator.core.model.report.AttrComparisonReport
 import com.dogeby.reliccalculator.core.model.report.CharacterReport
 import com.dogeby.reliccalculator.core.model.report.RelicReport
-import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.math.floor
+import kotlin.math.pow
 import kotlinx.datetime.Clock
-import kotlinx.serialization.json.Json
 
 @Singleton
 class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalculator {
 
-    private val subAffixValueTable: SubAffixValueTable = Json.decodeFromString(
-        File(SUB_AFFIX_VALUE_TABLE_PATH).readText(),
-    )
-
-    override fun calculateSubAffixScore(subAffix: SubAffix): Float {
-        val affixIncreaseValues = subAffixValueTable.affixes[subAffix.type] ?: emptyMap()
-        val maxAffix = affixIncreaseValues.getOrDefault(HIGH, AFFIX_INCREASE_DEFAULT) *
-            subAffix.count
+    override fun calculateSubAffixScore(
+        subAffix: SubAffix,
+        subAffixesInfo: Map<String, AffixInfo>,
+    ): Float {
+        val affixIncreaseValues = subAffixesInfo[subAffix.type]?.let { affixInfo ->
+            affixInfo.base.truncate(AFFIX_TRUNCATE_LENGTH) +
+                affixInfo.step.truncate(AFFIX_TRUNCATE_LENGTH) *
+                affixInfo.stepNum
+        } ?: return DEFAULT_AFFIX_SCORE
+        val maxAffix = affixIncreaseValues * subAffix.count
         return (subAffix.value * MAX_SCORE / maxAffix).toFloat().convertRatingExpression()
     }
 
@@ -54,7 +56,12 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
     override fun calculateRelicScore(
         relic: Relic,
         preset: Preset,
+        subAffixesData: Map<String, AffixData>,
     ): RelicReport {
+        val affixTypeToSubAffixes = subAffixesData[relic.rarity.toString()]?.affixes?.mapKeys {
+            it.value.property
+        } ?: emptyMap()
+
         val mainAffixReport = calculateMainAffixReport(
             relic = relic,
             preset = preset,
@@ -62,13 +69,15 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
 
         val topWeightsSum = preset.subAffixWeights
             .asSequence()
-            .filter { subAffixValueTable.affixes.contains(it.type) }
             .sortedByDescending { it.weight }
             .take(MAX_SUB_AFFIXES)
             .map { it.weight }
             .sum()
         val subAffixReports = relic.subAffix.map { subAffix ->
-            val score = calculateSubAffixScore(subAffix)
+            val score = calculateSubAffixScore(
+                subAffix = subAffix,
+                subAffixesInfo = affixTypeToSubAffixes,
+            )
             AffixReport(
                 type = subAffix.type,
                 score = score * getAffixTypeWeight(subAffix.type, preset.subAffixWeights),
@@ -153,9 +162,14 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
     override fun calculateCharacterScore(
         character: Character,
         preset: Preset,
+        subAffixesData: Map<String, AffixData>,
     ): CharacterReport {
-        val relicReports = character.relics.map {
-            calculateRelicScore(it, preset)
+        val relicReports = character.relics.map { relic ->
+            calculateRelicScore(
+                relic = relic,
+                preset = preset,
+                subAffixesData = subAffixesData,
+            )
         }
 
         val relicSetDemerit = (MAX_ACTIVE_RELIC_SETS - character.relicSets.count())
@@ -183,6 +197,11 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
         )
     }
 
+    private fun Double.truncate(n: Int): Double {
+        val pow10 = 10.0.pow(n)
+        return floor(this * pow10) / pow10
+    }
+
     private fun Float.convertRatingExpression(
         minScore: Float = MIN_SCORE,
         maxScore: Float = MAX_SCORE,
@@ -201,12 +220,10 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
     }
 
     private companion object {
-        const val SUB_AFFIX_VALUE_TABLE_PATH = "src/main/resources/sub_affix_value_table.json"
 
-        const val HIGH = "High"
-
-        const val AFFIX_INCREASE_DEFAULT = 0.0
+        const val DEFAULT_AFFIX_SCORE = 0.0f
         const val DEFAULT_AFFIX_WEIGHT = 0f
+        const val AFFIX_TRUNCATE_LENGTH = 6
 
         const val RELIC_MAX_LEVEL = 15
         const val RELIC_MAX_RARITY = 5

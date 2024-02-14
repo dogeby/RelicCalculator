@@ -52,11 +52,15 @@ class GameRepositoryImpl @Inject constructor(
         lang: GameTextLanguage,
     ): Result<Map<String, AffixData>> = gameResDataSource.getRelicSubAffixes(lang)
 
-    override fun calculateCharacterScore(
+    override suspend fun calculateCharacterScore(
         character: Character,
         preset: Preset,
-    ): CharacterReport = characterRelicCalculator.calculateCharacterScore(
-        character = character,
-        preset = preset,
-    )
+        lang: GameTextLanguage,
+    ): Result<CharacterReport> = runCatching {
+        characterRelicCalculator.calculateCharacterScore(
+            character = character,
+            preset = preset,
+            subAffixesData = getRelicSubAffixes(lang).getOrThrow(),
+        )
+    }
 }

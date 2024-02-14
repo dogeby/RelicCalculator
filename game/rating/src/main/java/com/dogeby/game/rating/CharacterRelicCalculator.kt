@@ -3,6 +3,8 @@ package com.dogeby.game.rating
 import com.dogeby.reliccalculator.core.model.hoyo.Character
 import com.dogeby.reliccalculator.core.model.hoyo.Relic
 import com.dogeby.reliccalculator.core.model.hoyo.SubAffix
+import com.dogeby.reliccalculator.core.model.hoyo.index.AffixData
+import com.dogeby.reliccalculator.core.model.hoyo.index.AffixInfo
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.preset.Preset
 import com.dogeby.reliccalculator.core.model.report.AffixCount
@@ -13,7 +15,10 @@ import com.dogeby.reliccalculator.core.model.report.RelicReport
 
 interface CharacterRelicCalculator {
 
-    fun calculateSubAffixScore(subAffix: SubAffix): Float
+    fun calculateSubAffixScore(
+        subAffix: SubAffix,
+        subAffixesInfo: Map<String, AffixInfo>,
+    ): Float
 
     fun calculateMainAffixReport(
         relic: Relic,
@@ -23,6 +28,7 @@ interface CharacterRelicCalculator {
     fun calculateRelicScore(
         relic: Relic,
         preset: Preset,
+        subAffixesData: Map<String, AffixData>,
     ): RelicReport
 
     fun calculateAttrComparison(
@@ -38,5 +44,6 @@ interface CharacterRelicCalculator {
     fun calculateCharacterScore(
         character: Character,
         preset: Preset,
+        subAffixesData: Map<String, AffixData>,
     ): CharacterReport
 }

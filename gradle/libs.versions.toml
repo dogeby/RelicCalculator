@@ -23,6 +23,7 @@ kotlinxDatetime = "0.5.0"
 protoDataStore = "1.0.0"
 protobuf = "3.25.2"
 protobufPlugin = "0.9.4"
+javaAnnotations = "24.1.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -56,6 +57,7 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 proto-datastore = { group = "androidx.datastore", name = "datastore", version.ref = "protoDataStore"}
 protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
+java-annotations = { group = "org.jetbrains", name = "annotations", version.ref = "javaAnnotations" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
