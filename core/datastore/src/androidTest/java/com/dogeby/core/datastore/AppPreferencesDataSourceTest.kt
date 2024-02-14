@@ -32,14 +32,16 @@ class AppPreferencesDataSourceTest {
 
     @Test
     fun test_setGameTextLanguage_success() = runTest(testDispatcher) {
-        val initLang = appPreferencesDataSource.appPreferencesData.first().gameTextLanguage
+        val inputLang1 = GameTextLanguage.KR
+        appPreferencesDataSource.setGameTextLanguage(inputLang1)
+        val newLang1 = appPreferencesDataSource.appPreferencesData.first().gameTextLanguage
 
-        Assert.assertEquals(GameTextLanguage.EN, initLang)
+        Assert.assertEquals(inputLang1, newLang1)
 
-        val inputLang = GameTextLanguage.KR
-        appPreferencesDataSource.setGameTextLanguage(inputLang)
-        val newLang = appPreferencesDataSource.appPreferencesData.first().gameTextLanguage
+        val inputLang2 = GameTextLanguage.EN
+        appPreferencesDataSource.setGameTextLanguage(inputLang2)
+        val newLang2 = appPreferencesDataSource.appPreferencesData.first().gameTextLanguage
 
-        Assert.assertEquals(inputLang, newLang)
+        Assert.assertEquals(inputLang2, newLang2)
     }
 }
