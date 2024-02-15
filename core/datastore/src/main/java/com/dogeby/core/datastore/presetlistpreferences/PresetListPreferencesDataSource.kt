@@ -18,5 +18,7 @@ interface PresetListPreferencesDataSource {
 
     suspend fun setFilteredData(presetListPreferencesData: PresetListPreferencesData): Result<Unit>
 
+    suspend fun clearFilteredData(): Result<Unit>
+
     suspend fun clearData(): Result<Unit>
 }

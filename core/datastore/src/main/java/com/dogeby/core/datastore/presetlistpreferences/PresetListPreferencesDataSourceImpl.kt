@@ -77,6 +77,16 @@ class PresetListPreferencesDataSourceImpl @Inject constructor(
         }
     }
 
+    override suspend fun clearFilteredData(): Result<Unit> = runCatching {
+        presetListDataStore.updateData {
+            it.copy {
+                filteredRarities.clear()
+                filteredPathIds.clear()
+                filteredElementIds.clear()
+            }
+        }
+    }
+
     override suspend fun clearData(): Result<Unit> = runCatching {
         presetListDataStore.updateData {
             it.copy {
