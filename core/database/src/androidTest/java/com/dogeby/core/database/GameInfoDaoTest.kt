@@ -7,6 +7,7 @@ import com.dogeby.core.database.model.hoyo.index.sampleCharacterInfoEntity
 import com.dogeby.core.database.model.hoyo.index.sampleElementInfoEntity
 import com.dogeby.core.database.model.hoyo.index.sampleLightConeInfoEntity
 import com.dogeby.core.database.model.hoyo.index.samplePathInfoEntity
+import com.dogeby.core.database.model.hoyo.index.samplePropertyInfoEntity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -199,5 +200,48 @@ class GameInfoDaoTest {
         val result = gameInfoDao.getLightConesInfoEntity().first()
 
         Assert.assertEquals(lightConesInfo, result)
+    }
+
+    @Test
+    fun test_insertOrIgnorePropertiesInfoEntity_success() = runTest {
+        val size = 3
+        val result = gameInfoDao.insertOrIgnorePropertiesInfoEntity(
+            List(size) { samplePropertyInfoEntity.copy(type = "test$it") }.toSet(),
+        )
+
+        Assert.assertEquals(List(size) { it + 1L }, result)
+    }
+
+    @Test
+    fun test_updatePropertiesInfoEntity_success() = runTest {
+        gameInfoDao.insertOrIgnorePropertiesInfoEntity(
+            listOf(samplePropertyInfoEntity).toSet(),
+        )
+        val result = gameInfoDao.updatePropertiesInfoEntity(
+            listOf(samplePropertyInfoEntity.copy(name = "newName")).toSet(),
+        )
+
+        Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_deletePropertiesInfoEntity_success() = runTest {
+        gameInfoDao.insertOrIgnorePropertiesInfoEntity(
+            listOf(samplePropertyInfoEntity).toSet(),
+        )
+        val result = gameInfoDao.deletePropertiesInfoEntity(
+            listOf(samplePropertyInfoEntity).toSet(),
+        )
+
+        Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_getPropertiesInfoEntity_success() = runTest {
+        val propertiesInfo = List(3) { samplePropertyInfoEntity.copy(type = "test$it") }
+        gameInfoDao.insertOrIgnorePropertiesInfoEntity(propertiesInfo.toSet())
+        val result = gameInfoDao.getPropertiesInfoEntity().first()
+
+        Assert.assertEquals(propertiesInfo, result)
     }
 }
