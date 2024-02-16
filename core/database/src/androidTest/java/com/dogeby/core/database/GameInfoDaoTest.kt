@@ -4,6 +4,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.dogeby.core.database.dao.GameInfoDao
 import com.dogeby.core.database.model.hoyo.index.sampleElementInfoEntity
+import com.dogeby.core.database.model.hoyo.index.samplePathInfoEntity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -15,8 +16,6 @@ class GameInfoDaoTest {
 
     private lateinit var gameInfoDao: GameInfoDao
     private lateinit var db: RelicCalculatorDatabase
-
-    private val sampleElementInfo = sampleElementInfoEntity
 
     @Before
     fun createDb() {
@@ -36,7 +35,7 @@ class GameInfoDaoTest {
     fun test_insertOrIgnoreElementsInfo_success() = runTest {
         val size = 3
         val result = gameInfoDao.insertOrIgnoreElementsInfo(
-            List(size) { sampleElementInfo.copy(id = "test$it") }.toSet(),
+            List(size) { sampleElementInfoEntity.copy(id = "test$it") }.toSet(),
         )
 
         Assert.assertEquals(List(size) { it + 1L }, result)
@@ -45,10 +44,10 @@ class GameInfoDaoTest {
     @Test
     fun test_updateElementsInfo_success() = runTest {
         gameInfoDao.insertOrIgnoreElementsInfo(
-            listOf(sampleElementInfo).toSet(),
+            listOf(sampleElementInfoEntity).toSet(),
         )
         val result = gameInfoDao.updateElementsInfo(
-            listOf(sampleElementInfo.copy(name = "newName")).toSet(),
+            listOf(sampleElementInfoEntity.copy(name = "newName")).toSet(),
         )
 
         Assert.assertEquals(1, result)
@@ -57,18 +56,59 @@ class GameInfoDaoTest {
     @Test
     fun test_deleteElementsInfo_success() = runTest {
         gameInfoDao.insertOrIgnoreElementsInfo(
-            listOf(sampleElementInfo).toSet(),
+            listOf(sampleElementInfoEntity).toSet(),
         )
-        val result = gameInfoDao.deleteElementsInfo(listOf(sampleElementInfo).toSet())
+        val result = gameInfoDao.deleteElementsInfo(listOf(sampleElementInfoEntity).toSet())
 
         Assert.assertEquals(1, result)
     }
 
     @Test
     fun test_getElementsInfo_success() = runTest {
-        val elementsInfo = List(3) { sampleElementInfo.copy(id = "test$it") }
+        val elementsInfo = List(3) { sampleElementInfoEntity.copy(id = "test$it") }
         gameInfoDao.insertOrIgnoreElementsInfo(elementsInfo.toSet())
         val result = gameInfoDao.getElementsInfo().first()
+
+        Assert.assertEquals(elementsInfo, result)
+    }
+
+    @Test
+    fun test_insertOrIgnorePathsInfoEntity_success() = runTest {
+        val size = 3
+        val result = gameInfoDao.insertOrIgnorePathsInfoEntity(
+            List(size) { samplePathInfoEntity.copy(id = "test$it") }.toSet(),
+        )
+
+        Assert.assertEquals(List(size) { it + 1L }, result)
+    }
+
+    @Test
+    fun test_updatePathsInfoEntity_success() = runTest {
+        gameInfoDao.insertOrIgnorePathsInfoEntity(
+            listOf(samplePathInfoEntity).toSet(),
+        )
+        val result = gameInfoDao.updatePathsInfoEntity(
+            listOf(samplePathInfoEntity.copy(name = "newName")).toSet(),
+        )
+
+        Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_deletePathsInfoEntity_success() = runTest {
+        gameInfoDao.insertOrIgnorePathsInfoEntity(
+            listOf(samplePathInfoEntity).toSet(),
+        )
+        val result = gameInfoDao.deletePathsInfoEntity(listOf(samplePathInfoEntity).toSet())
+
+        Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_getPathsInfoEntity_success() = runTest {
+        val elementsInfo = List(3) { samplePathInfoEntity.copy(id = "test$it") }
+        gameInfoDao.insertOrIgnorePathsInfoEntity(elementsInfo.toSet())
+        val result = gameInfoDao.getPathsInfoEntity().first()
 
         Assert.assertEquals(elementsInfo, result)
     }

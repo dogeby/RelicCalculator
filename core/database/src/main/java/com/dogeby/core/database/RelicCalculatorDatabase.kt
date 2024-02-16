@@ -8,6 +8,7 @@ import com.dogeby.core.database.dao.GameInfoDao
 import com.dogeby.core.database.dao.PresetDao
 import com.dogeby.core.database.model.hoyo.CharacterEntity
 import com.dogeby.core.database.model.hoyo.index.ElementInfoEntity
+import com.dogeby.core.database.model.hoyo.index.PathInfoEntity
 import com.dogeby.core.database.model.preset.PresetEntity
 import com.dogeby.core.database.model.report.CharacterReportEntity
 
@@ -17,6 +18,7 @@ import com.dogeby.core.database.model.report.CharacterReportEntity
         PresetEntity::class,
         CharacterReportEntity::class,
         ElementInfoEntity::class,
+        PathInfoEntity::class,
     ],
     version = 1,
 )
