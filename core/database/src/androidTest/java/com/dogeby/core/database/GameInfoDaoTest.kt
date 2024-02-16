@@ -5,6 +5,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.dogeby.core.database.dao.GameInfoDao
 import com.dogeby.core.database.model.hoyo.index.sampleCharacterInfoEntity
 import com.dogeby.core.database.model.hoyo.index.sampleElementInfoEntity
+import com.dogeby.core.database.model.hoyo.index.sampleLightConeInfoEntity
 import com.dogeby.core.database.model.hoyo.index.samplePathInfoEntity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -155,5 +156,48 @@ class GameInfoDaoTest {
         val result = gameInfoDao.getCharactersInfoEntity().first()
 
         Assert.assertEquals(charactersInfo, result)
+    }
+
+    @Test
+    fun test_insertOrIgnoreLightConesInfoEntity_success() = runTest {
+        val size = 3
+        val result = gameInfoDao.insertOrIgnoreLightConesInfoEntity(
+            List(size) { sampleLightConeInfoEntity.copy(id = "test$it") }.toSet(),
+        )
+
+        Assert.assertEquals(List(size) { it + 1L }, result)
+    }
+
+    @Test
+    fun test_updateLightConesInfoEntity_success() = runTest {
+        gameInfoDao.insertOrIgnoreLightConesInfoEntity(
+            listOf(sampleLightConeInfoEntity).toSet(),
+        )
+        val result = gameInfoDao.updateLightConesInfoEntity(
+            listOf(sampleLightConeInfoEntity.copy(name = "newName")).toSet(),
+        )
+
+        Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_deleteLightConesInfoEntity_success() = runTest {
+        gameInfoDao.insertOrIgnoreLightConesInfoEntity(
+            listOf(sampleLightConeInfoEntity).toSet(),
+        )
+        val result = gameInfoDao.deleteLightConesInfoEntity(
+            listOf(sampleLightConeInfoEntity).toSet(),
+        )
+
+        Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_getLightConesInfoEntity_success() = runTest {
+        val lightConesInfo = List(3) { sampleLightConeInfoEntity.copy(id = "test$it") }
+        gameInfoDao.insertOrIgnoreLightConesInfoEntity(lightConesInfo.toSet())
+        val result = gameInfoDao.getLightConesInfoEntity().first()
+
+        Assert.assertEquals(lightConesInfo, result)
     }
 }
