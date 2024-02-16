@@ -390,4 +390,48 @@ class GameInfoDaoTest {
 
         Assert.assertEquals(subAffixesData, result)
     }
+
+    @Test
+    fun test_getCharactersInfoWithDetails_success() = runTest {
+        gameInfoDao.insertOrIgnoreCharactersInfoEntity(setOf(sampleCharacterInfoEntity))
+        gameInfoDao.insertOrIgnorePathsInfoEntity(setOf(samplePathInfoEntity))
+        gameInfoDao.insertOrIgnoreElementsInfo(setOf(sampleElementInfoEntity))
+        val result = gameInfoDao.getCharactersInfoWithDetails().first()
+
+        Assert.assertEquals(
+            sampleCharacterInfoEntity.id,
+            result.characterInfo.id,
+        )
+        Assert.assertEquals(
+            sampleCharacterInfoEntity.path,
+            result.pathInfo.id,
+        )
+        Assert.assertEquals(
+            sampleCharacterInfoEntity.element,
+            result.elementInfo.id,
+        )
+    }
+
+    @Test
+    fun test_getCharactersInfoWithDetailsByIds_success() = runTest {
+        gameInfoDao.insertOrIgnoreCharactersInfoEntity(
+            List(3) { sampleCharacterInfoEntity.copy(id = "$it") }.toSet(),
+        )
+        gameInfoDao.insertOrIgnorePathsInfoEntity(setOf(samplePathInfoEntity))
+        gameInfoDao.insertOrIgnoreElementsInfo(setOf(sampleElementInfoEntity))
+        val result = gameInfoDao.getCharactersInfoWithDetails(setOf("0")).first()
+
+        Assert.assertEquals(
+            "0",
+            result.characterInfo.id,
+        )
+        Assert.assertEquals(
+            sampleCharacterInfoEntity.path,
+            result.pathInfo.id,
+        )
+        Assert.assertEquals(
+            sampleCharacterInfoEntity.element,
+            result.elementInfo.id,
+        )
+    }
 }

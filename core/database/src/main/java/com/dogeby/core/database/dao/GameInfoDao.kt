@@ -5,9 +5,11 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import com.dogeby.core.database.model.hoyo.index.AffixDataEntity
 import com.dogeby.core.database.model.hoyo.index.CharacterInfoEntity
+import com.dogeby.core.database.model.hoyo.index.DatabaseCharacterInfoWithDetails
 import com.dogeby.core.database.model.hoyo.index.ElementInfoEntity
 import com.dogeby.core.database.model.hoyo.index.LightConeInfoEntity
 import com.dogeby.core.database.model.hoyo.index.PathInfoEntity
@@ -132,4 +134,17 @@ interface GameInfoDao {
 
     @Query(value = "SELECT * FROM affixesData")
     fun getAffixesDataEntity(): Flow<List<AffixDataEntity>>
+
+    @Transaction
+    @Query("SELECT * FROM charactersInfo")
+    fun getCharactersInfoWithDetails(): List<DatabaseCharacterInfoWithDetails>
+
+    @Transaction
+    @Query(
+        """
+        SELECT * FROM charactersInfo
+        WHERE id in (:ids)
+    """,
+    )
+    fun getCharactersInfoWithDetails(ids: Set<String>): List<DatabaseCharacterInfoWithDetails>
 }
