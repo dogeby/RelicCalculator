@@ -12,6 +12,7 @@ import com.dogeby.core.database.model.hoyo.index.ElementInfoEntity
 import com.dogeby.core.database.model.hoyo.index.LightConeInfoEntity
 import com.dogeby.core.database.model.hoyo.index.PathInfoEntity
 import com.dogeby.core.database.model.hoyo.index.PropertyInfoEntity
+import com.dogeby.core.database.model.hoyo.index.RelicInfoEntity
 import com.dogeby.core.database.model.preset.PresetEntity
 import com.dogeby.core.database.model.report.CharacterReportEntity
 
@@ -25,6 +26,7 @@ import com.dogeby.core.database.model.report.CharacterReportEntity
         CharacterInfoEntity::class,
         LightConeInfoEntity::class,
         PropertyInfoEntity::class,
+        RelicInfoEntity::class,
     ],
     version = 1,
 )

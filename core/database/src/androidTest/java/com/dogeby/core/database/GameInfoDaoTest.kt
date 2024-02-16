@@ -8,6 +8,7 @@ import com.dogeby.core.database.model.hoyo.index.sampleElementInfoEntity
 import com.dogeby.core.database.model.hoyo.index.sampleLightConeInfoEntity
 import com.dogeby.core.database.model.hoyo.index.samplePathInfoEntity
 import com.dogeby.core.database.model.hoyo.index.samplePropertyInfoEntity
+import com.dogeby.core.database.model.hoyo.index.sampleRelicInfoEntity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -243,5 +244,48 @@ class GameInfoDaoTest {
         val result = gameInfoDao.getPropertiesInfoEntity().first()
 
         Assert.assertEquals(propertiesInfo, result)
+    }
+
+    @Test
+    fun test_insertOrIgnoreRelicsInfoEntity_success() = runTest {
+        val size = 3
+        val result = gameInfoDao.insertOrIgnoreRelicsInfoEntity(
+            List(size) { sampleRelicInfoEntity.copy(id = "test$it") }.toSet(),
+        )
+
+        Assert.assertEquals(List(size) { it + 1L }, result)
+    }
+
+    @Test
+    fun test_updateRelicsInfoEntity_success() = runTest {
+        gameInfoDao.insertOrIgnoreRelicsInfoEntity(
+            listOf(sampleRelicInfoEntity).toSet(),
+        )
+        val result = gameInfoDao.updateRelicsInfoEntity(
+            listOf(sampleRelicInfoEntity.copy(name = "newName")).toSet(),
+        )
+
+        Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_deleteRelicsInfoEntity_success() = runTest {
+        gameInfoDao.insertOrIgnoreRelicsInfoEntity(
+            listOf(sampleRelicInfoEntity).toSet(),
+        )
+        val result = gameInfoDao.deleteRelicsInfoEntity(
+            listOf(sampleRelicInfoEntity).toSet(),
+        )
+
+        Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_getRelicsInfoEntity_success() = runTest {
+        val relicsInfo = List(3) { sampleRelicInfoEntity.copy(id = "test$it") }
+        gameInfoDao.insertOrIgnoreRelicsInfoEntity(relicsInfo.toSet())
+        val result = gameInfoDao.getRelicsInfoEntity().first()
+
+        Assert.assertEquals(relicsInfo, result)
     }
 }
