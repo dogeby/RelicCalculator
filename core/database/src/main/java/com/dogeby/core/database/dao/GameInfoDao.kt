@@ -57,6 +57,14 @@ interface GameInfoDao {
     @Query(value = "SELECT * FROM charactersInfo")
     fun getCharactersInfoEntity(): Flow<List<CharacterInfoEntity>>
 
+    @Query(
+        value = """
+        SELECT * FROM charactersInfo
+        WHERE id in (:ids)
+    """,
+    )
+    fun getCharactersInfoEntity(ids: Set<String>): Flow<List<CharacterInfoEntity>>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertOrIgnoreLightConesInfoEntity(
         lightConesInfoEntity: Set<LightConeInfoEntity>,

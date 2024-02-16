@@ -163,6 +163,20 @@ class GameInfoDaoTest {
     }
 
     @Test
+    fun test_getCharactersInfoEntityByIds_success() = runTest {
+        val charactersInfo = List(3) { sampleCharacterInfoEntity.copy(id = "test$it") }
+        val takenCharactersInfo = charactersInfo.take(2)
+        gameInfoDao.insertOrIgnoreCharactersInfoEntity(charactersInfo.toSet())
+        val result = gameInfoDao.getCharactersInfoEntity(
+            takenCharactersInfo.map { it.id }
+                .toSet(),
+        )
+            .first()
+
+        Assert.assertEquals(takenCharactersInfo, result)
+    }
+
+    @Test
     fun test_insertOrIgnoreLightConesInfoEntity_success() = runTest {
         val size = 3
         val result = gameInfoDao.insertOrIgnoreLightConesInfoEntity(
