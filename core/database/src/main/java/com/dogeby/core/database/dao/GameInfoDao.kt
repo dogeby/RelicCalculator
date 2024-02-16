@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.dogeby.core.database.model.hoyo.index.CharacterInfoEntity
 import com.dogeby.core.database.model.hoyo.index.ElementInfoEntity
 import com.dogeby.core.database.model.hoyo.index.PathInfoEntity
 import kotlinx.coroutines.flow.Flow
@@ -36,4 +37,18 @@ interface GameInfoDao {
 
     @Query(value = "SELECT * FROM pathsInfo")
     fun getPathsInfoEntity(): Flow<List<PathInfoEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertOrIgnoreCharactersInfoEntity(
+        charactersInfo: Set<CharacterInfoEntity>,
+    ): List<Long>
+
+    @Update
+    suspend fun updateCharactersInfoEntity(charactersInfo: Set<CharacterInfoEntity>): Int
+
+    @Delete
+    suspend fun deleteCharactersInfoEntity(charactersInfo: Set<CharacterInfoEntity>): Int
+
+    @Query(value = "SELECT * FROM charactersInfo")
+    fun getCharactersInfoEntity(): Flow<List<CharacterInfoEntity>>
 }

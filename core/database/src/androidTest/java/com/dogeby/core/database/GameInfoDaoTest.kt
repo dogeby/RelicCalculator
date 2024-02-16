@@ -3,6 +3,7 @@ package com.dogeby.core.database
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.dogeby.core.database.dao.GameInfoDao
+import com.dogeby.core.database.model.hoyo.index.sampleCharacterInfoEntity
 import com.dogeby.core.database.model.hoyo.index.sampleElementInfoEntity
 import com.dogeby.core.database.model.hoyo.index.samplePathInfoEntity
 import kotlinx.coroutines.flow.first
@@ -111,5 +112,48 @@ class GameInfoDaoTest {
         val result = gameInfoDao.getPathsInfoEntity().first()
 
         Assert.assertEquals(elementsInfo, result)
+    }
+
+    @Test
+    fun test_insertOrIgnoreCharacterInfoEntity_success() = runTest {
+        val size = 3
+        val result = gameInfoDao.insertOrIgnoreCharactersInfoEntity(
+            List(size) { sampleCharacterInfoEntity.copy(id = "test$it") }.toSet(),
+        )
+
+        Assert.assertEquals(List(size) { it + 1L }, result)
+    }
+
+    @Test
+    fun test_updateCharactersInfoEntity_success() = runTest {
+        gameInfoDao.insertOrIgnoreCharactersInfoEntity(
+            listOf(sampleCharacterInfoEntity).toSet(),
+        )
+        val result = gameInfoDao.updateCharactersInfoEntity(
+            listOf(sampleCharacterInfoEntity.copy(name = "newName")).toSet(),
+        )
+
+        Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_deleteCharactersInfoEntity_success() = runTest {
+        gameInfoDao.insertOrIgnoreCharactersInfoEntity(
+            listOf(sampleCharacterInfoEntity).toSet(),
+        )
+        val result = gameInfoDao.deleteCharactersInfoEntity(
+            listOf(sampleCharacterInfoEntity).toSet(),
+        )
+
+        Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_getCharactersInfoEntity_success() = runTest {
+        val charactersInfo = List(3) { sampleCharacterInfoEntity.copy(id = "test$it") }
+        gameInfoDao.insertOrIgnoreCharactersInfoEntity(charactersInfo.toSet())
+        val result = gameInfoDao.getCharactersInfoEntity().first()
+
+        Assert.assertEquals(charactersInfo, result)
     }
 }
