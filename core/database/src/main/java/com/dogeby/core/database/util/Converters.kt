@@ -41,13 +41,13 @@ class AttributeListConverter {
     fun stringToAttributeList(json: String) = Json.decodeFromString<List<Attribute>>(json)
 }
 
-class RelicSetIdListConverter {
+class StringListConverter {
 
     @TypeConverter
-    fun relicSetIdListToString(relicSetIds: List<String>) = Json.encodeToString(relicSetIds)
+    fun stringListToString(stringList: List<String>) = Json.encodeToString(stringList)
 
     @TypeConverter
-    fun stringToRelicSetIdList(json: String) = Json.decodeFromString<List<String>>(json)
+    fun stringToStringList(json: String) = Json.decodeFromString<List<String>>(json)
 }
 
 class MainAffixWeightMapConverter {
