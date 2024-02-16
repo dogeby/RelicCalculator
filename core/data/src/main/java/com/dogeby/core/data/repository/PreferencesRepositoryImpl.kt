@@ -1,9 +1,12 @@
 package com.dogeby.core.data.repository
 
 import com.dogeby.core.datastore.apppreferences.AppPreferencesDataSource
+import com.dogeby.core.datastore.presetlistpreferences.PresetListPreferencesDataSource
 import com.dogeby.core.datastore.updatechecks.UpdateChecksDataSource
 import com.dogeby.reliccalculator.core.model.GameTextLanguage
 import com.dogeby.reliccalculator.core.model.preferences.AppPreferencesData
+import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
+import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.UpdateChecksData
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -15,6 +18,7 @@ import kotlinx.datetime.Instant
 class PreferencesRepositoryImpl @Inject constructor(
     private val updateChecksDataSource: UpdateChecksDataSource,
     private val appPreferencesDataSource: AppPreferencesDataSource,
+    private val presetListPreferencesDataSource: PresetListPreferencesDataSource,
 ) : PreferencesRepository {
 
     override fun getUpdateChecksData(): Flow<UpdateChecksData> =
@@ -26,15 +30,34 @@ class PreferencesRepositoryImpl @Inject constructor(
     override fun getGameTextLanguage(): Flow<GameTextLanguage> =
         appPreferencesDataSource.appPreferencesData.map { it.gameTextLanguage }
 
-    override suspend fun setDefaultPresetLastCheckDate(instant: Instant): Result<Unit> {
-        return updateChecksDataSource.setDefaultPresetLastCheckDate(instant)
-    }
+    override fun getPresetListPreferencesData(): Flow<PresetListPreferencesData> =
+        presetListPreferencesDataSource.presetListPreferencesData
 
-    override suspend fun setDefaultPresetCheckIntervalSecond(second: Int): Result<Unit> {
-        return updateChecksDataSource.setDefaultPresetCheckIntervalSecond(second)
-    }
+    override suspend fun setDefaultPresetLastCheckDate(instant: Instant): Result<Unit> =
+        updateChecksDataSource.setDefaultPresetLastCheckDate(instant)
 
-    override suspend fun setGameTextLanguage(lang: GameTextLanguage): Result<Unit> {
-        return appPreferencesDataSource.setGameTextLanguage(lang)
-    }
+    override suspend fun setDefaultPresetCheckIntervalSecond(second: Int): Result<Unit> =
+        updateChecksDataSource.setDefaultPresetCheckIntervalSecond(second)
+
+    override suspend fun setGameTextLanguage(lang: GameTextLanguage): Result<Unit> =
+        appPreferencesDataSource.setGameTextLanguage(lang)
+
+    override suspend fun setFilteredRarities(rarities: Set<Int>): Result<Unit> =
+        presetListPreferencesDataSource.setFilteredRarities(rarities)
+
+    override suspend fun setFilteredPathIds(ids: Set<String>): Result<Unit> =
+        presetListPreferencesDataSource.setFilteredPathIds(ids)
+
+    override suspend fun setFilteredElementIds(ids: Set<String>): Result<Unit> =
+        presetListPreferencesDataSource.setFilteredElementIds(ids)
+
+    override suspend fun setSortField(characterSortField: CharacterSortField): Result<Unit> =
+        presetListPreferencesDataSource.setSortField(characterSortField)
+
+    override suspend fun setFilteredData(
+        presetListPreferencesData: PresetListPreferencesData,
+    ): Result<Unit> = presetListPreferencesDataSource.setFilteredData(presetListPreferencesData)
+
+    override suspend fun clearFilteredData(): Result<Unit> =
+        presetListPreferencesDataSource.clearFilteredData()
 }

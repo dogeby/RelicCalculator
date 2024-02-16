@@ -71,8 +71,6 @@ val samplePresetEntity = PresetEntity(
     attrComparisons = listOf(
         AttrComparison(
             field = "atk",
-            name = "ATK",
-            icon = "icon/property/IconAttack.png",
             comparedValue = 500.0f,
             display = "500",
             percent = false,
