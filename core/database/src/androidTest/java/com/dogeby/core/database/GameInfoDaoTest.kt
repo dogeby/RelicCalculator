@@ -79,9 +79,9 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_insertOrIgnorePathsInfoEntity_success() = runTest {
+    fun test_insertOrIgnorePathsInfo_success() = runTest {
         val size = 3
-        val result = gameInfoDao.insertOrIgnorePathsInfoEntity(
+        val result = gameInfoDao.insertOrIgnorePathsInfo(
             List(size) { samplePathInfoEntity.copy(id = "test$it") }.toSet(),
         )
 
@@ -89,11 +89,11 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_updatePathsInfoEntity_success() = runTest {
-        gameInfoDao.insertOrIgnorePathsInfoEntity(
+    fun test_updatePathsInfo_success() = runTest {
+        gameInfoDao.insertOrIgnorePathsInfo(
             listOf(samplePathInfoEntity).toSet(),
         )
-        val result = gameInfoDao.updatePathsInfoEntity(
+        val result = gameInfoDao.updatePathsInfo(
             listOf(samplePathInfoEntity.copy(name = "newName")).toSet(),
         )
 
@@ -101,28 +101,28 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_deletePathsInfoEntity_success() = runTest {
-        gameInfoDao.insertOrIgnorePathsInfoEntity(
+    fun test_deletePathsInfo_success() = runTest {
+        gameInfoDao.insertOrIgnorePathsInfo(
             listOf(samplePathInfoEntity).toSet(),
         )
-        val result = gameInfoDao.deletePathsInfoEntity(listOf(samplePathInfoEntity).toSet())
+        val result = gameInfoDao.deletePathsInfo(listOf(samplePathInfoEntity).toSet())
 
         Assert.assertEquals(1, result)
     }
 
     @Test
-    fun test_getPathsInfoEntity_success() = runTest {
+    fun test_getPathsInfo_success() = runTest {
         val elementsInfo = List(3) { samplePathInfoEntity.copy(id = "test$it") }
-        gameInfoDao.insertOrIgnorePathsInfoEntity(elementsInfo.toSet())
-        val result = gameInfoDao.getPathsInfoEntity().first()
+        gameInfoDao.insertOrIgnorePathsInfo(elementsInfo.toSet())
+        val result = gameInfoDao.getPathsInfo().first()
 
         Assert.assertEquals(elementsInfo, result)
     }
 
     @Test
-    fun test_insertOrIgnoreCharacterInfoEntity_success() = runTest {
+    fun test_insertOrIgnoreCharacterInfo_success() = runTest {
         val size = 3
-        val result = gameInfoDao.insertOrIgnoreCharactersInfoEntity(
+        val result = gameInfoDao.insertOrIgnoreCharactersInfo(
             List(size) { sampleCharacterInfoEntity.copy(id = "test$it") }.toSet(),
         )
 
@@ -130,11 +130,11 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_updateCharactersInfoEntity_success() = runTest {
-        gameInfoDao.insertOrIgnoreCharactersInfoEntity(
+    fun test_updateCharactersInfo_success() = runTest {
+        gameInfoDao.insertOrIgnoreCharactersInfo(
             listOf(sampleCharacterInfoEntity).toSet(),
         )
-        val result = gameInfoDao.updateCharactersInfoEntity(
+        val result = gameInfoDao.updateCharactersInfo(
             listOf(sampleCharacterInfoEntity.copy(name = "newName")).toSet(),
         )
 
@@ -142,11 +142,11 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_deleteCharactersInfoEntity_success() = runTest {
-        gameInfoDao.insertOrIgnoreCharactersInfoEntity(
+    fun test_deleteCharactersInfo_success() = runTest {
+        gameInfoDao.insertOrIgnoreCharactersInfo(
             listOf(sampleCharacterInfoEntity).toSet(),
         )
-        val result = gameInfoDao.deleteCharactersInfoEntity(
+        val result = gameInfoDao.deleteCharactersInfo(
             listOf(sampleCharacterInfoEntity).toSet(),
         )
 
@@ -154,20 +154,20 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_getCharactersInfoEntity_success() = runTest {
+    fun test_getCharactersInfo_success() = runTest {
         val charactersInfo = List(3) { sampleCharacterInfoEntity.copy(id = "test$it") }
-        gameInfoDao.insertOrIgnoreCharactersInfoEntity(charactersInfo.toSet())
-        val result = gameInfoDao.getCharactersInfoEntity().first()
+        gameInfoDao.insertOrIgnoreCharactersInfo(charactersInfo.toSet())
+        val result = gameInfoDao.getCharactersInfo().first()
 
         Assert.assertEquals(charactersInfo, result)
     }
 
     @Test
-    fun test_getCharactersInfoEntityByIds_success() = runTest {
+    fun test_getCharactersInfoByIds_success() = runTest {
         val charactersInfo = List(3) { sampleCharacterInfoEntity.copy(id = "test$it") }
         val takenCharactersInfo = charactersInfo.take(2)
-        gameInfoDao.insertOrIgnoreCharactersInfoEntity(charactersInfo.toSet())
-        val result = gameInfoDao.getCharactersInfoEntity(
+        gameInfoDao.insertOrIgnoreCharactersInfo(charactersInfo.toSet())
+        val result = gameInfoDao.getCharactersInfo(
             takenCharactersInfo.map { it.id }
                 .toSet(),
         )
@@ -177,9 +177,9 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_insertOrIgnoreLightConesInfoEntity_success() = runTest {
+    fun test_insertOrIgnoreLightConesInfo_success() = runTest {
         val size = 3
-        val result = gameInfoDao.insertOrIgnoreLightConesInfoEntity(
+        val result = gameInfoDao.insertOrIgnoreLightConesInfo(
             List(size) { sampleLightConeInfoEntity.copy(id = "test$it") }.toSet(),
         )
 
@@ -187,11 +187,11 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_updateLightConesInfoEntity_success() = runTest {
-        gameInfoDao.insertOrIgnoreLightConesInfoEntity(
+    fun test_updateLightConesInfo_success() = runTest {
+        gameInfoDao.insertOrIgnoreLightConesInfo(
             listOf(sampleLightConeInfoEntity).toSet(),
         )
-        val result = gameInfoDao.updateLightConesInfoEntity(
+        val result = gameInfoDao.updateLightConesInfo(
             listOf(sampleLightConeInfoEntity.copy(name = "newName")).toSet(),
         )
 
@@ -199,11 +199,11 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_deleteLightConesInfoEntity_success() = runTest {
-        gameInfoDao.insertOrIgnoreLightConesInfoEntity(
+    fun test_deleteLightConesInfo_success() = runTest {
+        gameInfoDao.insertOrIgnoreLightConesInfo(
             listOf(sampleLightConeInfoEntity).toSet(),
         )
-        val result = gameInfoDao.deleteLightConesInfoEntity(
+        val result = gameInfoDao.deleteLightConesInfo(
             listOf(sampleLightConeInfoEntity).toSet(),
         )
 
@@ -211,18 +211,18 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_getLightConesInfoEntity_success() = runTest {
+    fun test_getLightConesInfo_success() = runTest {
         val lightConesInfo = List(3) { sampleLightConeInfoEntity.copy(id = "test$it") }
-        gameInfoDao.insertOrIgnoreLightConesInfoEntity(lightConesInfo.toSet())
-        val result = gameInfoDao.getLightConesInfoEntity().first()
+        gameInfoDao.insertOrIgnoreLightConesInfo(lightConesInfo.toSet())
+        val result = gameInfoDao.getLightConesInfo().first()
 
         Assert.assertEquals(lightConesInfo, result)
     }
 
     @Test
-    fun test_insertOrIgnorePropertiesInfoEntity_success() = runTest {
+    fun test_insertOrIgnorePropertiesInfo_success() = runTest {
         val size = 3
-        val result = gameInfoDao.insertOrIgnorePropertiesInfoEntity(
+        val result = gameInfoDao.insertOrIgnorePropertiesInfo(
             List(size) { samplePropertyInfoEntity.copy(type = "test$it") }.toSet(),
         )
 
@@ -230,11 +230,11 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_updatePropertiesInfoEntity_success() = runTest {
-        gameInfoDao.insertOrIgnorePropertiesInfoEntity(
+    fun test_updatePropertiesInfo_success() = runTest {
+        gameInfoDao.insertOrIgnorePropertiesInfo(
             listOf(samplePropertyInfoEntity).toSet(),
         )
-        val result = gameInfoDao.updatePropertiesInfoEntity(
+        val result = gameInfoDao.updatePropertiesInfo(
             listOf(samplePropertyInfoEntity.copy(name = "newName")).toSet(),
         )
 
@@ -242,11 +242,11 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_deletePropertiesInfoEntity_success() = runTest {
-        gameInfoDao.insertOrIgnorePropertiesInfoEntity(
+    fun test_deletePropertiesInfo_success() = runTest {
+        gameInfoDao.insertOrIgnorePropertiesInfo(
             listOf(samplePropertyInfoEntity).toSet(),
         )
-        val result = gameInfoDao.deletePropertiesInfoEntity(
+        val result = gameInfoDao.deletePropertiesInfo(
             listOf(samplePropertyInfoEntity).toSet(),
         )
 
@@ -254,18 +254,18 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_getPropertiesInfoEntity_success() = runTest {
+    fun test_getPropertiesInfo_success() = runTest {
         val propertiesInfo = List(3) { samplePropertyInfoEntity.copy(type = "test$it") }
-        gameInfoDao.insertOrIgnorePropertiesInfoEntity(propertiesInfo.toSet())
-        val result = gameInfoDao.getPropertiesInfoEntity().first()
+        gameInfoDao.insertOrIgnorePropertiesInfo(propertiesInfo.toSet())
+        val result = gameInfoDao.getPropertiesInfo().first()
 
         Assert.assertEquals(propertiesInfo, result)
     }
 
     @Test
-    fun test_insertOrIgnoreRelicsInfoEntity_success() = runTest {
+    fun test_insertOrIgnoreRelicsInfo_success() = runTest {
         val size = 3
-        val result = gameInfoDao.insertOrIgnoreRelicsInfoEntity(
+        val result = gameInfoDao.insertOrIgnoreRelicsInfo(
             List(size) { sampleRelicInfoEntity.copy(id = "test$it") }.toSet(),
         )
 
@@ -273,11 +273,11 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_updateRelicsInfoEntity_success() = runTest {
-        gameInfoDao.insertOrIgnoreRelicsInfoEntity(
+    fun test_updateRelicsInfo_success() = runTest {
+        gameInfoDao.insertOrIgnoreRelicsInfo(
             listOf(sampleRelicInfoEntity).toSet(),
         )
-        val result = gameInfoDao.updateRelicsInfoEntity(
+        val result = gameInfoDao.updateRelicsInfo(
             listOf(sampleRelicInfoEntity.copy(name = "newName")).toSet(),
         )
 
@@ -285,11 +285,11 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_deleteRelicsInfoEntity_success() = runTest {
-        gameInfoDao.insertOrIgnoreRelicsInfoEntity(
+    fun test_deleteRelicsInfo_success() = runTest {
+        gameInfoDao.insertOrIgnoreRelicsInfo(
             listOf(sampleRelicInfoEntity).toSet(),
         )
-        val result = gameInfoDao.deleteRelicsInfoEntity(
+        val result = gameInfoDao.deleteRelicsInfo(
             listOf(sampleRelicInfoEntity).toSet(),
         )
 
@@ -297,18 +297,18 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_getRelicsInfoEntity_success() = runTest {
+    fun test_getRelicsInfo_success() = runTest {
         val relicsInfo = List(3) { sampleRelicInfoEntity.copy(id = "test$it") }
-        gameInfoDao.insertOrIgnoreRelicsInfoEntity(relicsInfo.toSet())
-        val result = gameInfoDao.getRelicsInfoEntity().first()
+        gameInfoDao.insertOrIgnoreRelicsInfo(relicsInfo.toSet())
+        val result = gameInfoDao.getRelicsInfo().first()
 
         Assert.assertEquals(relicsInfo, result)
     }
 
     @Test
-    fun test_insertOrIgnoreRelicSetsInfoEntity_success() = runTest {
+    fun test_insertOrIgnoreRelicSetsInfo_success() = runTest {
         val size = 3
-        val result = gameInfoDao.insertOrIgnoreRelicSetsInfoEntity(
+        val result = gameInfoDao.insertOrIgnoreRelicSetsInfo(
             List(size) { sampleRelicSetInfoEntity.copy(id = "test$it") }.toSet(),
         )
 
@@ -316,11 +316,11 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_updateRelicSetsInfoEntity_success() = runTest {
-        gameInfoDao.insertOrIgnoreRelicSetsInfoEntity(
+    fun test_updateRelicSetsInfo_success() = runTest {
+        gameInfoDao.insertOrIgnoreRelicSetsInfo(
             listOf(sampleRelicSetInfoEntity).toSet(),
         )
-        val result = gameInfoDao.updateRelicSetsInfoEntity(
+        val result = gameInfoDao.updateRelicSetsInfo(
             listOf(sampleRelicSetInfoEntity.copy(name = "newName")).toSet(),
         )
 
@@ -328,11 +328,11 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_deleteRelicSetsInfoEntity_success() = runTest {
-        gameInfoDao.insertOrIgnoreRelicSetsInfoEntity(
+    fun test_deleteRelicSetsInfo_success() = runTest {
+        gameInfoDao.insertOrIgnoreRelicSetsInfo(
             listOf(sampleRelicSetInfoEntity).toSet(),
         )
-        val result = gameInfoDao.deleteRelicSetsInfoEntity(
+        val result = gameInfoDao.deleteRelicSetsInfo(
             listOf(sampleRelicSetInfoEntity).toSet(),
         )
 
@@ -340,10 +340,10 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_getRelicSetsInfoEntity_success() = runTest {
+    fun test_getRelicSetsInfo_success() = runTest {
         val relicSetsInfo = List(3) { sampleRelicSetInfoEntity.copy(id = "test$it") }
-        gameInfoDao.insertOrIgnoreRelicSetsInfoEntity(relicSetsInfo.toSet())
-        val result = gameInfoDao.getRelicSetsInfoEntity().first()
+        gameInfoDao.insertOrIgnoreRelicSetsInfo(relicSetsInfo.toSet())
+        val result = gameInfoDao.getRelicSetsInfo().first()
 
         Assert.assertEquals(relicSetsInfo, result)
     }
@@ -351,7 +351,7 @@ class GameInfoDaoTest {
     @Test
     fun test_insertOrIgnoreAffixesDataEntity_success() = runTest {
         val size = 3
-        val result = gameInfoDao.insertOrIgnoreAffixesDataEntity(
+        val result = gameInfoDao.insertOrIgnoreAffixesData(
             List(size) { sampleSubAffixDataEntity.copy(id = "test$it") }.toSet(),
         )
 
@@ -359,11 +359,11 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_updateAffixesDataEntity_success() = runTest {
-        gameInfoDao.insertOrIgnoreAffixesDataEntity(
+    fun test_updateAffixesData_success() = runTest {
+        gameInfoDao.insertOrIgnoreAffixesData(
             listOf(sampleSubAffixDataEntity).toSet(),
         )
-        val result = gameInfoDao.updateAffixesDataEntity(
+        val result = gameInfoDao.updateAffixesData(
             listOf(sampleSubAffixDataEntity.copy(affixes = emptyMap())).toSet(),
         )
 
@@ -371,11 +371,11 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_deleteAffixesDataEntity_success() = runTest {
-        gameInfoDao.insertOrIgnoreAffixesDataEntity(
+    fun test_deleteAffixesData_success() = runTest {
+        gameInfoDao.insertOrIgnoreAffixesData(
             listOf(sampleSubAffixDataEntity).toSet(),
         )
-        val result = gameInfoDao.deleteAffixesDataEntity(
+        val result = gameInfoDao.deleteAffixesData(
             listOf(sampleSubAffixDataEntity).toSet(),
         )
 
@@ -383,18 +383,18 @@ class GameInfoDaoTest {
     }
 
     @Test
-    fun test_getAffixesDataEntity_success() = runTest {
+    fun test_getAffixesData_success() = runTest {
         val subAffixesData = List(3) { sampleSubAffixDataEntity.copy(id = "test$it") }
-        gameInfoDao.insertOrIgnoreAffixesDataEntity(subAffixesData.toSet())
-        val result = gameInfoDao.getAffixesDataEntity().first()
+        gameInfoDao.insertOrIgnoreAffixesData(subAffixesData.toSet())
+        val result = gameInfoDao.getAffixesData().first()
 
         Assert.assertEquals(subAffixesData, result)
     }
 
     @Test
     fun test_getCharactersInfoWithDetails_success() = runTest {
-        gameInfoDao.insertOrIgnoreCharactersInfoEntity(setOf(sampleCharacterInfoEntity))
-        gameInfoDao.insertOrIgnorePathsInfoEntity(setOf(samplePathInfoEntity))
+        gameInfoDao.insertOrIgnoreCharactersInfo(setOf(sampleCharacterInfoEntity))
+        gameInfoDao.insertOrIgnorePathsInfo(setOf(samplePathInfoEntity))
         gameInfoDao.insertOrIgnoreElementsInfo(setOf(sampleElementInfoEntity))
         val result = gameInfoDao.getCharactersInfoWithDetails().first()
 
@@ -414,10 +414,10 @@ class GameInfoDaoTest {
 
     @Test
     fun test_getCharactersInfoWithDetailsByIds_success() = runTest {
-        gameInfoDao.insertOrIgnoreCharactersInfoEntity(
+        gameInfoDao.insertOrIgnoreCharactersInfo(
             List(3) { sampleCharacterInfoEntity.copy(id = "$it") }.toSet(),
         )
-        gameInfoDao.insertOrIgnorePathsInfoEntity(setOf(samplePathInfoEntity))
+        gameInfoDao.insertOrIgnorePathsInfo(setOf(samplePathInfoEntity))
         gameInfoDao.insertOrIgnoreElementsInfo(setOf(sampleElementInfoEntity))
         val result = gameInfoDao.getCharactersInfoWithDetails(setOf("0")).first()
 

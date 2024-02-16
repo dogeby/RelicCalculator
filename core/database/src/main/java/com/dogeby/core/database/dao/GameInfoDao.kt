@@ -34,30 +34,30 @@ interface GameInfoDao {
     fun getElementsInfo(): Flow<List<ElementInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnorePathsInfoEntity(pathsInfo: Set<PathInfoEntity>): List<Long>
+    suspend fun insertOrIgnorePathsInfo(pathsInfo: Set<PathInfoEntity>): List<Long>
 
     @Update
-    suspend fun updatePathsInfoEntity(pathsInfo: Set<PathInfoEntity>): Int
+    suspend fun updatePathsInfo(pathsInfo: Set<PathInfoEntity>): Int
 
     @Delete
-    suspend fun deletePathsInfoEntity(pathsInfo: Set<PathInfoEntity>): Int
+    suspend fun deletePathsInfo(pathsInfo: Set<PathInfoEntity>): Int
 
     @Query(value = "SELECT * FROM pathsInfo")
-    fun getPathsInfoEntity(): Flow<List<PathInfoEntity>>
+    fun getPathsInfo(): Flow<List<PathInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnoreCharactersInfoEntity(
+    suspend fun insertOrIgnoreCharactersInfo(
         charactersInfo: Set<CharacterInfoEntity>,
     ): List<Long>
 
     @Update
-    suspend fun updateCharactersInfoEntity(charactersInfo: Set<CharacterInfoEntity>): Int
+    suspend fun updateCharactersInfo(charactersInfo: Set<CharacterInfoEntity>): Int
 
     @Delete
-    suspend fun deleteCharactersInfoEntity(charactersInfo: Set<CharacterInfoEntity>): Int
+    suspend fun deleteCharactersInfo(charactersInfo: Set<CharacterInfoEntity>): Int
 
     @Query(value = "SELECT * FROM charactersInfo")
-    fun getCharactersInfoEntity(): Flow<List<CharacterInfoEntity>>
+    fun getCharactersInfo(): Flow<List<CharacterInfoEntity>>
 
     @Query(
         value = """
@@ -65,75 +65,75 @@ interface GameInfoDao {
         WHERE id in (:ids)
     """,
     )
-    fun getCharactersInfoEntity(ids: Set<String>): Flow<List<CharacterInfoEntity>>
+    fun getCharactersInfo(ids: Set<String>): Flow<List<CharacterInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnoreLightConesInfoEntity(
+    suspend fun insertOrIgnoreLightConesInfo(
         lightConesInfoEntity: Set<LightConeInfoEntity>,
     ): List<Long>
 
     @Update
-    suspend fun updateLightConesInfoEntity(lightConesInfoEntity: Set<LightConeInfoEntity>): Int
+    suspend fun updateLightConesInfo(lightConesInfoEntity: Set<LightConeInfoEntity>): Int
 
     @Delete
-    suspend fun deleteLightConesInfoEntity(lightConesInfoEntity: Set<LightConeInfoEntity>): Int
+    suspend fun deleteLightConesInfo(lightConesInfoEntity: Set<LightConeInfoEntity>): Int
 
     @Query(value = "SELECT * FROM lightConesInfo")
-    fun getLightConesInfoEntity(): Flow<List<LightConeInfoEntity>>
+    fun getLightConesInfo(): Flow<List<LightConeInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnorePropertiesInfoEntity(
+    suspend fun insertOrIgnorePropertiesInfo(
         propertiesInfoEntity: Set<PropertyInfoEntity>,
     ): List<Long>
 
     @Update
-    suspend fun updatePropertiesInfoEntity(propertiesInfoEntity: Set<PropertyInfoEntity>): Int
+    suspend fun updatePropertiesInfo(propertiesInfoEntity: Set<PropertyInfoEntity>): Int
 
     @Delete
-    suspend fun deletePropertiesInfoEntity(propertiesInfoEntity: Set<PropertyInfoEntity>): Int
+    suspend fun deletePropertiesInfo(propertiesInfoEntity: Set<PropertyInfoEntity>): Int
 
     @Query(value = "SELECT * FROM propertiesInfo")
-    fun getPropertiesInfoEntity(): Flow<List<PropertyInfoEntity>>
+    fun getPropertiesInfo(): Flow<List<PropertyInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnoreRelicsInfoEntity(relicsInfoEntity: Set<RelicInfoEntity>): List<Long>
+    suspend fun insertOrIgnoreRelicsInfo(relicsInfoEntity: Set<RelicInfoEntity>): List<Long>
 
     @Update
-    suspend fun updateRelicsInfoEntity(relicsInfoEntity: Set<RelicInfoEntity>): Int
+    suspend fun updateRelicsInfo(relicsInfoEntity: Set<RelicInfoEntity>): Int
 
     @Delete
-    suspend fun deleteRelicsInfoEntity(relicsInfoEntity: Set<RelicInfoEntity>): Int
+    suspend fun deleteRelicsInfo(relicsInfoEntity: Set<RelicInfoEntity>): Int
 
     @Query(value = "SELECT * FROM relicsInfo")
-    fun getRelicsInfoEntity(): Flow<List<RelicInfoEntity>>
+    fun getRelicsInfo(): Flow<List<RelicInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnoreRelicSetsInfoEntity(
+    suspend fun insertOrIgnoreRelicSetsInfo(
         relicSetsInfoEntity: Set<RelicSetInfoEntity>,
     ): List<Long>
 
     @Update
-    suspend fun updateRelicSetsInfoEntity(relicSetsInfoEntity: Set<RelicSetInfoEntity>): Int
+    suspend fun updateRelicSetsInfo(relicSetsInfoEntity: Set<RelicSetInfoEntity>): Int
 
     @Delete
-    suspend fun deleteRelicSetsInfoEntity(relicSetsInfoEntity: Set<RelicSetInfoEntity>): Int
+    suspend fun deleteRelicSetsInfo(relicSetsInfoEntity: Set<RelicSetInfoEntity>): Int
 
     @Query(value = "SELECT * FROM relicSetsInfo")
-    fun getRelicSetsInfoEntity(): Flow<List<RelicSetInfoEntity>>
+    fun getRelicSetsInfo(): Flow<List<RelicSetInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnoreAffixesDataEntity(
+    suspend fun insertOrIgnoreAffixesData(
         affixesDataEntity: Set<AffixDataEntity>,
     ): List<Long>
 
     @Update
-    suspend fun updateAffixesDataEntity(affixesDataEntity: Set<AffixDataEntity>): Int
+    suspend fun updateAffixesData(affixesDataEntity: Set<AffixDataEntity>): Int
 
     @Delete
-    suspend fun deleteAffixesDataEntity(affixesDataEntity: Set<AffixDataEntity>): Int
+    suspend fun deleteAffixesData(affixesDataEntity: Set<AffixDataEntity>): Int
 
     @Query(value = "SELECT * FROM affixesData")
-    fun getAffixesDataEntity(): Flow<List<AffixDataEntity>>
+    fun getAffixesData(): Flow<List<AffixDataEntity>>
 
     @Transaction
     @Query("SELECT * FROM charactersInfo")
