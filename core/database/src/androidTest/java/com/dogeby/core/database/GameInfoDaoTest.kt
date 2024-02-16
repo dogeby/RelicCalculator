@@ -10,6 +10,7 @@ import com.dogeby.core.database.model.hoyo.index.samplePathInfoEntity
 import com.dogeby.core.database.model.hoyo.index.samplePropertyInfoEntity
 import com.dogeby.core.database.model.hoyo.index.sampleRelicInfoEntity
 import com.dogeby.core.database.model.hoyo.index.sampleRelicSetInfoEntity
+import com.dogeby.core.database.model.hoyo.index.sampleSubAffixDataEntity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -331,5 +332,48 @@ class GameInfoDaoTest {
         val result = gameInfoDao.getRelicSetsInfoEntity().first()
 
         Assert.assertEquals(relicSetsInfo, result)
+    }
+
+    @Test
+    fun test_insertOrIgnoreAffixesDataEntity_success() = runTest {
+        val size = 3
+        val result = gameInfoDao.insertOrIgnoreAffixesDataEntity(
+            List(size) { sampleSubAffixDataEntity.copy(id = "test$it") }.toSet(),
+        )
+
+        Assert.assertEquals(List(size) { it + 1L }, result)
+    }
+
+    @Test
+    fun test_updateAffixesDataEntity_success() = runTest {
+        gameInfoDao.insertOrIgnoreAffixesDataEntity(
+            listOf(sampleSubAffixDataEntity).toSet(),
+        )
+        val result = gameInfoDao.updateAffixesDataEntity(
+            listOf(sampleSubAffixDataEntity.copy(affixes = emptyMap())).toSet(),
+        )
+
+        Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_deleteAffixesDataEntity_success() = runTest {
+        gameInfoDao.insertOrIgnoreAffixesDataEntity(
+            listOf(sampleSubAffixDataEntity).toSet(),
+        )
+        val result = gameInfoDao.deleteAffixesDataEntity(
+            listOf(sampleSubAffixDataEntity).toSet(),
+        )
+
+        Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_getAffixesDataEntity_success() = runTest {
+        val subAffixesData = List(3) { sampleSubAffixDataEntity.copy(id = "test$it") }
+        gameInfoDao.insertOrIgnoreAffixesDataEntity(subAffixesData.toSet())
+        val result = gameInfoDao.getAffixesDataEntity().first()
+
+        Assert.assertEquals(subAffixesData, result)
     }
 }

@@ -7,6 +7,7 @@ import com.dogeby.core.database.dao.CharacterReportDao
 import com.dogeby.core.database.dao.GameInfoDao
 import com.dogeby.core.database.dao.PresetDao
 import com.dogeby.core.database.model.hoyo.CharacterEntity
+import com.dogeby.core.database.model.hoyo.index.AffixDataEntity
 import com.dogeby.core.database.model.hoyo.index.CharacterInfoEntity
 import com.dogeby.core.database.model.hoyo.index.ElementInfoEntity
 import com.dogeby.core.database.model.hoyo.index.LightConeInfoEntity
@@ -29,6 +30,7 @@ import com.dogeby.core.database.model.report.CharacterReportEntity
         PropertyInfoEntity::class,
         RelicInfoEntity::class,
         RelicSetInfoEntity::class,
+        AffixDataEntity::class,
     ],
     version = 1,
 )

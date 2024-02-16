@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.dogeby.core.database.model.hoyo.index.AffixDataEntity
 import com.dogeby.core.database.model.hoyo.index.CharacterInfoEntity
 import com.dogeby.core.database.model.hoyo.index.ElementInfoEntity
 import com.dogeby.core.database.model.hoyo.index.LightConeInfoEntity
@@ -109,4 +110,18 @@ interface GameInfoDao {
 
     @Query(value = "SELECT * FROM relicSetsInfo")
     fun getRelicSetsInfoEntity(): Flow<List<RelicSetInfoEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertOrIgnoreAffixesDataEntity(
+        affixesDataEntity: Set<AffixDataEntity>,
+    ): List<Long>
+
+    @Update
+    suspend fun updateAffixesDataEntity(affixesDataEntity: Set<AffixDataEntity>): Int
+
+    @Delete
+    suspend fun deleteAffixesDataEntity(affixesDataEntity: Set<AffixDataEntity>): Int
+
+    @Query(value = "SELECT * FROM affixesData")
+    fun getAffixesDataEntity(): Flow<List<AffixDataEntity>>
 }
