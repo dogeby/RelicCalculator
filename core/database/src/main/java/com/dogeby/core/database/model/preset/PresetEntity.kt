@@ -7,7 +7,7 @@ import androidx.room.TypeConverters
 import com.dogeby.core.database.util.AffixWeightListConverter
 import com.dogeby.core.database.util.AttrComparisonListConverter
 import com.dogeby.core.database.util.MainAffixWeightMapConverter
-import com.dogeby.core.database.util.RelicSetIdListConverter
+import com.dogeby.core.database.util.StringListConverter
 import com.dogeby.reliccalculator.core.model.hoyo.index.RelicPiece
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.TestOnly
 
 @Entity(tableName = "presets")
 @TypeConverters(
-    RelicSetIdListConverter::class,
+    StringListConverter::class,
     MainAffixWeightMapConverter::class,
     AffixWeightListConverter::class,
     AttrComparisonListConverter::class,
