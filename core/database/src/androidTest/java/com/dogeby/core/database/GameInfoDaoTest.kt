@@ -9,6 +9,7 @@ import com.dogeby.core.database.model.hoyo.index.sampleLightConeInfoEntity
 import com.dogeby.core.database.model.hoyo.index.samplePathInfoEntity
 import com.dogeby.core.database.model.hoyo.index.samplePropertyInfoEntity
 import com.dogeby.core.database.model.hoyo.index.sampleRelicInfoEntity
+import com.dogeby.core.database.model.hoyo.index.sampleRelicSetInfoEntity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -287,5 +288,48 @@ class GameInfoDaoTest {
         val result = gameInfoDao.getRelicsInfoEntity().first()
 
         Assert.assertEquals(relicsInfo, result)
+    }
+
+    @Test
+    fun test_insertOrIgnoreRelicSetsInfoEntity_success() = runTest {
+        val size = 3
+        val result = gameInfoDao.insertOrIgnoreRelicSetsInfoEntity(
+            List(size) { sampleRelicSetInfoEntity.copy(id = "test$it") }.toSet(),
+        )
+
+        Assert.assertEquals(List(size) { it + 1L }, result)
+    }
+
+    @Test
+    fun test_updateRelicSetsInfoEntity_success() = runTest {
+        gameInfoDao.insertOrIgnoreRelicSetsInfoEntity(
+            listOf(sampleRelicSetInfoEntity).toSet(),
+        )
+        val result = gameInfoDao.updateRelicSetsInfoEntity(
+            listOf(sampleRelicSetInfoEntity.copy(name = "newName")).toSet(),
+        )
+
+        Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_deleteRelicSetsInfoEntity_success() = runTest {
+        gameInfoDao.insertOrIgnoreRelicSetsInfoEntity(
+            listOf(sampleRelicSetInfoEntity).toSet(),
+        )
+        val result = gameInfoDao.deleteRelicSetsInfoEntity(
+            listOf(sampleRelicSetInfoEntity).toSet(),
+        )
+
+        Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_getRelicSetsInfoEntity_success() = runTest {
+        val relicSetsInfo = List(3) { sampleRelicSetInfoEntity.copy(id = "test$it") }
+        gameInfoDao.insertOrIgnoreRelicSetsInfoEntity(relicSetsInfo.toSet())
+        val result = gameInfoDao.getRelicSetsInfoEntity().first()
+
+        Assert.assertEquals(relicSetsInfo, result)
     }
 }

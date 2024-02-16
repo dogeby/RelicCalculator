@@ -12,6 +12,7 @@ import com.dogeby.core.database.model.hoyo.index.LightConeInfoEntity
 import com.dogeby.core.database.model.hoyo.index.PathInfoEntity
 import com.dogeby.core.database.model.hoyo.index.PropertyInfoEntity
 import com.dogeby.core.database.model.hoyo.index.RelicInfoEntity
+import com.dogeby.core.database.model.hoyo.index.RelicSetInfoEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -94,4 +95,18 @@ interface GameInfoDao {
 
     @Query(value = "SELECT * FROM relicsInfo")
     fun getRelicsInfoEntity(): Flow<List<RelicInfoEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertOrIgnoreRelicSetsInfoEntity(
+        relicSetsInfoEntity: Set<RelicSetInfoEntity>,
+    ): List<Long>
+
+    @Update
+    suspend fun updateRelicSetsInfoEntity(relicSetsInfoEntity: Set<RelicSetInfoEntity>): Int
+
+    @Delete
+    suspend fun deleteRelicSetsInfoEntity(relicSetsInfoEntity: Set<RelicSetInfoEntity>): Int
+
+    @Query(value = "SELECT * FROM relicSetsInfo")
+    fun getRelicSetsInfoEntity(): Flow<List<RelicSetInfoEntity>>
 }
