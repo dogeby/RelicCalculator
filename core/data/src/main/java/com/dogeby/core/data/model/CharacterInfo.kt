@@ -1,8 +1,9 @@
 package com.dogeby.core.data.model
 
+import com.dogeby.core.database.model.hoyo.index.CharacterInfoEntity
 import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfo
 
-fun CharacterInfo.toCharacterInfoEntity() = CharacterInfo(
+fun CharacterInfo.toCharacterInfoEntity() = CharacterInfoEntity(
     id = id,
     name = name,
     tag = tag,
