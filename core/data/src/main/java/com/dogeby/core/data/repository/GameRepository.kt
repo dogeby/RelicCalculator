@@ -12,31 +12,29 @@ import com.dogeby.reliccalculator.core.model.hoyo.index.RelicInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.RelicSetInfo
 import com.dogeby.reliccalculator.core.model.preset.Preset
 import com.dogeby.reliccalculator.core.model.report.CharacterReport
+import kotlinx.coroutines.flow.Flow
 
 interface GameRepository {
 
-    suspend fun getCharacters(lang: GameTextLanguage): Result<Map<String, CharacterInfo>>
+    suspend fun getCharacters(): Flow<Map<String, CharacterInfo>>
 
-    suspend fun getElements(lang: GameTextLanguage): Result<Map<String, ElementInfo>>
+    suspend fun getElements(): Flow<Map<String, ElementInfo>>
 
-    suspend fun getLightCones(lang: GameTextLanguage): Result<Map<String, LightConeInfo>>
+    suspend fun getLightCones(): Flow<Map<String, LightConeInfo>>
 
-    suspend fun getPaths(lang: GameTextLanguage): Result<Map<String, PathInfo>>
+    suspend fun getPaths(): Flow<Map<String, PathInfo>>
 
-    suspend fun getProperties(lang: GameTextLanguage): Result<Map<String, PropertyInfo>>
+    suspend fun getProperties(): Flow<Map<String, PropertyInfo>>
 
-    suspend fun getRelicSets(lang: GameTextLanguage): Result<Map<String, RelicSetInfo>>
+    suspend fun getRelicSets(): Flow<Map<String, RelicSetInfo>>
 
-    suspend fun getRelics(lang: GameTextLanguage): Result<Map<String, RelicInfo>>
+    suspend fun getRelics(): Flow<Map<String, RelicInfo>>
 
-    suspend fun getRelicMainAffixes(lang: GameTextLanguage): Result<Map<String, AffixData>>
-
-    suspend fun getRelicSubAffixes(lang: GameTextLanguage): Result<Map<String, AffixData>>
+    suspend fun getRelicAffixes(): Flow<Map<String, AffixData>>
 
     suspend fun calculateCharacterScore(
         character: Character,
         preset: Preset,
-        lang: GameTextLanguage,
     ): Result<CharacterReport>
 
     suspend fun updateGameInfoInDb(lang: GameTextLanguage): Result<Unit>
