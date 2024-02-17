@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
+import androidx.room.Upsert
 import com.dogeby.core.database.model.hoyo.index.AffixDataEntity
 import com.dogeby.core.database.model.hoyo.index.CharacterInfoEntity
 import com.dogeby.core.database.model.hoyo.index.DatabaseCharacterInfoWithDetails
@@ -27,6 +28,9 @@ interface GameInfoDao {
     @Update
     suspend fun updateElementsInfo(elementsInfo: Set<ElementInfoEntity>): Int
 
+    @Upsert
+    suspend fun upsertElementsInfo(elementsInfo: Set<ElementInfoEntity>): List<Long>
+
     @Delete
     suspend fun deleteElementsInfo(elementsInfo: Set<ElementInfoEntity>): Int
 
@@ -39,6 +43,9 @@ interface GameInfoDao {
     @Update
     suspend fun updatePathsInfo(pathsInfo: Set<PathInfoEntity>): Int
 
+    @Upsert
+    suspend fun upsertPathsInfo(pathsInfo: Set<PathInfoEntity>): List<Long>
+
     @Delete
     suspend fun deletePathsInfo(pathsInfo: Set<PathInfoEntity>): Int
 
@@ -46,12 +53,13 @@ interface GameInfoDao {
     fun getPathsInfo(): Flow<List<PathInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnoreCharactersInfo(
-        charactersInfo: Set<CharacterInfoEntity>,
-    ): List<Long>
+    suspend fun insertOrIgnoreCharactersInfo(charactersInfo: Set<CharacterInfoEntity>): List<Long>
 
     @Update
     suspend fun updateCharactersInfo(charactersInfo: Set<CharacterInfoEntity>): Int
+
+    @Upsert
+    suspend fun upsertCharactersInfo(charactersInfo: Set<CharacterInfoEntity>): List<Long>
 
     @Delete
     suspend fun deleteCharactersInfo(charactersInfo: Set<CharacterInfoEntity>): Int
@@ -75,6 +83,9 @@ interface GameInfoDao {
     @Update
     suspend fun updateLightConesInfo(lightConesInfoEntity: Set<LightConeInfoEntity>): Int
 
+    @Upsert
+    suspend fun upsertLightConesInfo(lightConesInfoEntity: Set<LightConeInfoEntity>): List<Long>
+
     @Delete
     suspend fun deleteLightConesInfo(lightConesInfoEntity: Set<LightConeInfoEntity>): Int
 
@@ -89,6 +100,9 @@ interface GameInfoDao {
     @Update
     suspend fun updatePropertiesInfo(propertiesInfoEntity: Set<PropertyInfoEntity>): Int
 
+    @Upsert
+    suspend fun upsertPropertiesInfo(propertiesInfoEntity: Set<PropertyInfoEntity>): List<Long>
+
     @Delete
     suspend fun deletePropertiesInfo(propertiesInfoEntity: Set<PropertyInfoEntity>): Int
 
@@ -100,6 +114,9 @@ interface GameInfoDao {
 
     @Update
     suspend fun updateRelicsInfo(relicsInfoEntity: Set<RelicInfoEntity>): Int
+
+    @Upsert
+    suspend fun upsertRelicsInfo(relicsInfoEntity: Set<RelicInfoEntity>): List<Long>
 
     @Delete
     suspend fun deleteRelicsInfo(relicsInfoEntity: Set<RelicInfoEntity>): Int
@@ -115,6 +132,9 @@ interface GameInfoDao {
     @Update
     suspend fun updateRelicSetsInfo(relicSetsInfoEntity: Set<RelicSetInfoEntity>): Int
 
+    @Upsert
+    suspend fun upsertRelicSetsInfo(relicSetsInfoEntity: Set<RelicSetInfoEntity>): List<Long>
+
     @Delete
     suspend fun deleteRelicSetsInfo(relicSetsInfoEntity: Set<RelicSetInfoEntity>): Int
 
@@ -122,12 +142,13 @@ interface GameInfoDao {
     fun getRelicSetsInfo(): Flow<List<RelicSetInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnoreAffixesData(
-        affixesDataEntity: Set<AffixDataEntity>,
-    ): List<Long>
+    suspend fun insertOrIgnoreAffixesData(affixesDataEntity: Set<AffixDataEntity>): List<Long>
 
     @Update
     suspend fun updateAffixesData(affixesDataEntity: Set<AffixDataEntity>): Int
+
+    @Upsert
+    suspend fun upsertAffixesData(affixesDataEntity: Set<AffixDataEntity>): List<Long>
 
     @Delete
     suspend fun deleteAffixesData(affixesDataEntity: Set<AffixDataEntity>): Int

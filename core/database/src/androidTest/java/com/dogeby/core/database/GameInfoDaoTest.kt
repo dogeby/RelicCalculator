@@ -60,6 +60,23 @@ class GameInfoDaoTest {
     }
 
     @Test
+    fun test_upsertElementsInfo_success() = runTest {
+        val initialElements = List(3) { sampleElementInfoEntity.copy(id = "test$it") }
+        val insertRowIds = gameInfoDao.insertOrIgnoreElementsInfo(initialElements.toSet())
+
+        Assert.assertEquals(List(3) { it + 1L }, insertRowIds)
+
+        val updatedElement = initialElements.last().copy(name = "newName")
+        val newElement = sampleElementInfoEntity.copy(id = "newId")
+        val elementsToUpsert = initialElements.dropLast(1) +
+            updatedElement + newElement
+        gameInfoDao.upsertElementsInfo(elementsToUpsert.toSet())
+        val upsertedElements = gameInfoDao.getElementsInfo().first()
+
+        Assert.assertEquals(elementsToUpsert, upsertedElements)
+    }
+
+    @Test
     fun test_deleteElementsInfo_success() = runTest {
         gameInfoDao.insertOrIgnoreElementsInfo(
             listOf(sampleElementInfoEntity).toSet(),
@@ -101,6 +118,23 @@ class GameInfoDaoTest {
     }
 
     @Test
+    fun test_upsertPathsInfo_success() = runTest {
+        val initialPaths = List(3) { samplePathInfoEntity.copy(id = "test$it") }
+        val insertRowIds = gameInfoDao.insertOrIgnorePathsInfo(initialPaths.toSet())
+
+        Assert.assertEquals(List(3) { it + 1L }, insertRowIds)
+
+        val updatedPath = initialPaths.last().copy(name = "newName")
+        val newPath = samplePathInfoEntity.copy(id = "newId")
+        val pathsToUpsert = initialPaths.dropLast(1) +
+            updatedPath + newPath
+        gameInfoDao.upsertPathsInfo(pathsToUpsert.toSet())
+        val upsertedPaths = gameInfoDao.getPathsInfo().first()
+
+        Assert.assertEquals(pathsToUpsert, upsertedPaths)
+    }
+
+    @Test
     fun test_deletePathsInfo_success() = runTest {
         gameInfoDao.insertOrIgnorePathsInfo(
             listOf(samplePathInfoEntity).toSet(),
@@ -139,6 +173,23 @@ class GameInfoDaoTest {
         )
 
         Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_upsertCharactersInfo_success() = runTest {
+        val initialCharacters = List(3) { sampleCharacterInfoEntity.copy(id = "test$it") }
+        val insertRowIds = gameInfoDao.insertOrIgnoreCharactersInfo(initialCharacters.toSet())
+
+        Assert.assertEquals(List(3) { it + 1L }, insertRowIds)
+
+        val updatedCharacters = initialCharacters.last().copy(name = "newName")
+        val newCharacters = sampleCharacterInfoEntity.copy(id = "newId")
+        val charactersToUpsert = initialCharacters.dropLast(1) +
+            updatedCharacters + newCharacters
+        gameInfoDao.upsertCharactersInfo(charactersToUpsert.toSet())
+        val upsertedCharacters = gameInfoDao.getCharactersInfo().first()
+
+        Assert.assertEquals(charactersToUpsert, upsertedCharacters)
     }
 
     @Test
@@ -199,6 +250,23 @@ class GameInfoDaoTest {
     }
 
     @Test
+    fun test_upsertLightConesInfo_success() = runTest {
+        val initialLightCones = List(3) { sampleLightConeInfoEntity.copy(id = "test$it") }
+        val insertRowIds = gameInfoDao.insertOrIgnoreLightConesInfo(initialLightCones.toSet())
+
+        Assert.assertEquals(List(3) { it + 1L }, insertRowIds)
+
+        val updatedLightCones = initialLightCones.last().copy(name = "newName")
+        val newLightCones = sampleLightConeInfoEntity.copy(id = "newId")
+        val lightConesToUpsert = initialLightCones.dropLast(1) +
+            updatedLightCones + newLightCones
+        gameInfoDao.upsertLightConesInfo(lightConesToUpsert.toSet())
+        val upsertedLightCones = gameInfoDao.getLightConesInfo().first()
+
+        Assert.assertEquals(lightConesToUpsert, upsertedLightCones)
+    }
+
+    @Test
     fun test_deleteLightConesInfo_success() = runTest {
         gameInfoDao.insertOrIgnoreLightConesInfo(
             listOf(sampleLightConeInfoEntity).toSet(),
@@ -239,6 +307,23 @@ class GameInfoDaoTest {
         )
 
         Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_upsertPropertiesInfo_success() = runTest {
+        val initialProperties = List(3) { samplePropertyInfoEntity.copy(type = "test$it") }
+        val insertRowIds = gameInfoDao.insertOrIgnorePropertiesInfo(initialProperties.toSet())
+
+        Assert.assertEquals(List(3) { it + 1L }, insertRowIds)
+
+        val updatedProperties = initialProperties.last().copy(name = "newName")
+        val newProperties = samplePropertyInfoEntity.copy(type = "newId")
+        val propertiesToUpsert = initialProperties.dropLast(1) +
+            updatedProperties + newProperties
+        gameInfoDao.upsertPropertiesInfo(propertiesToUpsert.toSet())
+        val upsertedProperties = gameInfoDao.getPropertiesInfo().first()
+
+        Assert.assertEquals(propertiesToUpsert, upsertedProperties)
     }
 
     @Test
@@ -285,6 +370,23 @@ class GameInfoDaoTest {
     }
 
     @Test
+    fun test_upsertRelicsInfo_success() = runTest {
+        val initialRelics = List(3) { sampleRelicInfoEntity.copy(id = "test$it") }
+        val insertRowIds = gameInfoDao.insertOrIgnoreRelicsInfo(initialRelics.toSet())
+
+        Assert.assertEquals(List(3) { it + 1L }, insertRowIds)
+
+        val updatedRelics = initialRelics.last().copy(name = "newName")
+        val newRelics = sampleRelicInfoEntity.copy(id = "newId")
+        val relicsToUpsert = initialRelics.dropLast(1) +
+            updatedRelics + newRelics
+        gameInfoDao.upsertRelicsInfo(relicsToUpsert.toSet())
+        val upsertedRelics = gameInfoDao.getRelicsInfo().first()
+
+        Assert.assertEquals(relicsToUpsert, upsertedRelics)
+    }
+
+    @Test
     fun test_deleteRelicsInfo_success() = runTest {
         gameInfoDao.insertOrIgnoreRelicsInfo(
             listOf(sampleRelicInfoEntity).toSet(),
@@ -328,6 +430,23 @@ class GameInfoDaoTest {
     }
 
     @Test
+    fun test_upsertRelicSetsInfo_success() = runTest {
+        val initialRelicSets = List(3) { sampleRelicSetInfoEntity.copy(id = "test$it") }
+        val insertRowIds = gameInfoDao.insertOrIgnoreRelicSetsInfo(initialRelicSets.toSet())
+
+        Assert.assertEquals(List(3) { it + 1L }, insertRowIds)
+
+        val updatedRelicSets = initialRelicSets.last().copy(name = "newName")
+        val newRelicSets = sampleRelicSetInfoEntity.copy(id = "newId")
+        val relicSetsToUpsert = initialRelicSets.dropLast(1) +
+            updatedRelicSets + newRelicSets
+        gameInfoDao.upsertRelicSetsInfo(relicSetsToUpsert.toSet())
+        val upsertedRelicSets = gameInfoDao.getRelicSetsInfo().first()
+
+        Assert.assertEquals(relicSetsToUpsert, upsertedRelicSets)
+    }
+
+    @Test
     fun test_deleteRelicSetsInfo_success() = runTest {
         gameInfoDao.insertOrIgnoreRelicSetsInfo(
             listOf(sampleRelicSetInfoEntity).toSet(),
@@ -368,6 +487,23 @@ class GameInfoDaoTest {
         )
 
         Assert.assertEquals(1, result)
+    }
+
+    @Test
+    fun test_upsertAffixesData_success() = runTest {
+        val initialSubAffixData = List(3) { sampleSubAffixDataEntity.copy(id = "test$it") }
+        val insertRowIds = gameInfoDao.insertOrIgnoreAffixesData(initialSubAffixData.toSet())
+
+        Assert.assertEquals(List(3) { it + 1L }, insertRowIds)
+
+        val updatedSubAffixData = initialSubAffixData.last().copy(affixes = emptyMap())
+        val newSubAffixData = sampleSubAffixDataEntity.copy(id = "newId")
+        val subAffixDataToUpsert = initialSubAffixData.dropLast(1) +
+            updatedSubAffixData + newSubAffixData
+        gameInfoDao.upsertAffixesData(subAffixDataToUpsert.toSet())
+        val upsertedSubAffixData = gameInfoDao.getAffixesData().first()
+
+        Assert.assertEquals(subAffixDataToUpsert, upsertedSubAffixData)
     }
 
     @Test
