@@ -96,6 +96,20 @@ class GameInfoDaoTest {
     }
 
     @Test
+    fun test_getElementsInfoByIds_success() = runTest {
+        val elementsInfo = List(3) { sampleElementInfoEntity.copy(id = "test$it") }
+        val takenElementsInfo = elementsInfo.take(2)
+        gameInfoDao.insertOrIgnoreElementsInfo(elementsInfo.toSet())
+        val result = gameInfoDao.getElementsInfo(
+            takenElementsInfo.map { it.id }
+                .toSet(),
+        )
+            .first()
+
+        Assert.assertEquals(takenElementsInfo, result)
+    }
+
+    @Test
     fun test_insertOrIgnorePathsInfo_success() = runTest {
         val size = 3
         val result = gameInfoDao.insertOrIgnorePathsInfo(
@@ -146,11 +160,25 @@ class GameInfoDaoTest {
 
     @Test
     fun test_getPathsInfo_success() = runTest {
-        val elementsInfo = List(3) { samplePathInfoEntity.copy(id = "test$it") }
-        gameInfoDao.insertOrIgnorePathsInfo(elementsInfo.toSet())
+        val pathsInfo = List(3) { samplePathInfoEntity.copy(id = "test$it") }
+        gameInfoDao.insertOrIgnorePathsInfo(pathsInfo.toSet())
         val result = gameInfoDao.getPathsInfo().first()
 
-        Assert.assertEquals(elementsInfo, result)
+        Assert.assertEquals(pathsInfo, result)
+    }
+
+    @Test
+    fun test_getPathsInfoByIds_success() = runTest {
+        val pathsInfo = List(3) { samplePathInfoEntity.copy(id = "test$it") }
+        val takenPathsInfo = pathsInfo.take(2)
+        gameInfoDao.insertOrIgnorePathsInfo(pathsInfo.toSet())
+        val result = gameInfoDao.getPathsInfo(
+            takenPathsInfo.map { it.id }
+                .toSet(),
+        )
+            .first()
+
+        Assert.assertEquals(takenPathsInfo, result)
     }
 
     @Test
@@ -288,6 +316,20 @@ class GameInfoDaoTest {
     }
 
     @Test
+    fun test_getLightConesInfoByIds_success() = runTest {
+        val lightConesInfo = List(3) { sampleLightConeInfoEntity.copy(id = "test$it") }
+        val takenLightConesInfo = lightConesInfo.take(2)
+        gameInfoDao.insertOrIgnoreLightConesInfo(lightConesInfo.toSet())
+        val result = gameInfoDao.getLightConesInfo(
+            takenLightConesInfo.map { it.id }
+                .toSet(),
+        )
+            .first()
+
+        Assert.assertEquals(takenLightConesInfo, result)
+    }
+
+    @Test
     fun test_insertOrIgnorePropertiesInfo_success() = runTest {
         val size = 3
         val result = gameInfoDao.insertOrIgnorePropertiesInfo(
@@ -345,6 +387,39 @@ class GameInfoDaoTest {
         val result = gameInfoDao.getPropertiesInfo().first()
 
         Assert.assertEquals(propertiesInfo, result)
+    }
+
+    @Test
+    fun test_getPropertiesInfoByIds_success() = runTest {
+        val propertiesInfo = List(3) { samplePropertyInfoEntity.copy(type = "test$it") }
+        val takenPropertiesInfo = propertiesInfo.take(2)
+        gameInfoDao.insertOrIgnorePropertiesInfo(propertiesInfo.toSet())
+        val result = gameInfoDao.getPropertiesInfoByIds(
+            takenPropertiesInfo.map { it.type }
+                .toSet(),
+        )
+            .first()
+
+        Assert.assertEquals(takenPropertiesInfo, result)
+    }
+
+    @Test
+    fun test_getPropertiesInfoByFields_success() = runTest {
+        val propertiesInfo = List(3) {
+            samplePropertyInfoEntity.copy(
+                type = "test$it",
+                field = "test$it",
+            )
+        }
+        val takenPropertiesInfo = propertiesInfo.take(2)
+        gameInfoDao.insertOrIgnorePropertiesInfo(propertiesInfo.toSet())
+        val result = gameInfoDao.getPropertiesInfoByFields(
+            takenPropertiesInfo.map { it.field }
+                .toSet(),
+        )
+            .first()
+
+        Assert.assertEquals(takenPropertiesInfo, result)
     }
 
     @Test
@@ -408,6 +483,20 @@ class GameInfoDaoTest {
     }
 
     @Test
+    fun test_getRelicsInfoByIds_success() = runTest {
+        val relicsInfo = List(3) { sampleRelicInfoEntity.copy(id = "test$it") }
+        val takenRelicsInfo = relicsInfo.take(2)
+        gameInfoDao.insertOrIgnoreRelicsInfo(relicsInfo.toSet())
+        val result = gameInfoDao.getRelicsInfo(
+            takenRelicsInfo.map { it.id }
+                .toSet(),
+        )
+            .first()
+
+        Assert.assertEquals(takenRelicsInfo, result)
+    }
+
+    @Test
     fun test_insertOrIgnoreRelicSetsInfo_success() = runTest {
         val size = 3
         val result = gameInfoDao.insertOrIgnoreRelicSetsInfo(
@@ -468,6 +557,20 @@ class GameInfoDaoTest {
     }
 
     @Test
+    fun test_getRelicSetsInfoByIds_success() = runTest {
+        val relicSetsInfo = List(3) { sampleRelicSetInfoEntity.copy(id = "test$it") }
+        val takenRelicSetsInfo = relicSetsInfo.take(2)
+        gameInfoDao.insertOrIgnoreRelicSetsInfo(relicSetsInfo.toSet())
+        val result = gameInfoDao.getRelicSetsInfo(
+            takenRelicSetsInfo.map { it.id }
+                .toSet(),
+        )
+            .first()
+
+        Assert.assertEquals(takenRelicSetsInfo, result)
+    }
+
+    @Test
     fun test_insertOrIgnoreAffixesDataEntity_success() = runTest {
         val size = 3
         val result = gameInfoDao.insertOrIgnoreAffixesData(
@@ -525,6 +628,20 @@ class GameInfoDaoTest {
         val result = gameInfoDao.getAffixesData().first()
 
         Assert.assertEquals(subAffixesData, result)
+    }
+
+    @Test
+    fun test_getAffixesDataByIds_success() = runTest {
+        val subAffixesData = List(3) { sampleSubAffixDataEntity.copy(id = "test$it") }
+        val takenSubAffixesData = subAffixesData.take(2)
+        gameInfoDao.insertOrIgnoreAffixesData(subAffixesData.toSet())
+        val result = gameInfoDao.getAffixesData(
+            takenSubAffixesData.map { it.id }
+                .toSet(),
+        )
+            .first()
+
+        Assert.assertEquals(takenSubAffixesData, result)
     }
 
     @Test

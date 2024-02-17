@@ -37,6 +37,9 @@ interface GameInfoDao {
     @Query(value = "SELECT * FROM elementsInfo")
     fun getElementsInfo(): Flow<List<ElementInfoEntity>>
 
+    @Query(value = "SELECT * FROM elementsInfo WHERE id in (:ids)")
+    fun getElementsInfo(ids: Set<String>): Flow<List<ElementInfoEntity>>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertOrIgnorePathsInfo(pathsInfo: Set<PathInfoEntity>): List<Long>
 
@@ -51,6 +54,9 @@ interface GameInfoDao {
 
     @Query(value = "SELECT * FROM pathsInfo")
     fun getPathsInfo(): Flow<List<PathInfoEntity>>
+
+    @Query(value = "SELECT * FROM pathsInfo WHERE id in (:ids)")
+    fun getPathsInfo(ids: Set<String>): Flow<List<PathInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertOrIgnoreCharactersInfo(charactersInfo: Set<CharacterInfoEntity>): List<Long>
@@ -92,6 +98,9 @@ interface GameInfoDao {
     @Query(value = "SELECT * FROM lightConesInfo")
     fun getLightConesInfo(): Flow<List<LightConeInfoEntity>>
 
+    @Query(value = "SELECT * FROM lightConesInfo WHERE id in (:ids)")
+    fun getLightConesInfo(ids: Set<String>): Flow<List<LightConeInfoEntity>>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertOrIgnorePropertiesInfo(
         propertiesInfoEntity: Set<PropertyInfoEntity>,
@@ -109,6 +118,12 @@ interface GameInfoDao {
     @Query(value = "SELECT * FROM propertiesInfo")
     fun getPropertiesInfo(): Flow<List<PropertyInfoEntity>>
 
+    @Query(value = "SELECT * FROM propertiesInfo WHERE type in (:ids)")
+    fun getPropertiesInfoByIds(ids: Set<String>): Flow<List<PropertyInfoEntity>>
+
+    @Query(value = "SELECT * FROM propertiesInfo WHERE field in (:fields)")
+    fun getPropertiesInfoByFields(fields: Set<String>): Flow<List<PropertyInfoEntity>>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertOrIgnoreRelicsInfo(relicsInfoEntity: Set<RelicInfoEntity>): List<Long>
 
@@ -123,6 +138,9 @@ interface GameInfoDao {
 
     @Query(value = "SELECT * FROM relicsInfo")
     fun getRelicsInfo(): Flow<List<RelicInfoEntity>>
+
+    @Query(value = "SELECT * FROM relicsInfo WHERE id in (:ids)")
+    fun getRelicsInfo(ids: Set<String>): Flow<List<RelicInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertOrIgnoreRelicSetsInfo(
@@ -141,6 +159,9 @@ interface GameInfoDao {
     @Query(value = "SELECT * FROM relicSetsInfo")
     fun getRelicSetsInfo(): Flow<List<RelicSetInfoEntity>>
 
+    @Query(value = "SELECT * FROM relicSetsInfo WHERE id in (:ids)")
+    fun getRelicSetsInfo(ids: Set<String>): Flow<List<RelicSetInfoEntity>>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertOrIgnoreAffixesData(affixesDataEntity: Set<AffixDataEntity>): List<Long>
 
@@ -155,6 +176,9 @@ interface GameInfoDao {
 
     @Query(value = "SELECT * FROM affixesData")
     fun getAffixesData(): Flow<List<AffixDataEntity>>
+
+    @Query(value = "SELECT * FROM affixesData WHERE id in (:ids)")
+    fun getAffixesData(ids: Set<String>): Flow<List<AffixDataEntity>>
 
     @Transaction
     @Query("SELECT * FROM charactersInfo")
