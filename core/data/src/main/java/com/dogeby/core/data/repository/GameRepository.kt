@@ -38,4 +38,6 @@ interface GameRepository {
         preset: Preset,
         lang: GameTextLanguage,
     ): Result<CharacterReport>
+
+    suspend fun updateGameInfoInDb(lang: GameTextLanguage): Result<Unit>
 }
