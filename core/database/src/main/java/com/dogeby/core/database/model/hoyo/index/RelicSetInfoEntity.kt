@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.dogeby.core.database.util.StringListConverter
+import com.dogeby.reliccalculator.core.model.hoyo.index.RelicSetInfo
 
 @Entity(tableName = "relicSetsInfo")
 @TypeConverters(StringListConverter::class)
@@ -14,7 +15,7 @@ data class RelicSetInfoEntity(
     val icon: String,
 )
 
-fun RelicSetInfoEntity.toRelicSetInfo() = RelicSetInfoEntity(
+fun RelicSetInfoEntity.toRelicSetInfo() = RelicSetInfo(
     id = id,
     name = name,
     desc = desc,
