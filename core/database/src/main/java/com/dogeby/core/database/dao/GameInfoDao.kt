@@ -182,7 +182,7 @@ interface GameInfoDao {
 
     @Transaction
     @Query("SELECT * FROM charactersInfo")
-    fun getCharactersInfoWithDetails(): List<DatabaseCharacterInfoWithDetails>
+    fun getCharactersInfoWithDetails(): Flow<List<DatabaseCharacterInfoWithDetails>>
 
     @Transaction
     @Query(
@@ -191,5 +191,5 @@ interface GameInfoDao {
         WHERE id in (:ids)
     """,
     )
-    fun getCharactersInfoWithDetails(ids: Set<String>): List<DatabaseCharacterInfoWithDetails>
+    fun getCharactersInfoWithDetails(ids: Set<String>): Flow<List<DatabaseCharacterInfoWithDetails>>
 }

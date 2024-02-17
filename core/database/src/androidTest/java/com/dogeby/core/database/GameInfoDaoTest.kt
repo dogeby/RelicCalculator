@@ -649,7 +649,7 @@ class GameInfoDaoTest {
         gameInfoDao.insertOrIgnoreCharactersInfo(setOf(sampleCharacterInfoEntity))
         gameInfoDao.insertOrIgnorePathsInfo(setOf(samplePathInfoEntity))
         gameInfoDao.insertOrIgnoreElementsInfo(setOf(sampleElementInfoEntity))
-        val result = gameInfoDao.getCharactersInfoWithDetails().first()
+        val result = gameInfoDao.getCharactersInfoWithDetails().first().first()
 
         Assert.assertEquals(
             sampleCharacterInfoEntity.id,
@@ -672,7 +672,7 @@ class GameInfoDaoTest {
         )
         gameInfoDao.insertOrIgnorePathsInfo(setOf(samplePathInfoEntity))
         gameInfoDao.insertOrIgnoreElementsInfo(setOf(sampleElementInfoEntity))
-        val result = gameInfoDao.getCharactersInfoWithDetails(setOf("0")).first()
+        val result = gameInfoDao.getCharactersInfoWithDetails(setOf("0")).first().first()
 
         Assert.assertEquals(
             "0",
