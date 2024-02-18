@@ -4,6 +4,7 @@ import com.dogeby.reliccalculator.core.model.GameTextLanguage
 import com.dogeby.reliccalculator.core.model.hoyo.Character
 import com.dogeby.reliccalculator.core.model.hoyo.index.AffixData
 import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfo
+import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfoWithDetails
 import com.dogeby.reliccalculator.core.model.hoyo.index.ElementInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.LightConeInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.PathInfo
@@ -31,6 +32,8 @@ interface GameRepository {
     val relicsInfo: Flow<Map<String, RelicInfo>>
 
     val relicAffixesInfo: Flow<Map<String, AffixData>>
+
+    val charactersInfoWithDetails: Flow<List<CharacterInfoWithDetails>>
 
     suspend fun calculateCharacterScore(
         character: Character,

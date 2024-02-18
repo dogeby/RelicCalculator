@@ -11,6 +11,7 @@ import com.dogeby.core.data.model.toRelicSetInfoEntity
 import com.dogeby.core.database.dao.GameInfoDao
 import com.dogeby.core.database.model.hoyo.index.toAffixData
 import com.dogeby.core.database.model.hoyo.index.toCharacterInfo
+import com.dogeby.core.database.model.hoyo.index.toCharacterInfoWithDetails
 import com.dogeby.core.database.model.hoyo.index.toElementInfo
 import com.dogeby.core.database.model.hoyo.index.toLightConeInfo
 import com.dogeby.core.database.model.hoyo.index.toPathInfo
@@ -23,6 +24,7 @@ import com.dogeby.reliccalculator.core.model.GameTextLanguage
 import com.dogeby.reliccalculator.core.model.hoyo.Character
 import com.dogeby.reliccalculator.core.model.hoyo.index.AffixData
 import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfo
+import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfoWithDetails
 import com.dogeby.reliccalculator.core.model.hoyo.index.ElementInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.LightConeInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.PathInfo
@@ -107,6 +109,11 @@ class GameRepositoryImpl @Inject constructor(
                 keySelector = { it.id },
                 valueTransform = { it.toAffixData() },
             )
+        }
+
+    override val charactersInfoWithDetails: Flow<List<CharacterInfoWithDetails>> =
+        gameInfoDao.getCharactersInfoWithDetails().map { charactersInfoWithDetails ->
+            charactersInfoWithDetails.map { it.toCharacterInfoWithDetails() }
         }
 
     override suspend fun calculateCharacterScore(
