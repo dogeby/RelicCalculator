@@ -1,4 +1,4 @@
-package com.dogeby.reliccalculator.core.model.preset
+package com.dogeby.reliccalculator.core.domain.model
 
 import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.ElementInfo
