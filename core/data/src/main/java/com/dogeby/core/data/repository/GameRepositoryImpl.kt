@@ -45,7 +45,7 @@ class GameRepositoryImpl @Inject constructor(
     private val gameInfoDao: GameInfoDao,
 ) : GameRepository {
 
-    override fun getCharacters(): Flow<Map<String, CharacterInfo>> =
+    override val charactersInfo: Flow<Map<String, CharacterInfo>> =
         gameInfoDao.getCharactersInfo().map { charactersInfo ->
             charactersInfo.associateBy(
                 keySelector = { it.id },
@@ -53,7 +53,7 @@ class GameRepositoryImpl @Inject constructor(
             )
         }
 
-    override fun getElements(): Flow<Map<String, ElementInfo>> =
+    override val elementsInfo: Flow<Map<String, ElementInfo>> =
         gameInfoDao.getElementsInfo().map { elementsInfo ->
             elementsInfo.associateBy(
                 keySelector = { it.id },
@@ -61,15 +61,7 @@ class GameRepositoryImpl @Inject constructor(
             )
         }
 
-    override fun getLightCones(): Flow<Map<String, LightConeInfo>> =
-        gameInfoDao.getLightConesInfo().map { lightConesInfo ->
-            lightConesInfo.associateBy(
-                keySelector = { it.id },
-                valueTransform = { it.toLightConeInfo() },
-            )
-        }
-
-    override fun getPaths(): Flow<Map<String, PathInfo>> =
+    override val pathsInfo: Flow<Map<String, PathInfo>> =
         gameInfoDao.getPathsInfo().map { pathsInfo ->
             pathsInfo.associateBy(
                 keySelector = { it.id },
@@ -77,7 +69,15 @@ class GameRepositoryImpl @Inject constructor(
             )
         }
 
-    override fun getProperties(): Flow<Map<String, PropertyInfo>> =
+    override val lightConesInfo: Flow<Map<String, LightConeInfo>> =
+        gameInfoDao.getLightConesInfo().map { lightConesInfo ->
+            lightConesInfo.associateBy(
+                keySelector = { it.id },
+                valueTransform = { it.toLightConeInfo() },
+            )
+        }
+
+    override val propertiesInfo: Flow<Map<String, PropertyInfo>> =
         gameInfoDao.getPropertiesInfo().map { propertiesInfo ->
             propertiesInfo.associateBy(
                 keySelector = { it.type },
@@ -85,7 +85,7 @@ class GameRepositoryImpl @Inject constructor(
             )
         }
 
-    override fun getRelicSets(): Flow<Map<String, RelicSetInfo>> =
+    override val relicSetsInfo: Flow<Map<String, RelicSetInfo>> =
         gameInfoDao.getRelicSetsInfo().map { relicSetsInfo ->
             relicSetsInfo.associateBy(
                 keySelector = { it.id },
@@ -93,7 +93,7 @@ class GameRepositoryImpl @Inject constructor(
             )
         }
 
-    override fun getRelics(): Flow<Map<String, RelicInfo>> =
+    override val relicsInfo: Flow<Map<String, RelicInfo>> =
         gameInfoDao.getRelicsInfo().map { relicsInfo ->
             relicsInfo.associateBy(
                 keySelector = { it.id },
@@ -101,7 +101,7 @@ class GameRepositoryImpl @Inject constructor(
             )
         }
 
-    override fun getRelicAffixes(): Flow<Map<String, AffixData>> =
+    override val relicAffixesInfo: Flow<Map<String, AffixData>> =
         gameInfoDao.getAffixesData().map { affixesData ->
             affixesData.associateBy(
                 keySelector = { it.id },
@@ -116,8 +116,8 @@ class GameRepositoryImpl @Inject constructor(
         characterRelicCalculator.calculateCharacterScore(
             character = character,
             preset = preset,
-            relicsInfo = getRelics().first(),
-            subAffixesData = getRelicAffixes().first(),
+            relicsInfo = relicsInfo.first(),
+            subAffixesData = relicAffixesInfo.first(),
         )
     }
 
