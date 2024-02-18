@@ -70,6 +70,7 @@ val samplePresetEntity = PresetEntity(
     isAutoUpdate = false,
     attrComparisons = listOf(
         AttrComparison(
+            type = "AttackDelta",
             field = "atk",
             comparedValue = 500.0f,
             display = "500",

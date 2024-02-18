@@ -130,6 +130,7 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
             }
         }
         return AttrComparisonReport(
+            type = attrComparison.type,
             field = attrComparison.field,
             comparedValue = attrComparison.comparedValue,
             comparisonOperator = attrComparison.comparisonOperator,

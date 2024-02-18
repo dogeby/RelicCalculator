@@ -61,6 +61,7 @@ val sampleCharacterReportEntity = CharacterReportEntity(
     },
     attrComparisonReports = listOf(
         AttrComparisonReport(
+            type = "AttackDelta",
             field = "atk",
             comparedValue = 500.0f,
             comparisonOperator = ComparisonOperator.GREATER_THAN,
