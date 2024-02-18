@@ -16,21 +16,21 @@ import kotlinx.coroutines.flow.Flow
 
 interface GameRepository {
 
-    suspend fun getCharacters(): Flow<Map<String, CharacterInfo>>
+    fun getCharacters(): Flow<Map<String, CharacterInfo>>
 
-    suspend fun getElements(): Flow<Map<String, ElementInfo>>
+    fun getElements(): Flow<Map<String, ElementInfo>>
 
-    suspend fun getLightCones(): Flow<Map<String, LightConeInfo>>
+    fun getLightCones(): Flow<Map<String, LightConeInfo>>
 
-    suspend fun getPaths(): Flow<Map<String, PathInfo>>
+    fun getPaths(): Flow<Map<String, PathInfo>>
 
-    suspend fun getProperties(): Flow<Map<String, PropertyInfo>>
+    fun getProperties(): Flow<Map<String, PropertyInfo>>
 
-    suspend fun getRelicSets(): Flow<Map<String, RelicSetInfo>>
+    fun getRelicSets(): Flow<Map<String, RelicSetInfo>>
 
-    suspend fun getRelics(): Flow<Map<String, RelicInfo>>
+    fun getRelics(): Flow<Map<String, RelicInfo>>
 
-    suspend fun getRelicAffixes(): Flow<Map<String, AffixData>>
+    fun getRelicAffixes(): Flow<Map<String, AffixData>>
 
     suspend fun calculateCharacterScore(
         character: Character,
