@@ -11,6 +11,7 @@ import com.dogeby.core.data.model.toRelicSetInfoEntity
 import com.dogeby.core.database.dao.GameInfoDao
 import com.dogeby.core.database.model.hoyo.index.toAffixData
 import com.dogeby.core.database.model.hoyo.index.toCharacterInfo
+import com.dogeby.core.database.model.hoyo.index.toCharacterInfoWithDetails
 import com.dogeby.core.database.model.hoyo.index.toElementInfo
 import com.dogeby.core.database.model.hoyo.index.toLightConeInfo
 import com.dogeby.core.database.model.hoyo.index.toPathInfo
@@ -23,6 +24,7 @@ import com.dogeby.reliccalculator.core.model.GameTextLanguage
 import com.dogeby.reliccalculator.core.model.hoyo.Character
 import com.dogeby.reliccalculator.core.model.hoyo.index.AffixData
 import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfo
+import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfoWithDetails
 import com.dogeby.reliccalculator.core.model.hoyo.index.ElementInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.LightConeInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.PathInfo
@@ -45,7 +47,7 @@ class GameRepositoryImpl @Inject constructor(
     private val gameInfoDao: GameInfoDao,
 ) : GameRepository {
 
-    override suspend fun getCharacters(): Flow<Map<String, CharacterInfo>> =
+    override val charactersInfo: Flow<Map<String, CharacterInfo>> =
         gameInfoDao.getCharactersInfo().map { charactersInfo ->
             charactersInfo.associateBy(
                 keySelector = { it.id },
@@ -53,7 +55,7 @@ class GameRepositoryImpl @Inject constructor(
             )
         }
 
-    override suspend fun getElements(): Flow<Map<String, ElementInfo>> =
+    override val elementsInfo: Flow<Map<String, ElementInfo>> =
         gameInfoDao.getElementsInfo().map { elementsInfo ->
             elementsInfo.associateBy(
                 keySelector = { it.id },
@@ -61,15 +63,7 @@ class GameRepositoryImpl @Inject constructor(
             )
         }
 
-    override suspend fun getLightCones(): Flow<Map<String, LightConeInfo>> =
-        gameInfoDao.getLightConesInfo().map { lightConesInfo ->
-            lightConesInfo.associateBy(
-                keySelector = { it.id },
-                valueTransform = { it.toLightConeInfo() },
-            )
-        }
-
-    override suspend fun getPaths(): Flow<Map<String, PathInfo>> =
+    override val pathsInfo: Flow<Map<String, PathInfo>> =
         gameInfoDao.getPathsInfo().map { pathsInfo ->
             pathsInfo.associateBy(
                 keySelector = { it.id },
@@ -77,7 +71,15 @@ class GameRepositoryImpl @Inject constructor(
             )
         }
 
-    override suspend fun getProperties(): Flow<Map<String, PropertyInfo>> =
+    override val lightConesInfo: Flow<Map<String, LightConeInfo>> =
+        gameInfoDao.getLightConesInfo().map { lightConesInfo ->
+            lightConesInfo.associateBy(
+                keySelector = { it.id },
+                valueTransform = { it.toLightConeInfo() },
+            )
+        }
+
+    override val propertiesInfo: Flow<Map<String, PropertyInfo>> =
         gameInfoDao.getPropertiesInfo().map { propertiesInfo ->
             propertiesInfo.associateBy(
                 keySelector = { it.type },
@@ -85,7 +87,7 @@ class GameRepositoryImpl @Inject constructor(
             )
         }
 
-    override suspend fun getRelicSets(): Flow<Map<String, RelicSetInfo>> =
+    override val relicSetsInfo: Flow<Map<String, RelicSetInfo>> =
         gameInfoDao.getRelicSetsInfo().map { relicSetsInfo ->
             relicSetsInfo.associateBy(
                 keySelector = { it.id },
@@ -93,7 +95,7 @@ class GameRepositoryImpl @Inject constructor(
             )
         }
 
-    override suspend fun getRelics(): Flow<Map<String, RelicInfo>> =
+    override val relicsInfo: Flow<Map<String, RelicInfo>> =
         gameInfoDao.getRelicsInfo().map { relicsInfo ->
             relicsInfo.associateBy(
                 keySelector = { it.id },
@@ -101,12 +103,17 @@ class GameRepositoryImpl @Inject constructor(
             )
         }
 
-    override suspend fun getRelicAffixes(): Flow<Map<String, AffixData>> =
+    override val relicAffixesInfo: Flow<Map<String, AffixData>> =
         gameInfoDao.getAffixesData().map { affixesData ->
             affixesData.associateBy(
                 keySelector = { it.id },
                 valueTransform = { it.toAffixData() },
             )
+        }
+
+    override val charactersInfoWithDetails: Flow<List<CharacterInfoWithDetails>> =
+        gameInfoDao.getCharactersInfoWithDetails().map { charactersInfoWithDetails ->
+            charactersInfoWithDetails.map { it.toCharacterInfoWithDetails() }
         }
 
     override suspend fun calculateCharacterScore(
@@ -116,8 +123,8 @@ class GameRepositoryImpl @Inject constructor(
         characterRelicCalculator.calculateCharacterScore(
             character = character,
             preset = preset,
-            relicsInfo = getRelics().first(),
-            subAffixesData = getRelicAffixes().first(),
+            relicsInfo = relicsInfo.first(),
+            subAffixesData = relicAffixesInfo.first(),
         )
     }
 

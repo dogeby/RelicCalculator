@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AttrComparison(
+    val type: String,
     val field: String,
     @SerialName("compared_value") val comparedValue: Float,
     val display: String,
