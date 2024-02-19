@@ -49,10 +49,10 @@ val samplePreset = Preset(
     isAutoUpdate = false,
     attrComparisons = listOf(
         AttrComparison(
-            type = "AttackDelta",
-            field = "atk",
-            comparedValue = 500.0f,
-            display = "500",
+            type = "SpeedDelta",
+            field = "spd",
+            comparedValue = 134.0f,
+            display = "134",
             percent = false,
             comparisonOperator = ComparisonOperator.GREATER_THAN,
         ),
