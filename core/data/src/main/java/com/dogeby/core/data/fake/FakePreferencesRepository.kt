@@ -83,6 +83,22 @@ class FakePreferencesRepository : PreferencesRepository {
         }
 
     override suspend fun setFilteredData(
+        filteredRarities: Set<Int>,
+        filteredPathIds: Set<String>,
+        filteredElementIds: Set<String>,
+    ): Result<Unit> = runCatching {
+        presetListPreferencesDataFlow.run {
+            tryEmit(
+                first().copy(
+                    filteredRarities = filteredRarities,
+                    filteredPathIds = filteredPathIds,
+                    filteredElementIds = filteredElementIds,
+                ),
+            )
+        }
+    }
+
+    override suspend fun setPresetListPreferencesData(
         presetListPreferencesData: PresetListPreferencesData,
     ): Result<Unit> = runCatching {
         presetListPreferencesDataFlow.tryEmit(presetListPreferencesData)

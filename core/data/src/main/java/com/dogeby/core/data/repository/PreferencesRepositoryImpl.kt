@@ -55,8 +55,20 @@ class PreferencesRepositoryImpl @Inject constructor(
         presetListPreferencesDataSource.setSortField(characterSortField)
 
     override suspend fun setFilteredData(
+        filteredRarities: Set<Int>,
+        filteredPathIds: Set<String>,
+        filteredElementIds: Set<String>,
+    ): Result<Unit> = presetListPreferencesDataSource.setFilteredData(
+        filteredRarities = filteredRarities,
+        filteredPathIds = filteredPathIds,
+        filteredElementIds = filteredElementIds,
+    )
+
+    override suspend fun setPresetListPreferencesData(
         presetListPreferencesData: PresetListPreferencesData,
-    ): Result<Unit> = presetListPreferencesDataSource.setFilteredData(presetListPreferencesData)
+    ): Result<Unit> = presetListPreferencesDataSource.setPresetListPreferencesData(
+        presetListPreferencesData = presetListPreferencesData,
+    )
 
     override suspend fun clearFilteredData(): Result<Unit> =
         presetListPreferencesDataSource.clearFilteredData()

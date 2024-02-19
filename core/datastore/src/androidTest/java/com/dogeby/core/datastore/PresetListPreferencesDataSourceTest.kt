@@ -43,7 +43,7 @@ class PresetListPreferencesDataSourceTest {
             filteredElementIds = setOf("Fire"),
             sortField = CharacterSortField.LATEST_RELEASED,
         )
-        presetListPreferencesDataSource.setFilteredData(inputFilteredData)
+        presetListPreferencesDataSource.setPresetListPreferencesData(inputFilteredData)
 
         Assert.assertEquals(
             inputFilteredData,

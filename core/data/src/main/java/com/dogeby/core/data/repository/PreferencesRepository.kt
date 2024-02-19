@@ -32,7 +32,15 @@ interface PreferencesRepository {
 
     suspend fun setSortField(characterSortField: CharacterSortField): Result<Unit>
 
-    suspend fun setFilteredData(presetListPreferencesData: PresetListPreferencesData): Result<Unit>
+    suspend fun setFilteredData(
+        filteredRarities: Set<Int>,
+        filteredPathIds: Set<String>,
+        filteredElementIds: Set<String>,
+    ): Result<Unit>
+
+    suspend fun setPresetListPreferencesData(
+        presetListPreferencesData: PresetListPreferencesData,
+    ): Result<Unit>
 
     suspend fun clearFilteredData(): Result<Unit>
 }
