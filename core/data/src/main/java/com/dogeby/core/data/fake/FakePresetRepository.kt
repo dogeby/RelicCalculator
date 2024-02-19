@@ -15,7 +15,10 @@ import org.jetbrains.annotations.TestOnly
 class FakePresetRepository : PresetRepository {
 
     private val presetsFlow: MutableSharedFlow<List<Preset>> =
-        MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+        MutableSharedFlow<List<Preset>>(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+            .apply {
+                tryEmit(emptyList())
+            }
 
     private val defaultPresetDataInServerFlow: MutableSharedFlow<PresetData> =
         MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
