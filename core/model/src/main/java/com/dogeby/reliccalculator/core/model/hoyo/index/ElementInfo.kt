@@ -1,6 +1,7 @@
 package com.dogeby.reliccalculator.core.model.hoyo.index
 
 import kotlinx.serialization.Serializable
+import org.jetbrains.annotations.TestOnly
 
 @Serializable
 data class ElementInfo(
@@ -8,4 +9,12 @@ data class ElementInfo(
     val name: String,
     val color: String,
     val icon: String,
+)
+
+@TestOnly
+val sampleElementInfo = ElementInfo(
+    id = "Ice",
+    name = "얼음",
+    color = "#F84F36",
+    icon = "icon/element/Ice.png",
 )
