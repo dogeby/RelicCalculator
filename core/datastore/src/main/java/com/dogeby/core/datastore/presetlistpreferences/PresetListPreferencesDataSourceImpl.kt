@@ -63,18 +63,31 @@ class PresetListPreferencesDataSourceImpl @Inject constructor(
         }
 
     override suspend fun setFilteredData(
-        presetListPreferencesData: PresetListPreferencesData,
+        filteredRarities: Set<Int>,
+        filteredPathIds: Set<String>,
+        filteredElementIds: Set<String>,
     ): Result<Unit> = runCatching {
         presetListDataStore.updateData {
             it.copy {
-                filteredRarities.clear()
-                filteredRarities.addAll(presetListPreferencesData.filteredRarities)
-                filteredPathIds.clear()
-                filteredPathIds.addAll(presetListPreferencesData.filteredPathIds)
-                filteredElementIds.clear()
-                filteredElementIds.addAll(presetListPreferencesData.filteredElementIds)
+                this.filteredRarities.clear()
+                this.filteredRarities.addAll(filteredRarities)
+                this.filteredPathIds.clear()
+                this.filteredPathIds.addAll(filteredPathIds)
+                this.filteredElementIds.clear()
+                this.filteredElementIds.addAll(filteredElementIds)
             }
         }
+    }
+
+    override suspend fun setPresetListPreferencesData(
+        presetListPreferencesData: PresetListPreferencesData,
+    ): Result<Unit> = runCatching {
+        setFilteredData(
+            filteredRarities = presetListPreferencesData.filteredRarities,
+            filteredPathIds = presetListPreferencesData.filteredPathIds,
+            filteredElementIds = presetListPreferencesData.filteredElementIds,
+        )
+        setSortField(presetListPreferencesData.sortField)
     }
 
     override suspend fun clearFilteredData(): Result<Unit> = runCatching {

@@ -6,11 +6,13 @@ import com.dogeby.reliccalculator.core.model.preferences.AppPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
 import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.UpdateChecksData
+import com.dogeby.reliccalculator.core.model.preferences.samplePresetListPreferencesData
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import org.jetbrains.annotations.TestOnly
 
@@ -18,13 +20,33 @@ import org.jetbrains.annotations.TestOnly
 class FakePreferencesRepository : PreferencesRepository {
 
     private val updateChecksDataFlow: MutableSharedFlow<UpdateChecksData> =
-        MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+        MutableSharedFlow<UpdateChecksData>(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST,
+        ).apply {
+            tryEmit(
+                UpdateChecksData(
+                    defaultPresetLastCheckDate = Clock.System.now(),
+                    defaultPresetCheckIntervalSecond = 86_400,
+                ),
+            )
+        }
 
     private val appPreferencesDataFlow: MutableSharedFlow<AppPreferencesData> =
-        MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+        MutableSharedFlow<AppPreferencesData>(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST,
+        ).apply {
+            tryEmit(AppPreferencesData(GameTextLanguage.EN))
+        }
 
     private val presetListPreferencesDataFlow: MutableSharedFlow<PresetListPreferencesData> =
-        MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+        MutableSharedFlow<PresetListPreferencesData>(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST,
+        ).apply {
+            tryEmit(samplePresetListPreferencesData)
+        }
 
     override fun getUpdateChecksData(): Flow<UpdateChecksData> = updateChecksDataFlow
 
@@ -83,6 +105,22 @@ class FakePreferencesRepository : PreferencesRepository {
         }
 
     override suspend fun setFilteredData(
+        filteredRarities: Set<Int>,
+        filteredPathIds: Set<String>,
+        filteredElementIds: Set<String>,
+    ): Result<Unit> = runCatching {
+        presetListPreferencesDataFlow.run {
+            tryEmit(
+                first().copy(
+                    filteredRarities = filteredRarities,
+                    filteredPathIds = filteredPathIds,
+                    filteredElementIds = filteredElementIds,
+                ),
+            )
+        }
+    }
+
+    override suspend fun setPresetListPreferencesData(
         presetListPreferencesData: PresetListPreferencesData,
     ): Result<Unit> = runCatching {
         presetListPreferencesDataFlow.tryEmit(presetListPreferencesData)

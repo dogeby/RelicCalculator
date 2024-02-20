@@ -15,7 +15,10 @@ import org.jetbrains.annotations.TestOnly
 class FakePresetRepository : PresetRepository {
 
     private val presetsFlow: MutableSharedFlow<List<Preset>> =
-        MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+        MutableSharedFlow<List<Preset>>(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+            .apply {
+                tryEmit(emptyList())
+            }
 
     private val defaultPresetDataInServerFlow: MutableSharedFlow<PresetData> =
         MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
@@ -42,7 +45,7 @@ class FakePresetRepository : PresetRepository {
     override suspend fun insertPresets(presets: List<Preset>): Result<List<Long>> = runCatching {
         val presetsInFlow = presetsFlow.first()
         val newPresets = presets.filter { preset ->
-            presetsInFlow.any { it.characterId != preset.characterId }
+            presetsInFlow.any { it.characterId == preset.characterId }.not()
         }.distinctBy { it.characterId }
 
         presetsFlow.tryEmit(presetsInFlow + newPresets)
@@ -52,7 +55,7 @@ class FakePresetRepository : PresetRepository {
     override suspend fun updatePresets(presets: List<Preset>): Result<Int> = runCatching {
         val presetsInFlow = presetsFlow.first()
         val containedPresets = presets.filter { preset ->
-            presetsInFlow.any { it.characterId == preset.characterId }
+            presetsInFlow.any { it.characterId == preset.characterId }.not()
         }.associateBy { it.characterId }
 
         var updatedCount = 0
