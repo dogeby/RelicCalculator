@@ -10,7 +10,6 @@ import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfoWithDetails
 import com.dogeby.reliccalculator.core.model.hoyo.index.PropertyInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.RelicSetInfo
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
-import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesData
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.Preset
 import javax.inject.Inject
@@ -27,7 +26,10 @@ class GetPresetsWithDetailsUseCase @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     operator fun invoke(
-        listPreferencesData: PresetListPreferencesData,
+        filteredRarities: Set<Int>,
+        filteredPathIds: Set<String>,
+        filteredElementIds: Set<String>,
+        sortField: CharacterSortField,
     ): Flow<List<PresetWithDetails>> {
         return combine(
             gameRepository.charactersInfoWithDetails,
@@ -35,9 +37,9 @@ class GetPresetsWithDetailsUseCase @Inject constructor(
             gameRepository.propertiesInfo,
         ) { charactersInfoWithDetails, relicSetsInfo, propertiesInfo ->
             val isMatchingPreferences: (CharacterInfoWithDetails) -> Boolean = { details ->
-                details.characterInfo.rarity.isMatching(listPreferencesData.filteredRarities) &&
-                    details.pathInfo.id.isMatching(listPreferencesData.filteredPathIds) &&
-                    details.elementInfo.id.isMatching(listPreferencesData.filteredElementIds)
+                details.characterInfo.rarity.isMatching(filteredRarities) &&
+                    details.pathInfo.id.isMatching(filteredPathIds) &&
+                    details.elementInfo.id.isMatching(filteredElementIds)
             }
 
             val filteredCharactersInfoWithDetails = charactersInfoWithDetails
@@ -60,7 +62,7 @@ class GetPresetsWithDetailsUseCase @Inject constructor(
                     propertiesInfo = characterFilterResults.properties,
                 )
                 .map {
-                    it.sortedBy(listPreferencesData.sortField)
+                    it.sortedBy(sortField)
                 }
         }
     }
