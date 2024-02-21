@@ -42,19 +42,20 @@ class PreferencesRepositoryImpl @Inject constructor(
     override suspend fun setGameTextLanguage(lang: GameTextLanguage): Result<Unit> =
         appPreferencesDataSource.setGameTextLanguage(lang)
 
-    override suspend fun setFilteredRarities(rarities: Set<Int>): Result<Unit> =
+    override suspend fun setPresetListFilteredRarities(rarities: Set<Int>): Result<Unit> =
         presetListPreferencesDataSource.setFilteredRarities(rarities)
 
-    override suspend fun setFilteredPathIds(ids: Set<String>): Result<Unit> =
+    override suspend fun setPresetListFilteredPathIds(ids: Set<String>): Result<Unit> =
         presetListPreferencesDataSource.setFilteredPathIds(ids)
 
-    override suspend fun setFilteredElementIds(ids: Set<String>): Result<Unit> =
+    override suspend fun setPresetListFilteredElementIds(ids: Set<String>): Result<Unit> =
         presetListPreferencesDataSource.setFilteredElementIds(ids)
 
-    override suspend fun setSortField(characterSortField: CharacterSortField): Result<Unit> =
-        presetListPreferencesDataSource.setSortField(characterSortField)
+    override suspend fun setPresetListSortField(
+        characterSortField: CharacterSortField,
+    ): Result<Unit> = presetListPreferencesDataSource.setSortField(characterSortField)
 
-    override suspend fun setFilteredData(
+    override suspend fun setPresetListFilteredData(
         filteredRarities: Set<Int>,
         filteredPathIds: Set<String>,
         filteredElementIds: Set<String>,

@@ -123,7 +123,7 @@ class GetPresetsWithDetailsUseCaseTest {
         )
 
         preferencesRepository.clearFilteredData()
-        preferencesRepository.setFilteredElementIds(setOf(""))
+        preferencesRepository.setPresetListFilteredElementIds(setOf(""))
         val testElementPreferences = preferencesRepository.getPresetListPreferencesData().first()
 
         Assert.assertEquals(
@@ -137,7 +137,7 @@ class GetPresetsWithDetailsUseCaseTest {
         )
 
         preferencesRepository.clearFilteredData()
-        preferencesRepository.setFilteredRarities(setOf(4))
+        preferencesRepository.setPresetListFilteredRarities(setOf(4))
         val testRaritiesPreferences = preferencesRepository.getPresetListPreferencesData().first()
 
         Assert.assertEquals(

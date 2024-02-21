@@ -24,15 +24,15 @@ interface PreferencesRepository {
 
     suspend fun setGameTextLanguage(lang: GameTextLanguage): Result<Unit>
 
-    suspend fun setFilteredRarities(rarities: Set<Int>): Result<Unit>
+    suspend fun setPresetListFilteredRarities(rarities: Set<Int>): Result<Unit>
 
-    suspend fun setFilteredPathIds(ids: Set<String>): Result<Unit>
+    suspend fun setPresetListFilteredPathIds(ids: Set<String>): Result<Unit>
 
-    suspend fun setFilteredElementIds(ids: Set<String>): Result<Unit>
+    suspend fun setPresetListFilteredElementIds(ids: Set<String>): Result<Unit>
 
-    suspend fun setSortField(characterSortField: CharacterSortField): Result<Unit>
+    suspend fun setPresetListSortField(characterSortField: CharacterSortField): Result<Unit>
 
-    suspend fun setFilteredData(
+    suspend fun setPresetListFilteredData(
         filteredRarities: Set<Int>,
         filteredPathIds: Set<String>,
         filteredElementIds: Set<String>,
