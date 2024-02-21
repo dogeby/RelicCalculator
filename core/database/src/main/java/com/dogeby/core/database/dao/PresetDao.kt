@@ -19,6 +19,12 @@ interface PresetDao {
     @Update
     suspend fun updatePresets(presets: List<PresetEntity>): Int
 
+    @Query("UPDATE presets SET is_auto_update = (:isAutoUpdate) WHERE character_id in (:ids)")
+    suspend fun updatePresetsAutoUpdate(
+        ids: Set<String>,
+        isAutoUpdate: Boolean,
+    ): Int
+
     @Upsert
     suspend fun upsertPresets(presets: List<PresetEntity>): List<Long>
 
