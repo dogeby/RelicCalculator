@@ -48,7 +48,6 @@ class GetPresetsWithDetailsUseCaseTest {
         getPresetsWithDetailsUseCase = GetPresetsWithDetailsUseCase(
             presetRepository = presetRepository,
             gameRepository = gameRepository,
-            preferencesRepository = preferencesRepository,
         )
     }
 
@@ -92,7 +91,9 @@ class GetPresetsWithDetailsUseCaseTest {
 
         Assert.assertEquals(
             expectedPresetsWithDetails,
-            getPresetsWithDetailsUseCase().first().first(),
+            getPresetsWithDetailsUseCase(
+                preferencesRepository.getPresetListPreferencesData().first(),
+            ).first().first(),
         )
     }
 
@@ -108,21 +109,27 @@ class GetPresetsWithDetailsUseCaseTest {
 
         Assert.assertEquals(
             emptyList<PresetWithDetails>(),
-            getPresetsWithDetailsUseCase().first(),
+            getPresetsWithDetailsUseCase(
+                preferencesRepository.getPresetListPreferencesData().first(),
+            ).first(),
         )
 
         preferencesRepository.clearFilteredData()
         preferencesRepository.setFilteredElementIds(setOf(""))
         Assert.assertEquals(
             emptyList<PresetWithDetails>(),
-            getPresetsWithDetailsUseCase().first(),
+            getPresetsWithDetailsUseCase(
+                preferencesRepository.getPresetListPreferencesData().first(),
+            ).first(),
         )
 
         preferencesRepository.clearFilteredData()
         preferencesRepository.setFilteredRarities(setOf(4))
         Assert.assertEquals(
             emptyList<PresetWithDetails>(),
-            getPresetsWithDetailsUseCase().first(),
+            getPresetsWithDetailsUseCase(
+                preferencesRepository.getPresetListPreferencesData().first(),
+            ).first(),
         )
     }
 
@@ -149,7 +156,9 @@ class GetPresetsWithDetailsUseCaseTest {
 
         Assert.assertEquals(
             ids.sortedBy { it },
-            getPresetsWithDetailsUseCase().first().map { it.characterId },
+            getPresetsWithDetailsUseCase(
+                preferencesRepository.getPresetListPreferencesData().first(),
+            ).first().map { it.characterId },
         )
     }
 
@@ -176,7 +185,9 @@ class GetPresetsWithDetailsUseCaseTest {
 
         Assert.assertEquals(
             listOf("5", "4", "3", "2", "8001"),
-            getPresetsWithDetailsUseCase().first().map { it.characterId },
+            getPresetsWithDetailsUseCase(
+                preferencesRepository.getPresetListPreferencesData().first(),
+            ).first().map { it.characterId },
         )
     }
 
@@ -203,7 +214,9 @@ class GetPresetsWithDetailsUseCaseTest {
 
         Assert.assertEquals(
             listOf("8001", "8003", "2", "4", "5"),
-            getPresetsWithDetailsUseCase().first().map { it.characterId },
+            getPresetsWithDetailsUseCase(
+                preferencesRepository.getPresetListPreferencesData().first(),
+            ).first().map { it.characterId },
         )
     }
 }
