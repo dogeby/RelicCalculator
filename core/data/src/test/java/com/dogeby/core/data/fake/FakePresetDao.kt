@@ -24,6 +24,18 @@ class FakePresetDao : PresetDao {
             .count()
     }
 
+    override suspend fun updatePresetsAutoUpdate(
+        ids: Set<String>,
+        isAutoUpdate: Boolean,
+    ): Int {
+        return tables.values.mapNotNull {
+            if (it.characterId !in ids) return@mapNotNull null
+            it.copy(isAutoUpdate = isAutoUpdate)
+        }.run {
+            updatePresets(this)
+        }
+    }
+
     override suspend fun upsertPresets(presets: List<PresetEntity>): List<Long> {
         return presets.map {
             if (tables.put(it.characterId, it) == null) 1 else -1

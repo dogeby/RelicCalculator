@@ -1,7 +1,6 @@
 package com.dogeby.reliccalculator.core.domain.preset
 
 import com.dogeby.core.data.repository.GameRepository
-import com.dogeby.core.data.repository.PreferencesRepository
 import com.dogeby.core.data.repository.PresetRepository
 import com.dogeby.reliccalculator.core.domain.model.AffixWeightWithInfo
 import com.dogeby.reliccalculator.core.domain.model.AttrComparisonWithInfo
@@ -11,7 +10,6 @@ import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfoWithDetails
 import com.dogeby.reliccalculator.core.model.hoyo.index.PropertyInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.RelicSetInfo
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
-import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesData
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.Preset
 import javax.inject.Inject
@@ -24,21 +22,24 @@ import kotlinx.coroutines.flow.map
 class GetPresetsWithDetailsUseCase @Inject constructor(
     private val presetRepository: PresetRepository,
     private val gameRepository: GameRepository,
-    private val preferencesRepository: PreferencesRepository,
 ) {
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    operator fun invoke(): Flow<List<PresetWithDetails>> {
+    operator fun invoke(
+        filteredRarities: Set<Int>,
+        filteredPathIds: Set<String>,
+        filteredElementIds: Set<String>,
+        sortField: CharacterSortField,
+    ): Flow<List<PresetWithDetails>> {
         return combine(
             gameRepository.charactersInfoWithDetails,
             gameRepository.relicSetsInfo,
             gameRepository.propertiesInfo,
-            preferencesRepository.getPresetListPreferencesData(),
-        ) { charactersInfoWithDetails, relicSetsInfo, propertiesInfo, preferencesData ->
+        ) { charactersInfoWithDetails, relicSetsInfo, propertiesInfo ->
             val isMatchingPreferences: (CharacterInfoWithDetails) -> Boolean = { details ->
-                details.characterInfo.rarity.isMatching(preferencesData.filteredRarities) &&
-                    details.pathInfo.id.isMatching(preferencesData.filteredPathIds) &&
-                    details.elementInfo.id.isMatching(preferencesData.filteredElementIds)
+                details.characterInfo.rarity.isMatching(filteredRarities) &&
+                    details.pathInfo.id.isMatching(filteredPathIds) &&
+                    details.elementInfo.id.isMatching(filteredElementIds)
             }
 
             val filteredCharactersInfoWithDetails = charactersInfoWithDetails
@@ -49,7 +50,6 @@ class GetPresetsWithDetailsUseCase @Inject constructor(
                 filteredCharacters = filteredCharactersInfoWithDetails,
                 relicSets = relicSetsInfo,
                 properties = propertiesInfo,
-                preferencesData = preferencesData,
             )
         }.flatMapLatest { characterFilterResults ->
             val filteredPreset = presetRepository
@@ -62,7 +62,7 @@ class GetPresetsWithDetailsUseCase @Inject constructor(
                     propertiesInfo = characterFilterResults.properties,
                 )
                 .map {
-                    it.sortedBy(characterFilterResults.preferencesData.sortField)
+                    it.sortedBy(sortField)
                 }
         }
     }
@@ -71,7 +71,6 @@ class GetPresetsWithDetailsUseCase @Inject constructor(
         val filteredCharacters: Map<String, CharacterInfoWithDetails>,
         val relicSets: Map<String, RelicSetInfo>,
         val properties: Map<String, PropertyInfo>,
-        val preferencesData: PresetListPreferencesData,
     )
 
     private fun <T> T.isMatching(list: Set<T>) = list.isEmpty() or (this in list)

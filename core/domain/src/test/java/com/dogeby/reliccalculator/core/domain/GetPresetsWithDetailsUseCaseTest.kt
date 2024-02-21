@@ -48,7 +48,6 @@ class GetPresetsWithDetailsUseCaseTest {
         getPresetsWithDetailsUseCase = GetPresetsWithDetailsUseCase(
             presetRepository = presetRepository,
             gameRepository = gameRepository,
-            preferencesRepository = preferencesRepository,
         )
     }
 
@@ -57,6 +56,7 @@ class GetPresetsWithDetailsUseCaseTest {
         presetRepository.insertPresets(listOf(samplePreset))
         insertSampleInfoData()
         preferencesRepository.setPresetListPreferencesData(samplePresetListPreferencesData)
+        val listPreferences = preferencesRepository.getPresetListPreferencesData().first()
 
         val mainAffixWeight = samplePreset.pieceMainAffixWeights[RelicPiece.FOOT]?.first()
             ?: throw NullPointerException()
@@ -92,7 +92,12 @@ class GetPresetsWithDetailsUseCaseTest {
 
         Assert.assertEquals(
             expectedPresetsWithDetails,
-            getPresetsWithDetailsUseCase().first().first(),
+            getPresetsWithDetailsUseCase(
+                filteredRarities = listPreferences.filteredRarities,
+                filteredPathIds = listPreferences.filteredPathIds,
+                filteredElementIds = listPreferences.filteredElementIds,
+                sortField = listPreferences.sortField,
+            ).first().first(),
         )
     }
 
@@ -105,24 +110,44 @@ class GetPresetsWithDetailsUseCaseTest {
                 filteredPathIds = setOf(""),
             ),
         )
+        val testPathPreferences = preferencesRepository.getPresetListPreferencesData().first()
 
         Assert.assertEquals(
             emptyList<PresetWithDetails>(),
-            getPresetsWithDetailsUseCase().first(),
+            getPresetsWithDetailsUseCase(
+                filteredRarities = testPathPreferences.filteredRarities,
+                filteredPathIds = testPathPreferences.filteredPathIds,
+                filteredElementIds = testPathPreferences.filteredElementIds,
+                sortField = testPathPreferences.sortField,
+            ).first(),
         )
 
         preferencesRepository.clearFilteredData()
-        preferencesRepository.setFilteredElementIds(setOf(""))
+        preferencesRepository.setPresetListFilteredElementIds(setOf(""))
+        val testElementPreferences = preferencesRepository.getPresetListPreferencesData().first()
+
         Assert.assertEquals(
             emptyList<PresetWithDetails>(),
-            getPresetsWithDetailsUseCase().first(),
+            getPresetsWithDetailsUseCase(
+                filteredRarities = testElementPreferences.filteredRarities,
+                filteredPathIds = testElementPreferences.filteredPathIds,
+                filteredElementIds = testElementPreferences.filteredElementIds,
+                sortField = testElementPreferences.sortField,
+            ).first(),
         )
 
         preferencesRepository.clearFilteredData()
-        preferencesRepository.setFilteredRarities(setOf(4))
+        preferencesRepository.setPresetListFilteredRarities(setOf(4))
+        val testRaritiesPreferences = preferencesRepository.getPresetListPreferencesData().first()
+
         Assert.assertEquals(
             emptyList<PresetWithDetails>(),
-            getPresetsWithDetailsUseCase().first(),
+            getPresetsWithDetailsUseCase(
+                filteredRarities = testRaritiesPreferences.filteredRarities,
+                filteredPathIds = testRaritiesPreferences.filteredPathIds,
+                filteredElementIds = testRaritiesPreferences.filteredElementIds,
+                sortField = testRaritiesPreferences.sortField,
+            ).first(),
         )
     }
 
@@ -146,10 +171,16 @@ class GetPresetsWithDetailsUseCaseTest {
                 sortField = CharacterSortField.NAME,
             ),
         )
+        val listPreferences = preferencesRepository.getPresetListPreferencesData().first()
 
         Assert.assertEquals(
             ids.sortedBy { it },
-            getPresetsWithDetailsUseCase().first().map { it.characterId },
+            getPresetsWithDetailsUseCase(
+                filteredRarities = listPreferences.filteredRarities,
+                filteredPathIds = listPreferences.filteredPathIds,
+                filteredElementIds = listPreferences.filteredElementIds,
+                sortField = listPreferences.sortField,
+            ).first().map { it.characterId },
         )
     }
 
@@ -173,10 +204,16 @@ class GetPresetsWithDetailsUseCaseTest {
                 sortField = CharacterSortField.LATEST_RELEASED,
             ),
         )
+        val listPreferences = preferencesRepository.getPresetListPreferencesData().first()
 
         Assert.assertEquals(
             listOf("5", "4", "3", "2", "8001"),
-            getPresetsWithDetailsUseCase().first().map { it.characterId },
+            getPresetsWithDetailsUseCase(
+                filteredRarities = listPreferences.filteredRarities,
+                filteredPathIds = listPreferences.filteredPathIds,
+                filteredElementIds = listPreferences.filteredElementIds,
+                sortField = listPreferences.sortField,
+            ).first().map { it.characterId },
         )
     }
 
@@ -200,10 +237,16 @@ class GetPresetsWithDetailsUseCaseTest {
                 sortField = CharacterSortField.EARLIEST_RELEASED,
             ),
         )
+        val listPreferences = preferencesRepository.getPresetListPreferencesData().first()
 
         Assert.assertEquals(
             listOf("8001", "8003", "2", "4", "5"),
-            getPresetsWithDetailsUseCase().first().map { it.characterId },
+            getPresetsWithDetailsUseCase(
+                filteredRarities = listPreferences.filteredRarities,
+                filteredPathIds = listPreferences.filteredPathIds,
+                filteredElementIds = listPreferences.filteredElementIds,
+                sortField = listPreferences.sortField,
+            ).first().map { it.characterId },
         )
     }
 }

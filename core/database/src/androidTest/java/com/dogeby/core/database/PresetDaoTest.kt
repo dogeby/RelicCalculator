@@ -57,6 +57,23 @@ class PresetDaoTest {
     }
 
     @Test
+    fun test_presetDao_updatePresetsAutoUpdate_success() = runTest {
+        val ids = (1..5).map { "$it" }
+        presetDao.insertOrIgnorePresets(
+            ids.map {
+                samplePreset.copy(
+                    characterId = it,
+                    isAutoUpdate = false,
+                )
+            },
+        )
+        val updatedIds = ids.take(3).toSet()
+        presetDao.updatePresetsAutoUpdate(updatedIds, true)
+
+        Assert.assertTrue(presetDao.getPresets(updatedIds).first().all { it.isAutoUpdate })
+    }
+
+    @Test
     fun test_presetDao_upsert_success() = runTest {
         val initialPresetsSize = 3
         val initialPresets = List(initialPresetsSize) { samplePreset.copy(characterId = "test$it") }

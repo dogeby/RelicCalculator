@@ -79,32 +79,36 @@ class FakePreferencesRepository : PreferencesRepository {
         }
     }
 
-    override suspend fun setFilteredRarities(rarities: Set<Int>): Result<Unit> = runCatching {
-        presetListPreferencesDataFlow.run {
-            tryEmit(first().copy(filteredRarities = rarities))
-        }
-    }
-
-    override suspend fun setFilteredPathIds(ids: Set<String>): Result<Unit> = runCatching {
-        presetListPreferencesDataFlow.run {
-            tryEmit(first().copy(filteredPathIds = ids))
-        }
-    }
-
-    override suspend fun setFilteredElementIds(ids: Set<String>): Result<Unit> = runCatching {
-        presetListPreferencesDataFlow.run {
-            tryEmit(first().copy(filteredElementIds = ids))
-        }
-    }
-
-    override suspend fun setSortField(characterSortField: CharacterSortField): Result<Unit> =
+    override suspend fun setPresetListFilteredRarities(rarities: Set<Int>): Result<Unit> =
         runCatching {
             presetListPreferencesDataFlow.run {
-                tryEmit(first().copy(sortField = characterSortField))
+                tryEmit(first().copy(filteredRarities = rarities))
             }
         }
 
-    override suspend fun setFilteredData(
+    override suspend fun setPresetListFilteredPathIds(ids: Set<String>): Result<Unit> =
+        runCatching {
+            presetListPreferencesDataFlow.run {
+                tryEmit(first().copy(filteredPathIds = ids))
+            }
+        }
+
+    override suspend fun setPresetListFilteredElementIds(ids: Set<String>): Result<Unit> =
+        runCatching {
+            presetListPreferencesDataFlow.run {
+                tryEmit(first().copy(filteredElementIds = ids))
+            }
+        }
+
+    override suspend fun setPresetListSortField(
+        characterSortField: CharacterSortField,
+    ): Result<Unit> = runCatching {
+        presetListPreferencesDataFlow.run {
+            tryEmit(first().copy(sortField = characterSortField))
+        }
+    }
+
+    override suspend fun setPresetListFilteredData(
         filteredRarities: Set<Int>,
         filteredPathIds: Set<String>,
         filteredElementIds: Set<String>,
