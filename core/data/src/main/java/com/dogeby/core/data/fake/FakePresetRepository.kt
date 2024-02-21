@@ -70,6 +70,16 @@ class FakePresetRepository : PresetRepository {
         updatedCount
     }
 
+    override suspend fun updatePresetsAutoUpdate(
+        ids: Set<String>,
+        isAutoUpdate: Boolean,
+    ): Result<Int> {
+        return presetsFlow.first().mapNotNull {
+            if (it.characterId !in ids) return@mapNotNull null
+            it.copy(isAutoUpdate = isAutoUpdate)
+        }.run { updatePresets(this) }
+    }
+
     override suspend fun upsertPresets(presets: List<Preset>): Result<List<Long>> {
         val updatedCount = updatePresets(presets)
         val insertRows = insertPresets(presets)

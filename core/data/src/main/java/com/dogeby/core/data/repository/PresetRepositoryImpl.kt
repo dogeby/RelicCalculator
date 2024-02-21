@@ -57,6 +57,13 @@ class PresetRepositoryImpl @Inject constructor(
         presetDao.updatePresets(presets.map(Preset::toPresetEntity))
     }
 
+    override suspend fun updatePresetsAutoUpdate(
+        ids: Set<String>,
+        isAutoUpdate: Boolean,
+    ): Result<Int> = runCatching {
+        presetDao.updatePresetsAutoUpdate(ids, isAutoUpdate)
+    }
+
     override suspend fun upsertPresets(presets: List<Preset>): Result<List<Long>> = runCatching {
         presetDao.upsertPresets(presets.map(Preset::toPresetEntity))
     }

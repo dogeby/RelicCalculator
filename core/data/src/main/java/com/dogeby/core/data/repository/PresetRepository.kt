@@ -19,6 +19,11 @@ interface PresetRepository {
 
     suspend fun updatePresets(presets: List<Preset>): Result<Int>
 
+    suspend fun updatePresetsAutoUpdate(
+        ids: Set<String>,
+        isAutoUpdate: Boolean,
+    ): Result<Int>
+
     suspend fun upsertPresets(presets: List<Preset>): Result<List<Long>>
 
     suspend fun deletePresets(presets: List<Preset>): Result<Int>
