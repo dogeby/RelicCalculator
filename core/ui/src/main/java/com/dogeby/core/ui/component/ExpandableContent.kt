@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.IntSize
 import com.dogeby.core.ui.theme.RelicCalculatorTheme
 
 @Composable
-fun ExpandableRow(
+fun ExpandableContent(
     modifier: Modifier = Modifier,
     onToggle: ((isExpanded: Boolean) -> Unit)? = null,
     content: @Composable AnimatedContentScope.(isExpanded: Boolean) -> Unit,
@@ -63,13 +63,13 @@ fun ExpandableRow(
 fun PreviewExpandableRow() {
     RelicCalculatorTheme {
         val list = List(5) { it.toString() }
-        ExpandableRow(
+        ExpandableContent(
             content = { isExpanded ->
                 if (isExpanded) {
                     Column {
                         list.forEach { Text(text = it) }
                     }
-                    return@ExpandableRow
+                    return@ExpandableContent
                 }
                 Text(text = list[0])
             },
