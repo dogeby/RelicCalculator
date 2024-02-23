@@ -36,6 +36,7 @@ fun HorizontalGameImageText(
     backgroundColor: Color = Color.Transparent,
     imageSize: Dp = 24.dp,
     imageContentScale: ContentScale = ContentScale.Fit,
+    imageColorFilter: ColorFilter? = null,
     textStyle: TextStyle = MaterialTheme.typography.labelLarge,
 ) {
     Surface(
@@ -56,7 +57,7 @@ fun HorizontalGameImageText(
                 src = src,
                 modifier = Modifier.size(size = imageSize),
                 contentScale = imageContentScale,
-                colorFilter = ColorFilter.tint(contentColorFor(backgroundColor)),
+                colorFilter = imageColorFilter,
             )
             Spacer(modifier = Modifier.width(4.dp))
             Text(
@@ -76,6 +77,7 @@ fun VerticalGameImageText(
     backgroundColor: Color = Color.Transparent,
     imageSize: Dp = 24.dp,
     imageContentScale: ContentScale = ContentScale.Fit,
+    imageColorFilter: ColorFilter? = null,
     textStyle: TextStyle = MaterialTheme.typography.labelLarge,
 ) {
     Surface(
@@ -91,7 +93,7 @@ fun VerticalGameImageText(
                 src = src,
                 modifier = Modifier.size(size = imageSize),
                 contentScale = imageContentScale,
-                colorFilter = ColorFilter.tint(contentColorFor(backgroundColor)),
+                colorFilter = imageColorFilter,
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
@@ -111,6 +113,7 @@ fun VerticalAffixImageText(
     backgroundColor: Color = Color.Transparent,
     imageSize: Dp = 24.dp,
     imageContentScale: ContentScale = ContentScale.Fit,
+    imageColorFilter: ColorFilter? = null,
     textStyle: TextStyle = MaterialTheme.typography.labelLarge,
 ) {
     Surface(
@@ -126,7 +129,7 @@ fun VerticalAffixImageText(
                 type = type,
                 modifier = Modifier.size(size = imageSize),
                 contentScale = imageContentScale,
-                colorFilter = ColorFilter.tint(contentColorFor(backgroundColor)),
+                colorFilter = imageColorFilter,
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
@@ -141,10 +144,12 @@ fun VerticalAffixImageText(
 @Composable
 fun PreviewHorizontalGameImageText() {
     RelicCalculatorTheme {
+        val backgroundColor = MaterialTheme.colorScheme.secondaryContainer
         HorizontalGameImageText(
             src = "icon/property/IconSpeed.png",
             text = ">= 100",
-            backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+            backgroundColor = backgroundColor,
+            imageColorFilter = ColorFilter.tint(contentColorFor(backgroundColor)),
         )
     }
 }
@@ -153,10 +158,12 @@ fun PreviewHorizontalGameImageText() {
 @Composable
 fun PreviewVerticalGameImageText() {
     RelicCalculatorTheme {
+        val backgroundColor = MaterialTheme.colorScheme.tertiaryContainer
         VerticalGameImageText(
             src = "icon/property/IconSpeed.png",
             text = "100",
-            backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
+            backgroundColor = backgroundColor,
+            imageColorFilter = ColorFilter.tint(contentColorFor(backgroundColor)),
         )
     }
 }
@@ -165,10 +172,12 @@ fun PreviewVerticalGameImageText() {
 @Composable
 fun PreviewVerticalAffixImageText() {
     RelicCalculatorTheme {
+        val backgroundColor = MaterialTheme.colorScheme.tertiaryContainer
         VerticalAffixImageText(
             type = "SpeedDelta",
             text = "5.0",
-            backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
+            backgroundColor = backgroundColor,
+            imageColorFilter = ColorFilter.tint(contentColorFor(backgroundColor)),
         )
     }
 }
