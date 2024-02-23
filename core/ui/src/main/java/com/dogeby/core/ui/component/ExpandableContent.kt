@@ -8,8 +8,8 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,21 +23,13 @@ import com.dogeby.core.ui.theme.RelicCalculatorTheme
 
 @Composable
 fun ExpandableContent(
+    isExpanded: Boolean,
     modifier: Modifier = Modifier,
-    onToggle: ((isExpanded: Boolean) -> Unit)? = null,
-    content: @Composable AnimatedContentScope.(isExpanded: Boolean) -> Unit,
+    content: @Composable AnimatedContentScope.(targetState: Boolean) -> Unit,
 ) {
-    var isExpanded by remember {
-        mutableStateOf(false)
-    }
     AnimatedContent(
         targetState = isExpanded,
-        modifier = modifier.clickable {
-            isExpanded = !isExpanded
-            if (onToggle != null) {
-                onToggle(isExpanded)
-            }
-        },
+        modifier = modifier,
         transitionSpec = {
             fadeIn(animationSpec = tween(150, 150)) togetherWith
                 fadeOut(animationSpec = tween(150)) using
@@ -63,16 +55,25 @@ fun ExpandableContent(
 fun PreviewExpandableRow() {
     RelicCalculatorTheme {
         val list = List(5) { it.toString() }
-        ExpandableContent(
-            content = { isExpanded ->
-                if (isExpanded) {
-                    Column {
-                        list.forEach { Text(text = it) }
+        var isExpanded by remember {
+            mutableStateOf(false)
+        }
+        Column {
+            Button(onClick = { isExpanded = !isExpanded }) {
+                Text(text = "Button: $isExpanded")
+            }
+            ExpandableContent(
+                isExpanded = isExpanded,
+                content = { targetState ->
+                    if (targetState) {
+                        Column {
+                            list.forEach { Text(text = it) }
+                        }
+                        return@ExpandableContent
                     }
-                    return@ExpandableContent
-                }
-                Text(text = list[0])
-            },
-        )
+                    Text(text = list[0])
+                },
+            )
+        }
     }
 }
