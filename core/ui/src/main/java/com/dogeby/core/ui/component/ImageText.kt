@@ -142,7 +142,7 @@ fun VerticalAffixImageText(
 
 @Preview
 @Composable
-fun PreviewHorizontalGameImageText() {
+private fun PreviewHorizontalGameImageText() {
     RelicCalculatorTheme {
         val backgroundColor = MaterialTheme.colorScheme.secondaryContainer
         HorizontalGameImageText(
@@ -156,7 +156,7 @@ fun PreviewHorizontalGameImageText() {
 
 @Preview
 @Composable
-fun PreviewVerticalGameImageText() {
+private fun PreviewVerticalGameImageText() {
     RelicCalculatorTheme {
         val backgroundColor = MaterialTheme.colorScheme.tertiaryContainer
         VerticalGameImageText(
@@ -170,7 +170,7 @@ fun PreviewVerticalGameImageText() {
 
 @Preview
 @Composable
-fun PreviewVerticalAffixImageText() {
+private fun PreviewVerticalAffixImageText() {
     RelicCalculatorTheme {
         val backgroundColor = MaterialTheme.colorScheme.tertiaryContainer
         VerticalAffixImageText(

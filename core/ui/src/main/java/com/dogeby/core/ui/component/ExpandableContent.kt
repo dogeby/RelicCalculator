@@ -52,7 +52,7 @@ fun ExpandableContent(
 
 @Preview
 @Composable
-fun PreviewExpandableRow() {
+private fun PreviewExpandableRow() {
     RelicCalculatorTheme {
         val list = List(5) { it.toString() }
         var isExpanded by remember {

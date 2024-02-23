@@ -44,7 +44,7 @@ fun GameImageWithBackground(
 
 @Preview
 @Composable
-fun PreviewGameImageWithBackground() {
+private fun PreviewGameImageWithBackground() {
     RelicCalculatorTheme {
         GameImageWithBackground(
             src = "icon/relic/103.png",
