@@ -48,6 +48,9 @@ android {
 
 dependencies {
 
+    implementation(project(":core:model"))
+    implementation(project(":core:domain"))
+
     implementation(libs.core.ktx)
     implementation(platform(libs.compose.bom))
     implementation(libs.ui.tooling.preview)
