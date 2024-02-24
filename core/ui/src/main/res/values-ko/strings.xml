@@ -1,4 +1,5 @@
 <resources>
     <string name="edit">수정</string>
     <string name="default_preset_auto_update">기본 프리셋 자동 업데이트</string>
+    <string name="empty_list">목록이 비어 있습니다.</string>
 </resources>
