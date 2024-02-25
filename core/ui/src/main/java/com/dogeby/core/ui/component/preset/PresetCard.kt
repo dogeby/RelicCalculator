@@ -49,6 +49,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dogeby.core.ui.R
@@ -82,7 +83,7 @@ fun PresetCard(
     colors: CardColors = CardDefaults.cardColors(),
 ) {
     Card(
-        modifier = modifier,
+        modifier = modifier.size(360.dp, 416.dp),
         shape = shape,
         colors = colors,
     ) {
@@ -204,6 +205,11 @@ private fun RelicSetsAndAttrComparisonsRow(
             alignment = Alignment.CenterHorizontally,
         ),
     ) {
+        if (relicSets.isEmpty() and attrComparisons.isEmpty()) {
+            item {
+                Text(text = stringResource(id = R.string.empty_list))
+            }
+        }
         items(
             items = relicSets,
             key = { it.id },
@@ -237,8 +243,11 @@ private fun MainPieceAffixWeightsGrid(
     pieceAffixWeights: Map<RelicPiece, List<AffixWeightWithInfo>>,
     modifier: Modifier = Modifier,
 ) {
+    val isEmpty = pieceAffixWeights.isEmpty() or pieceAffixWeights.values.all { it.isEmpty() }
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
+        columns = GridCells.Fixed(
+            if (isEmpty) 1 else 2,
+        ),
         modifier = modifier.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(
             space = 8.dp,
@@ -249,6 +258,15 @@ private fun MainPieceAffixWeightsGrid(
             alignment = Alignment.CenterHorizontally,
         ),
     ) {
+        if (isEmpty) {
+            item {
+                Text(
+                    text = stringResource(id = R.string.empty_list),
+                    textAlign = TextAlign.Center,
+                )
+            }
+            return@LazyVerticalGrid
+        }
         items(
             items = pieceAffixWeights.toList(),
             key = { it.first },
@@ -376,6 +394,11 @@ private fun SubAffixWeightsWithInfoList(
             alignment = Alignment.CenterHorizontally,
         ),
     ) {
+        if (subAffixWeightsWithInfo.isEmpty()) {
+            item {
+                Text(text = stringResource(id = R.string.empty_list))
+            }
+        }
         items(
             items = subAffixWeightsWithInfo,
             key = { it.affixWeight.affixId },

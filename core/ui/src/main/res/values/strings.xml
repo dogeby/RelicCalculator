@@ -1,4 +1,5 @@
 <resources>
     <string name="edit">Edit</string>
     <string name="default_preset_auto_update">Default Preset Auto Update</string>
+    <string name="empty_list">The list is empty.</string>
 </resources>
