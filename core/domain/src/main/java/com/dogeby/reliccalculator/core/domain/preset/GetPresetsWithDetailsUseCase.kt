@@ -148,6 +148,11 @@ class GetPresetsWithDetailsUseCase @Inject constructor(
                     it.characterInfo.name
                 }
             }
+            CharacterSortField.NAME_DESC -> {
+                sortedByDescending {
+                    it.characterInfo.name
+                }
+            }
         }
     }
 

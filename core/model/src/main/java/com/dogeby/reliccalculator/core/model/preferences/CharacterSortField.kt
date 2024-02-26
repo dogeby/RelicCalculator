@@ -4,4 +4,5 @@ enum class CharacterSortField {
     ID_ASC,
     ID_DESC,
     NAME_ASC,
+    NAME_DESC,
 }
