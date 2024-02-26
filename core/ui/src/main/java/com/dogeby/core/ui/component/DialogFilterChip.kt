@@ -21,7 +21,7 @@ import com.dogeby.core.ui.theme.RelicCalculatorTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DialogFilterChip(
-    selected: () -> Boolean,
+    selected: Boolean,
     text: String,
     modifier: Modifier = Modifier,
     leadingIcon: @Composable (() -> Unit)? = null,
@@ -31,7 +31,7 @@ fun DialogFilterChip(
         mutableStateOf(false)
     }
     FilterChip(
-        selected = selected(),
+        selected = selected,
         onClick = { expanded = !expanded },
         label = { Text(text = text) },
         modifier = modifier,
@@ -58,7 +58,7 @@ fun DialogFilterChip(
 fun PreviewDialogFilterChip() {
     RelicCalculatorTheme {
         DialogFilterChip(
-            selected = { false },
+            selected = true ,
             text = "test",
             leadingIcon = {
                 Icon(imageVector = Icons.Default.FilterList, contentDescription = null)
