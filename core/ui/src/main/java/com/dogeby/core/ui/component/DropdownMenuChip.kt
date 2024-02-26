@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Sort
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.AssistChip
@@ -26,6 +27,7 @@ import com.dogeby.core.ui.theme.RelicCalculatorTheme
 fun DropdownMenuChip(
     text: String,
     modifier: Modifier = Modifier,
+    leadingIcon: @Composable (() -> Unit)? = null,
     dropdownMenuContent: @Composable ColumnScope.() -> Unit,
 ) {
     var expanded by remember {
@@ -39,6 +41,7 @@ fun DropdownMenuChip(
         AssistChip(
             onClick = { expanded = !expanded },
             label = { Text(text = text) },
+            leadingIcon = leadingIcon,
             trailingIcon = {
                 Icon(
                     imageVector = if (expanded) {
@@ -63,7 +66,15 @@ fun DropdownMenuChip(
 @Composable
 private fun PreviewDropdownMenuChip() {
     RelicCalculatorTheme {
-        DropdownMenuChip(text = "test") {
+        DropdownMenuChip(
+            text = "test",
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.Sort,
+                    contentDescription = null,
+                )
+            },
+        ) {
             List(3) {
                 DropdownMenuItem(
                     text = {
