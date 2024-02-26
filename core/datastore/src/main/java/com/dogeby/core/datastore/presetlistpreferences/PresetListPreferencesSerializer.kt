@@ -16,7 +16,7 @@ class PresetListPreferencesSerializer @Inject constructor() : Serializer<PresetL
     override val defaultValue: PresetListPreferences
         get() = PresetListPreferences.getDefaultInstance()
             .toBuilder()
-            .setSortField(CharacterSortField.LATEST_RELEASED.name)
+            .setSortField(CharacterSortField.ID_ASC.name)
             .build()
 
     override suspend fun readFrom(input: InputStream): PresetListPreferences {
