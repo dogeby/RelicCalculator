@@ -2,4 +2,7 @@
     <string name="edit">Edit</string>
     <string name="default_preset_auto_update">Default Preset Auto Update</string>
     <string name="empty_list">The list is empty.</string>
+    <string name="sort">Sort</string>
+    <string name="default_order">Default</string>
+    <string name="name_order">Name</string>
 </resources>
