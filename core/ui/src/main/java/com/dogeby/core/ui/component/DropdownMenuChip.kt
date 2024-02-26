@@ -24,7 +24,7 @@ import com.dogeby.core.ui.theme.RelicCalculatorTheme
 
 @Composable
 fun DropdownMenuChip(
-    label: String,
+    text: String,
     modifier: Modifier = Modifier,
     dropdownMenuContent: @Composable ColumnScope.() -> Unit,
 ) {
@@ -38,7 +38,7 @@ fun DropdownMenuChip(
     ) {
         AssistChip(
             onClick = { expanded = !expanded },
-            label = { Text(text = label) },
+            label = { Text(text = text) },
             trailingIcon = {
                 Icon(
                     imageVector = if (expanded) {
@@ -63,7 +63,7 @@ fun DropdownMenuChip(
 @Composable
 private fun PreviewDropdownMenuChip() {
     RelicCalculatorTheme {
-        DropdownMenuChip(label = "test") {
+        DropdownMenuChip(text = "test") {
             List(3) {
                 DropdownMenuItem(
                     text = {
