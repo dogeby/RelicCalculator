@@ -50,7 +50,7 @@ fun CharacterFilterChip(
     filteredRarities: Set<Int>,
     filteredPathIds: Set<String>,
     filteredElementIds: Set<String>,
-    onConfirm: (
+    onConfirmFilters: (
         selectedRarities: Set<Int>,
         selectedPathIds: Set<String>,
         selectedElementIds: Set<String>,
@@ -150,7 +150,7 @@ fun CharacterFilterChip(
                             selectedElementIds = emptySet()
                         },
                         onConfirmBtnClick = {
-                            onConfirm(
+                            onConfirmFilters(
                                 selectedRarities,
                                 selectedPathIds,
                                 selectedElementIds,
@@ -300,7 +300,7 @@ private fun PreviewCharacterFilterChip() {
             filteredRarities = setOf(5),
             filteredPathIds = setOf("0"),
             filteredElementIds = setOf("0"),
-            onConfirm = { _, _, _ -> },
+            onConfirmFilters = { _, _, _ -> },
         )
     }
 }
