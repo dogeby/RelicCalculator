@@ -27,9 +27,9 @@ import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
@@ -77,7 +77,7 @@ import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
 fun PresetCard(
     presetWithDetails: PresetWithDetails,
     onEditMenuItemClick: (id: String) -> Unit,
-    onAutoUpdateChanged: (Boolean) -> Unit,
+    onAutoUpdateChanged: (id: String, isAutoUpdate: Boolean) -> Unit,
     modifier: Modifier = Modifier,
     shape: Shape = CardDefaults.shape,
     colors: CardColors = CardDefaults.cardColors(),
@@ -90,6 +90,7 @@ fun PresetCard(
         Column {
             Surface {
                 CharacterListItem(
+                    characterId = presetWithDetails.characterId,
                     characterName = presetWithDetails.characterInfo.name,
                     characterIcon = presetWithDetails.characterInfo.icon,
                     isAutoUpdate = presetWithDetails.isAutoUpdate,
@@ -101,11 +102,11 @@ fun PresetCard(
                 relicSets = presetWithDetails.relicSets,
                 attrComparisons = presetWithDetails.attrComparisons,
             )
-            Divider(modifier = Modifier.padding(horizontal = 16.dp))
+            HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
             MainPieceAffixWeightsGrid(
                 pieceAffixWeights = presetWithDetails.pieceMainAffixWeightsWithInfo,
             )
-            Divider(modifier = Modifier.padding(horizontal = 16.dp))
+            HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
             SubAffixWeightsWithInfoList(
                 subAffixWeightsWithInfo = presetWithDetails.subAffixWeightsWithInfo,
             )
@@ -115,11 +116,12 @@ fun PresetCard(
 
 @Composable
 private fun CharacterListItem(
+    characterId: String,
     characterName: String,
     characterIcon: String,
     isAutoUpdate: Boolean,
     onEditMenuItemClick: () -> Unit,
-    onAutoUpdateChanged: (Boolean) -> Unit,
+    onAutoUpdateChanged: (id: String, isAutoUpdate: Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var expanded by remember {
@@ -175,11 +177,15 @@ private fun CharacterListItem(
                     text = {
                         Text(text = stringResource(id = R.string.default_preset_auto_update))
                     },
-                    onClick = { onAutoUpdateChanged(!isAutoUpdate) },
+                    onClick = {
+                        onAutoUpdateChanged(characterId, !isAutoUpdate)
+                    },
                     trailingIcon = {
                         Switch(
                             checked = isAutoUpdate,
-                            onCheckedChange = onAutoUpdateChanged,
+                            onCheckedChange = {
+                                onAutoUpdateChanged(characterId, it)
+                            },
                         )
                     },
                 )
@@ -463,7 +469,9 @@ private fun PreviewPresetCard() {
                 },
             ),
             onEditMenuItemClick = {},
-            onAutoUpdateChanged = { isAutoUpdate = !isAutoUpdate },
+            onAutoUpdateChanged = { _, autoUpdate ->
+                isAutoUpdate = autoUpdate
+            },
             modifier = Modifier.padding(8.dp),
         )
     }
