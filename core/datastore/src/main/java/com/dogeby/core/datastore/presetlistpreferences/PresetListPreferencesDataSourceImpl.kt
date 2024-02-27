@@ -106,7 +106,7 @@ class PresetListPreferencesDataSourceImpl @Inject constructor(
                 filteredRarities.clear()
                 filteredPathIds.clear()
                 filteredElementIds.clear()
-                sortField = CharacterSortField.LATEST_RELEASED.name
+                sortField = CharacterSortField.ID_ASC.name
             }
         }
     }

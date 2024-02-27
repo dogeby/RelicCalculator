@@ -136,7 +136,7 @@ class FakePreferencesRepository : PreferencesRepository {
                 filteredRarities = emptySet(),
                 filteredPathIds = emptySet(),
                 filteredElementIds = emptySet(),
-                sortField = CharacterSortField.LATEST_RELEASED,
+                sortField = CharacterSortField.ID_ASC,
             ),
         )
     }

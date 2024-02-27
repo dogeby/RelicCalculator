@@ -168,7 +168,7 @@ class GetPresetsWithDetailsUseCaseTest {
         gameRepository.sendCharacterInfoWithDetails(characterInfoWithDetails)
         preferencesRepository.setPresetListPreferencesData(
             samplePresetListPreferencesData.copy(
-                sortField = CharacterSortField.NAME,
+                sortField = CharacterSortField.NAME_ASC,
             ),
         )
         val listPreferences = preferencesRepository.getPresetListPreferencesData().first()
@@ -201,7 +201,7 @@ class GetPresetsWithDetailsUseCaseTest {
         gameRepository.sendCharacterInfoWithDetails(characterInfoWithDetails)
         preferencesRepository.setPresetListPreferencesData(
             samplePresetListPreferencesData.copy(
-                sortField = CharacterSortField.LATEST_RELEASED,
+                sortField = CharacterSortField.ID_ASC,
             ),
         )
         val listPreferences = preferencesRepository.getPresetListPreferencesData().first()
@@ -234,7 +234,7 @@ class GetPresetsWithDetailsUseCaseTest {
         gameRepository.sendCharacterInfoWithDetails(characterInfoWithDetails)
         preferencesRepository.setPresetListPreferencesData(
             samplePresetListPreferencesData.copy(
-                sortField = CharacterSortField.EARLIEST_RELEASED,
+                sortField = CharacterSortField.ID_DESC,
             ),
         )
         val listPreferences = preferencesRepository.getPresetListPreferencesData().first()

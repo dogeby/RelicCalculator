@@ -133,18 +133,23 @@ class GetPresetsWithDetailsUseCase @Inject constructor(
         characterSortField: CharacterSortField,
     ): List<PresetWithDetails> {
         return when (characterSortField) {
-            CharacterSortField.LATEST_RELEASED -> {
+            CharacterSortField.ID_ASC -> {
                 sortedWith { o1, o2 ->
                     o2.characterId.toAdjustedId() - o1.characterId.toAdjustedId()
                 }
             }
-            CharacterSortField.EARLIEST_RELEASED -> {
+            CharacterSortField.ID_DESC -> {
                 sortedWith { o1, o2 ->
                     o1.characterId.toAdjustedId() - o2.characterId.toAdjustedId()
                 }
             }
-            CharacterSortField.NAME -> {
+            CharacterSortField.NAME_ASC -> {
                 sortedBy {
+                    it.characterInfo.name
+                }
+            }
+            CharacterSortField.NAME_DESC -> {
+                sortedByDescending {
                     it.characterInfo.name
                 }
             }

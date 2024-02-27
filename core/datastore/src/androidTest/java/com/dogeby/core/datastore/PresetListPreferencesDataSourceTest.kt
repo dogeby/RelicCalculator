@@ -41,7 +41,7 @@ class PresetListPreferencesDataSourceTest {
             filteredRarities = setOf(4, 5),
             filteredPathIds = setOf("Rogue"),
             filteredElementIds = setOf("Fire"),
-            sortField = CharacterSortField.LATEST_RELEASED,
+            sortField = CharacterSortField.ID_ASC,
         )
         presetListPreferencesDataSource.setPresetListPreferencesData(inputFilteredData)
 

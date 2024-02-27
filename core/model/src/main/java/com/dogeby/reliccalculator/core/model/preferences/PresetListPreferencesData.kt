@@ -14,5 +14,5 @@ val samplePresetListPreferencesData = PresetListPreferencesData(
     filteredRarities = setOf(5),
     filteredPathIds = emptySet(),
     filteredElementIds = emptySet(),
-    sortField = CharacterSortField.LATEST_RELEASED,
+    sortField = CharacterSortField.ID_ASC,
 )

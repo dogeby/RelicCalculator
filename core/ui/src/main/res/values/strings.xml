@@ -2,4 +2,14 @@
     <string name="edit">Edit</string>
     <string name="default_preset_auto_update">Default Preset Auto Update</string>
     <string name="empty_list">The list is empty.</string>
+    <string name="sort">Sort</string>
+    <string name="default_order">Default</string>
+    <string name="name_order">Name</string>
+    <string name="filter">Filter</string>
+    <string name="rarity">Rarity</string>
+    <string name="path">Paths</string>
+    <string name="element">Type</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="clear_all">Clear All</string>
+    <string name="confirm">Confirm</string>
 </resources>
