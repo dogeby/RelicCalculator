@@ -16,16 +16,12 @@ import com.dogeby.reliccalculator.core.model.hoyo.index.PathInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.sampleElementInfo
 import com.dogeby.reliccalculator.core.model.hoyo.index.samplePathInfo
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
+import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesData
 
 @Composable
 fun PresetListOptionBar(
-    selectedSortField: CharacterSortField,
+    presetListOptionBarUiState: PresetListOptionBarUiState,
     onSetSortField: (CharacterSortField) -> Unit,
-    pathInfoList: List<PathInfo>,
-    elementInfoList: List<ElementInfo>,
-    filteredRarities: Set<Int>,
-    filteredPathIds: Set<String>,
-    filteredElementIds: Set<String>,
     onConfirmFilters: (
         selectedRarities: Set<Int>,
         selectedPathIds: Set<String>,
@@ -33,23 +29,41 @@ fun PresetListOptionBar(
     ) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = modifier.horizontalScroll(rememberScrollState()),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        CharacterSortFieldChip(
-            selectedSortField = selectedSortField,
-            onSetSortField = onSetSortField,
-        )
-        CharacterFilterChip(
-            pathInfoList = pathInfoList,
-            elementInfoList = elementInfoList,
-            filteredRarities = filteredRarities,
-            filteredPathIds = filteredPathIds,
-            filteredElementIds = filteredElementIds,
-            onConfirmFilters = onConfirmFilters,
-        )
+    when (presetListOptionBarUiState) {
+        PresetListOptionBarUiState.Loading -> Unit
+        is PresetListOptionBarUiState.Success -> {
+            with(presetListOptionBarUiState) {
+                Row(
+                    modifier = modifier.horizontalScroll(rememberScrollState()),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    CharacterSortFieldChip(
+                        selectedSortField = presetListPreferencesData.sortField,
+                        onSetSortField = onSetSortField,
+                    )
+                    CharacterFilterChip(
+                        pathInfoList = pathInfoList,
+                        elementInfoList = elementInfoList,
+                        filteredRarities = presetListPreferencesData.filteredRarities,
+                        filteredPathIds = presetListPreferencesData.filteredPathIds,
+                        filteredElementIds = presetListPreferencesData.filteredElementIds,
+                        onConfirmFilters = onConfirmFilters,
+                    )
+                }
+            }
+        }
     }
+}
+
+sealed interface PresetListOptionBarUiState {
+
+    data object Loading : PresetListOptionBarUiState
+
+    data class Success(
+        val pathInfoList: List<PathInfo>,
+        val elementInfoList: List<ElementInfo>,
+        val presetListPreferencesData: PresetListPreferencesData,
+    ) : PresetListOptionBarUiState
 }
 
 @Preview(apiLevel = 33)
@@ -57,13 +71,17 @@ fun PresetListOptionBar(
 private fun PreviewPresetListOptionBar() {
     RelicCalculatorTheme {
         PresetListOptionBar(
-            selectedSortField = CharacterSortField.ID_ASC,
+            presetListOptionBarUiState = PresetListOptionBarUiState.Success(
+                pathInfoList = List(7) { samplePathInfo.copy(id = "$it", name = "$it") },
+                elementInfoList = List(7) { sampleElementInfo.copy(id = "$it", name = "$it") },
+                presetListPreferencesData = PresetListPreferencesData(
+                    filteredRarities = setOf(5),
+                    filteredPathIds = setOf("0"),
+                    filteredElementIds = setOf("0"),
+                    sortField = CharacterSortField.ID_ASC,
+                ),
+            ),
             onSetSortField = {},
-            pathInfoList = List(7) { samplePathInfo.copy(id = "$it", name = "$it") },
-            elementInfoList = List(7) { sampleElementInfo.copy(id = "$it", name = "$it") },
-            filteredRarities = setOf(5),
-            filteredPathIds = setOf("0"),
-            filteredElementIds = setOf("0"),
             onConfirmFilters = { _, _, _ -> },
         )
     }
