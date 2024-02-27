@@ -91,7 +91,7 @@ fun CharacterSortDropdownMenuItem(
 
 @Preview(apiLevel = 33)
 @Composable
-fun PreviewCharacterSortFieldChip() {
+private fun PreviewCharacterSortFieldChip() {
     RelicCalculatorTheme {
         var sortField by remember {
             mutableStateOf(CharacterSortField.ID_ASC)
@@ -105,7 +105,7 @@ fun PreviewCharacterSortFieldChip() {
 
 @Preview(apiLevel = 33)
 @Composable
-fun PreviewCharacterSortDropdownMenuItem() {
+private fun PreviewCharacterSortDropdownMenuItem() {
     RelicCalculatorTheme {
         CharacterSortDropdownMenuItem(
             isSelected = true,
