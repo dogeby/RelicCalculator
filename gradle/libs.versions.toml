@@ -24,6 +24,8 @@ protoDataStore = "1.0.0"
 protobuf = "3.25.2"
 protobufPlugin = "0.9.4"
 javaAnnotations = "24.1.0"
+androidxLifecycle = "2.7.0"
+androidxHiltNavigationCompose = "1.2.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -58,6 +60,9 @@ proto-datastore = { group = "androidx.datastore", name = "datastore", version.re
 protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
 java-annotations = { group = "org.jetbrains", name = "annotations", version.ref = "javaAnnotations" }
+androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
