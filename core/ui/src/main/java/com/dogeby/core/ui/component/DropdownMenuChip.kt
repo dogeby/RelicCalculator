@@ -2,7 +2,6 @@ package com.dogeby.core.ui.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Sort
@@ -34,9 +33,7 @@ fun DropdownMenuChip(
         mutableStateOf(false)
     }
     Box(
-        modifier = modifier
-            .fillMaxSize()
-            .wrapContentSize(Alignment.TopCenter),
+        modifier = modifier.wrapContentSize(Alignment.TopCenter),
     ) {
         AssistChip(
             onClick = { expanded = !expanded },
