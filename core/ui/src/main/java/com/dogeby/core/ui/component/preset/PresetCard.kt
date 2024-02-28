@@ -88,7 +88,7 @@ fun PresetCard(
         colors = colors,
     ) {
         Column {
-            Surface {
+            Surface(tonalElevation = 1.dp) {
                 CharacterListItem(
                     characterId = presetWithDetails.characterId,
                     characterName = presetWithDetails.characterInfo.name,
@@ -423,7 +423,7 @@ private fun SubAffixWeightsWithInfoList(
     }
 }
 
-@Preview
+@Preview(apiLevel = 33)
 @Composable
 private fun PreviewPresetCard() {
     RelicCalculatorTheme {
