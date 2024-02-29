@@ -3,6 +3,7 @@ package com.dogeby.core.database.di
 import com.dogeby.core.database.RelicCalculatorDatabase
 import com.dogeby.core.database.dao.CharacterDao
 import com.dogeby.core.database.dao.CharacterReportDao
+import com.dogeby.core.database.dao.GameInfoDao
 import com.dogeby.core.database.dao.PresetDao
 import dagger.Module
 import dagger.Provides
@@ -23,4 +24,7 @@ object DaoModule {
     @Provides
     fun providesCharacterReportDao(database: RelicCalculatorDatabase): CharacterReportDao =
         database.characterReportDao()
+
+    @Provides
+    fun providesGameInfoDao(database: RelicCalculatorDatabase): GameInfoDao = database.gameInfoDao()
 }

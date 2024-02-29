@@ -26,7 +26,7 @@ import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
 fun LazyGridScope.presetList(
     presetListUiState: PresetListUiState,
     onEditMenuItemClick: (id: String) -> Unit,
-    onAutoUpdateChanged: (Boolean) -> Unit,
+    onAutoUpdateChanged: (id: String, isAutoUpdate: Boolean) -> Unit,
 ) {
     when (presetListUiState) {
         PresetListUiState.Loading -> Unit
@@ -106,7 +106,7 @@ private fun PreviewPresetList() {
             presetList(
                 presetListUiState = PresetListUiState.Success(presets),
                 onEditMenuItemClick = {},
-                onAutoUpdateChanged = {},
+                onAutoUpdateChanged = { _, _ -> },
             )
         }
     }
