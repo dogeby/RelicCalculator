@@ -23,173 +23,173 @@ import kotlinx.coroutines.flow.Flow
 interface GameInfoDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnoreElementsInfo(elementsInfo: Set<ElementInfoEntity>): List<Long>
+    suspend fun insertOrIgnoreElementInfoSet(elementInfoSet: Set<ElementInfoEntity>): List<Long>
 
     @Update
-    suspend fun updateElementsInfo(elementsInfo: Set<ElementInfoEntity>): Int
+    suspend fun updateElementInfoSet(elementInfoSet: Set<ElementInfoEntity>): Int
 
     @Upsert
-    suspend fun upsertElementsInfo(elementsInfo: Set<ElementInfoEntity>): List<Long>
+    suspend fun upsertElementInfoSet(elementInfoSet: Set<ElementInfoEntity>): List<Long>
 
     @Delete
-    suspend fun deleteElementsInfo(elementsInfo: Set<ElementInfoEntity>): Int
+    suspend fun deleteElementInfoSet(elementInfoSet: Set<ElementInfoEntity>): Int
 
-    @Query(value = "SELECT * FROM elementsInfo")
-    fun getElementsInfo(): Flow<List<ElementInfoEntity>>
+    @Query(value = "SELECT * FROM elementInfoTable")
+    fun getElementInfoList(): Flow<List<ElementInfoEntity>>
 
-    @Query(value = "SELECT * FROM elementsInfo WHERE id in (:ids)")
-    fun getElementsInfo(ids: Set<String>): Flow<List<ElementInfoEntity>>
+    @Query(value = "SELECT * FROM elementInfoTable WHERE id in (:ids)")
+    fun getElementInfoList(ids: Set<String>): Flow<List<ElementInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnorePathsInfo(pathsInfo: Set<PathInfoEntity>): List<Long>
+    suspend fun insertOrIgnorePathInfoSet(pathInfoSet: Set<PathInfoEntity>): List<Long>
 
     @Update
-    suspend fun updatePathsInfo(pathsInfo: Set<PathInfoEntity>): Int
+    suspend fun updatePathInfoSet(pathInfoSet: Set<PathInfoEntity>): Int
 
     @Upsert
-    suspend fun upsertPathsInfo(pathsInfo: Set<PathInfoEntity>): List<Long>
+    suspend fun upsertPathInfoSet(pathInfoSet: Set<PathInfoEntity>): List<Long>
 
     @Delete
-    suspend fun deletePathsInfo(pathsInfo: Set<PathInfoEntity>): Int
+    suspend fun deletePathInfoSet(pathInfoSet: Set<PathInfoEntity>): Int
 
-    @Query(value = "SELECT * FROM pathsInfo")
-    fun getPathsInfo(): Flow<List<PathInfoEntity>>
+    @Query(value = "SELECT * FROM pathInfoTable")
+    fun getPathInfoList(): Flow<List<PathInfoEntity>>
 
-    @Query(value = "SELECT * FROM pathsInfo WHERE id in (:ids)")
-    fun getPathsInfo(ids: Set<String>): Flow<List<PathInfoEntity>>
+    @Query(value = "SELECT * FROM pathInfoTable WHERE id in (:ids)")
+    fun getPathInfoList(ids: Set<String>): Flow<List<PathInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnoreCharactersInfo(charactersInfo: Set<CharacterInfoEntity>): List<Long>
+    suspend fun insertOrIgnoreCharacterInfoSet(
+        characterInfoSet: Set<CharacterInfoEntity>,
+    ): List<Long>
 
     @Update
-    suspend fun updateCharactersInfo(charactersInfo: Set<CharacterInfoEntity>): Int
+    suspend fun updateCharacterInfoSet(characterInfoSet: Set<CharacterInfoEntity>): Int
 
     @Upsert
-    suspend fun upsertCharactersInfo(charactersInfo: Set<CharacterInfoEntity>): List<Long>
+    suspend fun upsertCharacterInfoSet(characterInfoSet: Set<CharacterInfoEntity>): List<Long>
 
     @Delete
-    suspend fun deleteCharactersInfo(charactersInfo: Set<CharacterInfoEntity>): Int
+    suspend fun deleteCharacterInfoSet(characterInfoSet: Set<CharacterInfoEntity>): Int
 
-    @Query(value = "SELECT * FROM charactersInfo")
-    fun getCharactersInfo(): Flow<List<CharacterInfoEntity>>
+    @Query(value = "SELECT * FROM characterInfoTable")
+    fun getCharacterInfoList(): Flow<List<CharacterInfoEntity>>
 
     @Query(
         value = """
-        SELECT * FROM charactersInfo
+        SELECT * FROM characterInfoTable
         WHERE id in (:ids)
     """,
     )
-    fun getCharactersInfo(ids: Set<String>): Flow<List<CharacterInfoEntity>>
+    fun getCharacterInfoList(ids: Set<String>): Flow<List<CharacterInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnoreLightConesInfo(
-        lightConesInfoEntity: Set<LightConeInfoEntity>,
+    suspend fun insertOrIgnoreLightConeInfoSet(
+        lightConeInfoSet: Set<LightConeInfoEntity>,
     ): List<Long>
 
     @Update
-    suspend fun updateLightConesInfo(lightConesInfoEntity: Set<LightConeInfoEntity>): Int
+    suspend fun updateLightConeInfoSet(lightConeInfoSet: Set<LightConeInfoEntity>): Int
 
     @Upsert
-    suspend fun upsertLightConesInfo(lightConesInfoEntity: Set<LightConeInfoEntity>): List<Long>
+    suspend fun upsertLightConeInfoSet(lightConeInfoSet: Set<LightConeInfoEntity>): List<Long>
 
     @Delete
-    suspend fun deleteLightConesInfo(lightConesInfoEntity: Set<LightConeInfoEntity>): Int
+    suspend fun deleteLightConeInfoSet(lightConeInfoSet: Set<LightConeInfoEntity>): Int
 
-    @Query(value = "SELECT * FROM lightConesInfo")
-    fun getLightConesInfo(): Flow<List<LightConeInfoEntity>>
+    @Query(value = "SELECT * FROM lightConeInfoTable")
+    fun getLightConeInfoList(): Flow<List<LightConeInfoEntity>>
 
-    @Query(value = "SELECT * FROM lightConesInfo WHERE id in (:ids)")
-    fun getLightConesInfo(ids: Set<String>): Flow<List<LightConeInfoEntity>>
+    @Query(value = "SELECT * FROM lightConeInfoTable WHERE id in (:ids)")
+    fun getLightConeInfoList(ids: Set<String>): Flow<List<LightConeInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnorePropertiesInfo(
-        propertiesInfoEntity: Set<PropertyInfoEntity>,
-    ): List<Long>
+    suspend fun insertOrIgnorePropertyInfoSet(propertyInfoSet: Set<PropertyInfoEntity>): List<Long>
 
     @Update
-    suspend fun updatePropertiesInfo(propertiesInfoEntity: Set<PropertyInfoEntity>): Int
+    suspend fun updatePropertyInfoSet(propertyInfoSet: Set<PropertyInfoEntity>): Int
 
     @Upsert
-    suspend fun upsertPropertiesInfo(propertiesInfoEntity: Set<PropertyInfoEntity>): List<Long>
+    suspend fun upsertPropertyInfoSet(propertyInfoSet: Set<PropertyInfoEntity>): List<Long>
 
     @Delete
-    suspend fun deletePropertiesInfo(propertiesInfoEntity: Set<PropertyInfoEntity>): Int
+    suspend fun deletePropertyInfoSet(propertyInfoSet: Set<PropertyInfoEntity>): Int
 
-    @Query(value = "SELECT * FROM propertiesInfo")
-    fun getPropertiesInfo(): Flow<List<PropertyInfoEntity>>
+    @Query(value = "SELECT * FROM propertyInfoTable")
+    fun getPropertyInfoList(): Flow<List<PropertyInfoEntity>>
 
-    @Query(value = "SELECT * FROM propertiesInfo WHERE type in (:ids)")
-    fun getPropertiesInfoByIds(ids: Set<String>): Flow<List<PropertyInfoEntity>>
+    @Query(value = "SELECT * FROM propertyInfoTable WHERE type in (:ids)")
+    fun getPropertyInfoListByIds(ids: Set<String>): Flow<List<PropertyInfoEntity>>
 
-    @Query(value = "SELECT * FROM propertiesInfo WHERE field in (:fields)")
-    fun getPropertiesInfoByFields(fields: Set<String>): Flow<List<PropertyInfoEntity>>
+    @Query(value = "SELECT * FROM propertyInfoTable WHERE field in (:fields)")
+    fun getPropertyInfoListByFields(fields: Set<String>): Flow<List<PropertyInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnoreRelicsInfo(relicsInfoEntity: Set<RelicInfoEntity>): List<Long>
+    suspend fun insertOrIgnoreRelicInfoSet(relicInfoSet: Set<RelicInfoEntity>): List<Long>
 
     @Update
-    suspend fun updateRelicsInfo(relicsInfoEntity: Set<RelicInfoEntity>): Int
+    suspend fun updateRelicInfoSet(relicInfoSet: Set<RelicInfoEntity>): Int
 
     @Upsert
-    suspend fun upsertRelicsInfo(relicsInfoEntity: Set<RelicInfoEntity>): List<Long>
+    suspend fun upsertRelicInfoSet(relicInfoSet: Set<RelicInfoEntity>): List<Long>
 
     @Delete
-    suspend fun deleteRelicsInfo(relicsInfoEntity: Set<RelicInfoEntity>): Int
+    suspend fun deleteRelicInfoSet(relicInfoSet: Set<RelicInfoEntity>): Int
 
-    @Query(value = "SELECT * FROM relicsInfo")
-    fun getRelicsInfo(): Flow<List<RelicInfoEntity>>
+    @Query(value = "SELECT * FROM relicInfoTable")
+    fun getRelicInfoList(): Flow<List<RelicInfoEntity>>
 
-    @Query(value = "SELECT * FROM relicsInfo WHERE id in (:ids)")
-    fun getRelicsInfo(ids: Set<String>): Flow<List<RelicInfoEntity>>
+    @Query(value = "SELECT * FROM relicInfoTable WHERE id in (:ids)")
+    fun getRelicInfoList(ids: Set<String>): Flow<List<RelicInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnoreRelicSetsInfo(
-        relicSetsInfoEntity: Set<RelicSetInfoEntity>,
-    ): List<Long>
+    suspend fun insertOrIgnoreRelicSetInfoSet(relicSetInfoSet: Set<RelicSetInfoEntity>): List<Long>
 
     @Update
-    suspend fun updateRelicSetsInfo(relicSetsInfoEntity: Set<RelicSetInfoEntity>): Int
+    suspend fun updateRelicSetInfoSet(relicSetInfoSet: Set<RelicSetInfoEntity>): Int
 
     @Upsert
-    suspend fun upsertRelicSetsInfo(relicSetsInfoEntity: Set<RelicSetInfoEntity>): List<Long>
+    suspend fun upsertRelicSetInfoSet(relicSetInfoSet: Set<RelicSetInfoEntity>): List<Long>
 
     @Delete
-    suspend fun deleteRelicSetsInfo(relicSetsInfoEntity: Set<RelicSetInfoEntity>): Int
+    suspend fun deleteRelicSetInfoSet(relicSetInfoSet: Set<RelicSetInfoEntity>): Int
 
-    @Query(value = "SELECT * FROM relicSetsInfo")
-    fun getRelicSetsInfo(): Flow<List<RelicSetInfoEntity>>
+    @Query(value = "SELECT * FROM relicSetInfoTable")
+    fun getRelicSetInfoList(): Flow<List<RelicSetInfoEntity>>
 
-    @Query(value = "SELECT * FROM relicSetsInfo WHERE id in (:ids)")
-    fun getRelicSetsInfo(ids: Set<String>): Flow<List<RelicSetInfoEntity>>
+    @Query(value = "SELECT * FROM relicSetInfoTable WHERE id in (:ids)")
+    fun getRelicSetInfoList(ids: Set<String>): Flow<List<RelicSetInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnoreAffixesData(affixesDataEntity: Set<AffixDataEntity>): List<Long>
+    suspend fun insertOrIgnoreAffixDataSet(affixesDataEntity: Set<AffixDataEntity>): List<Long>
 
     @Update
-    suspend fun updateAffixesData(affixesDataEntity: Set<AffixDataEntity>): Int
+    suspend fun updateAffixDataSet(affixesDataEntity: Set<AffixDataEntity>): Int
 
     @Upsert
-    suspend fun upsertAffixesData(affixesDataEntity: Set<AffixDataEntity>): List<Long>
+    suspend fun upsertAffixDataSet(affixesDataEntity: Set<AffixDataEntity>): List<Long>
 
     @Delete
-    suspend fun deleteAffixesData(affixesDataEntity: Set<AffixDataEntity>): Int
+    suspend fun deleteAffixDataSet(affixesDataEntity: Set<AffixDataEntity>): Int
 
-    @Query(value = "SELECT * FROM affixesData")
-    fun getAffixesData(): Flow<List<AffixDataEntity>>
+    @Query(value = "SELECT * FROM affixDataTable")
+    fun getAffixDataList(): Flow<List<AffixDataEntity>>
 
-    @Query(value = "SELECT * FROM affixesData WHERE id in (:ids)")
-    fun getAffixesData(ids: Set<String>): Flow<List<AffixDataEntity>>
+    @Query(value = "SELECT * FROM affixDataTable WHERE id in (:ids)")
+    fun getAffixDataList(ids: Set<String>): Flow<List<AffixDataEntity>>
 
     @Transaction
-    @Query("SELECT * FROM charactersInfo")
-    fun getCharactersInfoWithDetails(): Flow<List<DatabaseCharacterInfoWithDetails>>
+    @Query("SELECT * FROM characterInfoTable")
+    fun getCharacterInfoWithDetailsList(): Flow<List<DatabaseCharacterInfoWithDetails>>
 
     @Transaction
     @Query(
         """
-        SELECT * FROM charactersInfo
+        SELECT * FROM characterInfoTable
         WHERE id in (:ids)
     """,
     )
-    fun getCharactersInfoWithDetails(ids: Set<String>): Flow<List<DatabaseCharacterInfoWithDetails>>
+    fun getCharacterInfoWithDetailsList(
+        ids: Set<String>,
+    ): Flow<List<DatabaseCharacterInfoWithDetails>>
 }

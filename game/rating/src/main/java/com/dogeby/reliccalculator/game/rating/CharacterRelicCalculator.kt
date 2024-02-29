@@ -19,7 +19,7 @@ interface CharacterRelicCalculator {
 
     fun calculateSubAffixScore(
         subAffix: SubAffix,
-        subAffixesInfo: Map<String, AffixInfo>,
+        subAffixInfoMap: Map<String, AffixInfo>,
     ): Float
 
     fun calculateMainAffixReport(
@@ -32,7 +32,7 @@ interface CharacterRelicCalculator {
         relic: Relic,
         preset: Preset,
         relicInfo: RelicInfo,
-        subAffixesData: Map<String, AffixData>,
+        subAffixDataMap: Map<String, AffixData>,
     ): RelicReport
 
     fun calculateAttrComparison(
@@ -48,7 +48,7 @@ interface CharacterRelicCalculator {
     fun calculateCharacterScore(
         character: Character,
         preset: Preset,
-        relicsInfo: Map<String, RelicInfo>,
-        subAffixesData: Map<String, AffixData>,
+        relicInfoMap: Map<String, RelicInfo>,
+        subAffixDataMap: Map<String, AffixData>,
     ): CharacterReport
 }

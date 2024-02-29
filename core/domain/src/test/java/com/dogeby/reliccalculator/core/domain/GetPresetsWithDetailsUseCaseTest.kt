@@ -33,9 +33,9 @@ class GetPresetsWithDetailsUseCaseTest {
 
     private fun insertSampleInfoData() {
         gameRepository.apply {
-            sendCharacterInfoWithDetails(listOf(sampleCharacterInfoWithDetails))
-            sendRelicSetInfo(mapOf(sampleRelicSetInfo.id to sampleRelicSetInfo))
-            sendPropertyInfo(mapOf(samplePropertyInfo.type to samplePropertyInfo))
+            sendCharacterInfoWithDetailsList(listOf(sampleCharacterInfoWithDetails))
+            sendRelicSetInfoMap(mapOf(sampleRelicSetInfo.id to sampleRelicSetInfo))
+            sendPropertyInfoMap(mapOf(samplePropertyInfo.type to samplePropertyInfo))
         }
     }
 
@@ -165,7 +165,7 @@ class GetPresetsWithDetailsUseCaseTest {
                 ),
             )
         }
-        gameRepository.sendCharacterInfoWithDetails(characterInfoWithDetails)
+        gameRepository.sendCharacterInfoWithDetailsList(characterInfoWithDetails)
         preferencesRepository.setPresetListPreferencesData(
             samplePresetListPreferencesData.copy(
                 sortField = CharacterSortField.NAME_ASC,
@@ -198,7 +198,7 @@ class GetPresetsWithDetailsUseCaseTest {
                 ),
             )
         }
-        gameRepository.sendCharacterInfoWithDetails(characterInfoWithDetails)
+        gameRepository.sendCharacterInfoWithDetailsList(characterInfoWithDetails)
         preferencesRepository.setPresetListPreferencesData(
             samplePresetListPreferencesData.copy(
                 sortField = CharacterSortField.ID_ASC,
@@ -231,7 +231,7 @@ class GetPresetsWithDetailsUseCaseTest {
                 ),
             )
         }
-        gameRepository.sendCharacterInfoWithDetails(characterInfoWithDetails)
+        gameRepository.sendCharacterInfoWithDetailsList(characterInfoWithDetails)
         preferencesRepository.setPresetListPreferencesData(
             samplePresetListPreferencesData.copy(
                 sortField = CharacterSortField.ID_DESC,

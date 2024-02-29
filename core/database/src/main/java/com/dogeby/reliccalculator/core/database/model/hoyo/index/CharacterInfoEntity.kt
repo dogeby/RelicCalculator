@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.dogeby.reliccalculator.core.model.mihomo.index.CharacterInfo
 import org.jetbrains.annotations.TestOnly
 
-@Entity(tableName = "charactersInfo")
+@Entity(tableName = "characterInfoTable")
 data class CharacterInfoEntity(
     @PrimaryKey val id: String,
     val name: String,

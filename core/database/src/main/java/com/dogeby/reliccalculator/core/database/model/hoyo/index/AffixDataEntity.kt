@@ -8,7 +8,7 @@ import com.dogeby.reliccalculator.core.model.mihomo.index.AffixData
 import com.dogeby.reliccalculator.core.model.mihomo.index.AffixInfo
 import org.jetbrains.annotations.TestOnly
 
-@Entity(tableName = "affixesData")
+@Entity(tableName = "affixDataTable")
 @TypeConverters(AffixInfoMapConverter::class)
 data class AffixDataEntity(
     @PrimaryKey val id: String,

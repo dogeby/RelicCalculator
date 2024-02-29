@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.dogeby.reliccalculator.core.model.mihomo.index.LightConeInfo
 import org.jetbrains.annotations.TestOnly
 
-@Entity(tableName = "lightConesInfo")
+@Entity(tableName = "lightConeInfoTable")
 data class LightConeInfoEntity(
     @PrimaryKey val id: String,
     val name: String,

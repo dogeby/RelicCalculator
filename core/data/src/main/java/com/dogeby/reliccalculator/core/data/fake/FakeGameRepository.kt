@@ -23,32 +23,35 @@ import org.jetbrains.annotations.TestOnly
 @TestOnly
 class FakeGameRepository : GameRepository {
 
-    private val charactersInfoFlow: MutableSharedFlow<Map<String, CharacterInfo>> =
+    private val characterInfoMapFlow: MutableSharedFlow<Map<String, CharacterInfo>> =
         MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
-    private val elementsInfoFlow: MutableSharedFlow<Map<String, ElementInfo>> =
+    private val elementInfoMapFlow: MutableSharedFlow<Map<String, ElementInfo>> =
         MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
-    private val pathsInfoFlow: MutableSharedFlow<Map<String, PathInfo>> =
+    private val pathInfoMapFlow: MutableSharedFlow<Map<String, PathInfo>> =
         MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
-    private val lightConesInfoFlow: MutableSharedFlow<Map<String, LightConeInfo>> =
+    private val lightConeInfoMapFlow: MutableSharedFlow<Map<String, LightConeInfo>> =
         MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
-    private val propertiesInfoFlow: MutableSharedFlow<Map<String, PropertyInfo>> =
+    private val propertyInfoMapFlow: MutableSharedFlow<Map<String, PropertyInfo>> =
         MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
-    private val relicSetsInfoFlow: MutableSharedFlow<Map<String, RelicSetInfo>> =
+    private val relicSetInfoMapFlow: MutableSharedFlow<Map<String, RelicSetInfo>> =
         MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
-    private val relicsInfoFlow: MutableSharedFlow<Map<String, RelicInfo>> =
+    private val relicInfoMapFlow: MutableSharedFlow<Map<String, RelicInfo>> =
         MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
-    private val relicAffixesInfoFlow: MutableSharedFlow<Map<String, AffixData>> =
+    private val relicAffixInfoMapFlow: MutableSharedFlow<Map<String, AffixData>> =
         MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
-    private val charactersInfoWithDetailsFlow: MutableSharedFlow<List<CharacterInfoWithDetails>> =
-        MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    private val characterInfoWithDetailsListFlow:
+        MutableSharedFlow<List<CharacterInfoWithDetails>> = MutableSharedFlow(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST,
+        )
 
     private val characterScoreFlow: MutableSharedFlow<Result<CharacterReport>> =
         MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
@@ -56,24 +59,24 @@ class FakeGameRepository : GameRepository {
     private val gameInfoInDbUpdateResultFlow: MutableSharedFlow<Result<Unit>> =
         MutableSharedFlow(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
-    override val charactersInfo: Flow<Map<String, CharacterInfo>> = charactersInfoFlow
+    override val characterInfoMap: Flow<Map<String, CharacterInfo>> = characterInfoMapFlow
 
-    override val elementsInfo: Flow<Map<String, ElementInfo>> = elementsInfoFlow
+    override val elementInfoMap: Flow<Map<String, ElementInfo>> = elementInfoMapFlow
 
-    override val pathsInfo: Flow<Map<String, PathInfo>> = pathsInfoFlow
+    override val pathInfoMap: Flow<Map<String, PathInfo>> = pathInfoMapFlow
 
-    override val lightConesInfo: Flow<Map<String, LightConeInfo>> = lightConesInfoFlow
+    override val lightConeInfoMap: Flow<Map<String, LightConeInfo>> = lightConeInfoMapFlow
 
-    override val propertiesInfo: Flow<Map<String, PropertyInfo>> = propertiesInfoFlow
+    override val propertyInfoMap: Flow<Map<String, PropertyInfo>> = propertyInfoMapFlow
 
-    override val relicSetsInfo: Flow<Map<String, RelicSetInfo>> = relicSetsInfoFlow
+    override val relicSetInfoMap: Flow<Map<String, RelicSetInfo>> = relicSetInfoMapFlow
 
-    override val relicsInfo: Flow<Map<String, RelicInfo>> = relicsInfoFlow
+    override val relicInfoMap: Flow<Map<String, RelicInfo>> = relicInfoMapFlow
 
-    override val relicAffixesInfo: Flow<Map<String, AffixData>> = relicAffixesInfoFlow
+    override val relicAffixInfoMap: Flow<Map<String, AffixData>> = relicAffixInfoMapFlow
 
-    override val charactersInfoWithDetails: Flow<List<CharacterInfoWithDetails>> =
-        charactersInfoWithDetailsFlow
+    override val characterInfoWithDetailsList: Flow<List<CharacterInfoWithDetails>> =
+        characterInfoWithDetailsListFlow
 
     override suspend fun calculateCharacterScore(
         character: Character,
@@ -86,40 +89,42 @@ class FakeGameRepository : GameRepository {
         return gameInfoInDbUpdateResultFlow.first()
     }
 
-    fun sendCharacterInfo(charactersInfo: Map<String, CharacterInfo>) {
-        charactersInfoFlow.tryEmit(charactersInfo)
+    fun sendCharacterInfoMap(characterInfoMap: Map<String, CharacterInfo>) {
+        characterInfoMapFlow.tryEmit(characterInfoMap)
     }
 
-    fun sendElementsInfo(elementsInfo: Map<String, ElementInfo>) {
-        elementsInfoFlow.tryEmit(elementsInfo)
+    fun sendElementInfoMap(elementInfoMap: Map<String, ElementInfo>) {
+        elementInfoMapFlow.tryEmit(elementInfoMap)
     }
 
-    fun sendPathInfo(pathsInfo: Map<String, PathInfo>) {
-        pathsInfoFlow.tryEmit(pathsInfo)
+    fun sendPathInfoMap(pathInfoMap: Map<String, PathInfo>) {
+        pathInfoMapFlow.tryEmit(pathInfoMap)
     }
 
-    fun sendLightConeInfo(lightConesInfo: Map<String, LightConeInfo>) {
-        lightConesInfoFlow.tryEmit(lightConesInfo)
+    fun sendLightConeInfoMap(lightConeInfoMap: Map<String, LightConeInfo>) {
+        lightConeInfoMapFlow.tryEmit(lightConeInfoMap)
     }
 
-    fun sendPropertyInfo(propertiesInfo: Map<String, PropertyInfo>) {
-        propertiesInfoFlow.tryEmit(propertiesInfo)
+    fun sendPropertyInfoMap(propertyInfoMap: Map<String, PropertyInfo>) {
+        propertyInfoMapFlow.tryEmit(propertyInfoMap)
     }
 
-    fun sendRelicSetInfo(relicSetsInfo: Map<String, RelicSetInfo>) {
-        relicSetsInfoFlow.tryEmit(relicSetsInfo)
+    fun sendRelicSetInfoMap(relicSetInfoMap: Map<String, RelicSetInfo>) {
+        relicSetInfoMapFlow.tryEmit(relicSetInfoMap)
     }
 
-    fun sendRelicInfo(relicsInfo: Map<String, RelicInfo>) {
-        relicsInfoFlow.tryEmit(relicsInfo)
+    fun sendRelicInfoMap(relicInfoMap: Map<String, RelicInfo>) {
+        relicInfoMapFlow.tryEmit(relicInfoMap)
     }
 
-    fun sendAffixData(relicAffixesInfo: Map<String, AffixData>) {
-        relicAffixesInfoFlow.tryEmit(relicAffixesInfo)
+    fun sendAffixDataMap(relicAffixInfoMap: Map<String, AffixData>) {
+        relicAffixInfoMapFlow.tryEmit(relicAffixInfoMap)
     }
 
-    fun sendCharacterInfoWithDetails(charactersInfoWithDetails: List<CharacterInfoWithDetails>) {
-        charactersInfoWithDetailsFlow.tryEmit(charactersInfoWithDetails)
+    fun sendCharacterInfoWithDetailsList(
+        characterInfoWithDetailsList: List<CharacterInfoWithDetails>,
+    ) {
+        characterInfoWithDetailsListFlow.tryEmit(characterInfoWithDetailsList)
     }
 
     fun sendCharacterScore(characterScore: Result<CharacterReport>) {

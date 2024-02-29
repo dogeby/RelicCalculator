@@ -47,73 +47,73 @@ class GameRepositoryImpl @Inject constructor(
     private val gameInfoDao: GameInfoDao,
 ) : GameRepository {
 
-    override val charactersInfo: Flow<Map<String, CharacterInfo>> =
-        gameInfoDao.getCharactersInfo().map { charactersInfo ->
-            charactersInfo.associateBy(
+    override val characterInfoMap: Flow<Map<String, CharacterInfo>> =
+        gameInfoDao.getCharacterInfoList().map { characterInfoList ->
+            characterInfoList.associateBy(
                 keySelector = { it.id },
                 valueTransform = { it.toCharacterInfo() },
             )
         }
 
-    override val elementsInfo: Flow<Map<String, ElementInfo>> =
-        gameInfoDao.getElementsInfo().map { elementsInfo ->
-            elementsInfo.associateBy(
+    override val elementInfoMap: Flow<Map<String, ElementInfo>> =
+        gameInfoDao.getElementInfoList().map { elementInfoList ->
+            elementInfoList.associateBy(
                 keySelector = { it.id },
                 valueTransform = { it.toElementInfo() },
             )
         }
 
-    override val pathsInfo: Flow<Map<String, PathInfo>> =
-        gameInfoDao.getPathsInfo().map { pathsInfo ->
-            pathsInfo.associateBy(
+    override val pathInfoMap: Flow<Map<String, PathInfo>> =
+        gameInfoDao.getPathInfoList().map { pathInfoList ->
+            pathInfoList.associateBy(
                 keySelector = { it.id },
                 valueTransform = { it.toPathInfo() },
             )
         }
 
-    override val lightConesInfo: Flow<Map<String, LightConeInfo>> =
-        gameInfoDao.getLightConesInfo().map { lightConesInfo ->
-            lightConesInfo.associateBy(
+    override val lightConeInfoMap: Flow<Map<String, LightConeInfo>> =
+        gameInfoDao.getLightConeInfoList().map { lightConeInfoList ->
+            lightConeInfoList.associateBy(
                 keySelector = { it.id },
                 valueTransform = { it.toLightConeInfo() },
             )
         }
 
-    override val propertiesInfo: Flow<Map<String, PropertyInfo>> =
-        gameInfoDao.getPropertiesInfo().map { propertiesInfo ->
-            propertiesInfo.associateBy(
+    override val propertyInfoMap: Flow<Map<String, PropertyInfo>> =
+        gameInfoDao.getPropertyInfoList().map { propertyInfoList ->
+            propertyInfoList.associateBy(
                 keySelector = { it.type },
                 valueTransform = { it.toPropertyInfo() },
             )
         }
 
-    override val relicSetsInfo: Flow<Map<String, RelicSetInfo>> =
-        gameInfoDao.getRelicSetsInfo().map { relicSetsInfo ->
-            relicSetsInfo.associateBy(
+    override val relicSetInfoMap: Flow<Map<String, RelicSetInfo>> =
+        gameInfoDao.getRelicSetInfoList().map { relicSetInfoList ->
+            relicSetInfoList.associateBy(
                 keySelector = { it.id },
                 valueTransform = { it.toRelicSetInfo() },
             )
         }
 
-    override val relicsInfo: Flow<Map<String, RelicInfo>> =
-        gameInfoDao.getRelicsInfo().map { relicsInfo ->
-            relicsInfo.associateBy(
+    override val relicInfoMap: Flow<Map<String, RelicInfo>> =
+        gameInfoDao.getRelicInfoList().map { relicInfoList ->
+            relicInfoList.associateBy(
                 keySelector = { it.id },
                 valueTransform = { it.toRelicInfo() },
             )
         }
 
-    override val relicAffixesInfo: Flow<Map<String, AffixData>> =
-        gameInfoDao.getAffixesData().map { affixesData ->
-            affixesData.associateBy(
+    override val relicAffixInfoMap: Flow<Map<String, AffixData>> =
+        gameInfoDao.getAffixDataList().map { affixDataList ->
+            affixDataList.associateBy(
                 keySelector = { it.id },
                 valueTransform = { it.toAffixData() },
             )
         }
 
-    override val charactersInfoWithDetails: Flow<List<CharacterInfoWithDetails>> =
-        gameInfoDao.getCharactersInfoWithDetails().map { charactersInfoWithDetails ->
-            charactersInfoWithDetails.map { it.toCharacterInfoWithDetails() }
+    override val characterInfoWithDetailsList: Flow<List<CharacterInfoWithDetails>> =
+        gameInfoDao.getCharacterInfoWithDetailsList().map { characterInfoListWithDetails ->
+            characterInfoListWithDetails.map { it.toCharacterInfoWithDetails() }
         }
 
     override suspend fun calculateCharacterScore(
@@ -123,8 +123,8 @@ class GameRepositoryImpl @Inject constructor(
         characterRelicCalculator.calculateCharacterScore(
             character = character,
             preset = preset,
-            relicsInfo = relicsInfo.first(),
-            subAffixesData = relicAffixesInfo.first(),
+            relicInfoMap = relicInfoMap.first(),
+            subAffixDataMap = relicAffixInfoMap.first(),
         )
     }
 
@@ -132,39 +132,39 @@ class GameRepositoryImpl @Inject constructor(
         val failInfoNames = mutableListOf<String>()
 
         gameResDataSource.getElements(lang).getOrNull()?.values?.let { elements ->
-            gameInfoDao.upsertElementsInfo(elements.map { it.toElementInfoEntity() }.toSet())
+            gameInfoDao.upsertElementInfoSet(elements.map { it.toElementInfoEntity() }.toSet())
         } ?: { failInfoNames.add("elements") }
 
         gameResDataSource.getPaths(lang).getOrNull()?.values?.let { paths ->
-            gameInfoDao.upsertPathsInfo(paths.map { it.toPathInfoEntity() }.toSet())
+            gameInfoDao.upsertPathInfoSet(paths.map { it.toPathInfoEntity() }.toSet())
         } ?: { failInfoNames.add("paths") }
 
         gameResDataSource.getCharacters(lang).getOrNull()?.values?.let { characters ->
-            gameInfoDao.upsertCharactersInfo(characters.map { it.toCharacterInfoEntity() }.toSet())
+            gameInfoDao.upsertCharacterInfoSet(characters.map { it.toCharacterInfoEntity() }.toSet())
         } ?: { failInfoNames.add("characters") }
 
         gameResDataSource.getLightCones(lang).getOrNull()?.values?.let { lightCones ->
-            gameInfoDao.upsertLightConesInfo(lightCones.map { it.toLightConeInfoEntity() }.toSet())
+            gameInfoDao.upsertLightConeInfoSet(lightCones.map { it.toLightConeInfoEntity() }.toSet())
         } ?: { failInfoNames.add("lightCones") }
 
         gameResDataSource.getProperties(lang).getOrNull()?.values?.let { properties ->
-            gameInfoDao.upsertPropertiesInfo(properties.map { it.toPropertyInfoEntity() }.toSet())
+            gameInfoDao.upsertPropertyInfoSet(properties.map { it.toPropertyInfoEntity() }.toSet())
         } ?: { failInfoNames.add("properties") }
 
         gameResDataSource.getRelics(lang).getOrNull()?.values?.let { relics ->
-            gameInfoDao.upsertRelicsInfo(relics.map { it.toRelicInfoEntity() }.toSet())
+            gameInfoDao.upsertRelicInfoSet(relics.map { it.toRelicInfoEntity() }.toSet())
         } ?: { failInfoNames.add("relics") }
 
         gameResDataSource.getRelicSets(lang).getOrNull()?.values?.let { relicSets ->
-            gameInfoDao.upsertRelicSetsInfo(relicSets.map { it.toRelicSetInfoEntity() }.toSet())
+            gameInfoDao.upsertRelicSetInfoSet(relicSets.map { it.toRelicSetInfoEntity() }.toSet())
         } ?: { failInfoNames.add("relicSets") }
 
         gameResDataSource.getRelicMainAffixes(lang).getOrNull()?.values?.let { mainAffixData ->
-            gameInfoDao.upsertAffixesData(mainAffixData.map { it.toAffixDataEntity() }.toSet())
+            gameInfoDao.upsertAffixDataSet(mainAffixData.map { it.toAffixDataEntity() }.toSet())
         } ?: { failInfoNames.add("mainAffixData") }
 
         gameResDataSource.getRelicSubAffixes(lang).getOrNull()?.values?.let { subAffixData ->
-            gameInfoDao.upsertAffixesData(subAffixData.map { it.toAffixDataEntity() }.toSet())
+            gameInfoDao.upsertAffixDataSet(subAffixData.map { it.toAffixDataEntity() }.toSet())
         } ?: { failInfoNames.add("subAffixData") }
 
         if (failInfoNames.isNotEmpty()) {

@@ -27,9 +27,9 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
 
     override fun calculateSubAffixScore(
         subAffix: SubAffix,
-        subAffixesInfo: Map<String, AffixInfo>,
+        subAffixInfoMap: Map<String, AffixInfo>,
     ): Float {
-        val affixIncreaseValues = subAffixesInfo[subAffix.type]?.let { affixInfo ->
+        val affixIncreaseValues = subAffixInfoMap[subAffix.type]?.let { affixInfo ->
             affixInfo.base.truncate(AFFIX_TRUNCATE_LENGTH) +
                 affixInfo.step.truncate(AFFIX_TRUNCATE_LENGTH) *
                 affixInfo.stepNum
@@ -59,9 +59,9 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
         relic: Relic,
         preset: Preset,
         relicInfo: RelicInfo,
-        subAffixesData: Map<String, AffixData>,
+        subAffixDataMap: Map<String, AffixData>,
     ): RelicReport {
-        val affixTypeToSubAffixes = subAffixesData[relic.rarity.toString()]?.affixes?.mapKeys {
+        val affixTypeToSubAffixes = subAffixDataMap[relic.rarity.toString()]?.affixes?.mapKeys {
             it.value.property
         } ?: emptyMap()
 
@@ -80,7 +80,7 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
         val subAffixReports = relic.subAffix.map { subAffix ->
             val score = calculateSubAffixScore(
                 subAffix = subAffix,
-                subAffixesInfo = affixTypeToSubAffixes,
+                subAffixInfoMap = affixTypeToSubAffixes,
             )
             AffixReport(
                 type = subAffix.type,
@@ -167,18 +167,18 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
     override fun calculateCharacterScore(
         character: Character,
         preset: Preset,
-        relicsInfo: Map<String, RelicInfo>,
-        subAffixesData: Map<String, AffixData>,
+        relicInfoMap: Map<String, RelicInfo>,
+        subAffixDataMap: Map<String, AffixData>,
     ): CharacterReport {
         val relicReports = character.relics.map { relic ->
             calculateRelicScore(
                 relic = relic,
                 preset = preset,
-                relicInfo = relicsInfo[relic.id]
+                relicInfo = relicInfoMap[relic.id]
                     ?: throw IllegalArgumentException(
-                        "Relic id: ${relic.id}, RelicsInfoKeys: ${relicsInfo.keys}",
+                        "Relic id: ${relic.id}, RelicInfoMapKeys: ${relicInfoMap.keys}",
                     ),
-                subAffixesData = subAffixesData,
+                subAffixDataMap = subAffixDataMap,
             )
         }
 

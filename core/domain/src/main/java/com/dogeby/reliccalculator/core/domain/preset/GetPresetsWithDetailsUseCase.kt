@@ -32,24 +32,24 @@ class GetPresetsWithDetailsUseCase @Inject constructor(
         sortField: CharacterSortField,
     ): Flow<List<PresetWithDetails>> {
         return combine(
-            gameRepository.charactersInfoWithDetails,
-            gameRepository.relicSetsInfo,
-            gameRepository.propertiesInfo,
-        ) { charactersInfoWithDetails, relicSetsInfo, propertiesInfo ->
+            gameRepository.characterInfoWithDetailsList,
+            gameRepository.relicSetInfoMap,
+            gameRepository.propertyInfoMap,
+        ) { characterInfoWithDetailsList, relicSetInfoMap, propertyInfoMap ->
             val isMatchingPreferences: (CharacterInfoWithDetails) -> Boolean = { details ->
                 details.characterInfo.rarity.isMatching(filteredRarities) &&
                     details.pathInfo.id.isMatching(filteredPathIds) &&
                     details.elementInfo.id.isMatching(filteredElementIds)
             }
 
-            val filteredCharactersInfoWithDetails = charactersInfoWithDetails
+            val filteredCharacters = characterInfoWithDetailsList
                 .filter(isMatchingPreferences)
                 .associateBy { it.characterInfo.id }
 
             CharacterFilterResults(
-                filteredCharacters = filteredCharactersInfoWithDetails,
-                relicSets = relicSetsInfo,
-                properties = propertiesInfo,
+                filteredCharacters = filteredCharacters,
+                relicSets = relicSetInfoMap,
+                properties = propertyInfoMap,
             )
         }.flatMapLatest { characterFilterResults ->
             val filteredPreset = presetRepository
@@ -57,9 +57,9 @@ class GetPresetsWithDetailsUseCase @Inject constructor(
 
             filteredPreset
                 .mapToPresetsWithDetails(
-                    charactersInfoWithDetails = characterFilterResults.filteredCharacters,
-                    relicSetsInfo = characterFilterResults.relicSets,
-                    propertiesInfo = characterFilterResults.properties,
+                    characterInfoWithDetailsMap = characterFilterResults.filteredCharacters,
+                    relicSetInfoMap = characterFilterResults.relicSets,
+                    propertyInfoMap = characterFilterResults.properties,
                 )
                 .map {
                     it.sortedBy(sortField)
@@ -76,32 +76,32 @@ class GetPresetsWithDetailsUseCase @Inject constructor(
     private fun <T> T.isMatching(list: Set<T>) = list.isEmpty() or (this in list)
 
     private fun Flow<List<Preset>>.mapToPresetsWithDetails(
-        charactersInfoWithDetails: Map<String, CharacterInfoWithDetails>,
-        relicSetsInfo: Map<String, RelicSetInfo>,
-        propertiesInfo: Map<String, PropertyInfo>,
+        characterInfoWithDetailsMap: Map<String, CharacterInfoWithDetails>,
+        relicSetInfoMap: Map<String, RelicSetInfo>,
+        propertyInfoMap: Map<String, PropertyInfo>,
     ): Flow<List<PresetWithDetails>> {
         return map { presets ->
             presets.mapNotNull { preset ->
-                val characterInfoWithDetails = charactersInfoWithDetails[preset.characterId]
+                val characterInfoWithDetails = characterInfoWithDetailsMap[preset.characterId]
                     ?: return@mapNotNull null
 
                 preset.toPresetWithDetails(
                     characterInfo = characterInfoWithDetails.characterInfo,
                     pathInfo = characterInfoWithDetails.pathInfo,
                     elementInfo = characterInfoWithDetails.elementInfo,
-                    relicSets = preset.relicSetIds.mapNotNull { relicSetsInfo[it] },
+                    relicSets = preset.relicSetIds.mapNotNull { relicSetInfoMap[it] },
                     pieceMainAffixWeightsWithInfo = preset
                         .pieceMainAffixWeights
                         .mapValues { pieceMainAffixWeight ->
                             pieceMainAffixWeight.value.mapNotNullToAffixWeightsWithInfo(
-                                propertiesInfo,
+                                propertyInfoMap,
                             )
                         },
                     subAffixWeightsWithInfo = preset
                         .subAffixWeights
-                        .mapNotNullToAffixWeightsWithInfo(propertiesInfo),
+                        .mapNotNullToAffixWeightsWithInfo(propertyInfoMap),
                     attrComparisons = preset.attrComparisons.mapNotNull { attrComparison ->
-                        propertiesInfo[attrComparison.type]?.let {
+                        propertyInfoMap[attrComparison.type]?.let {
                             AttrComparisonWithInfo(
                                 attrComparison = attrComparison,
                                 propertyInfo = it,
@@ -114,10 +114,10 @@ class GetPresetsWithDetailsUseCase @Inject constructor(
     }
 
     private fun List<AffixWeight>.mapNotNullToAffixWeightsWithInfo(
-        propertiesInfo: Map<String, PropertyInfo>,
+        propertyInfoMap: Map<String, PropertyInfo>,
     ): List<AffixWeightWithInfo> {
         return mapNotNull { affixWeight ->
-            propertiesInfo[affixWeight.type]?.let {
+            propertyInfoMap[affixWeight.type]?.let {
                 AffixWeightWithInfo(
                     affixWeight = affixWeight,
                     propertyInfo = it,

@@ -7,7 +7,7 @@ import com.dogeby.reliccalculator.core.model.mihomo.index.RelicInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.RelicPiece
 import org.jetbrains.annotations.TestOnly
 
-@Entity(tableName = "relicsInfo")
+@Entity(tableName = "relicInfoTable")
 data class RelicInfoEntity(
     @PrimaryKey val id: String,
     @ColumnInfo("set_id") val setId: String,

@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.dogeby.reliccalculator.core.model.mihomo.index.PathInfo
 import org.jetbrains.annotations.TestOnly
 
-@Entity(tableName = "pathsInfo")
+@Entity(tableName = "pathInfoTable")
 data class PathInfoEntity(
     @PrimaryKey val id: String,
     val name: String,

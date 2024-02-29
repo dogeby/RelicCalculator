@@ -7,7 +7,7 @@ import com.dogeby.reliccalculator.core.database.util.StringListConverter
 import com.dogeby.reliccalculator.core.model.mihomo.index.RelicSetInfo
 import org.jetbrains.annotations.TestOnly
 
-@Entity(tableName = "relicSetsInfo")
+@Entity(tableName = "relicSetInfoTable")
 @TypeConverters(StringListConverter::class)
 data class RelicSetInfoEntity(
     @PrimaryKey val id: String,

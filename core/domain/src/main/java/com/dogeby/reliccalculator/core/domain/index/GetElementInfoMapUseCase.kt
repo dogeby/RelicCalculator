@@ -3,9 +3,9 @@ package com.dogeby.reliccalculator.core.domain.index
 import com.dogeby.reliccalculator.core.data.repository.GameRepository
 import javax.inject.Inject
 
-class GetPathsInfoUseCase @Inject constructor(
+class GetElementInfoMapUseCase @Inject constructor(
     private val gameRepository: GameRepository,
 ) {
 
-    operator fun invoke() = gameRepository.pathsInfo
+    operator fun invoke() = gameRepository.elementInfoMap
 }
