@@ -1,8 +1,8 @@
 package com.dogeby.reliccalculator.core.domain
 
-import com.dogeby.core.data.fake.FakeGameRepository
-import com.dogeby.core.data.fake.FakePreferencesRepository
-import com.dogeby.core.data.fake.FakePresetRepository
+import com.dogeby.reliccalculator.core.data.fake.FakeGameRepository
+import com.dogeby.reliccalculator.core.data.fake.FakePreferencesRepository
+import com.dogeby.reliccalculator.core.data.fake.FakePresetRepository
 import com.dogeby.reliccalculator.core.domain.model.AffixWeightWithInfo
 import com.dogeby.reliccalculator.core.domain.model.AttrComparisonWithInfo
 import com.dogeby.reliccalculator.core.domain.model.PresetWithDetails

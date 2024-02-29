@@ -1,7 +1,7 @@
 package com.dogeby.reliccalculator.core.domain.preset
 
-import com.dogeby.core.data.repository.GameRepository
-import com.dogeby.core.data.repository.PresetRepository
+import com.dogeby.reliccalculator.core.data.repository.GameRepository
+import com.dogeby.reliccalculator.core.data.repository.PresetRepository
 import com.dogeby.reliccalculator.core.domain.model.AffixWeightWithInfo
 import com.dogeby.reliccalculator.core.domain.model.AttrComparisonWithInfo
 import com.dogeby.reliccalculator.core.domain.model.PresetWithDetails

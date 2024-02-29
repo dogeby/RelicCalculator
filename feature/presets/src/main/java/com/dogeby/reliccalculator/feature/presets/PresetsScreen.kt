@@ -24,13 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.dogeby.core.ui.R
-import com.dogeby.core.ui.component.HideableBarLazyVerticalGrid
-import com.dogeby.core.ui.component.preset.PresetListOptionBar
-import com.dogeby.core.ui.component.preset.PresetListOptionBarUiState
-import com.dogeby.core.ui.component.preset.PresetListUiState
-import com.dogeby.core.ui.component.preset.presetList
-import com.dogeby.core.ui.theme.RelicCalculatorTheme
 import com.dogeby.reliccalculator.core.domain.model.AffixWeightWithInfo
 import com.dogeby.reliccalculator.core.domain.model.AttrComparisonWithInfo
 import com.dogeby.reliccalculator.core.domain.model.PresetWithDetails
@@ -45,6 +38,13 @@ import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesDa
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
+import com.dogeby.reliccalculator.core.ui.R
+import com.dogeby.reliccalculator.core.ui.component.HideableBarLazyVerticalGrid
+import com.dogeby.reliccalculator.core.ui.component.preset.PresetListOptionBar
+import com.dogeby.reliccalculator.core.ui.component.preset.PresetListOptionBarUiState
+import com.dogeby.reliccalculator.core.ui.component.preset.PresetListUiState
+import com.dogeby.reliccalculator.core.ui.component.preset.presetList
+import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 
 @Composable
 fun PresetsRoute(

@@ -1,6 +1,6 @@
 package com.dogeby.reliccalculator.core.domain.index
 
-import com.dogeby.core.data.repository.GameRepository
+import com.dogeby.reliccalculator.core.data.repository.GameRepository
 import javax.inject.Inject
 
 class GetElementsInfoUseCase @Inject constructor(

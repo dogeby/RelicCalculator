@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.dogeby.game.resource"
+    namespace = "com.dogeby.reliccalculator.game.resource"
     compileSdk = 34
 
     defaultConfig {

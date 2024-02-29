@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.dogeby.core.ui"
+    namespace = "com.dogeby.reliccalculator.core.ui"
     compileSdk = 34
 
     defaultConfig {
