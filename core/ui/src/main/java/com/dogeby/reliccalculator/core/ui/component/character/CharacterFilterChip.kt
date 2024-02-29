@@ -34,10 +34,10 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dogeby.reliccalculator.core.model.hoyo.index.ElementInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.PathInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.sampleElementInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.samplePathInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.ElementInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.PathInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.sampleElementInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.samplePathInfo
 import com.dogeby.reliccalculator.core.ui.R
 import com.dogeby.reliccalculator.core.ui.component.image.GameImage
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme

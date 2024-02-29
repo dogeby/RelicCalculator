@@ -1,4 +1,4 @@
-package com.dogeby.reliccalculator.core.model.hoyo.index
+package com.dogeby.reliccalculator.core.model.mihomo.index
 
 enum class RelicPiece(val icon: String) {
     HEAD("icon/piece/head.webp"),

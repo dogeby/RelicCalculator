@@ -4,8 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.dogeby.reliccalculator.core.database.util.AffixInfoMapConverter
-import com.dogeby.reliccalculator.core.model.hoyo.index.AffixData
-import com.dogeby.reliccalculator.core.model.hoyo.index.AffixInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.AffixData
+import com.dogeby.reliccalculator.core.model.mihomo.index.AffixInfo
 import org.jetbrains.annotations.TestOnly
 
 @Entity(tableName = "affixesData")

@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.dogeby.reliccalculator.core.database.util.StringListConverter
-import com.dogeby.reliccalculator.core.model.hoyo.index.RelicSetInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.RelicSetInfo
 import org.jetbrains.annotations.TestOnly
 
 @Entity(tableName = "relicSetsInfo")

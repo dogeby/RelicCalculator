@@ -1,4 +1,4 @@
-package com.dogeby.reliccalculator.core.model.hoyo.index
+package com.dogeby.reliccalculator.core.model.mihomo.index
 
 import org.jetbrains.annotations.TestOnly
 

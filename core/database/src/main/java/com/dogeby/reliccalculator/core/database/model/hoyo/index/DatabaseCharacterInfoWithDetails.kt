@@ -2,7 +2,7 @@ package com.dogeby.reliccalculator.core.database.model.hoyo.index
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfoWithDetails
+import com.dogeby.reliccalculator.core.model.mihomo.index.CharacterInfoWithDetails
 
 data class DatabaseCharacterInfoWithDetails(
     @Embedded val characterInfo: CharacterInfoEntity,

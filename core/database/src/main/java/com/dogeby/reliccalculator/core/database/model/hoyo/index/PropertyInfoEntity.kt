@@ -2,7 +2,7 @@ package com.dogeby.reliccalculator.core.database.model.hoyo.index
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.dogeby.reliccalculator.core.model.hoyo.index.PropertyInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.PropertyInfo
 import org.jetbrains.annotations.TestOnly
 
 @Entity(tableName = "propertiesInfo")

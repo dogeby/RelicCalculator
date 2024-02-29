@@ -6,9 +6,9 @@ import com.dogeby.reliccalculator.core.domain.model.AffixWeightWithInfo
 import com.dogeby.reliccalculator.core.domain.model.AttrComparisonWithInfo
 import com.dogeby.reliccalculator.core.domain.model.PresetWithDetails
 import com.dogeby.reliccalculator.core.domain.model.toPresetWithDetails
-import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfoWithDetails
-import com.dogeby.reliccalculator.core.model.hoyo.index.PropertyInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.RelicSetInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.CharacterInfoWithDetails
+import com.dogeby.reliccalculator.core.model.mihomo.index.PropertyInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.RelicSetInfo
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.Preset

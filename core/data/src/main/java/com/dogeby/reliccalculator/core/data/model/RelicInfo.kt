@@ -1,7 +1,7 @@
 package com.dogeby.reliccalculator.core.data.model
 
 import com.dogeby.reliccalculator.core.database.model.hoyo.index.RelicInfoEntity
-import com.dogeby.reliccalculator.core.model.hoyo.index.RelicInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.RelicInfo
 
 fun RelicInfo.toRelicInfoEntity() = RelicInfoEntity(
     id = id,

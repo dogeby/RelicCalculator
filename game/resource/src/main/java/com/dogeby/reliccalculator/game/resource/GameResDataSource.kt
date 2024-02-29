@@ -1,14 +1,14 @@
 package com.dogeby.reliccalculator.game.resource
 
 import com.dogeby.reliccalculator.core.model.GameTextLanguage
-import com.dogeby.reliccalculator.core.model.hoyo.index.AffixData
-import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.ElementInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.LightConeInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.PathInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.PropertyInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.RelicInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.RelicSetInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.AffixData
+import com.dogeby.reliccalculator.core.model.mihomo.index.CharacterInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.ElementInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.LightConeInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.PathInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.PropertyInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.RelicInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.RelicSetInfo
 
 interface GameResDataSource {
 

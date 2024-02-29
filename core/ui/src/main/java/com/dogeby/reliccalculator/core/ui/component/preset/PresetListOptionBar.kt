@@ -8,10 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dogeby.reliccalculator.core.model.hoyo.index.ElementInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.PathInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.sampleElementInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.samplePathInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.ElementInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.PathInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.sampleElementInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.samplePathInfo
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
 import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesData
 import com.dogeby.reliccalculator.core.ui.component.character.CharacterFilterChip

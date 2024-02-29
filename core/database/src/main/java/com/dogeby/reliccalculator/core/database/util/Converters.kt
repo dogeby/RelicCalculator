@@ -1,11 +1,11 @@
 package com.dogeby.reliccalculator.core.database.util
 
 import androidx.room.TypeConverter
-import com.dogeby.reliccalculator.core.model.hoyo.Attribute
-import com.dogeby.reliccalculator.core.model.hoyo.Relic
-import com.dogeby.reliccalculator.core.model.hoyo.RelicSet
-import com.dogeby.reliccalculator.core.model.hoyo.index.AffixInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.RelicPiece
+import com.dogeby.reliccalculator.core.model.mihomo.Attribute
+import com.dogeby.reliccalculator.core.model.mihomo.Relic
+import com.dogeby.reliccalculator.core.model.mihomo.RelicSet
+import com.dogeby.reliccalculator.core.model.mihomo.index.AffixInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.RelicPiece
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.report.AffixCount

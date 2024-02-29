@@ -1,7 +1,7 @@
 package com.dogeby.reliccalculator.core.data.model
 
 import com.dogeby.reliccalculator.core.database.model.hoyo.index.DatabaseCharacterInfoWithDetails
-import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfoWithDetails
+import com.dogeby.reliccalculator.core.model.mihomo.index.CharacterInfoWithDetails
 
 fun CharacterInfoWithDetails.toDatabaseCharacterInfoWithDetails() =
     DatabaseCharacterInfoWithDetails(

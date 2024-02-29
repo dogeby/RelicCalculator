@@ -8,7 +8,7 @@ import com.dogeby.reliccalculator.core.database.util.AffixWeightListConverter
 import com.dogeby.reliccalculator.core.database.util.AttrComparisonListConverter
 import com.dogeby.reliccalculator.core.database.util.MainAffixWeightMapConverter
 import com.dogeby.reliccalculator.core.database.util.StringListConverter
-import com.dogeby.reliccalculator.core.model.hoyo.index.RelicPiece
+import com.dogeby.reliccalculator.core.model.mihomo.index.RelicPiece
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator

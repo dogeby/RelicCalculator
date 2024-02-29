@@ -3,8 +3,8 @@ package com.dogeby.reliccalculator.core.database.model.hoyo.index
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.dogeby.reliccalculator.core.model.hoyo.index.RelicInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.RelicPiece
+import com.dogeby.reliccalculator.core.model.mihomo.index.RelicInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.RelicPiece
 import org.jetbrains.annotations.TestOnly
 
 @Entity(tableName = "relicsInfo")

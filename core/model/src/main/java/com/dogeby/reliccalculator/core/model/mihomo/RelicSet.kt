@@ -1,11 +1,10 @@
-package com.dogeby.reliccalculator.core.model.hoyo
+package com.dogeby.reliccalculator.core.model.mihomo
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LightCone(
+data class RelicSet(
     val id: String,
     val name: String,
     val icon: String,
-    val portrait: String,
 )

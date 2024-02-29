@@ -1,12 +1,12 @@
 package com.dogeby.reliccalculator.game.rating
 
-import com.dogeby.reliccalculator.core.model.hoyo.Character
-import com.dogeby.reliccalculator.core.model.hoyo.Relic
-import com.dogeby.reliccalculator.core.model.hoyo.SubAffix
-import com.dogeby.reliccalculator.core.model.hoyo.index.AffixData
-import com.dogeby.reliccalculator.core.model.hoyo.index.AffixInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.RelicInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.RelicPiece
+import com.dogeby.reliccalculator.core.model.mihomo.Character
+import com.dogeby.reliccalculator.core.model.mihomo.Relic
+import com.dogeby.reliccalculator.core.model.mihomo.SubAffix
+import com.dogeby.reliccalculator.core.model.mihomo.index.AffixData
+import com.dogeby.reliccalculator.core.model.mihomo.index.AffixInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.RelicInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.RelicPiece
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator

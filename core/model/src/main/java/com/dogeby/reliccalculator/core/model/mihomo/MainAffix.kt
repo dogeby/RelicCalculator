@@ -1,10 +1,10 @@
-package com.dogeby.reliccalculator.core.model.hoyo
+package com.dogeby.reliccalculator.core.model.mihomo
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Attribute(
-    val field: String,
+data class MainAffix(
+    val type: String,
     val name: String,
     val icon: String,
     val value: Double,

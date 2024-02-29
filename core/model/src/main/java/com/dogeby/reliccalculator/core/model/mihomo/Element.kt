@@ -1,9 +1,9 @@
-package com.dogeby.reliccalculator.core.model.hoyo
+package com.dogeby.reliccalculator.core.model.mihomo
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RelicSet(
+data class Element(
     val id: String,
     val name: String,
     val icon: String,
