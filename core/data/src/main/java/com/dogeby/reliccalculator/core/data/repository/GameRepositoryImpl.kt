@@ -140,11 +140,15 @@ class GameRepositoryImpl @Inject constructor(
         } ?: { failInfoNames.add("paths") }
 
         gameResDataSource.getCharacters(lang).getOrNull()?.values?.let { characters ->
-            gameInfoDao.upsertCharacterInfoSet(characters.map { it.toCharacterInfoEntity() }.toSet())
+            gameInfoDao.upsertCharacterInfoSet(
+                characters.map { it.toCharacterInfoEntity() }.toSet(),
+            )
         } ?: { failInfoNames.add("characters") }
 
         gameResDataSource.getLightCones(lang).getOrNull()?.values?.let { lightCones ->
-            gameInfoDao.upsertLightConeInfoSet(lightCones.map { it.toLightConeInfoEntity() }.toSet())
+            gameInfoDao.upsertLightConeInfoSet(
+                lightCones.map { it.toLightConeInfoEntity() }.toSet(),
+            )
         } ?: { failInfoNames.add("lightCones") }
 
         gameResDataSource.getProperties(lang).getOrNull()?.values?.let { properties ->
