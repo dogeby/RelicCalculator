@@ -50,7 +50,7 @@ fun CharacterSortFieldChip(
 }
 
 @Composable
-fun CharacterSortDropdownMenuItem(
+private fun CharacterSortDropdownMenuItem(
     isSelected: Boolean,
     field: CharacterSortField,
     onClick: () -> Unit,
