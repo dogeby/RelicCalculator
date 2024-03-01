@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.dogeby.core.datastore"
+    namespace = "com.dogeby.reliccalculator.core.datastore"
     compileSdk = 34
 
     defaultConfig {

@@ -1,6 +1,6 @@
 package com.dogeby.reliccalculator.core.model.report
 
-import com.dogeby.reliccalculator.core.model.hoyo.Character
+import com.dogeby.reliccalculator.core.model.mihomo.Character
 import com.dogeby.reliccalculator.core.model.preset.Preset
 import kotlinx.datetime.Instant
 

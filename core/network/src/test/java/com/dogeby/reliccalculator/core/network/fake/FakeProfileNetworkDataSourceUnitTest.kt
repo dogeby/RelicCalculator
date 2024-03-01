@@ -1,7 +1,7 @@
 package com.dogeby.reliccalculator.core.network.fake
 
 import JvmUnitTestFakeAssetManager
-import com.dogeby.core.common.di.CommonModule
+import com.dogeby.reliccalculator.core.common.di.CommonModule
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert

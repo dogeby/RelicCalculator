@@ -2,16 +2,16 @@ package com.dogeby.reliccalculator.feature.presets
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dogeby.core.ui.component.preset.PresetListOptionBarUiState
-import com.dogeby.core.ui.component.preset.PresetListUiState
-import com.dogeby.reliccalculator.core.domain.index.GetElementsInfoUseCase
-import com.dogeby.reliccalculator.core.domain.index.GetPathsInfoUseCase
+import com.dogeby.reliccalculator.core.domain.index.GetElementInfoMapUseCase
+import com.dogeby.reliccalculator.core.domain.index.GetPathInfoMapUseCase
 import com.dogeby.reliccalculator.core.domain.model.PresetWithDetails
 import com.dogeby.reliccalculator.core.domain.preference.GetPresetListPreferencesDataUseCase
 import com.dogeby.reliccalculator.core.domain.preference.SetPresetListPreferencesDataUseCase
 import com.dogeby.reliccalculator.core.domain.preset.GetPresetsWithDetailsUseCase
 import com.dogeby.reliccalculator.core.domain.preset.UpdatePresetAutoUpdateUseCase
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
+import com.dogeby.reliccalculator.core.ui.component.preset.PresetListOptionBarUiState
+import com.dogeby.reliccalculator.core.ui.component.preset.PresetListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -30,15 +30,15 @@ import kotlinx.coroutines.launch
 class PresetsViewModel @Inject constructor(
     private val updatePresetAutoUpdateUseCase: UpdatePresetAutoUpdateUseCase,
     private val setPresetListPreferencesDataUseCase: SetPresetListPreferencesDataUseCase,
-    getPathsInfoUseCase: GetPathsInfoUseCase,
-    getElementsInfoUseCase: GetElementsInfoUseCase,
+    getPathInfoMapUseCase: GetPathInfoMapUseCase,
+    getElementInfoMapUseCase: GetElementInfoMapUseCase,
     getPresetListPreferencesDataUseCase: GetPresetListPreferencesDataUseCase,
     getPresetsWithDetailsUseCase: GetPresetsWithDetailsUseCase,
 ) : ViewModel() {
 
     val presetsOptionBarUiState: StateFlow<PresetListOptionBarUiState> = combine(
-        getPathsInfoUseCase(),
-        getElementsInfoUseCase(),
+        getPathInfoMapUseCase(),
+        getElementInfoMapUseCase(),
         getPresetListPreferencesDataUseCase(),
     ) { pathInfoList, elementInfoList, presetsPreferencesData ->
         PresetListOptionBarUiState.Success(

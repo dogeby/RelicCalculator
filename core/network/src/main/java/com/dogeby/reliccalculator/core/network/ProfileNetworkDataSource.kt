@@ -1,6 +1,6 @@
 package com.dogeby.reliccalculator.core.network
 
-import com.dogeby.reliccalculator.core.model.hoyo.Profile
+import com.dogeby.reliccalculator.core.model.mihomo.Profile
 
 interface ProfileNetworkDataSource {
 

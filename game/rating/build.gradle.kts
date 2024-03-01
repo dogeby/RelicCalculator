@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.dogeby.game.rating"
+    namespace = "com.dogeby.game.reliccalculator.rating"
     compileSdk = 34
 
     defaultConfig {

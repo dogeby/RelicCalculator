@@ -1,6 +1,6 @@
 package com.dogeby.reliccalculator.core.domain.preset
 
-import com.dogeby.core.data.repository.PresetRepository
+import com.dogeby.reliccalculator.core.data.repository.PresetRepository
 import javax.inject.Inject
 
 class UpdatePresetAutoUpdateUseCase @Inject constructor(

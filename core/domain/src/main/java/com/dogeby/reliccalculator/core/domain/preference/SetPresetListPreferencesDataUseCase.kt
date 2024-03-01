@@ -1,6 +1,6 @@
 package com.dogeby.reliccalculator.core.domain.preference
 
-import com.dogeby.core.data.repository.PreferencesRepository
+import com.dogeby.reliccalculator.core.data.repository.PreferencesRepository
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
 import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesData
 import javax.inject.Inject

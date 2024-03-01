@@ -1,7 +1,7 @@
 package com.dogeby.reliccalculator.core.domain.preset
 
-import com.dogeby.core.data.repository.PreferencesRepository
-import com.dogeby.core.data.repository.PresetRepository
+import com.dogeby.reliccalculator.core.data.repository.PreferencesRepository
+import com.dogeby.reliccalculator.core.data.repository.PresetRepository
 import com.dogeby.reliccalculator.core.domain.model.DefaultPresetUpdateResult
 import javax.inject.Inject
 import kotlinx.coroutines.flow.first

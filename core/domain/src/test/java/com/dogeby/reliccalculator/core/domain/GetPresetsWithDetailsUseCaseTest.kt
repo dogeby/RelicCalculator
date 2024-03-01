@@ -1,20 +1,20 @@
 package com.dogeby.reliccalculator.core.domain
 
-import com.dogeby.core.data.fake.FakeGameRepository
-import com.dogeby.core.data.fake.FakePreferencesRepository
-import com.dogeby.core.data.fake.FakePresetRepository
+import com.dogeby.reliccalculator.core.data.fake.FakeGameRepository
+import com.dogeby.reliccalculator.core.data.fake.FakePreferencesRepository
+import com.dogeby.reliccalculator.core.data.fake.FakePresetRepository
 import com.dogeby.reliccalculator.core.domain.model.AffixWeightWithInfo
 import com.dogeby.reliccalculator.core.domain.model.AttrComparisonWithInfo
 import com.dogeby.reliccalculator.core.domain.model.PresetWithDetails
 import com.dogeby.reliccalculator.core.domain.model.toPresetWithDetails
 import com.dogeby.reliccalculator.core.domain.preset.GetPresetsWithDetailsUseCase
-import com.dogeby.reliccalculator.core.model.hoyo.index.RelicPiece
-import com.dogeby.reliccalculator.core.model.hoyo.index.sampleCharacterInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.sampleCharacterInfoWithDetails
-import com.dogeby.reliccalculator.core.model.hoyo.index.sampleElementInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.samplePathInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.samplePropertyInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.sampleRelicSetInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.RelicPiece
+import com.dogeby.reliccalculator.core.model.mihomo.index.sampleCharacterInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.sampleCharacterInfoWithDetails
+import com.dogeby.reliccalculator.core.model.mihomo.index.sampleElementInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.samplePathInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.samplePropertyInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.sampleRelicSetInfo
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
 import com.dogeby.reliccalculator.core.model.preferences.samplePresetListPreferencesData
 import com.dogeby.reliccalculator.core.model.preset.samplePreset
@@ -33,9 +33,9 @@ class GetPresetsWithDetailsUseCaseTest {
 
     private fun insertSampleInfoData() {
         gameRepository.apply {
-            sendCharacterInfoWithDetails(listOf(sampleCharacterInfoWithDetails))
-            sendRelicSetInfo(mapOf(sampleRelicSetInfo.id to sampleRelicSetInfo))
-            sendPropertyInfo(mapOf(samplePropertyInfo.type to samplePropertyInfo))
+            sendCharacterInfoWithDetailsList(listOf(sampleCharacterInfoWithDetails))
+            sendRelicSetInfoMap(mapOf(sampleRelicSetInfo.id to sampleRelicSetInfo))
+            sendPropertyInfoMap(mapOf(samplePropertyInfo.type to samplePropertyInfo))
         }
     }
 
@@ -165,7 +165,7 @@ class GetPresetsWithDetailsUseCaseTest {
                 ),
             )
         }
-        gameRepository.sendCharacterInfoWithDetails(characterInfoWithDetails)
+        gameRepository.sendCharacterInfoWithDetailsList(characterInfoWithDetails)
         preferencesRepository.setPresetListPreferencesData(
             samplePresetListPreferencesData.copy(
                 sortField = CharacterSortField.NAME_ASC,
@@ -198,7 +198,7 @@ class GetPresetsWithDetailsUseCaseTest {
                 ),
             )
         }
-        gameRepository.sendCharacterInfoWithDetails(characterInfoWithDetails)
+        gameRepository.sendCharacterInfoWithDetailsList(characterInfoWithDetails)
         preferencesRepository.setPresetListPreferencesData(
             samplePresetListPreferencesData.copy(
                 sortField = CharacterSortField.ID_ASC,
@@ -231,7 +231,7 @@ class GetPresetsWithDetailsUseCaseTest {
                 ),
             )
         }
-        gameRepository.sendCharacterInfoWithDetails(characterInfoWithDetails)
+        gameRepository.sendCharacterInfoWithDetailsList(characterInfoWithDetails)
         preferencesRepository.setPresetListPreferencesData(
             samplePresetListPreferencesData.copy(
                 sortField = CharacterSortField.ID_DESC,

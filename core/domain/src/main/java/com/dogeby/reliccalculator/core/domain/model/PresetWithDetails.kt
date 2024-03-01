@@ -1,10 +1,10 @@
 package com.dogeby.reliccalculator.core.domain.model
 
-import com.dogeby.reliccalculator.core.model.hoyo.index.CharacterInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.ElementInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.PathInfo
-import com.dogeby.reliccalculator.core.model.hoyo.index.RelicPiece
-import com.dogeby.reliccalculator.core.model.hoyo.index.RelicSetInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.CharacterInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.ElementInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.PathInfo
+import com.dogeby.reliccalculator.core.model.mihomo.index.RelicPiece
+import com.dogeby.reliccalculator.core.model.mihomo.index.RelicSetInfo
 import com.dogeby.reliccalculator.core.model.preset.Preset
 
 data class PresetWithDetails(
