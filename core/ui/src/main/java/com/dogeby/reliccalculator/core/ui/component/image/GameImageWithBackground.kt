@@ -25,6 +25,8 @@ fun GameImageWithBackground(
     imageSize: Dp = 24.dp,
     imageContentScale: ContentScale = ContentScale.Fit,
     imageColorFilter: ColorFilter? = null,
+    tonalElevation: Dp = 0.dp,
+    shadowElevation: Dp = 0.dp,
 ) {
     Surface(
         modifier = modifier,
