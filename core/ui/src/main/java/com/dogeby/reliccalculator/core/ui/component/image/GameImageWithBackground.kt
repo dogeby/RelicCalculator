@@ -32,6 +32,8 @@ fun GameImageWithBackground(
         modifier = modifier,
         shape = shape,
         color = backgroundColor,
+        tonalElevation = tonalElevation,
+        shadowElevation = shadowElevation,
     ) {
         GameImage(
             src = src,
