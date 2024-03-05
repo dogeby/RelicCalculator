@@ -12,4 +12,11 @@
     <string name="dismiss">닫기</string>
     <string name="clear_all">모두 해제</string>
     <string name="confirm">확인</string>
+
+    <string name="head">머리</string>
+    <string name="hand">팔</string>
+    <string name="body">몸통</string>
+    <string name="foot">다리</string>
+    <string name="planar_sphere">차원 구체</string>
+    <string name="link_rope">연결 매듭</string>
 </resources>
