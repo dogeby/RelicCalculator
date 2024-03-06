@@ -15,23 +15,39 @@ import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 
 fun LazyListScope.pieceMainAffixWeightList(
-    relicPieces: Map<RelicPiece, List<AffixWeightWithInfo>>,
+    pieceMainAffixWeightListUiState: PieceMainAffixWeightListUiState,
     onMainAffixWeightChangeFinished: (
         relicPiece: RelicPiece,
         affixId: String,
         weight: Float,
     ) -> Unit,
 ) {
-    items(
-        items = relicPieces.toList(),
-        key = { it },
-    ) { (relicPiece, affixes) ->
-        PieceMainAffixWeightCard(
-            relicPiece = relicPiece,
-            affixWeightWithInfoList = affixes,
-            onWeightChangeFinished = onMainAffixWeightChangeFinished,
-        )
+    when (pieceMainAffixWeightListUiState) {
+        PieceMainAffixWeightListUiState.Loading -> Unit
+        is PieceMainAffixWeightListUiState.Success -> {
+            items(
+                items = pieceMainAffixWeightListUiState.pieceToAffixWeightsMap.toList(),
+                key = { (relicPiece, _) ->
+                    relicPiece
+                },
+            ) { (relicPiece, affixes) ->
+                PieceMainAffixWeightCard(
+                    relicPiece = relicPiece,
+                    affixWeightWithInfoList = affixes,
+                    onWeightChangeFinished = onMainAffixWeightChangeFinished,
+                )
+            }
+        }
     }
+}
+
+sealed interface PieceMainAffixWeightListUiState {
+
+    data object Loading : PieceMainAffixWeightListUiState
+
+    data class Success(
+        val pieceToAffixWeightsMap: Map<RelicPiece, List<AffixWeightWithInfo>>,
+    ) : PieceMainAffixWeightListUiState
 }
 
 @Preview(apiLevel = 33)
@@ -62,9 +78,11 @@ private fun PreviewPieceMainAffixWeightList() {
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             pieceMainAffixWeightList(
-                relicPieces = RelicPiece.entries.associateWith {
-                    affixes
-                },
+                pieceMainAffixWeightListUiState = PieceMainAffixWeightListUiState.Success(
+                    RelicPiece.entries.associateWith {
+                        affixes
+                    },
+                ),
                 onMainAffixWeightChangeFinished = { _, _, _ -> },
             )
         }
