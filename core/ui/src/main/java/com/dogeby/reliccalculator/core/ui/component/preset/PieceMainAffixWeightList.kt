@@ -16,8 +16,6 @@ import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 
 fun LazyListScope.pieceMainAffixWeightList(
     relicPieces: Map<RelicPiece, List<AffixWeightWithInfo>>,
-    onMainAffixAdd: (RelicPiece) -> Unit,
-    onMainAffixDelete: (RelicPiece, affixId: String) -> Unit,
     onMainAffixWeightChangeFinished: (
         relicPiece: RelicPiece,
         affixId: String,
@@ -31,8 +29,6 @@ fun LazyListScope.pieceMainAffixWeightList(
         PieceMainAffixWeightCard(
             relicPiece = relicPiece,
             affixWeightWithInfoList = affixes,
-            onAddButtonClick = onMainAffixAdd,
-            onMainAffixDelete = onMainAffixDelete,
             onWeightChangeFinished = onMainAffixWeightChangeFinished,
         )
     }
@@ -40,7 +36,7 @@ fun LazyListScope.pieceMainAffixWeightList(
 
 @Preview(apiLevel = 33)
 @Composable
-fun PreviewPieceMainAffixWeightList() {
+private fun PreviewPieceMainAffixWeightList() {
     RelicCalculatorTheme {
         val affixes = List(3) {
             AffixWeightWithInfo(
@@ -69,8 +65,6 @@ fun PreviewPieceMainAffixWeightList() {
                 relicPieces = RelicPiece.entries.associateWith {
                     affixes
                 },
-                onMainAffixAdd = {},
-                onMainAffixDelete = { _, _ -> },
                 onMainAffixWeightChangeFinished = { _, _, _ -> },
             )
         }

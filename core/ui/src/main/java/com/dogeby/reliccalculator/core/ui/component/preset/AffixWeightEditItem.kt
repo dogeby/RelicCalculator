@@ -7,10 +7,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
@@ -38,7 +34,6 @@ fun AffixWeightEditItem(
     weight: () -> Float,
     icon: String,
     onWeightChangeFinished: (Float) -> Unit,
-    onDelete: () -> Unit,
     modifier: Modifier = Modifier,
     shape: Shape = RoundedCornerShape(4.dp),
     color: Color = MaterialTheme.colorScheme.surface,
@@ -78,12 +73,6 @@ fun AffixWeightEditItem(
                 AffixWeightSlider(
                     weight = weight,
                     onValueChangeFinished = onWeightChangeFinished,
-                )
-            }
-            IconButton(onClick = onDelete) {
-                Icon(
-                    imageVector = Icons.Default.Delete,
-                    contentDescription = null,
                 )
             }
         }
@@ -132,7 +121,6 @@ private fun PreviewAffixWeightEditItem() {
             weight = { 0f },
             icon = "icon/property/IconSpeed.png",
             onWeightChangeFinished = {},
-            onDelete = {},
         )
     }
 }
