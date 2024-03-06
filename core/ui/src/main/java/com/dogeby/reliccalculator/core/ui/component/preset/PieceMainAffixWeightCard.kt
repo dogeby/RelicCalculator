@@ -71,7 +71,6 @@ fun PieceMainAffixWeightCard(
         ) {
             Row(
                 modifier = Modifier.weight(1f),
-                horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 GameImage(
@@ -81,7 +80,7 @@ fun PieceMainAffixWeightCard(
                         .padding(4.dp),
                     colorFilter = ColorFilter.tint(LocalContentColor.current),
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(16.dp))
                 val name = stringResource(
                     when (relicPiece) {
                         RelicPiece.HEAD -> R.string.head
