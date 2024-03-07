@@ -71,7 +71,7 @@ import com.dogeby.reliccalculator.core.ui.component.HorizontalGameImageText
 import com.dogeby.reliccalculator.core.ui.component.VerticalAffixImageText
 import com.dogeby.reliccalculator.core.ui.component.image.AffixImage
 import com.dogeby.reliccalculator.core.ui.component.image.GameImage
-import com.dogeby.reliccalculator.core.ui.component.image.GameImageWithBackground
+import com.dogeby.reliccalculator.core.ui.component.image.GameImageWithTooltipAndBackground
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 
 @Composable
@@ -223,8 +223,9 @@ private fun RelicSetsAndAttrComparisonsRow(
             items = relicSets,
             key = { it.id },
         ) { item ->
-            GameImageWithBackground(
+            GameImageWithTooltipAndBackground(
                 src = item.icon,
+                tooltipText = item.name,
                 backgroundColor = backgroundColor,
                 imageSize = imageSize,
             )
