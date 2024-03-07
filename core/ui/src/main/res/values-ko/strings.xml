@@ -20,4 +20,6 @@
     <string name="foot">다리</string>
     <string name="planar_sphere">차원 구체</string>
     <string name="link_rope">연결 매듭</string>
+
+    <string name="set_num">%1$d세트</string>
 </resources>
