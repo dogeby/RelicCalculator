@@ -14,10 +14,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dogeby.reliccalculator.core.model.mihomo.index.RelicSetInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.sampleRelicSetInfo
+import com.dogeby.reliccalculator.core.ui.R
 import com.dogeby.reliccalculator.core.ui.component.FilterChipWithRichTooltip
 import com.dogeby.reliccalculator.core.ui.component.image.GameImage
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
@@ -52,8 +54,15 @@ fun LazyGridScope.relicSetFilters(
                     Column(
                         verticalArrangement = Arrangement.spacedBy(2.dp),
                     ) {
-                        relicSetFilterUiState.relicSetInfo.desc.forEach {
-                            Text(text = it)
+                        relicSetFilterUiState.relicSetInfo.desc.forEachIndexed { index, desc ->
+                            Text(
+                                text = "${
+                                    stringResource(
+                                        id = R.string.set_num,
+                                        (index + 1) * 2,
+                                    )
+                                }: $desc",
+                            )
                         }
                     }
                 }

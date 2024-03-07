@@ -237,8 +237,15 @@ private fun RelicSetsAndAttrComparisonsRow(
                 },
             ) {
                 Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                    item.desc.forEach {
-                        Text(text = it)
+                    item.desc.forEachIndexed { index, desc ->
+                        Text(
+                            text = "${
+                                stringResource(
+                                    id = R.string.set_num,
+                                    (index + 1) * 2,
+                                )
+                            }: $desc",
+                        )
                     }
                 }
             }

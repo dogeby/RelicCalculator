@@ -20,4 +20,6 @@
     <string name="foot">Feet</string>
     <string name="planar_sphere">Planar Sphere</string>
     <string name="link_rope">Link Rope</string>
+
+    <string name="set_num">%1$d-Pc</string>
 </resources>
