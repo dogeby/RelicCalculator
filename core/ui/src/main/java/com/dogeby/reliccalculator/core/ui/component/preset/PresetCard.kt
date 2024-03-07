@@ -29,6 +29,7 @@ import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -71,7 +72,7 @@ import com.dogeby.reliccalculator.core.ui.component.HorizontalGameImageText
 import com.dogeby.reliccalculator.core.ui.component.VerticalAffixImageText
 import com.dogeby.reliccalculator.core.ui.component.image.AffixImage
 import com.dogeby.reliccalculator.core.ui.component.image.GameImage
-import com.dogeby.reliccalculator.core.ui.component.image.GameImageWithTooltipAndBackground
+import com.dogeby.reliccalculator.core.ui.component.image.GameImageWithRichTooltipAndBackground
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 
 @Composable
@@ -197,6 +198,7 @@ private fun CharacterListItem(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun RelicSetsAndAttrComparisonsRow(
     relicSets: List<RelicSetInfo>,
@@ -223,12 +225,23 @@ private fun RelicSetsAndAttrComparisonsRow(
             items = relicSets,
             key = { it.id },
         ) { item ->
-            GameImageWithTooltipAndBackground(
+            GameImageWithRichTooltipAndBackground(
                 src = item.icon,
-                tooltipText = item.name,
                 backgroundColor = backgroundColor,
                 imageSize = imageSize,
-            )
+                tooltipTitle = {
+                    Text(
+                        text = item.name,
+                        style = MaterialTheme.typography.titleMedium,
+                    )
+                },
+            ) {
+                Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                    item.desc.forEach {
+                        Text(text = it)
+                    }
+                }
+            }
         }
         items(
             items = attrComparisons,
