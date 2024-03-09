@@ -30,7 +30,7 @@ fun CharacterSortFieldChip(
     modifier: Modifier = Modifier,
 ) {
     DropdownMenuChip(
-        text = stringResource(id = R.string.sort),
+        label = { Text(text = stringResource(id = R.string.sort)) },
         modifier = modifier,
         leadingIcon = {
             Icon(
