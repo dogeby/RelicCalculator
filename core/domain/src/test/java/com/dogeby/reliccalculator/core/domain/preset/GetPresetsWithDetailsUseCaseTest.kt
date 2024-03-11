@@ -1,4 +1,4 @@
-package com.dogeby.reliccalculator.core.domain
+package com.dogeby.reliccalculator.core.domain.preset
 
 import com.dogeby.reliccalculator.core.data.fake.FakeGameRepository
 import com.dogeby.reliccalculator.core.data.fake.FakePreferencesRepository
@@ -7,7 +7,6 @@ import com.dogeby.reliccalculator.core.domain.model.AffixWeightWithInfo
 import com.dogeby.reliccalculator.core.domain.model.AttrComparisonWithInfo
 import com.dogeby.reliccalculator.core.domain.model.PresetWithDetails
 import com.dogeby.reliccalculator.core.domain.model.toPresetWithDetails
-import com.dogeby.reliccalculator.core.domain.preset.GetPresetsWithDetailsUseCase
 import com.dogeby.reliccalculator.core.model.mihomo.index.RelicPiece
 import com.dogeby.reliccalculator.core.model.mihomo.index.sampleCharacterInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.sampleCharacterInfoWithDetails
