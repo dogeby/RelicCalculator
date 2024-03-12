@@ -7,7 +7,7 @@ import com.dogeby.reliccalculator.core.domain.index.GetPathInfoMapUseCase
 import com.dogeby.reliccalculator.core.domain.model.PresetWithDetails
 import com.dogeby.reliccalculator.core.domain.preference.GetPresetListPreferencesDataUseCase
 import com.dogeby.reliccalculator.core.domain.preference.SetPresetListPreferencesDataUseCase
-import com.dogeby.reliccalculator.core.domain.preset.GetPresetsWithDetailsUseCase
+import com.dogeby.reliccalculator.core.domain.preset.GetPresetWithDetailsListUseCase
 import com.dogeby.reliccalculator.core.domain.preset.UpdatePresetAutoUpdateUseCase
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
 import com.dogeby.reliccalculator.core.ui.component.preset.PresetListOptionBarUiState
@@ -33,7 +33,7 @@ class PresetsViewModel @Inject constructor(
     getPathInfoMapUseCase: GetPathInfoMapUseCase,
     getElementInfoMapUseCase: GetElementInfoMapUseCase,
     getPresetListPreferencesDataUseCase: GetPresetListPreferencesDataUseCase,
-    getPresetsWithDetailsUseCase: GetPresetsWithDetailsUseCase,
+    getPresetWithDetailsListUseCase: GetPresetWithDetailsListUseCase,
 ) : ViewModel() {
 
     val presetsOptionBarUiState: StateFlow<PresetListOptionBarUiState> = combine(
@@ -65,7 +65,7 @@ class PresetsViewModel @Inject constructor(
             }
         }
         .flatMapLatest { presetListPreferencesData ->
-            getPresetsWithDetailsUseCase(
+            getPresetWithDetailsListUseCase(
                 filteredRarities = presetListPreferencesData.filteredRarities,
                 filteredPathIds = presetListPreferencesData.filteredPathIds,
                 filteredElementIds = presetListPreferencesData.filteredElementIds,

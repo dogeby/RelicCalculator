@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 
-class GetPresetsWithDetailsUseCase @Inject constructor(
+class GetPresetWithDetailsListUseCase @Inject constructor(
     private val presetRepository: PresetRepository,
     private val gameRepository: GameRepository,
 ) {
