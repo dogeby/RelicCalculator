@@ -2,15 +2,14 @@ package com.dogeby.reliccalculator.core.domain.preset
 
 import com.dogeby.reliccalculator.core.data.repository.GameRepository
 import com.dogeby.reliccalculator.core.data.repository.PresetRepository
-import com.dogeby.reliccalculator.core.domain.model.AffixWeightWithInfo
 import com.dogeby.reliccalculator.core.domain.model.AttrComparisonWithInfo
 import com.dogeby.reliccalculator.core.domain.model.PresetWithDetails
+import com.dogeby.reliccalculator.core.domain.model.mapNotNullToAffixWeightsWithInfo
 import com.dogeby.reliccalculator.core.domain.model.toPresetWithDetails
 import com.dogeby.reliccalculator.core.model.mihomo.index.CharacterInfoWithDetails
 import com.dogeby.reliccalculator.core.model.mihomo.index.PropertyInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.RelicSetInfo
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
-import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.Preset
 import javax.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -108,19 +107,6 @@ class GetPresetsWithDetailsUseCase @Inject constructor(
                             )
                         }
                     },
-                )
-            }
-        }
-    }
-
-    private fun List<AffixWeight>.mapNotNullToAffixWeightsWithInfo(
-        propertyInfoMap: Map<String, PropertyInfo>,
-    ): List<AffixWeightWithInfo> {
-        return mapNotNull { affixWeight ->
-            propertyInfoMap[affixWeight.type]?.let {
-                AffixWeightWithInfo(
-                    affixWeight = affixWeight,
-                    propertyInfo = it,
                 )
             }
         }
