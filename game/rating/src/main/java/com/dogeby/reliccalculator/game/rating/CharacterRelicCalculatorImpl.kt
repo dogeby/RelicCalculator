@@ -9,7 +9,7 @@ import com.dogeby.reliccalculator.core.model.mihomo.index.RelicInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.RelicPiece
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
-import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
+import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator.Companion.performComparison
 import com.dogeby.reliccalculator.core.model.preset.Preset
 import com.dogeby.reliccalculator.core.model.report.AffixCount
 import com.dogeby.reliccalculator.core.model.report.AffixReport
@@ -109,26 +109,20 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
     override fun calculateAttrComparison(
         character: Character,
         attrComparison: AttrComparison,
-    ): AttrComparisonReport? {
-        val attrValue = attrComparison.field.runCatching {
-            character.attributes.first { it.field == this }.value +
-                character.additions.first { it.field == this }.value
-        }.getOrElse { return null }
+    ): AttrComparisonReport {
+        val attributeValue = character.attributes.firstOrNull {
+            it.field == attrComparison.field
+        }?.value ?: 0.0
+        val additionValue = character.additions.firstOrNull {
+            it.field == attrComparison.field
+        }?.value ?: 0.0
+        val attrValue = attributeValue + additionValue
 
-        val isPass = when (attrComparison.comparisonOperator) {
-            ComparisonOperator.GREATER_THAN -> {
-                attrValue > attrComparison.comparedValue.toDouble()
-            }
-            ComparisonOperator.GREATER_THAN_OR_EQUAL_TO -> {
-                attrValue >= attrComparison.comparedValue.toDouble()
-            }
-            ComparisonOperator.LESS_THAN -> {
-                attrValue < attrComparison.comparedValue.toDouble()
-            }
-            ComparisonOperator.LESS_THAN_OR_EQUAL_TO -> {
-                attrValue <= attrComparison.comparedValue.toDouble()
-            }
-        }
+        val isPass = attrComparison.comparisonOperator.performComparison(
+            attrValue = attrValue,
+            comparedValue = attrComparison.comparedValue.toDouble(),
+        )
+
         return AttrComparisonReport(
             type = attrComparison.type,
             field = attrComparison.field,
@@ -190,7 +184,7 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
             acc + relicReport.score
         } / MAX_RELICS - relicSetDemerit
 
-        val attrComparisonReports = preset.attrComparisons.mapNotNull {
+        val attrComparisonReports = preset.attrComparisons.map {
             calculateAttrComparison(character, it)
         }
 

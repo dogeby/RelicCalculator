@@ -7,3 +7,16 @@ data class AffixWeightWithInfo(
     val affixWeight: AffixWeight,
     val propertyInfo: PropertyInfo,
 )
+
+internal fun List<AffixWeight>.mapNotNullToAffixWeightsWithInfo(
+    propertyInfoMap: Map<String, PropertyInfo>,
+): List<AffixWeightWithInfo> {
+    return mapNotNull { affixWeight ->
+        propertyInfoMap[affixWeight.type]?.let {
+            AffixWeightWithInfo(
+                affixWeight = affixWeight,
+                propertyInfo = it,
+            )
+        }
+    }
+}

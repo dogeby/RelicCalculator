@@ -38,7 +38,7 @@ interface CharacterRelicCalculator {
     fun calculateAttrComparison(
         character: Character,
         attrComparison: AttrComparison,
-    ): AttrComparisonReport?
+    ): AttrComparisonReport
 
     fun countValidAffixes(
         character: Character,

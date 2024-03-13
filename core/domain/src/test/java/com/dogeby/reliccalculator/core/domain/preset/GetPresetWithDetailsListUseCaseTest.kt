@@ -23,9 +23,9 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
-class GetPresetsWithDetailsUseCaseTest {
+class GetPresetWithDetailsListUseCaseTest {
 
-    private lateinit var getPresetsWithDetailsUseCase: GetPresetsWithDetailsUseCase
+    private lateinit var getPresetWithDetailsListUseCase: GetPresetWithDetailsListUseCase
     private lateinit var presetRepository: FakePresetRepository
     private lateinit var gameRepository: FakeGameRepository
     private lateinit var preferencesRepository: FakePreferencesRepository
@@ -44,14 +44,14 @@ class GetPresetsWithDetailsUseCaseTest {
         gameRepository = FakeGameRepository()
         preferencesRepository = FakePreferencesRepository()
 
-        getPresetsWithDetailsUseCase = GetPresetsWithDetailsUseCase(
+        getPresetWithDetailsListUseCase = GetPresetWithDetailsListUseCase(
             presetRepository = presetRepository,
             gameRepository = gameRepository,
         )
     }
 
     @Test
-    fun test_getPresetsWithDetailsUseCase_success() = runTest {
+    fun test_getPresetWithDetailsListUseCase_success() = runTest {
         presetRepository.insertPresets(listOf(samplePreset))
         insertSampleInfoData()
         preferencesRepository.setPresetListPreferencesData(samplePresetListPreferencesData)
@@ -91,7 +91,7 @@ class GetPresetsWithDetailsUseCaseTest {
 
         Assert.assertEquals(
             expectedPresetsWithDetails,
-            getPresetsWithDetailsUseCase(
+            getPresetWithDetailsListUseCase(
                 filteredRarities = listPreferences.filteredRarities,
                 filteredPathIds = listPreferences.filteredPathIds,
                 filteredElementIds = listPreferences.filteredElementIds,
@@ -101,7 +101,7 @@ class GetPresetsWithDetailsUseCaseTest {
     }
 
     @Test
-    fun test_getPresetsWithDetailsUseCase_noMatching() = runTest {
+    fun test_getPresetWithDetailsListUseCase_noMatching() = runTest {
         presetRepository.insertPresets(listOf(samplePreset))
         insertSampleInfoData()
         preferencesRepository.setPresetListPreferencesData(
@@ -113,7 +113,7 @@ class GetPresetsWithDetailsUseCaseTest {
 
         Assert.assertEquals(
             emptyList<PresetWithDetails>(),
-            getPresetsWithDetailsUseCase(
+            getPresetWithDetailsListUseCase(
                 filteredRarities = testPathPreferences.filteredRarities,
                 filteredPathIds = testPathPreferences.filteredPathIds,
                 filteredElementIds = testPathPreferences.filteredElementIds,
@@ -127,7 +127,7 @@ class GetPresetsWithDetailsUseCaseTest {
 
         Assert.assertEquals(
             emptyList<PresetWithDetails>(),
-            getPresetsWithDetailsUseCase(
+            getPresetWithDetailsListUseCase(
                 filteredRarities = testElementPreferences.filteredRarities,
                 filteredPathIds = testElementPreferences.filteredPathIds,
                 filteredElementIds = testElementPreferences.filteredElementIds,
@@ -141,7 +141,7 @@ class GetPresetsWithDetailsUseCaseTest {
 
         Assert.assertEquals(
             emptyList<PresetWithDetails>(),
-            getPresetsWithDetailsUseCase(
+            getPresetWithDetailsListUseCase(
                 filteredRarities = testRaritiesPreferences.filteredRarities,
                 filteredPathIds = testRaritiesPreferences.filteredPathIds,
                 filteredElementIds = testRaritiesPreferences.filteredElementIds,
@@ -151,7 +151,7 @@ class GetPresetsWithDetailsUseCaseTest {
     }
 
     @Test
-    fun test_getPresetsWithDetailsUseCase_sortedByName() = runTest {
+    fun test_getPresetWithDetailsListUseCase_sortedByName() = runTest {
         val ids = listOf("5", "3", "4", "2", "1")
         val initialPresets = ids.map { samplePreset.copy(characterId = it) }
         presetRepository.insertPresets(initialPresets)
@@ -174,7 +174,7 @@ class GetPresetsWithDetailsUseCaseTest {
 
         Assert.assertEquals(
             ids.sortedBy { it },
-            getPresetsWithDetailsUseCase(
+            getPresetWithDetailsListUseCase(
                 filteredRarities = listPreferences.filteredRarities,
                 filteredPathIds = listPreferences.filteredPathIds,
                 filteredElementIds = listPreferences.filteredElementIds,
@@ -184,7 +184,7 @@ class GetPresetsWithDetailsUseCaseTest {
     }
 
     @Test
-    fun test_getPresetsWithDetailsUseCase_sortedByLatestReleased() = runTest {
+    fun test_getPresetWithDetailsListUseCase_sortedByLatestReleased() = runTest {
         val ids = listOf("5", "3", "4", "2", "8001")
         val initialPresets = ids.map { samplePreset.copy(characterId = it) }
         presetRepository.insertPresets(initialPresets)
@@ -207,7 +207,7 @@ class GetPresetsWithDetailsUseCaseTest {
 
         Assert.assertEquals(
             listOf("5", "4", "3", "2", "8001"),
-            getPresetsWithDetailsUseCase(
+            getPresetWithDetailsListUseCase(
                 filteredRarities = listPreferences.filteredRarities,
                 filteredPathIds = listPreferences.filteredPathIds,
                 filteredElementIds = listPreferences.filteredElementIds,
@@ -217,7 +217,7 @@ class GetPresetsWithDetailsUseCaseTest {
     }
 
     @Test
-    fun test_getPresetsWithDetailsUseCase_sortedByEarliestReleased() = runTest {
+    fun test_getPresetWithDetailsListUseCase_sortedByEarliestReleased() = runTest {
         val ids = listOf("5", "8003", "4", "2", "8001")
         val initialPresets = ids.map { samplePreset.copy(characterId = it) }
         presetRepository.insertPresets(initialPresets)
@@ -240,7 +240,7 @@ class GetPresetsWithDetailsUseCaseTest {
 
         Assert.assertEquals(
             listOf("8001", "8003", "2", "4", "5"),
-            getPresetsWithDetailsUseCase(
+            getPresetWithDetailsListUseCase(
                 filteredRarities = listPreferences.filteredRarities,
                 filteredPathIds = listPreferences.filteredPathIds,
                 filteredElementIds = listPreferences.filteredElementIds,
