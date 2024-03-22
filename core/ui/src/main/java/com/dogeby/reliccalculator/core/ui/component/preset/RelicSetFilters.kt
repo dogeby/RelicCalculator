@@ -27,7 +27,7 @@ import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 @OptIn(ExperimentalMaterial3Api::class)
 fun LazyGridScope.relicSetFilters(
     relicSetFiltersUiState: RelicSetFiltersUiState,
-    onFilterChipSelectedChanged: (selected: Boolean) -> Unit,
+    onFilterChipSelectedChanged: (id: String, selected: Boolean) -> Unit,
 ) {
     when (relicSetFiltersUiState) {
         RelicSetFiltersUiState.Loading -> Unit
@@ -35,7 +35,12 @@ fun LazyGridScope.relicSetFilters(
             items(relicSetFiltersUiState.relicSets) { relicSetFilterUiState ->
                 FilterChipWithRichTooltip(
                     selected = { relicSetFilterUiState.selected },
-                    onClick = { onFilterChipSelectedChanged(!relicSetFilterUiState.selected) },
+                    onClick = {
+                        onFilterChipSelectedChanged(
+                            relicSetFilterUiState.relicSetInfo.id,
+                            !relicSetFilterUiState.selected,
+                        )
+                    },
                     label = {
                         GameImage(
                             src = relicSetFilterUiState.relicSetInfo.icon,
@@ -104,7 +109,7 @@ fun PreviewRelicSetFilters() {
                         )
                     },
                 ),
-                onFilterChipSelectedChanged = {},
+                onFilterChipSelectedChanged = { _, _ -> },
             )
         }
     }
