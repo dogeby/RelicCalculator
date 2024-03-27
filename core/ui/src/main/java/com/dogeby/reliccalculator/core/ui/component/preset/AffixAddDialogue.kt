@@ -31,10 +31,10 @@ import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 fun AffixAddDialogue(
     affixAddDialogueUiState: AffixAddDialogueUiState,
     onDismissRequest: () -> Unit,
-    onAddBtnClick: (List<AffixWithDetails>) -> Unit,
+    onAddBtnClick: (List<String>) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var selectedAffixes: List<AffixWithDetails> by rememberSaveable(affixAddDialogueUiState) {
+    var selectedAffixIds: List<String> by rememberSaveable(affixAddDialogueUiState) {
         mutableStateOf(emptyList())
     }
 
@@ -42,7 +42,7 @@ fun AffixAddDialogue(
         onDismissRequest = onDismissRequest,
         confirmButton = {
             TextButton(
-                onClick = { onAddBtnClick(selectedAffixes) },
+                onClick = { onAddBtnClick(selectedAffixIds) },
             ) {
                 Text(text = stringResource(id = R.string.add))
             }
@@ -64,15 +64,15 @@ fun AffixAddDialogue(
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
                         affixAddDialogueUiState.affixes.forEach { affix ->
-                            val isSelected = affix in selectedAffixes
+                            val isSelected = affix.id in selectedAffixIds
                             FilterChip(
                                 selected = isSelected,
                                 onClick = {
                                     if (isSelected) {
-                                        selectedAffixes -= affix
+                                        selectedAffixIds -= affix.id
                                         return@FilterChip
                                     }
-                                    selectedAffixes += affix
+                                    selectedAffixIds += affix.id
                                 },
                                 label = { Text(text = affix.propertyInfo.name) },
                                 leadingIcon = {
