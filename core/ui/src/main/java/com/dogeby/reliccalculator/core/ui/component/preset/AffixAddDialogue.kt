@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -28,12 +29,12 @@ import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun AffixAddDialogue(
-    affixes: List<AffixWithDetails>,
+    affixAddDialogueUiState: AffixAddDialogueUiState,
     onDismissRequest: () -> Unit,
-    onAddBtnClick: (List<AffixWithDetails>) -> Unit,
+    onAddBtnClick: (List<String>) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var selectedAffixes: List<AffixWithDetails> by remember(affixes) {
+    var selectedAffixIds: List<String> by rememberSaveable(affixAddDialogueUiState) {
         mutableStateOf(emptyList())
     }
 
@@ -41,7 +42,7 @@ fun AffixAddDialogue(
         onDismissRequest = onDismissRequest,
         confirmButton = {
             TextButton(
-                onClick = { onAddBtnClick(selectedAffixes) },
+                onClick = { onAddBtnClick(selectedAffixIds) },
             ) {
                 Text(text = stringResource(id = R.string.add))
             }
@@ -55,35 +56,49 @@ fun AffixAddDialogue(
             }
         },
         text = {
-            FlowRow(
-                modifier = modifier,
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                affixes.forEach { affix ->
-                    val isSelected = affix in selectedAffixes
-                    FilterChip(
-                        selected = isSelected,
-                        onClick = {
-                            if (isSelected) {
-                                selectedAffixes -= affix
-                                return@FilterChip
-                            }
-                            selectedAffixes += affix
-                        },
-                        label = { Text(text = affix.propertyInfo.name) },
-                        leadingIcon = {
-                            val contentColor = LocalContentColor.current
-                            GameImage(
-                                src = affix.propertyInfo.icon,
-                                modifier = Modifier.size(18.dp),
-                                colorFilter = ColorFilter.tint(contentColor),
+            when (affixAddDialogueUiState) {
+                AffixAddDialogueUiState.Loading -> Unit
+                is AffixAddDialogueUiState.Success -> {
+                    FlowRow(
+                        modifier = modifier,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        affixAddDialogueUiState.affixes.forEach { affix ->
+                            val isSelected = affix.id in selectedAffixIds
+                            FilterChip(
+                                selected = isSelected,
+                                onClick = {
+                                    if (isSelected) {
+                                        selectedAffixIds -= affix.id
+                                        return@FilterChip
+                                    }
+                                    selectedAffixIds += affix.id
+                                },
+                                label = { Text(text = affix.propertyInfo.name) },
+                                leadingIcon = {
+                                    val contentColor = LocalContentColor.current
+                                    GameImage(
+                                        src = affix.propertyInfo.icon,
+                                        modifier = Modifier.size(18.dp),
+                                        colorFilter = ColorFilter.tint(contentColor),
+                                    )
+                                },
                             )
-                        },
-                    )
+                        }
+                    }
                 }
             }
         },
     )
+}
+
+sealed interface AffixAddDialogueUiState {
+
+    data object Loading : AffixAddDialogueUiState
+
+    data class Success(
+        val affixes: List<AffixWithDetails>,
+    ) : AffixAddDialogueUiState
 }
 
 @Preview(apiLevel = 33)
@@ -95,12 +110,14 @@ fun PreviewAffixAddDialogue() {
         }
         if (shown) {
             AffixAddDialogue(
-                affixes = List(5) {
-                    AffixWithDetails(
-                        id = "$it",
-                        propertyInfo = samplePropertyInfo,
-                    )
-                },
+                affixAddDialogueUiState = AffixAddDialogueUiState.Success(
+                    affixes = List(5) {
+                        AffixWithDetails(
+                            id = "$it",
+                            propertyInfo = samplePropertyInfo,
+                        )
+                    },
+                ),
                 onDismissRequest = { shown = false },
                 onAddBtnClick = { shown = false },
             )
