@@ -20,8 +20,9 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dogeby.reliccalculator.core.domain.model.AffixWithDetails
+import com.dogeby.reliccalculator.core.domain.model.AffixWeightWithInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.samplePropertyInfo
+import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.ui.R
 import com.dogeby.reliccalculator.core.ui.component.image.GameImage
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
@@ -64,15 +65,15 @@ fun AffixAddDialogue(
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
                         affixAddDialogueUiState.affixes.forEach { affix ->
-                            val isSelected = affix.id in selectedAffixIds
+                            val isSelected = affix.affixWeight.affixId in selectedAffixIds
                             FilterChip(
                                 selected = isSelected,
                                 onClick = {
                                     if (isSelected) {
-                                        selectedAffixIds -= affix.id
+                                        selectedAffixIds -= affix.affixWeight.affixId
                                         return@FilterChip
                                     }
-                                    selectedAffixIds += affix.id
+                                    selectedAffixIds += affix.affixWeight.affixId
                                 },
                                 label = { Text(text = affix.propertyInfo.name) },
                                 leadingIcon = {
@@ -97,7 +98,7 @@ sealed interface AffixAddDialogueUiState {
     data object Loading : AffixAddDialogueUiState
 
     data class Success(
-        val affixes: List<AffixWithDetails>,
+        val affixes: List<AffixWeightWithInfo>,
     ) : AffixAddDialogueUiState
 }
 
@@ -112,8 +113,12 @@ fun PreviewAffixAddDialogue() {
             AffixAddDialogue(
                 affixAddDialogueUiState = AffixAddDialogueUiState.Success(
                     affixes = List(5) {
-                        AffixWithDetails(
-                            id = "$it",
+                        AffixWeightWithInfo(
+                            affixWeight = AffixWeight(
+                                affixId = "$it",
+                                type = "",
+                                weight = 0.0f,
+                            ),
                             propertyInfo = samplePropertyInfo,
                         )
                     },
