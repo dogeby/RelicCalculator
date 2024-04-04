@@ -8,11 +8,16 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 
-class GetMainAffixWeightWithInfoUseCase @Inject constructor(
-    private val gameRepository: GameRepository,
-) {
+interface GetMainAffixWeightWithInfoUseCase {
 
-    operator fun invoke(): Flow<Map<RelicPiece, List<AffixWeightWithInfo>>> {
+    operator fun invoke(): Flow<Map<RelicPiece, List<AffixWeightWithInfo>>>
+}
+
+class GetMainAffixWeightWithInfoUseCaseImpl @Inject constructor(
+    private val gameRepository: GameRepository,
+) : GetMainAffixWeightWithInfoUseCase {
+
+    override operator fun invoke(): Flow<Map<RelicPiece, List<AffixWeightWithInfo>>> {
         return gameRepository
             .relicAffixInfoMap
             .combine(gameRepository.propertyInfoMap) { relicAffixInfoMap, propertyInfoMap ->
