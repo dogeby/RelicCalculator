@@ -18,7 +18,7 @@ interface UpdatePresetUseCase {
         subAffixWeights: List<AffixWeight>,
         attrComparisons: List<AttrComparison>,
         isAutoUpdate: Boolean = false,
-    ): Result<Int>
+    ): Result<UpdatedPresetCount>
 }
 
 class UpdatePresetUseCaseImpl @Inject constructor(
