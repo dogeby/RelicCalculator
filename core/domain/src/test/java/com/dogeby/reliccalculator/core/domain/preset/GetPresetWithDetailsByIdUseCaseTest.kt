@@ -38,7 +38,7 @@ class GetPresetWithDetailsByIdUseCaseTest {
         presetRepository = FakePresetRepository()
         gameRepository = FakeGameRepository()
 
-        getPresetWithDetailsByIdUseCase = GetPresetWithDetailsByIdUseCase(
+        getPresetWithDetailsByIdUseCase = GetPresetWithDetailsByIdUseCaseImpl(
             presetRepository = presetRepository,
             gameRepository = gameRepository,
         )
