@@ -16,7 +16,7 @@ class GetAttrComparisonWithInfoListUseCaseTest {
     @Before
     fun setUp() {
         gameRepository = FakeGameRepository()
-        getAttrComparisonWithInfoListUseCase = GetAttrComparisonWithInfoListUseCase(
+        getAttrComparisonWithInfoListUseCase = GetAttrComparisonWithInfoListUseCaseImpl(
             gameRepository = gameRepository,
         )
     }
