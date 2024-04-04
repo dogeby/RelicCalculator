@@ -10,12 +10,17 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 
-class GetPresetWithDetailsByIdUseCase @Inject constructor(
+interface GetPresetWithDetailsByIdUseCase {
+
+    operator fun invoke(id: String): Flow<Result<PresetWithDetails>>
+}
+
+class GetPresetWithDetailsByIdUseCaseImpl @Inject constructor(
     private val presetRepository: PresetRepository,
     private val gameRepository: GameRepository,
-) {
+) : GetPresetWithDetailsByIdUseCase {
 
-    operator fun invoke(id: String): Flow<Result<PresetWithDetails>> {
+    override operator fun invoke(id: String): Flow<Result<PresetWithDetails>> {
         return combine(
             presetRepository.getPresets(setOf(id)),
             gameRepository.characterInfoWithDetailsList,

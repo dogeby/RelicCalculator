@@ -8,11 +8,16 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class GetAttrComparisonWithInfoListUseCase @Inject constructor(
-    private val gameRepository: GameRepository,
-) {
+interface GetAttrComparisonWithInfoListUseCase {
 
-    operator fun invoke(): Flow<List<AttrComparisonWithInfo>> {
+    operator fun invoke(): Flow<List<AttrComparisonWithInfo>>
+}
+
+class GetAttrComparisonWithInfoListUseCaseImpl @Inject constructor(
+    private val gameRepository: GameRepository,
+) : GetAttrComparisonWithInfoListUseCase {
+
+    override operator fun invoke(): Flow<List<AttrComparisonWithInfo>> {
         return gameRepository.propertyInfoMap.map { propertyInfoMap ->
             attrComparisonTypes.mapNotNull { type ->
                 val propertyInfo = propertyInfoMap[type] ?: return@mapNotNull null

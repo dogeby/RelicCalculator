@@ -8,9 +8,7 @@ import com.dogeby.reliccalculator.core.model.mihomo.index.RelicSetInfo
 import com.dogeby.reliccalculator.core.model.preset.Preset
 import javax.inject.Inject
 
-class UpdatePresetUseCase @Inject constructor(
-    private val presetRepository: PresetRepository,
-) {
+interface UpdatePresetUseCase {
 
     suspend operator fun invoke(
         characterId: String,
@@ -19,6 +17,20 @@ class UpdatePresetUseCase @Inject constructor(
         subAffixWeights: List<AffixWeightWithInfo>,
         attrComparisons: List<AttrComparisonWithInfo>,
         isAutoUpdate: Boolean = false,
+    ): Result<Int>
+}
+
+class UpdatePresetUseCaseImpl @Inject constructor(
+    private val presetRepository: PresetRepository,
+) : UpdatePresetUseCase {
+
+    override suspend operator fun invoke(
+        characterId: String,
+        relicSets: List<RelicSetInfo>,
+        pieceMainAffixWeights: Map<RelicPiece, List<AffixWeightWithInfo>>,
+        subAffixWeights: List<AffixWeightWithInfo>,
+        attrComparisons: List<AttrComparisonWithInfo>,
+        isAutoUpdate: Boolean,
     ): Result<Int> {
         val preset = Preset(
             characterId = characterId,

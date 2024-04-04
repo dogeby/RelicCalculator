@@ -21,7 +21,7 @@ class GetMainAffixWeightWithInfoUseCaseTest {
     @Before
     fun setUp() {
         gameRepository = FakeGameRepository()
-        getMainAffixWeightWithInfoUseCase = GetMainAffixWeightWithInfoUseCase(gameRepository)
+        getMainAffixWeightWithInfoUseCase = GetMainAffixWeightWithInfoUseCaseImpl(gameRepository)
     }
 
     @Test
