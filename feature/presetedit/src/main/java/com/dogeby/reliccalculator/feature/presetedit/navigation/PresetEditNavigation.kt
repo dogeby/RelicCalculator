@@ -4,14 +4,15 @@ import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
+import com.dogeby.reliccalculator.core.common.decoder.StringDecoder
 
 const val PRESET_EDIT_ROUTE = "presetEdit"
 internal const val PRESET_ID_ARG = "presetId"
 
 internal class PresetEditArgs(val presetId: String) {
 
-    constructor(savedStateHandle: SavedStateHandle) :
-        this(Uri.decode(checkNotNull(savedStateHandle[PRESET_ID_ARG])))
+    constructor(savedStateHandle: SavedStateHandle, stringDecoder: StringDecoder) :
+        this(stringDecoder.decodeString(checkNotNull(savedStateHandle[PRESET_ID_ARG])))
 }
 
 fun NavController.navigateToPresetEdit(
