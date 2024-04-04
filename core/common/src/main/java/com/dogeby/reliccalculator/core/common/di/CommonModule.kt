@@ -1,5 +1,7 @@
 package com.dogeby.reliccalculator.core.common.di
 
+import com.dogeby.reliccalculator.core.common.decoder.StringDecoder
+import com.dogeby.reliccalculator.core.common.decoder.UriDecoder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,4 +18,8 @@ object CommonModule {
     fun providesJson(): Json = Json {
         ignoreUnknownKeys = true
     }
+
+    @Provides
+    @Singleton
+    fun providesStringDecoder(): StringDecoder = UriDecoder()
 }
