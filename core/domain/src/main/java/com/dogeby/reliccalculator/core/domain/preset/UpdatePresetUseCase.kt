@@ -1,23 +1,24 @@
 package com.dogeby.reliccalculator.core.domain.preset
 
 import com.dogeby.reliccalculator.core.data.repository.PresetRepository
-import com.dogeby.reliccalculator.core.domain.model.AffixWeightWithInfo
-import com.dogeby.reliccalculator.core.domain.model.AttrComparisonWithInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.RelicPiece
-import com.dogeby.reliccalculator.core.model.mihomo.index.RelicSetInfo
+import com.dogeby.reliccalculator.core.model.preset.AffixWeight
+import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.preset.Preset
 import javax.inject.Inject
+
+typealias UpdatedPresetCount = Int
 
 interface UpdatePresetUseCase {
 
     suspend operator fun invoke(
         characterId: String,
-        relicSets: List<RelicSetInfo>,
-        pieceMainAffixWeights: Map<RelicPiece, List<AffixWeightWithInfo>>,
-        subAffixWeights: List<AffixWeightWithInfo>,
-        attrComparisons: List<AttrComparisonWithInfo>,
+        relicSetIds: List<String>,
+        pieceMainAffixWeights: Map<RelicPiece, List<AffixWeight>>,
+        subAffixWeights: List<AffixWeight>,
+        attrComparisons: List<AttrComparison>,
         isAutoUpdate: Boolean = false,
-    ): Result<Int>
+    ): Result<UpdatedPresetCount>
 }
 
 class UpdatePresetUseCaseImpl @Inject constructor(
@@ -26,21 +27,19 @@ class UpdatePresetUseCaseImpl @Inject constructor(
 
     override suspend operator fun invoke(
         characterId: String,
-        relicSets: List<RelicSetInfo>,
-        pieceMainAffixWeights: Map<RelicPiece, List<AffixWeightWithInfo>>,
-        subAffixWeights: List<AffixWeightWithInfo>,
-        attrComparisons: List<AttrComparisonWithInfo>,
+        relicSetIds: List<String>,
+        pieceMainAffixWeights: Map<RelicPiece, List<AffixWeight>>,
+        subAffixWeights: List<AffixWeight>,
+        attrComparisons: List<AttrComparison>,
         isAutoUpdate: Boolean,
-    ): Result<Int> {
+    ): Result<UpdatedPresetCount> {
         val preset = Preset(
             characterId = characterId,
-            relicSetIds = relicSets.map { it.id },
-            pieceMainAffixWeights = pieceMainAffixWeights.mapValues { (_, affixWeight) ->
-                affixWeight.map { it.affixWeight }
-            },
-            subAffixWeights = subAffixWeights.map { it.affixWeight },
+            relicSetIds = relicSetIds,
+            pieceMainAffixWeights = pieceMainAffixWeights,
+            subAffixWeights = subAffixWeights,
             isAutoUpdate = isAutoUpdate,
-            attrComparisons = attrComparisons.map { it.attrComparison },
+            attrComparisons = attrComparisons,
         )
 
         return presetRepository.updatePresets(listOf(preset))
