@@ -8,6 +8,10 @@ sealed interface PresetEditMessageUiState {
 
     data object EditSuccess : PresetEditMessageUiState
 
+    data object ResetSuccess : PresetEditMessageUiState
+
+    data object ResetError : PresetEditMessageUiState
+
     data object AddError : PresetEditMessageUiState
 
     data object DeleteError : PresetEditMessageUiState

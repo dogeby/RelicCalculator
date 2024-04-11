@@ -56,32 +56,7 @@ class PresetEditViewModel @Inject constructor(
     )
         .map { result ->
             result.getOrNull()?.also { preset ->
-                savedStateHandle.setListIfNotNull(
-                    SELECTED_RELIC_SET_IDS_KEY,
-                    preset.relicSets.map { it.id },
-                )
-                savedStateHandle.setListIfNotNull(
-                    EDITED_ATTR_COMPARISONS_KEY,
-                    preset.attrComparisons.map {
-                        it.attrComparison
-                    },
-                )
-                savedStateHandle.setMapIfNotNull(
-                    EDITED_PIECE_MAIN_AFFIX_WEIGHT_KEY,
-                    preset
-                        .pieceMainAffixWeightsWithInfo
-                        .mapValues { (_, affixWeightWithInfoList) ->
-                            affixWeightWithInfoList.map {
-                                it.affixWeight
-                            }
-                        },
-                )
-                savedStateHandle.setListIfNotNull(
-                    EDITED_SUB_AFFIX_WEIGHT_KEY,
-                    preset.subAffixWeightsWithInfo.map {
-                        it.affixWeight
-                    },
-                )
+                setPresetToSaveStateHandle(preset)
             }
         }
         .stateIn(
@@ -313,8 +288,8 @@ class PresetEditViewModel @Inject constructor(
                 initialValue = AffixAddDialogueUiState.Loading,
             )
 
-    private val _snackBarMessage = MutableSharedFlow<PresetEditMessageUiState>()
-    val snackBarMessage: SharedFlow<PresetEditMessageUiState> = _snackBarMessage
+    private val _snackbarMessage = MutableSharedFlow<PresetEditMessageUiState>()
+    val snackbarMessage: SharedFlow<PresetEditMessageUiState> = _snackbarMessage
 
     private fun <T> SavedStateHandle.setListIfNotNull(
         key: String,
@@ -334,9 +309,38 @@ class PresetEditViewModel @Inject constructor(
         }
     }
 
+    private fun setPresetToSaveStateHandle(preset: PresetWithDetails) {
+        savedStateHandle.setListIfNotNull(
+            SELECTED_RELIC_SET_IDS_KEY,
+            preset.relicSets.map { it.id },
+        )
+        savedStateHandle.setListIfNotNull(
+            EDITED_ATTR_COMPARISONS_KEY,
+            preset.attrComparisons.map {
+                it.attrComparison
+            },
+        )
+        savedStateHandle.setMapIfNotNull(
+            EDITED_PIECE_MAIN_AFFIX_WEIGHT_KEY,
+            preset
+                .pieceMainAffixWeightsWithInfo
+                .mapValues { (_, affixWeightWithInfoList) ->
+                    affixWeightWithInfoList.map {
+                        it.affixWeight
+                    }
+                },
+        )
+        savedStateHandle.setListIfNotNull(
+            EDITED_SUB_AFFIX_WEIGHT_KEY,
+            preset.subAffixWeightsWithInfo.map {
+                it.affixWeight
+            },
+        )
+    }
+
     private fun emitMessage(presetEditMessageUiState: PresetEditMessageUiState) {
         viewModelScope.launch {
-            _snackBarMessage.emit(presetEditMessageUiState)
+            _snackbarMessage.emit(presetEditMessageUiState)
         }
     }
 
@@ -410,8 +414,8 @@ class PresetEditViewModel @Inject constructor(
                     isAutoUpdate = false,
                 ).onSuccess {
                     when (it) {
-                        1 -> _snackBarMessage.emit(PresetEditMessageUiState.EditSuccess)
-                        0 -> _snackBarMessage.emit(PresetEditMessageUiState.EditDuplicate)
+                        1 -> _snackbarMessage.emit(PresetEditMessageUiState.EditSuccess)
+                        0 -> _snackbarMessage.emit(PresetEditMessageUiState.EditDuplicate)
                         else -> emitMessage(PresetEditMessageUiState.EditError)
                     }
                 }.onFailure {
@@ -419,6 +423,16 @@ class PresetEditViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun resetEditedPreset() {
+        val preset = presetWithDetails.value
+        if (preset == null) {
+            emitMessage(PresetEditMessageUiState.ResetError)
+            return
+        }
+        setPresetToSaveStateHandle(preset)
+        emitMessage(PresetEditMessageUiState.ResetSuccess)
     }
 
     fun addAttrComparison(type: String) {
