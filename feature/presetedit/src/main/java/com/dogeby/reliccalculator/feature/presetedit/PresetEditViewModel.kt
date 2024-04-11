@@ -344,42 +344,6 @@ class PresetEditViewModel @Inject constructor(
         }
     }
 
-    private fun areRelicSetsModified(
-        preset: PresetWithDetails,
-        selectedRelicSetIds: List<String>,
-    ): Boolean {
-        return preset.relicSets.map { it.id }.toSet() != selectedRelicSetIds.toSet()
-    }
-
-    private fun areAttrComparisonsModified(
-        preset: PresetWithDetails,
-        editedAttrComparisons: List<AttrComparison>,
-    ): Boolean {
-        return preset.attrComparisons.map {
-            it.attrComparison
-        }.toSet() != editedAttrComparisons.toSet()
-    }
-
-    private fun arePieceMainAffixWeightsModified(
-        preset: PresetWithDetails,
-        editedMainAffixWeights: Map<RelicPiece, List<AffixWeight>>,
-    ): Boolean {
-        return preset.pieceMainAffixWeightsWithInfo.all { (relicPiece, affixWeightWithInfoList) ->
-            affixWeightWithInfoList.map {
-                it.affixWeight
-            }.toSet() != editedMainAffixWeights[relicPiece]?.toSet()
-        }
-    }
-
-    private fun areSubAffixWeightsModified(
-        preset: PresetWithDetails,
-        editedSubAffixWeights: List<AffixWeight>,
-    ): Boolean {
-        return preset.subAffixWeightsWithInfo.map {
-            it.affixWeight
-        }.toSet() != editedSubAffixWeights.toSet()
-    }
-
     fun updatePreset() {
         val preset = presetWithDetails.value
         val relicSetIds = selectedRelicSetIds.value
@@ -398,29 +362,22 @@ class PresetEditViewModel @Inject constructor(
             return
         }
 
-        if (
-            areRelicSetsModified(preset, relicSetIds) &&
-            areAttrComparisonsModified(preset, attrComparisons) &&
-            arePieceMainAffixWeightsModified(preset, pieceMainAffixWeights) &&
-            areSubAffixWeightsModified(preset, subAffixWeights)
-        ) {
-            viewModelScope.launch {
-                updatePresetUseCase(
-                    characterId = preset.characterId,
-                    relicSetIds = relicSetIds,
-                    pieceMainAffixWeights = pieceMainAffixWeights,
-                    subAffixWeights = subAffixWeights,
-                    attrComparisons = attrComparisons,
-                    isAutoUpdate = false,
-                ).onSuccess {
-                    when (it) {
-                        1 -> _snackbarMessage.emit(PresetEditMessageUiState.EditSuccess)
-                        0 -> _snackbarMessage.emit(PresetEditMessageUiState.EditDuplicate)
-                        else -> emitMessage(PresetEditMessageUiState.EditError)
-                    }
-                }.onFailure {
-                    emitMessage(PresetEditMessageUiState.EditError)
+        viewModelScope.launch {
+            updatePresetUseCase(
+                characterId = preset.characterId,
+                relicSetIds = relicSetIds,
+                pieceMainAffixWeights = pieceMainAffixWeights,
+                subAffixWeights = subAffixWeights,
+                attrComparisons = attrComparisons,
+                isAutoUpdate = false,
+            ).onSuccess {
+                when (it) {
+                    1 -> _snackbarMessage.emit(PresetEditMessageUiState.EditSuccess)
+                    0 -> _snackbarMessage.emit(PresetEditMessageUiState.NoChanges)
+                    else -> emitMessage(PresetEditMessageUiState.EditError)
                 }
+            }.onFailure {
+                emitMessage(PresetEditMessageUiState.EditError)
             }
         }
     }
