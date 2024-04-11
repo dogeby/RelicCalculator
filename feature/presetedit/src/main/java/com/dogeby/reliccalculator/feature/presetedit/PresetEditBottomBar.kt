@@ -29,6 +29,8 @@ internal fun PresetEditBottomBar(
     onSave: () -> Unit,
     onReset: () -> Unit,
     modifier: Modifier = Modifier,
+    saveBtnEnabled: Boolean = true,
+    resetBtnEnabled: Boolean = true,
     containerColor: Color = BottomAppBarDefaults.containerColor,
     contentColor: Color = contentColorFor(containerColor),
     tonalElevation: Dp = BottomAppBarDefaults.ContainerElevation,
@@ -48,15 +50,30 @@ internal fun PresetEditBottomBar(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Button(onClick = onReset) {
+            Button(
+                onClick = onReset,
+                enabled = resetBtnEnabled,
+            ) {
                 Text(text = stringResource(id = R.string.reset))
             }
-            Button(onClick = onSave) {
+            Button(
+                onClick = onSave,
+                enabled = saveBtnEnabled,
+            ) {
                 Text(text = stringResource(id = R.string.save))
             }
         }
     }
-    BottomAppBar {
+}
+
+@Preview(apiLevel = 33)
+@Composable
+private fun PreviewPresetEditBottomBarBtnDisabled() {
+    RelicCalculatorTheme {
+        PresetEditBottomBar(
+            onSave = {},
+            onReset = {},
+        )
     }
 }
 
@@ -64,6 +81,11 @@ internal fun PresetEditBottomBar(
 @Composable
 private fun PreviewPresetEditBottomBar() {
     RelicCalculatorTheme {
-        PresetEditBottomBar(onSave = {}, onReset = {})
+        PresetEditBottomBar(
+            onSave = {},
+            onReset = {},
+            resetBtnEnabled = false,
+            saveBtnEnabled = false,
+        )
     }
 }
