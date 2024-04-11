@@ -1,10 +1,8 @@
 package com.dogeby.reliccalculator.core.ui.component
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -15,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.dogeby.reliccalculator.core.ui.R
 
@@ -29,12 +28,12 @@ fun EmptyState(
     text: String = stringResource(id = R.string.empty_list),
     style: TextStyle = MaterialTheme.typography.titleMedium,
     fontWeight: FontWeight? = FontWeight.Bold,
+    minHeight: Dp = 72.dp,
 ) {
-    Column(
-        modifier = modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
+    Box(
+        modifier = modifier.fillMaxWidth().heightIn(min = minHeight),
+        contentAlignment = Alignment.Center,
     ) {
-        Spacer(modifier = Modifier.height(56.dp))
         Text(
             text = text,
             textAlign = TextAlign.Center,
