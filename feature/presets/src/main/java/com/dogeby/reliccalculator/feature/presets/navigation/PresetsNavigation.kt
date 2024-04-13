@@ -12,10 +12,14 @@ fun NavController.navigateToPresets(navOptions: NavOptions? = null) {
     navigate(PRESETS_ROUTE, navOptions)
 }
 
-fun NavGraphBuilder.presetsScreen(navigateToPresetEdit: (String) -> Unit) {
+fun NavGraphBuilder.presetsScreen(
+    navigateToPresetEdit: (String) -> Unit,
+    nestedGraphs: NavGraphBuilder.() -> Unit,
+) {
     composable(route = PRESETS_ROUTE) {
         PresetsRoute(
             navigateToPresetEdit = navigateToPresetEdit,
         )
     }
+    nestedGraphs()
 }
