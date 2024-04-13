@@ -54,6 +54,8 @@ android {
 dependencies {
 
     implementation(project(":feature:presets"))
+    implementation(project(":feature:presetedit"))
+    implementation(project(":core:domain"))
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)

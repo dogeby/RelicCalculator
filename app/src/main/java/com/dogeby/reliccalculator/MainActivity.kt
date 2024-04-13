@@ -1,49 +1,46 @@
 package com.dogeby.reliccalculator
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.activity.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.dogeby.reliccalculator.core.domain.index.UpdateGameInfoInDbUseCase
+import com.dogeby.reliccalculator.core.domain.preset.UpdateDefaultPresetsUseCase
 import com.dogeby.reliccalculator.ui.theme.RelicCalculatorTheme
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            viewModel
             RelicCalculatorTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background,
-                ) {
-                    Greeting("Android")
-                }
+                RcApp()
             }
         }
     }
 }
 
-@Composable
-fun Greeting(
-    name: String,
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier,
-    )
-}
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    updateDefaultPresetsUseCase: UpdateDefaultPresetsUseCase,
+    updateGameInfoInDbUseCase: UpdateGameInfoInDbUseCase,
+) : ViewModel() {
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    RelicCalculatorTheme {
-        Greeting("Android")
+    init {
+        viewModelScope.launch {
+            val presetUpdateResult = updateDefaultPresetsUseCase()
+            val infoUpdateResult = updateGameInfoInDbUseCase()
+            Log.d("test", "$presetUpdateResult, $infoUpdateResult")
+        }
     }
 }
