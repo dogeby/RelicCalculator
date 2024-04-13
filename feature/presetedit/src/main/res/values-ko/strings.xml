@@ -1,4 +1,18 @@
 <resources>
     <string name="reset">초기화</string>
     <string name="save">저장</string>
+
+    <string name="relic_set">유물 세트</string>
+    <string name="main_stat_by_piece">부위별 메인 속성</string>
+    <string name="sub_stat">보조 속성</string>
+    <string name="stat_comparison">속성 비교</string>
+
+    <string name="edit_error_message">편집하는 중 오류가 발생했습니다.</string>
+    <string name="edit_success_message">편집이 성공적으로 완료되었습니다.</string>
+    <string name="reset_success_message">초기화가 성공적으로 완료되었습니다.</string>
+    <string name="reset_error_message">초기화하는 중 오류가 발생했습니다.</string>
+    <string name="add_error_message">추가하는 중 오류가 발생했습니다.</string>
+    <string name="delete_error_message">삭제하는 중 오류가 발생했습니다.</string>
+    <string name="modify_error_message">수정하는 중 오류가 발생했습니다.</string>
+    <string name="no_changes_message">변경사항이 없습니다.</string>
 </resources>

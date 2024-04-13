@@ -1,4 +1,18 @@
 <resources>
     <string name="reset">Reset</string>
     <string name="save">Save</string>
+
+    <string name="relic_set">Relic Set</string>
+    <string name="main_stat_by_piece">Main Stat by Piece</string>
+    <string name="sub_stat">Sub Stats</string>
+    <string name="stat_comparison">Stat Comparison</string>
+
+    <string name="edit_error_message">An error occurred while editing.</string>
+    <string name="edit_success_message">Edit successful.</string>
+    <string name="reset_success_message">Reset successful.</string>
+    <string name="reset_error_message">An error occurred while resetting.</string>
+    <string name="add_error_message">An error occurred while adding.</string>
+    <string name="delete_error_message">An error occurred while deleting.</string>
+    <string name="modify_error_message">An error occurred while modifying.</string>
+    <string name="no_changes_message">No changes were made.</string>
 </resources>
