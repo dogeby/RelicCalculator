@@ -14,38 +14,38 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import javax.inject.Singleton
+import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
 @InstallIn(ViewModelComponent::class)
 abstract class PresetUseCaseModule {
 
     @Binds
-    @Singleton
+    @ViewModelScoped
     abstract fun bindsGetPresetWithDetailsByIdUseCase(
         getPresetWithDetailsByIdUseCaseImpl: GetPresetWithDetailsByIdUseCaseImpl,
     ): GetPresetWithDetailsByIdUseCase
 
     @Binds
-    @Singleton
+    @ViewModelScoped
     abstract fun bindsGetAttrComparisonWithInfoListUseCase(
         getAttrComparisonWithInfoListUseCaseImpl: GetAttrComparisonWithInfoListUseCaseImpl,
     ): GetAttrComparisonWithInfoListUseCase
 
     @Binds
-    @Singleton
+    @ViewModelScoped
     abstract fun bindsGetMainAffixWeightWithInfoUseCase(
         getMainAffixWeightWithInfoUseCaseImpl: GetMainAffixWeightWithInfoUseCaseImpl,
     ): GetMainAffixWeightWithInfoUseCase
 
     @Binds
-    @Singleton
+    @ViewModelScoped
     abstract fun bindsGetSubAffixWeightWithInfoUseCase(
         getSubAffixWeightWithInfoUseCaseImpl: GetSubAffixWeightWithInfoUseCaseImpl,
     ): GetSubAffixWeightWithInfoUseCase
 
     @Binds
-    @Singleton
+    @ViewModelScoped
     abstract fun UpdatePresetUseCase(
         updatePresetUseCaseImpl: UpdatePresetUseCaseImpl,
     ): UpdatePresetUseCase

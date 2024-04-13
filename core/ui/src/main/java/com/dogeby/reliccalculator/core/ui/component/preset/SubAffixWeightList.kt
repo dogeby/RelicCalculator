@@ -17,6 +17,7 @@ import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 fun LazyListScope.subAffixWeightList(
     subAffixWeightListUiState: SubAffixWeightListUiState,
     onWeightChangeFinished: (affixId: String, weight: Float) -> Unit,
+    onDeleteSubAffixWeight: (affixId: String) -> Unit,
     itemShape: Shape = RoundedCornerShape(4.dp),
     itemTonalElevation: Dp = 0.dp,
     itemShadowElevation: Dp = 0.dp,
@@ -39,6 +40,9 @@ fun LazyListScope.subAffixWeightList(
                             affixWeightWithInfo.affixWeight.affixId,
                             it,
                         )
+                    },
+                    onDeleteItem = {
+                        onDeleteSubAffixWeight(affixWeightWithInfo.affixWeight.affixId)
                     },
                     shape = itemShape,
                     tonalElevation = itemTonalElevation,
@@ -86,6 +90,7 @@ private fun PreviewSubAffixWeightList() {
                     },
                 ),
                 onWeightChangeFinished = { _, _ -> },
+                onDeleteSubAffixWeight = {},
             )
         }
     }

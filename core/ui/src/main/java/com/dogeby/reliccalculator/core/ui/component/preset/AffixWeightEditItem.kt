@@ -7,6 +7,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
@@ -35,6 +40,7 @@ fun AffixWeightEditItem(
     icon: String,
     onWeightChangeFinished: (Float) -> Unit,
     modifier: Modifier = Modifier,
+    onDeleteItem: (() -> Unit)? = null,
     shape: Shape = RoundedCornerShape(4.dp),
     color: Color = MaterialTheme.colorScheme.surface,
     contentColor: Color = contentColorFor(color),
@@ -74,6 +80,14 @@ fun AffixWeightEditItem(
                     weight = weight,
                     onValueChangeFinished = onWeightChangeFinished,
                 )
+            }
+            onDeleteItem?.let {
+                IconButton(onClick = onDeleteItem) {
+                    Icon(
+                        imageVector = Icons.Outlined.Delete,
+                        contentDescription = null,
+                    )
+                }
             }
         }
     }
@@ -121,6 +135,20 @@ private fun PreviewAffixWeightEditItem() {
             weight = { 0f },
             icon = "icon/property/IconSpeed.png",
             onWeightChangeFinished = {},
+        )
+    }
+}
+
+@Preview(apiLevel = 33)
+@Composable
+private fun PreviewAffixWeightEditItemWithDelete() {
+    RelicCalculatorTheme {
+        AffixWeightEditItem(
+            name = "name",
+            weight = { 0f },
+            icon = "icon/property/IconSpeed.png",
+            onWeightChangeFinished = {},
+            onDeleteItem = {},
         )
     }
 }
