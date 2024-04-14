@@ -1,5 +1,6 @@
 package com.dogeby.reliccalculator
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -15,6 +16,7 @@ fun RcApp(navController: NavHostController = rememberNavController()) {
     val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
+        modifier = Modifier.fillMaxSize(),
     ) {
         RcNavHost(
             navController = navController,
