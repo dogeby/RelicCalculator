@@ -12,7 +12,6 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -24,7 +23,6 @@ import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -50,7 +48,7 @@ import com.dogeby.reliccalculator.core.ui.util.clearFocusWhenTap
 fun AttrComparisonEditItem(
     icon: String,
     name: String,
-    comparedValue: Float,
+    displayComparedValue: String,
     percent: Boolean,
     comparisonOperator: ComparisonOperator,
     onComparisonOperatorChanged: (ComparisonOperator) -> Unit,
@@ -120,7 +118,7 @@ fun AttrComparisonEditItem(
                     }
                 }
                 ComparedValueTextField(
-                    keyword = "$comparedValue",
+                    keyword = displayComparedValue,
                     onKeywordChange = onComparedValueChanged,
                     modifier = Modifier.weight(1f),
                 )
@@ -195,21 +193,21 @@ private fun PreviewAttrComparisonEditItem() {
     var comparisonOperator by remember {
         mutableStateOf(ComparisonOperator.GREATER_THAN_OR_EQUAL_TO)
     }
-    var comparedValue by remember {
-        mutableFloatStateOf(134f)
+    var displayComparedValue by remember {
+        mutableStateOf("123")
     }
     RelicCalculatorTheme {
         AttrComparisonEditItem(
             icon = "icon/property/IconSpeed.png",
             name = "속도",
-            comparedValue = comparedValue,
+            displayComparedValue = displayComparedValue,
             percent = true,
             comparisonOperator = comparisonOperator,
             onComparisonOperatorChanged = {
                 comparisonOperator = it
             },
             onComparedValueChanged = {
-                comparedValue = it.toFloat()
+                displayComparedValue = it
             },
             onDeleteItem = {},
             modifier = Modifier.width(360.dp).clearFocusWhenTap(),

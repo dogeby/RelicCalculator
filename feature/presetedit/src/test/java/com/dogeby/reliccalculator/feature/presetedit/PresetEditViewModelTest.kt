@@ -251,11 +251,12 @@ class PresetEditViewModelTest {
         val modifiedAttrComparison = sampleAttrComparison.copy(
             comparisonOperator = ComparisonOperator.LESS_THAN,
             comparedValue = sampleAttrComparison.comparedValue + 100f,
+            display = (sampleAttrComparison.display.toInt() + 100).toString(),
         )
         presetEditViewModel.modifyAttrComparison(
             type = sampleAttrComparison.type,
             comparisonOperator = modifiedAttrComparison.comparisonOperator,
-            comparedValue = modifiedAttrComparison.comparedValue,
+            inputComparedValue = modifiedAttrComparison.display,
         )
 
         assertEquals(

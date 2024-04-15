@@ -16,8 +16,7 @@ import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 
 fun LazyListScope.attrComparisonEditList(
     attrComparisonEditListUiState: AttrComparisonEditListUiState,
-    onComparisonOperatorChanged: (type: String, comparisonOperator: ComparisonOperator) -> Unit,
-    onComparedValueChanged: (type: String, comparedValue: String) -> Unit,
+    onModifyAttrComparison: (String, ComparisonOperator, String) -> Unit,
     onDeleteAttrComparisonEditItem: (type: String) -> Unit,
 ) {
     when (attrComparisonEditListUiState) {
@@ -32,19 +31,21 @@ fun LazyListScope.attrComparisonEditList(
                 AttrComparisonEditItem(
                     icon = editItem.propertyInfo.icon,
                     name = editItem.propertyInfo.name,
-                    comparedValue = editItem.attrComparison.comparedValue,
+                    displayComparedValue = editItem.attrComparison.display,
                     percent = editItem.propertyInfo.percent,
                     comparisonOperator = editItem.attrComparison.comparisonOperator,
-                    onComparisonOperatorChanged = {
-                        onComparisonOperatorChanged(
+                    onComparisonOperatorChanged = { comparisonOperator ->
+                        onModifyAttrComparison(
                             editItem.propertyInfo.type,
-                            it,
+                            comparisonOperator,
+                            editItem.attrComparison.display,
                         )
                     },
-                    onComparedValueChanged = {
-                        onComparedValueChanged(
+                    onComparedValueChanged = { comparedValue ->
+                        onModifyAttrComparison(
                             editItem.propertyInfo.type,
-                            it,
+                            editItem.attrComparison.comparisonOperator,
+                            comparedValue,
                         )
                     },
                     onDeleteItem = {
@@ -82,8 +83,7 @@ private fun PreviewAttrComparisonEditList() {
                         )
                     },
                 ),
-                onComparedValueChanged = { _, _ -> },
-                onComparisonOperatorChanged = { _, _ -> },
+                onModifyAttrComparison = { _, _, _ -> },
                 onDeleteAttrComparisonEditItem = {},
             )
         }
