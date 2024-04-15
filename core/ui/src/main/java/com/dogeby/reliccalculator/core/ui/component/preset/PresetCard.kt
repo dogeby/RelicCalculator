@@ -85,7 +85,7 @@ fun PresetCard(
     colors: CardColors = CardDefaults.cardColors(),
 ) {
     Card(
-        modifier = modifier.size(360.dp, 416.dp),
+        modifier = modifier.size(360.dp, 420.dp),
         shape = shape,
         colors = colors,
     ) {
