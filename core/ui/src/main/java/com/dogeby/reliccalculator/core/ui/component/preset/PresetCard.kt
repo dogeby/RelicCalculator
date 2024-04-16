@@ -257,7 +257,8 @@ private fun RelicSetsAndAttrComparisonsRow(
             HorizontalGameImageText(
                 src = item.propertyInfo.icon,
                 text = "${item.attrComparison.comparisonOperator.symbol} " +
-                    item.attrComparison.display,
+                    item.attrComparison.display +
+                    if (item.attrComparison.percent) "%" else "",
                 backgroundColor = backgroundColor,
                 imageSize = imageSize,
                 imageColorFilter = ColorFilter.tint(
