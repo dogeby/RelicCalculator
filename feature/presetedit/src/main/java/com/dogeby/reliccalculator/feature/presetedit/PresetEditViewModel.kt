@@ -273,10 +273,14 @@ class PresetEditViewModel @Inject constructor(
             }
             val editedAffixIds = editedSubAffixWeights.map { it.affixId }
 
+            val unEditedAffixes = affixWeights.filterNot {
+                it.affixWeight.affixId in editedAffixIds
+            }
+            if (unEditedAffixes.isEmpty()) {
+                return@combine AffixAddDialogueUiState.Empty
+            }
             AffixAddDialogueUiState.Success(
-                affixes = affixWeights.filterNot {
-                    it.affixWeight.affixId in editedAffixIds
-                },
+                affixes = unEditedAffixes,
             )
         }
             .onStart {

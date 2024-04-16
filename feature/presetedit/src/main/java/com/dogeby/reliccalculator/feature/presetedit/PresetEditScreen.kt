@@ -193,6 +193,9 @@ fun PresetEditScreen(
                     },
                     onModifySubAffixWeight = onModifySubAffixWeight,
                     onDeleteSubAffixWeight = onDeleteSubAffixWeight,
+                    enableAddBtn = {
+                        subAffixAddDialogueUiState !is AffixAddDialogueUiState.Empty
+                    },
                 )
                 attrComparisonEditListWithTitle(
                     attrComparisonEditListUiState = attrComparisonEditListUiState,
@@ -263,6 +266,7 @@ private fun LazyListScope.subAffixWeightListWithTitle(
     onSubAffixWeightAddBtnClick: () -> Unit,
     onModifySubAffixWeight: (affixId: String, weight: Float) -> Unit,
     onDeleteSubAffixWeight: (affixId: String) -> Unit,
+    enableAddBtn: () -> Boolean,
 ) {
     item {
         Row(
@@ -274,7 +278,10 @@ private fun LazyListScope.subAffixWeightListWithTitle(
                 text = stringResource(id = R.string.sub_stat),
                 style = MaterialTheme.typography.titleMedium,
             )
-            IconButton(onClick = onSubAffixWeightAddBtnClick) {
+            IconButton(
+                onClick = onSubAffixWeightAddBtnClick,
+                enabled = enableAddBtn(),
+            ) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = null,
