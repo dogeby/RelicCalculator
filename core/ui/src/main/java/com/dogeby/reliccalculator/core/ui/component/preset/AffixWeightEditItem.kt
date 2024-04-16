@@ -4,11 +4,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -70,6 +71,7 @@ fun AffixWeightEditItem(
                 backgroundColor = iconBackgroundColor,
                 imageSize = 48.dp,
                 imageColorFilter = ColorFilter.tint(contentColorFor(iconBackgroundColor)),
+                modifier = Modifier.size(56.dp),
             )
             Column(modifier = Modifier.weight(1f)) {
                 Text(
@@ -79,6 +81,7 @@ fun AffixWeightEditItem(
                 AffixWeightSlider(
                     weight = weight,
                     onValueChangeFinished = onWeightChangeFinished,
+                    modifier = Modifier.height(24.dp),
                 )
             }
             onDeleteItem?.let {

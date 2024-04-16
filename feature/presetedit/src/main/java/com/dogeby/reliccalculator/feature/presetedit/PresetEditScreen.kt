@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
@@ -132,7 +133,7 @@ fun PresetEditScreen(
     onModifySubAffixWeight: (affixId: String, weight: Float) -> Unit,
     onAddAttrComparison: (type: String) -> Unit,
     onDeleteAttrComparison: (type: String) -> Unit,
-    onModifyAttrComparison: (String, ComparisonOperator?, Float?) -> Unit,
+    onModifyAttrComparison: (String, ComparisonOperator, String) -> Unit,
 ) {
     var openAttrComparisonAddDialogue by rememberSaveable {
         mutableStateOf(false)
@@ -162,7 +163,7 @@ fun PresetEditScreen(
             },
         )
     }
-    Box(modifier) {
+    Box(modifier.fillMaxSize()) {
         if (relicSetFiltersUiState is RelicSetFiltersUiState.Success &&
             attrComparisonEditListUiState is AttrComparisonEditListUiState.Success &&
             pieceMainAffixWeightListUiState is PieceMainAffixWeightListUiState.Success &&
@@ -297,7 +298,7 @@ private fun LazyListScope.subAffixWeightListWithTitle(
 private fun LazyListScope.attrComparisonEditListWithTitle(
     attrComparisonEditListUiState: AttrComparisonEditListUiState.Success,
     onAttrComparisonAddBtnClick: () -> Unit,
-    onModifyAttrComparison: (String, ComparisonOperator?, Float?) -> Unit,
+    onModifyAttrComparison: (String, ComparisonOperator, String) -> Unit,
     onDeleteAttrComparison: (type: String) -> Unit,
 ) {
     item {
@@ -325,20 +326,7 @@ private fun LazyListScope.attrComparisonEditListWithTitle(
     } else {
         attrComparisonEditList(
             attrComparisonEditListUiState = attrComparisonEditListUiState,
-            onComparisonOperatorChanged = { type, comparisonOperator ->
-                onModifyAttrComparison(
-                    type,
-                    comparisonOperator,
-                    null,
-                )
-            },
-            onComparedValueChanged = { type: String, comparedValue: String ->
-                onModifyAttrComparison(
-                    type,
-                    null,
-                    comparedValue.toFloatOrNull(),
-                )
-            },
+            onModifyAttrComparison = onModifyAttrComparison,
             onDeleteAttrComparisonEditItem = onDeleteAttrComparison,
         )
     }

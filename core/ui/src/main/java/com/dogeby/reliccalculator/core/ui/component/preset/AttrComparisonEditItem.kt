@@ -2,9 +2,11 @@ package com.dogeby.reliccalculator.core.ui.component.preset
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,7 +14,6 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -24,7 +25,6 @@ import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -50,7 +50,7 @@ import com.dogeby.reliccalculator.core.ui.util.clearFocusWhenTap
 fun AttrComparisonEditItem(
     icon: String,
     name: String,
-    comparedValue: Float,
+    displayComparedValue: String,
     percent: Boolean,
     comparisonOperator: ComparisonOperator,
     onComparisonOperatorChanged: (ComparisonOperator) -> Unit,
@@ -89,50 +89,53 @@ fun AttrComparisonEditItem(
                 backgroundColor = iconBackgroundColor,
                 imageSize = 48.dp,
                 imageColorFilter = ColorFilter.tint(contentColorFor(iconBackgroundColor)),
+                modifier = Modifier.size(56.dp),
             )
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = name,
                     style = MaterialTheme.typography.bodyLarge,
                 )
-                DropdownMenuChip(
-                    label = {
-                        Text(
-                            text = comparisonOperator.symbol,
-                            modifier = Modifier.widthIn(min = 32.dp),
-                            textAlign = TextAlign.Center,
-                        )
-                    },
-                    expandedState = expandedState,
-                    trailingIcon = null,
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    ComparisonOperator.entries.forEach {
-                        ComparisonOperatorDropdownMenuItem(
-                            symbol = it.symbol,
-                            onClick = {
-                                onComparisonOperatorChanged(it)
-                                expandedState.value = false
-                            },
-                        )
+                    DropdownMenuChip(
+                        label = {
+                            Text(
+                                text = comparisonOperator.symbol,
+                                modifier = Modifier.widthIn(min = 32.dp),
+                                textAlign = TextAlign.Center,
+                            )
+                        },
+                        expandedState = expandedState,
+                        trailingIcon = null,
+                    ) {
+                        ComparisonOperator.entries.forEach {
+                            ComparisonOperatorDropdownMenuItem(
+                                symbol = it.symbol,
+                                onClick = {
+                                    onComparisonOperatorChanged(it)
+                                    expandedState.value = false
+                                },
+                            )
+                        }
+                    }
+                    ComparedValueTextField(
+                        keyword = displayComparedValue,
+                        onKeywordChange = onComparedValueChanged,
+                        modifier = Modifier.weight(1f),
+                    )
+                    if (percent) {
+                        Text(text = "%")
                     }
                 }
-                ComparedValueTextField(
-                    keyword = "$comparedValue",
-                    onKeywordChange = onComparedValueChanged,
-                    modifier = Modifier.weight(1f),
+            }
+            IconButton(onClick = onDeleteItem) {
+                Icon(
+                    imageVector = Icons.Outlined.Delete,
+                    contentDescription = null,
                 )
-                if (percent) {
-                    Text(text = "%")
-                }
-                IconButton(onClick = onDeleteItem) {
-                    Icon(
-                        imageVector = Icons.Outlined.Delete,
-                        contentDescription = null,
-                    )
-                }
             }
         }
     }
@@ -195,24 +198,26 @@ private fun PreviewAttrComparisonEditItem() {
     var comparisonOperator by remember {
         mutableStateOf(ComparisonOperator.GREATER_THAN_OR_EQUAL_TO)
     }
-    var comparedValue by remember {
-        mutableFloatStateOf(134f)
+    var displayComparedValue by remember {
+        mutableStateOf("123")
     }
     RelicCalculatorTheme {
         AttrComparisonEditItem(
             icon = "icon/property/IconSpeed.png",
             name = "속도",
-            comparedValue = comparedValue,
+            displayComparedValue = displayComparedValue,
             percent = true,
             comparisonOperator = comparisonOperator,
             onComparisonOperatorChanged = {
                 comparisonOperator = it
             },
             onComparedValueChanged = {
-                comparedValue = it.toFloat()
+                displayComparedValue = it
             },
             onDeleteItem = {},
-            modifier = Modifier.width(360.dp).clearFocusWhenTap(),
+            modifier = Modifier
+                .width(360.dp)
+                .clearFocusWhenTap(),
         )
     }
 }

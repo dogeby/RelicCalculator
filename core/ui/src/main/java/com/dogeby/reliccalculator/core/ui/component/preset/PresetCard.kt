@@ -85,7 +85,7 @@ fun PresetCard(
     colors: CardColors = CardDefaults.cardColors(),
 ) {
     Card(
-        modifier = modifier.size(360.dp, 416.dp),
+        modifier = modifier.size(360.dp, 420.dp),
         shape = shape,
         colors = colors,
     ) {
@@ -257,7 +257,8 @@ private fun RelicSetsAndAttrComparisonsRow(
             HorizontalGameImageText(
                 src = item.propertyInfo.icon,
                 text = "${item.attrComparison.comparisonOperator.symbol} " +
-                    item.attrComparison.display,
+                    item.attrComparison.display +
+                    if (item.attrComparison.percent) "%" else "",
                 backgroundColor = backgroundColor,
                 imageSize = imageSize,
                 imageColorFilter = ColorFilter.tint(
@@ -319,7 +320,9 @@ private fun MainPieceAffixWeightItem(
     var expanded by remember {
         mutableStateOf(false)
     }
+    val itemWidth = 160.dp
     val itemPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
+    val horizontalPadding = 4.dp
     val leadingImageSize = 32.dp
     val affixImageSize = 24.dp
     val trailingIconSize = 32.dp
@@ -335,6 +338,7 @@ private fun MainPieceAffixWeightItem(
             val contentColor = LocalContentColor.current
             Row(
                 modifier = Modifier
+                    .width(itemWidth)
                     .run {
                         if (affixWeightsWithInfo.size > 1) {
                             clickable {
@@ -345,14 +349,13 @@ private fun MainPieceAffixWeightItem(
                         }
                     }
                     .padding(itemPadding),
-                horizontalArrangement = Arrangement.spacedBy(2.dp),
+                horizontalArrangement = Arrangement.spacedBy(horizontalPadding),
             ) {
                 GameImage(
                     src = relicPiece.icon,
                     modifier = Modifier.size(leadingImageSize),
                     colorFilter = ColorFilter.tint(contentColor),
                 )
-                Spacer(modifier = Modifier.width(2.dp))
                 Row(
                     modifier = Modifier.align(Alignment.CenterVertically),
                     verticalAlignment = Alignment.CenterVertically,
@@ -363,23 +366,22 @@ private fun MainPieceAffixWeightItem(
                         colorFilter = ColorFilter.tint(contentColor),
                     )
                     Spacer(modifier = Modifier.width(2.dp))
-                    Text(text = affixWeightWithInfo.affixWeight.weight.toString())
+                    Text(
+                        text = affixWeightWithInfo.affixWeight.weight.toString(),
+                    )
                 }
-                Spacer(modifier = Modifier.width(4.dp))
-
-                if (affixWeightsWithInfo.size <= 1) {
-                    Spacer(modifier = Modifier.size(trailingIconSize))
-                    return@Surface
+                if (affixWeightsWithInfo.size > 1) {
+                    Spacer(modifier = Modifier.weight(1f))
+                    Icon(
+                        imageVector = if (expanded) {
+                            Icons.Default.ExpandLess
+                        } else {
+                            Icons.Default.ExpandMore
+                        },
+                        contentDescription = null,
+                        modifier = Modifier.size(trailingIconSize),
+                    )
                 }
-                Icon(
-                    imageVector = if (expanded) {
-                        Icons.Default.ExpandLess
-                    } else {
-                        Icons.Default.ExpandMore
-                    },
-                    contentDescription = null,
-                    modifier = Modifier.size(trailingIconSize),
-                )
             }
         }
         DropdownMenu(
@@ -388,11 +390,14 @@ private fun MainPieceAffixWeightItem(
         ) {
             val contentColor = LocalContentColor.current
             Column(
-                modifier = Modifier.padding(itemPadding),
+                modifier = Modifier
+                    .width(itemWidth)
+                    .padding(itemPadding),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 affixWeightsWithInfo.drop(1).forEach { affixWeightWithInfo ->
                     Row(verticalAlignment = Alignment.CenterVertically) {
+                        Spacer(modifier = Modifier.width(leadingImageSize + horizontalPadding))
                         AffixImage(
                             type = affixWeightWithInfo.affixWeight.type,
                             modifier = Modifier.size(affixImageSize),

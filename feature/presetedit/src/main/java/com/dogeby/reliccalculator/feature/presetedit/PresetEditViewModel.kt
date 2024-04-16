@@ -362,6 +362,17 @@ class PresetEditViewModel @Inject constructor(
             return
         }
 
+        if (
+            attrComparisons.any {
+                it.display.toFloatOrNull() == null ||
+                    it.display.firstOrNull() == '.' ||
+                    it.display.lastOrNull() == '.'
+            }
+        ) {
+            emitMessage(PresetEditMessageUiState.EditError)
+            return
+        }
+
         viewModelScope.launch {
             updatePresetUseCase(
                 characterId = preset.characterId,
@@ -432,23 +443,35 @@ class PresetEditViewModel @Inject constructor(
 
     fun modifyAttrComparison(
         type: String,
-        comparisonOperator: ComparisonOperator? = null,
-        comparedValue: Float? = null,
+        comparisonOperator: ComparisonOperator,
+        inputComparedValue: String,
     ) {
         val editedAttrComparisonsValue = editedAttrComparisons.value
         if (editedAttrComparisonsValue == null) {
             emitMessage(PresetEditMessageUiState.ModifyError)
             return
         }
-
-        val modifiedAttrComparisons = editedAttrComparisonsValue.map {
-            if (type == it.type) {
-                return@map it.copy(
-                    comparisonOperator = comparisonOperator ?: it.comparisonOperator,
-                    comparedValue = comparedValue ?: it.comparedValue,
+        val filteredInputComparedValue = inputComparedValue
+            .filter { it.isDigit() || it == '.' }
+        val inputComparedValueAsFloat = filteredInputComparedValue
+            .toFloatOrNull()
+        val modifiedAttrComparisons = editedAttrComparisonsValue.map { attrComparison ->
+            if (type == attrComparison.type) {
+                val newComparedValue = if (inputComparedValueAsFloat == null) {
+                    attrComparison.comparedValue
+                } else if (attrComparison.percent) {
+                    inputComparedValueAsFloat / 100
+                } else {
+                    inputComparedValueAsFloat
+                }
+                attrComparison.copy(
+                    comparisonOperator = comparisonOperator,
+                    comparedValue = newComparedValue,
+                    display = filteredInputComparedValue,
                 )
+            } else {
+                attrComparison
             }
-            it
         }
 
         savedStateHandle[EDITED_ATTR_COMPARISONS_KEY] = modifiedAttrComparisons

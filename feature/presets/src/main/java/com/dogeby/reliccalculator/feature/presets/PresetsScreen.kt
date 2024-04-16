@@ -2,7 +2,6 @@ package com.dogeby.reliccalculator.feature.presets
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -93,7 +92,7 @@ private fun PresetsScreen(
                 bottomBar = {},
                 bottomBarHeight = 0.dp,
                 columns = GridCells.Adaptive(308.dp),
-                modifier = modifier.fillMaxSize(),
+                modifier = modifier,
                 contentPadding = PaddingValues(8.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
