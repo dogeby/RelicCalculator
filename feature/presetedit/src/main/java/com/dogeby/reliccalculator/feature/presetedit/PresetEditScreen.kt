@@ -44,6 +44,7 @@ import com.dogeby.reliccalculator.core.ui.component.preset.SubAffixWeightListUiS
 import com.dogeby.reliccalculator.core.ui.component.preset.attrComparisonEditList
 import com.dogeby.reliccalculator.core.ui.component.preset.pieceMainAffixWeightList
 import com.dogeby.reliccalculator.core.ui.component.preset.subAffixWeightList
+import com.dogeby.reliccalculator.core.ui.util.clearFocusWhenTap
 import com.dogeby.reliccalculator.feature.presetedit.model.PresetEditMessageUiState
 
 @Composable
@@ -163,7 +164,11 @@ fun PresetEditScreen(
             },
         )
     }
-    Box(modifier.fillMaxSize()) {
+    Box(
+        modifier
+            .fillMaxSize()
+            .clearFocusWhenTap(),
+    ) {
         if (relicSetFiltersUiState is RelicSetFiltersUiState.Success &&
             attrComparisonEditListUiState is AttrComparisonEditListUiState.Success &&
             pieceMainAffixWeightListUiState is PieceMainAffixWeightListUiState.Success &&
