@@ -109,7 +109,7 @@ fun PresetEditRoute(
         onAddSubAffixWeight = viewModel::addSubAffixWeight,
         onDeleteSubAffixWeight = viewModel::deleteSubAffixWeight,
         onModifySubAffixWeight = viewModel::modifySubAffixWeight,
-        onAddAttrComparison = viewModel::addAttrComparison,
+        onAddAttrComparisons = viewModel::addAttrComparison,
         onDeleteAttrComparison = viewModel::deleteAttrComparison,
         onModifyAttrComparison = viewModel::modifyAttrComparison,
         modifier = modifier,
@@ -132,7 +132,7 @@ fun PresetEditScreen(
     onAddSubAffixWeight: (affixIds: List<String>) -> Unit,
     onDeleteSubAffixWeight: (affixId: String) -> Unit,
     onModifySubAffixWeight: (affixId: String, weight: Float) -> Unit,
-    onAddAttrComparison: (type: String) -> Unit,
+    onAddAttrComparisons: (types: List<String>) -> Unit,
     onDeleteAttrComparison: (type: String) -> Unit,
     onModifyAttrComparison: (String, ComparisonOperator, String) -> Unit,
 ) {
@@ -148,7 +148,7 @@ fun PresetEditScreen(
             attrComparisonAddDialogueUiState = attrComparisonAddDialogueUiState,
             onDismissRequest = { openAttrComparisonAddDialogue = false },
             onAddBtnClick = {
-                onAddAttrComparison(it)
+                onAddAttrComparisons(it)
                 openAttrComparisonAddDialogue = false
             },
         )

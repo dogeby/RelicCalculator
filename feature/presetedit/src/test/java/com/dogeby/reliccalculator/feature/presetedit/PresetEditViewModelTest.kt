@@ -220,7 +220,7 @@ class PresetEditViewModelTest {
             presetEditViewModel.attrComparisonAddDialogueUiState.value,
         )
 
-        presetEditViewModel.addAttrComparison(sampleAttrComparison.type)
+        presetEditViewModel.addAttrComparison(listOf(sampleAttrComparison.type))
 
         assertEquals(
             AttrComparisonEditListUiState.Success(
