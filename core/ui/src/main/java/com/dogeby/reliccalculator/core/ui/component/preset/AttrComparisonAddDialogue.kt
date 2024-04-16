@@ -25,6 +25,7 @@ import com.dogeby.reliccalculator.core.model.mihomo.index.PropertyInfo
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
 import com.dogeby.reliccalculator.core.ui.R
+import com.dogeby.reliccalculator.core.ui.component.EmptyState
 import com.dogeby.reliccalculator.core.ui.component.image.GameImage
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 
@@ -45,6 +46,8 @@ fun AttrComparisonAddDialogue(
         confirmButton = {
             TextButton(
                 onClick = { selectedAttrComparison?.let { onAddBtnClick(it) } },
+                enabled = attrComparisonAddDialogueUiState is
+                    AttrComparisonAddDialogueUiState.Success,
             ) {
                 Text(text = stringResource(id = R.string.add))
             }
@@ -60,6 +63,9 @@ fun AttrComparisonAddDialogue(
         text = {
             when (attrComparisonAddDialogueUiState) {
                 AttrComparisonAddDialogueUiState.Loading -> Unit
+                AttrComparisonAddDialogueUiState.Empty -> {
+                    EmptyState()
+                }
                 is AttrComparisonAddDialogueUiState.Success -> {
                     FlowRow(
                         modifier = modifier,
@@ -100,6 +106,8 @@ fun AttrComparisonAddDialogue(
 sealed interface AttrComparisonAddDialogueUiState {
 
     data object Loading : AttrComparisonAddDialogueUiState
+
+    data object Empty : AttrComparisonAddDialogueUiState
 
     data class Success(
         val attrComparisons: List<AttrComparisonWithInfo>,

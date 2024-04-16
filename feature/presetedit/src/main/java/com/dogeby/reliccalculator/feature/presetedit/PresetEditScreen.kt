@@ -204,6 +204,9 @@ fun PresetEditScreen(
                     },
                     onModifyAttrComparison = onModifyAttrComparison,
                     onDeleteAttrComparison = onDeleteAttrComparison,
+                    enableAddBtn = {
+                        attrComparisonAddDialogueUiState !is AttrComparisonAddDialogueUiState.Empty
+                    },
                 )
             }
         } else {
@@ -307,6 +310,7 @@ private fun LazyListScope.attrComparisonEditListWithTitle(
     onAttrComparisonAddBtnClick: () -> Unit,
     onModifyAttrComparison: (String, ComparisonOperator, String) -> Unit,
     onDeleteAttrComparison: (type: String) -> Unit,
+    enableAddBtn: () -> Boolean,
 ) {
     item {
         Row(
@@ -318,7 +322,10 @@ private fun LazyListScope.attrComparisonEditListWithTitle(
                 text = stringResource(id = R.string.stat_comparison),
                 style = MaterialTheme.typography.titleMedium,
             )
-            IconButton(onClick = onAttrComparisonAddBtnClick) {
+            IconButton(
+                onClick = onAttrComparisonAddBtnClick,
+                enabled = enableAddBtn(),
+            ) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = null,

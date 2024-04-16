@@ -159,12 +159,17 @@ class PresetEditViewModel @Inject constructor(
             if (attrComparisons == null || editedAttrComparisons == null) {
                 return@combine AttrComparisonAddDialogueUiState.Loading
             }
+
             val editedAttrComparisonIds = editedAttrComparisons.map { it.type }
+            val uneditedAttrComparison = attrComparisons.filterNot {
+                it.attrComparison.type in editedAttrComparisonIds
+            }
+            if (uneditedAttrComparison.isEmpty()) {
+                return@combine AttrComparisonAddDialogueUiState.Empty
+            }
 
             AttrComparisonAddDialogueUiState.Success(
-                attrComparisons = attrComparisons.filterNot {
-                    it.attrComparison.type in editedAttrComparisonIds
-                },
+                attrComparisons = uneditedAttrComparison,
             )
         }
             .onStart {
@@ -272,15 +277,15 @@ class PresetEditViewModel @Inject constructor(
                 return@combine AffixAddDialogueUiState.Loading
             }
             val editedAffixIds = editedSubAffixWeights.map { it.affixId }
-
-            val unEditedAffixes = affixWeights.filterNot {
+            val uneditedAffixes = affixWeights.filterNot {
                 it.affixWeight.affixId in editedAffixIds
             }
-            if (unEditedAffixes.isEmpty()) {
+            if (uneditedAffixes.isEmpty()) {
                 return@combine AffixAddDialogueUiState.Empty
             }
+
             AffixAddDialogueUiState.Success(
-                affixes = unEditedAffixes,
+                affixes = uneditedAffixes,
             )
         }
             .onStart {
