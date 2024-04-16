@@ -2,9 +2,11 @@ package com.dogeby.reliccalculator.core.ui.component.preset
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -87,50 +89,53 @@ fun AttrComparisonEditItem(
                 backgroundColor = iconBackgroundColor,
                 imageSize = 48.dp,
                 imageColorFilter = ColorFilter.tint(contentColorFor(iconBackgroundColor)),
+                modifier = Modifier.size(56.dp),
             )
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = name,
                     style = MaterialTheme.typography.bodyLarge,
                 )
-                DropdownMenuChip(
-                    label = {
-                        Text(
-                            text = comparisonOperator.symbol,
-                            modifier = Modifier.widthIn(min = 32.dp),
-                            textAlign = TextAlign.Center,
-                        )
-                    },
-                    expandedState = expandedState,
-                    trailingIcon = null,
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    ComparisonOperator.entries.forEach {
-                        ComparisonOperatorDropdownMenuItem(
-                            symbol = it.symbol,
-                            onClick = {
-                                onComparisonOperatorChanged(it)
-                                expandedState.value = false
-                            },
-                        )
+                    DropdownMenuChip(
+                        label = {
+                            Text(
+                                text = comparisonOperator.symbol,
+                                modifier = Modifier.widthIn(min = 32.dp),
+                                textAlign = TextAlign.Center,
+                            )
+                        },
+                        expandedState = expandedState,
+                        trailingIcon = null,
+                    ) {
+                        ComparisonOperator.entries.forEach {
+                            ComparisonOperatorDropdownMenuItem(
+                                symbol = it.symbol,
+                                onClick = {
+                                    onComparisonOperatorChanged(it)
+                                    expandedState.value = false
+                                },
+                            )
+                        }
+                    }
+                    ComparedValueTextField(
+                        keyword = displayComparedValue,
+                        onKeywordChange = onComparedValueChanged,
+                        modifier = Modifier.weight(1f),
+                    )
+                    if (percent) {
+                        Text(text = "%")
                     }
                 }
-                ComparedValueTextField(
-                    keyword = displayComparedValue,
-                    onKeywordChange = onComparedValueChanged,
-                    modifier = Modifier.weight(1f),
+            }
+            IconButton(onClick = onDeleteItem) {
+                Icon(
+                    imageVector = Icons.Outlined.Delete,
+                    contentDescription = null,
                 )
-                if (percent) {
-                    Text(text = "%")
-                }
-                IconButton(onClick = onDeleteItem) {
-                    Icon(
-                        imageVector = Icons.Outlined.Delete,
-                        contentDescription = null,
-                    )
-                }
             }
         }
     }
@@ -210,7 +215,9 @@ private fun PreviewAttrComparisonEditItem() {
                 displayComparedValue = it
             },
             onDeleteItem = {},
-            modifier = Modifier.width(360.dp).clearFocusWhenTap(),
+            modifier = Modifier
+                .width(360.dp)
+                .clearFocusWhenTap(),
         )
     }
 }
