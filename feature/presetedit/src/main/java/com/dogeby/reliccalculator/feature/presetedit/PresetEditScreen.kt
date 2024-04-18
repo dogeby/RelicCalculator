@@ -44,6 +44,7 @@ import com.dogeby.reliccalculator.core.ui.component.preset.SubAffixWeightListUiS
 import com.dogeby.reliccalculator.core.ui.component.preset.attrComparisonEditList
 import com.dogeby.reliccalculator.core.ui.component.preset.pieceMainAffixWeightList
 import com.dogeby.reliccalculator.core.ui.component.preset.subAffixWeightList
+import com.dogeby.reliccalculator.core.ui.util.clearFocusWhenTap
 import com.dogeby.reliccalculator.feature.presetedit.model.PresetEditMessageUiState
 
 @Composable
@@ -108,7 +109,7 @@ fun PresetEditRoute(
         onAddSubAffixWeight = viewModel::addSubAffixWeight,
         onDeleteSubAffixWeight = viewModel::deleteSubAffixWeight,
         onModifySubAffixWeight = viewModel::modifySubAffixWeight,
-        onAddAttrComparison = viewModel::addAttrComparison,
+        onAddAttrComparisons = viewModel::addAttrComparison,
         onDeleteAttrComparison = viewModel::deleteAttrComparison,
         onModifyAttrComparison = viewModel::modifyAttrComparison,
         modifier = modifier,
@@ -131,7 +132,7 @@ fun PresetEditScreen(
     onAddSubAffixWeight: (affixIds: List<String>) -> Unit,
     onDeleteSubAffixWeight: (affixId: String) -> Unit,
     onModifySubAffixWeight: (affixId: String, weight: Float) -> Unit,
-    onAddAttrComparison: (type: String) -> Unit,
+    onAddAttrComparisons: (types: List<String>) -> Unit,
     onDeleteAttrComparison: (type: String) -> Unit,
     onModifyAttrComparison: (String, ComparisonOperator, String) -> Unit,
 ) {
@@ -147,7 +148,7 @@ fun PresetEditScreen(
             attrComparisonAddDialogueUiState = attrComparisonAddDialogueUiState,
             onDismissRequest = { openAttrComparisonAddDialogue = false },
             onAddBtnClick = {
-                onAddAttrComparison(it)
+                onAddAttrComparisons(it)
                 openAttrComparisonAddDialogue = false
             },
         )
@@ -163,7 +164,11 @@ fun PresetEditScreen(
             },
         )
     }
-    Box(modifier.fillMaxSize()) {
+    Box(
+        modifier
+            .fillMaxSize()
+            .clearFocusWhenTap(),
+    ) {
         if (relicSetFiltersUiState is RelicSetFiltersUiState.Success &&
             attrComparisonEditListUiState is AttrComparisonEditListUiState.Success &&
             pieceMainAffixWeightListUiState is PieceMainAffixWeightListUiState.Success &&
@@ -193,6 +198,9 @@ fun PresetEditScreen(
                     },
                     onModifySubAffixWeight = onModifySubAffixWeight,
                     onDeleteSubAffixWeight = onDeleteSubAffixWeight,
+                    enableAddBtn = {
+                        subAffixAddDialogueUiState !is AffixAddDialogueUiState.Empty
+                    },
                 )
                 attrComparisonEditListWithTitle(
                     attrComparisonEditListUiState = attrComparisonEditListUiState,
@@ -201,6 +209,9 @@ fun PresetEditScreen(
                     },
                     onModifyAttrComparison = onModifyAttrComparison,
                     onDeleteAttrComparison = onDeleteAttrComparison,
+                    enableAddBtn = {
+                        attrComparisonAddDialogueUiState !is AttrComparisonAddDialogueUiState.Empty
+                    },
                 )
             }
         } else {
@@ -263,6 +274,7 @@ private fun LazyListScope.subAffixWeightListWithTitle(
     onSubAffixWeightAddBtnClick: () -> Unit,
     onModifySubAffixWeight: (affixId: String, weight: Float) -> Unit,
     onDeleteSubAffixWeight: (affixId: String) -> Unit,
+    enableAddBtn: () -> Boolean,
 ) {
     item {
         Row(
@@ -274,7 +286,10 @@ private fun LazyListScope.subAffixWeightListWithTitle(
                 text = stringResource(id = R.string.sub_stat),
                 style = MaterialTheme.typography.titleMedium,
             )
-            IconButton(onClick = onSubAffixWeightAddBtnClick) {
+            IconButton(
+                onClick = onSubAffixWeightAddBtnClick,
+                enabled = enableAddBtn(),
+            ) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = null,
@@ -300,6 +315,7 @@ private fun LazyListScope.attrComparisonEditListWithTitle(
     onAttrComparisonAddBtnClick: () -> Unit,
     onModifyAttrComparison: (String, ComparisonOperator, String) -> Unit,
     onDeleteAttrComparison: (type: String) -> Unit,
+    enableAddBtn: () -> Boolean,
 ) {
     item {
         Row(
@@ -311,7 +327,10 @@ private fun LazyListScope.attrComparisonEditListWithTitle(
                 text = stringResource(id = R.string.stat_comparison),
                 style = MaterialTheme.typography.titleMedium,
             )
-            IconButton(onClick = onAttrComparisonAddBtnClick) {
+            IconButton(
+                onClick = onAttrComparisonAddBtnClick,
+                enabled = enableAddBtn(),
+            ) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = null,

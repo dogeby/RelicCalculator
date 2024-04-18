@@ -159,12 +159,17 @@ class PresetEditViewModel @Inject constructor(
             if (attrComparisons == null || editedAttrComparisons == null) {
                 return@combine AttrComparisonAddDialogueUiState.Loading
             }
+
             val editedAttrComparisonIds = editedAttrComparisons.map { it.type }
+            val uneditedAttrComparison = attrComparisons.filterNot {
+                it.attrComparison.type in editedAttrComparisonIds
+            }
+            if (uneditedAttrComparison.isEmpty()) {
+                return@combine AttrComparisonAddDialogueUiState.Empty
+            }
 
             AttrComparisonAddDialogueUiState.Success(
-                attrComparisons = attrComparisons.filterNot {
-                    it.attrComparison.type in editedAttrComparisonIds
-                },
+                attrComparisons = uneditedAttrComparison,
             )
         }
             .onStart {
@@ -272,11 +277,15 @@ class PresetEditViewModel @Inject constructor(
                 return@combine AffixAddDialogueUiState.Loading
             }
             val editedAffixIds = editedSubAffixWeights.map { it.affixId }
+            val uneditedAffixes = affixWeights.filterNot {
+                it.affixWeight.affixId in editedAffixIds
+            }
+            if (uneditedAffixes.isEmpty()) {
+                return@combine AffixAddDialogueUiState.Empty
+            }
 
             AffixAddDialogueUiState.Success(
-                affixes = affixWeights.filterNot {
-                    it.affixWeight.affixId in editedAffixIds
-                },
+                affixes = uneditedAffixes,
             )
         }
             .onStart {
@@ -403,7 +412,7 @@ class PresetEditViewModel @Inject constructor(
         emitMessage(PresetEditMessageUiState.ResetSuccess)
     }
 
-    fun addAttrComparison(type: String) {
+    fun addAttrComparison(types: List<String>) {
         val attrComparisonWithInfoListValue = attrComparisonWithInfoList.value
         val editedAttrComparisonsValue = editedAttrComparisons.value
 
@@ -412,19 +421,23 @@ class PresetEditViewModel @Inject constructor(
             return
         }
 
-        val newAttrComparison = attrComparisonWithInfoListValue
-            .find { type == it.attrComparison.type }
-            ?.attrComparison
+        val newAttrComparisons = attrComparisonWithInfoListValue
+            .filter { it.attrComparison.type in types }
+            .map { it.attrComparison }
 
-        if (newAttrComparison == null) {
+        if (newAttrComparisons.isEmpty()) {
             emitMessage(PresetEditMessageUiState.AddError)
             return
         }
 
-        val updatedAttrComparisons = editedAttrComparisonsValue.toMutableList()
-        updatedAttrComparisons.add(newAttrComparison)
+        val updatedAttrComparisons = editedAttrComparisonsValue
+            .toMutableList()
+            .apply {
+                addAll(newAttrComparisons)
+            }
+            .toList()
 
-        savedStateHandle[EDITED_ATTR_COMPARISONS_KEY] = updatedAttrComparisons.toList()
+        savedStateHandle[EDITED_ATTR_COMPARISONS_KEY] = updatedAttrComparisons
     }
 
     fun deleteAttrComparison(type: String) {

@@ -25,6 +25,7 @@ import com.dogeby.reliccalculator.core.model.mihomo.index.PropertyInfo
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
 import com.dogeby.reliccalculator.core.ui.R
+import com.dogeby.reliccalculator.core.ui.component.EmptyState
 import com.dogeby.reliccalculator.core.ui.component.image.GameImage
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 
@@ -33,18 +34,20 @@ import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 fun AttrComparisonAddDialogue(
     attrComparisonAddDialogueUiState: AttrComparisonAddDialogueUiState,
     onDismissRequest: () -> Unit,
-    onAddBtnClick: (type: String) -> Unit,
+    onAddBtnClick: (types: List<String>) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var selectedAttrComparison: String? by rememberSaveable(attrComparisonAddDialogueUiState) {
-        mutableStateOf(null)
+    var selectedAttrComparison: List<String> by rememberSaveable(attrComparisonAddDialogueUiState) {
+        mutableStateOf(emptyList())
     }
 
     AlertDialog(
         onDismissRequest = onDismissRequest,
         confirmButton = {
             TextButton(
-                onClick = { selectedAttrComparison?.let { onAddBtnClick(it) } },
+                onClick = { onAddBtnClick(selectedAttrComparison) },
+                enabled = attrComparisonAddDialogueUiState is
+                    AttrComparisonAddDialogueUiState.Success,
             ) {
                 Text(text = stringResource(id = R.string.add))
             }
@@ -60,6 +63,9 @@ fun AttrComparisonAddDialogue(
         text = {
             when (attrComparisonAddDialogueUiState) {
                 AttrComparisonAddDialogueUiState.Loading -> Unit
+                AttrComparisonAddDialogueUiState.Empty -> {
+                    EmptyState()
+                }
                 is AttrComparisonAddDialogueUiState.Success -> {
                     FlowRow(
                         modifier = modifier,
@@ -68,16 +74,18 @@ fun AttrComparisonAddDialogue(
                         attrComparisonAddDialogueUiState
                             .attrComparisons
                             .forEach { attrComparison ->
-                                val isSelected = attrComparison.attrComparison.type ==
+                                val isSelected = attrComparison.attrComparison.type in
                                     selectedAttrComparison
                                 FilterChip(
                                     selected = isSelected,
                                     onClick = {
                                         if (isSelected) {
-                                            selectedAttrComparison = null
+                                            selectedAttrComparison -=
+                                                attrComparison.attrComparison.type
                                             return@FilterChip
                                         }
-                                        selectedAttrComparison = attrComparison.attrComparison.type
+                                        selectedAttrComparison +=
+                                            attrComparison.attrComparison.type
                                     },
                                     label = { Text(text = attrComparison.propertyInfo.name) },
                                     leadingIcon = {
@@ -100,6 +108,8 @@ fun AttrComparisonAddDialogue(
 sealed interface AttrComparisonAddDialogueUiState {
 
     data object Loading : AttrComparisonAddDialogueUiState
+
+    data object Empty : AttrComparisonAddDialogueUiState
 
     data class Success(
         val attrComparisons: List<AttrComparisonWithInfo>,

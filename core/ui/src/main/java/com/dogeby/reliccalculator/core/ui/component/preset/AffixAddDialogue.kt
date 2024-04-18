@@ -24,6 +24,7 @@ import com.dogeby.reliccalculator.core.domain.model.AffixWeightWithInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.samplePropertyInfo
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.ui.R
+import com.dogeby.reliccalculator.core.ui.component.EmptyState
 import com.dogeby.reliccalculator.core.ui.component.image.GameImage
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 
@@ -44,6 +45,7 @@ fun AffixAddDialogue(
         confirmButton = {
             TextButton(
                 onClick = { onAddBtnClick(selectedAffixIds) },
+                enabled = affixAddDialogueUiState is AffixAddDialogueUiState.Success,
             ) {
                 Text(text = stringResource(id = R.string.add))
             }
@@ -59,6 +61,9 @@ fun AffixAddDialogue(
         text = {
             when (affixAddDialogueUiState) {
                 AffixAddDialogueUiState.Loading -> Unit
+                AffixAddDialogueUiState.Empty -> {
+                    EmptyState()
+                }
                 is AffixAddDialogueUiState.Success -> {
                     FlowRow(
                         modifier = modifier,
@@ -96,6 +101,8 @@ fun AffixAddDialogue(
 sealed interface AffixAddDialogueUiState {
 
     data object Loading : AffixAddDialogueUiState
+
+    data object Empty : AffixAddDialogueUiState
 
     data class Success(
         val affixes: List<AffixWeightWithInfo>,

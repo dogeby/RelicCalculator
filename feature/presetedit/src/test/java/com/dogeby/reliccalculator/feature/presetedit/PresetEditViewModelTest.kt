@@ -132,7 +132,7 @@ class PresetEditViewModelTest {
         }
 
         assertEquals(
-            AttrComparisonAddDialogueUiState.Success(emptyList()),
+            AttrComparisonAddDialogueUiState.Empty,
             presetEditViewModel.attrComparisonAddDialogueUiState.value,
         )
     }
@@ -187,7 +187,7 @@ class PresetEditViewModelTest {
         }
 
         assertEquals(
-            AffixAddDialogueUiState.Success(emptyList()),
+            AffixAddDialogueUiState.Empty,
             presetEditViewModel.subAffixAddDialogueUiState.value,
         )
     }
@@ -220,7 +220,7 @@ class PresetEditViewModelTest {
             presetEditViewModel.attrComparisonAddDialogueUiState.value,
         )
 
-        presetEditViewModel.addAttrComparison(sampleAttrComparison.type)
+        presetEditViewModel.addAttrComparison(listOf(sampleAttrComparison.type))
 
         assertEquals(
             AttrComparisonEditListUiState.Success(
@@ -234,9 +234,7 @@ class PresetEditViewModelTest {
             presetEditViewModel.attrComparisonEditListUiState.value,
         )
         assertEquals(
-            AttrComparisonAddDialogueUiState.Success(
-                emptyList(),
-            ),
+            AttrComparisonAddDialogueUiState.Empty,
             presetEditViewModel.attrComparisonAddDialogueUiState.value,
         )
     }
@@ -370,7 +368,7 @@ class PresetEditViewModelTest {
             presetEditViewModel.subAffixWeightListUiState.value,
         )
         assertEquals(
-            AffixAddDialogueUiState.Success(emptyList()),
+            AffixAddDialogueUiState.Empty,
             presetEditViewModel.subAffixAddDialogueUiState.value,
         )
     }
