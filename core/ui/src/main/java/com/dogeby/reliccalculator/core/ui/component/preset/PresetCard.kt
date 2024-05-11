@@ -18,7 +18,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
@@ -46,12 +45,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dogeby.reliccalculator.core.domain.model.AffixWeightWithInfo
@@ -70,6 +67,7 @@ import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
 import com.dogeby.reliccalculator.core.ui.R
 import com.dogeby.reliccalculator.core.ui.component.HorizontalGameImageText
 import com.dogeby.reliccalculator.core.ui.component.VerticalAffixImageText
+import com.dogeby.reliccalculator.core.ui.component.character.CharacterListItem
 import com.dogeby.reliccalculator.core.ui.component.image.AffixImage
 import com.dogeby.reliccalculator.core.ui.component.image.GameImage
 import com.dogeby.reliccalculator.core.ui.component.image.GameImageWithRichTooltipAndBackground
@@ -92,13 +90,61 @@ fun PresetCard(
         Column {
             Surface(tonalElevation = 1.dp) {
                 CharacterListItem(
-                    characterId = presetWithDetails.characterId,
                     characterName = presetWithDetails.characterInfo.name,
                     characterIcon = presetWithDetails.characterInfo.icon,
-                    isAutoUpdate = presetWithDetails.isAutoUpdate,
-                    onEditMenuItemClick = { onEditMenuItemClick(presetWithDetails.characterId) },
-                    onAutoUpdateChanged = onAutoUpdateChanged,
-                )
+                ) {
+                    Box(
+                        modifier = Modifier.wrapContentSize(Alignment.TopStart),
+                    ) {
+                        var expanded by remember {
+                            mutableStateOf(false)
+                        }
+
+                        IconButton(
+                            onClick = { expanded = true },
+                            modifier = Modifier.size(48.dp),
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.MoreVert,
+                                contentDescription = null,
+                            )
+                        }
+                        DropdownMenu(
+                            expanded = expanded,
+                            onDismissRequest = { expanded = !expanded },
+                        ) {
+                            DropdownMenuItem(
+                                text = {
+                                    Text(text = stringResource(id = R.string.edit))
+                                },
+                                onClick = { onEditMenuItemClick(presetWithDetails.characterId) },
+                            )
+                            DropdownMenuItem(
+                                text = {
+                                    Text(
+                                        text = stringResource(
+                                            id = R.string.default_preset_auto_update,
+                                        ),
+                                    )
+                                },
+                                onClick = {
+                                    onAutoUpdateChanged(
+                                        presetWithDetails.characterId,
+                                        !presetWithDetails.isAutoUpdate,
+                                    )
+                                },
+                                trailingIcon = {
+                                    Switch(
+                                        checked = presetWithDetails.isAutoUpdate,
+                                        onCheckedChange = {
+                                            onAutoUpdateChanged(presetWithDetails.characterId, it)
+                                        },
+                                    )
+                                },
+                            )
+                        }
+                    }
+                }
             }
             RelicSetsAndAttrComparisonsRow(
                 relicSets = presetWithDetails.relicSets,
@@ -112,88 +158,6 @@ fun PresetCard(
             SubAffixWeightsWithInfoList(
                 subAffixWeightsWithInfo = presetWithDetails.subAffixWeightsWithInfo,
             )
-        }
-    }
-}
-
-@Composable
-private fun CharacterListItem(
-    characterId: String,
-    characterName: String,
-    characterIcon: String,
-    isAutoUpdate: Boolean,
-    onEditMenuItemClick: () -> Unit,
-    onAutoUpdateChanged: (id: String, isAutoUpdate: Boolean) -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    var expanded by remember {
-        mutableStateOf(false)
-    }
-
-    Row(
-        modifier = modifier
-            .padding(
-                start = 16.dp,
-                top = 12.dp,
-                end = 4.dp,
-                bottom = 12.dp,
-            ),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        GameImage(
-            src = characterIcon,
-            modifier = Modifier
-                .size(54.dp)
-                .clip(CircleShape),
-        )
-        Spacer(modifier = Modifier.width(16.dp))
-        Text(
-            text = characterName,
-            modifier = Modifier.weight(1f),
-            overflow = TextOverflow.Ellipsis,
-            maxLines = 2,
-            style = MaterialTheme.typography.titleMedium,
-        )
-        Box(
-            modifier = Modifier.wrapContentSize(Alignment.TopStart),
-        ) {
-            IconButton(
-                onClick = { expanded = true },
-                modifier = Modifier.size(48.dp),
-            ) {
-                Icon(
-                    imageVector = Icons.Default.MoreVert,
-                    contentDescription = null,
-                )
-            }
-            DropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = !expanded },
-            ) {
-                DropdownMenuItem(
-                    text = {
-                        Text(text = stringResource(id = R.string.edit))
-                    },
-                    onClick = onEditMenuItemClick,
-                )
-                DropdownMenuItem(
-                    text = {
-                        Text(text = stringResource(id = R.string.default_preset_auto_update))
-                    },
-                    onClick = {
-                        onAutoUpdateChanged(characterId, !isAutoUpdate)
-                    },
-                    trailingIcon = {
-                        Switch(
-                            checked = isAutoUpdate,
-                            onCheckedChange = {
-                                onAutoUpdateChanged(characterId, it)
-                            },
-                        )
-                    },
-                )
-            }
         }
     }
 }
