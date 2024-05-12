@@ -15,12 +15,13 @@ import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 fun CharacterRelicRatingList(
     characterRelicRatingListUiState: CharacterRelicRatingListUiState,
     modifier: Modifier = Modifier,
+    horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(16.dp),
 ) {
     when (characterRelicRatingListUiState) {
         CharacterRelicRatingListUiState.Loading -> Unit
         is CharacterRelicRatingListUiState.Success -> {
             LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = horizontalArrangement,
                 modifier = modifier,
             ) {
                 items(
