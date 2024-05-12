@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dogeby.reliccalculator.core.ui.R
 import com.dogeby.reliccalculator.core.ui.component.DateTimeText
+import com.dogeby.reliccalculator.core.ui.component.Rating
 import com.dogeby.reliccalculator.core.ui.component.image.GameImage
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 import kotlinx.datetime.Clock
@@ -105,6 +106,27 @@ fun CharacterListItemWithUpdatedDate(
     )
 }
 
+@Composable
+fun CharacterListItemWithRating(
+    characterName: String,
+    characterIcon: String,
+    updatedDate: Instant,
+    score: Float,
+    modifier: Modifier = Modifier,
+) {
+    CharacterListItemWithUpdatedDate(
+        characterName = characterName,
+        characterIcon = characterIcon,
+        updatedDate = updatedDate,
+        modifier = modifier,
+    ) {
+        Rating(
+            rating = score,
+            color = MaterialTheme.colorScheme.primaryContainer,
+        )
+    }
+}
+
 @Preview(apiLevel = 33)
 @Composable
 private fun PreviewCharacterListItem() {
@@ -140,6 +162,20 @@ private fun PreviewCharacterListItemWithUpdatedDate() {
                     )
                 }
             },
+        )
+    }
+}
+
+@Preview(apiLevel = 33)
+@Composable
+private fun PreviewCharacterListItemWithRating() {
+    RelicCalculatorTheme {
+        CharacterListItemWithRating(
+            characterName = "test",
+            characterIcon = "",
+            updatedDate = Clock.System.now(),
+            score = 4.5f,
+            modifier = Modifier.padding(horizontal = 8.dp),
         )
     }
 }
