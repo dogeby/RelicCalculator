@@ -1,6 +1,5 @@
 package com.dogeby.reliccalculator.core.ui.component.character
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -41,11 +40,10 @@ fun CharacterListItem(
         modifier = modifier
             .padding(
                 start = 16.dp,
-                top = 12.dp,
-                end = 4.dp,
-                bottom = 12.dp,
+                top = 8.dp,
+                end = 24.dp,
+                bottom = 8.dp,
             ),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         GameImage(
