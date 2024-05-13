@@ -52,6 +52,7 @@ fun CharacterSimpleReportCard(
 }
 
 data class CharacterSimpleReportCardUiState(
+    val id: String,
     val characterName: String,
     val characterIcon: String,
     val updatedDate: Instant,
@@ -65,6 +66,7 @@ private fun PreviewCharacterSimpleReportCard() {
     RelicCalculatorTheme {
         CharacterSimpleReportCard(
             characterSimpleReportCardUiState = CharacterSimpleReportCardUiState(
+                id = "",
                 characterName = "name",
                 characterIcon = "icon/character/1107.png",
                 updatedDate = Clock.System.now(),
