@@ -6,9 +6,16 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.dogeby.reliccalculator.core.database.util.AffixCountListConverter
 import com.dogeby.reliccalculator.core.database.util.AttrComparisonReportListConverter
+import com.dogeby.reliccalculator.core.database.util.CharacterConverter
 import com.dogeby.reliccalculator.core.database.util.InstantConverter
+import com.dogeby.reliccalculator.core.database.util.PresetConverter
 import com.dogeby.reliccalculator.core.database.util.RelicReportListConverter
+import com.dogeby.reliccalculator.core.model.mihomo.Character
+import com.dogeby.reliccalculator.core.model.mihomo.Element
+import com.dogeby.reliccalculator.core.model.mihomo.LightCone
+import com.dogeby.reliccalculator.core.model.mihomo.Path
 import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
+import com.dogeby.reliccalculator.core.model.preset.Preset
 import com.dogeby.reliccalculator.core.model.report.AffixCount
 import com.dogeby.reliccalculator.core.model.report.AffixReport
 import com.dogeby.reliccalculator.core.model.report.AttrComparisonReport
@@ -23,12 +30,16 @@ import org.jetbrains.annotations.TestOnly
     AttrComparisonReportListConverter::class,
     InstantConverter::class,
     AffixCountListConverter::class,
+    CharacterConverter::class,
+    PresetConverter::class,
 )
 data class CharacterReportEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "report_id")
     val id: Int = 0,
     @ColumnInfo(name = "character_id") val characterId: String,
+    val character: Character,
+    val preset: Preset,
     @ColumnInfo(name = "character_score") val score: Float,
     @ColumnInfo(name = "relic_reports") val relicReports: List<RelicReport>,
     @ColumnInfo(name = "attr_comparison_reports")
@@ -42,6 +53,27 @@ data class CharacterReportEntity(
 val sampleCharacterReportEntity = CharacterReportEntity(
     id = 0,
     characterId = "1212",
+    character = Character(
+        id = "1212",
+        name = "",
+        icon = "",
+        preview = "",
+        portrait = "",
+        path = Path("", "", ""),
+        element = Element("", "", ""),
+        lightCone = LightCone("", "", "", ""),
+        relics = emptyList(),
+        relicSets = emptyList(),
+        attributes = emptyList(),
+        additions = emptyList(),
+    ),
+    preset = Preset(
+        characterId = "1212",
+        emptyList(),
+        emptyMap(),
+        emptyList(),
+        attrComparisons = emptyList(),
+    ),
     score = 5.0f,
     relicReports = List(3) { index ->
         RelicReport(

@@ -2,12 +2,14 @@ package com.dogeby.reliccalculator.core.database.util
 
 import androidx.room.TypeConverter
 import com.dogeby.reliccalculator.core.model.mihomo.Attribute
+import com.dogeby.reliccalculator.core.model.mihomo.Character
 import com.dogeby.reliccalculator.core.model.mihomo.Relic
 import com.dogeby.reliccalculator.core.model.mihomo.RelicSet
 import com.dogeby.reliccalculator.core.model.mihomo.index.AffixInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.RelicPiece
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
+import com.dogeby.reliccalculator.core.model.preset.Preset
 import com.dogeby.reliccalculator.core.model.report.AffixCount
 import com.dogeby.reliccalculator.core.model.report.AttrComparisonReport
 import com.dogeby.reliccalculator.core.model.report.RelicReport
@@ -126,4 +128,22 @@ class AffixInfoMapConverter {
 
     @TypeConverter
     fun stringToAffixInfoMap(json: String) = Json.decodeFromString<Map<String, AffixInfo>>(json)
+}
+
+class CharacterConverter {
+
+    @TypeConverter
+    fun characterToString(character: Character) = Json.encodeToString(character)
+
+    @TypeConverter
+    fun stringToCharacter(json: String) = Json.decodeFromString<Character>(json)
+}
+
+class PresetConverter {
+
+    @TypeConverter
+    fun presetToString(preset: Preset) = Json.encodeToString(preset)
+
+    @TypeConverter
+    fun stringToPreset(json: String) = Json.decodeFromString<Preset>(json)
 }
