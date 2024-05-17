@@ -19,6 +19,7 @@ import com.dogeby.reliccalculator.core.model.preset.Preset
 import com.dogeby.reliccalculator.core.model.report.AffixCount
 import com.dogeby.reliccalculator.core.model.report.AffixReport
 import com.dogeby.reliccalculator.core.model.report.AttrComparisonReport
+import com.dogeby.reliccalculator.core.model.report.CharacterReport
 import com.dogeby.reliccalculator.core.model.report.RelicReport
 import kotlinx.datetime.Instant
 import kotlinx.datetime.toInstant
@@ -45,8 +46,18 @@ data class CharacterReportEntity(
     @ColumnInfo(name = "attr_comparison_reports")
     val attrComparisonReports: List<AttrComparisonReport>,
     @ColumnInfo(name = "valid_affix_counts")
-    val validAffixCount: List<AffixCount>,
+    val validAffixCounts: List<AffixCount>,
     val generationTime: Instant,
+)
+
+fun CharacterReportEntity.toCharacterReport() = CharacterReport(
+    character = character,
+    preset = preset,
+    score = score,
+    relicReports = relicReports,
+    attrComparisonReports = attrComparisonReports,
+    validAffixCounts = validAffixCounts,
+    generationTime = generationTime,
 )
 
 @TestOnly
@@ -100,7 +111,7 @@ val sampleCharacterReportEntity = CharacterReportEntity(
             isPass = false,
         ),
     ),
-    validAffixCount = List(3) {
+    validAffixCounts = List(3) {
         AffixCount(
             type = "type$it",
             count = it,
