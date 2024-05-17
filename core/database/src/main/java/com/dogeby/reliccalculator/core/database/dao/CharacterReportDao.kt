@@ -53,6 +53,14 @@ interface CharacterReportDao {
 
     @Query(
         value = """
+            SELECT * FROM character_reports
+            WHERE character_id IN (:ids)
+        """,
+    )
+    fun getCharacterReportsByCharacterIds(ids: Set<String>): Flow<List<CharacterReportEntity>>
+
+    @Query(
+        value = """
             SELECT *
             FROM character_reports AS cr
             WHERE cr.generationTime = (

@@ -191,6 +191,24 @@ class CharacterReportDaoTest {
     }
 
     @Test
+    fun test_characterReportDao_getCharacterReportsByCharacterIds_success() = runTest {
+        val characterReports = List(3) {
+            characterReport.copy(
+                characterId = "$it",
+            )
+        }.run {
+            val ids = characterReportDao.insertOrIgnoreCharacterReports(this)
+            mapIndexed { index, characterReportEntity ->
+                characterReportEntity.copy(id = ids[index].toInt())
+            }
+        }
+        val ids = characterReports.map { it.characterId }
+        val result = characterReportDao.getCharacterReportsByCharacterIds(ids.toSet()).first()
+
+        Assert.assertEquals(characterReports, result)
+    }
+
+    @Test
     fun test_characterReportDao_getLatestCharacterReports_success() = runTest {
         val characterReports =
             List(3) { characterId ->
