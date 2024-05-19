@@ -51,6 +51,7 @@ data class CharacterReportEntity(
 )
 
 fun CharacterReportEntity.toCharacterReport() = CharacterReport(
+    id = id,
     character = character,
     preset = preset,
     score = score,

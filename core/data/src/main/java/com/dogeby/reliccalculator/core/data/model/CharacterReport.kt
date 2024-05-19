@@ -4,6 +4,7 @@ import com.dogeby.reliccalculator.core.database.model.report.CharacterReportEnti
 import com.dogeby.reliccalculator.core.model.report.CharacterReport
 
 fun CharacterReport.toCharacterReportEntity() = CharacterReportEntity(
+    id = id,
     characterId = character.id,
     character = character,
     preset = preset,
