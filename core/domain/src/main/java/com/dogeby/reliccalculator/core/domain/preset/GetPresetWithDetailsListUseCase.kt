@@ -35,14 +35,12 @@ class GetPresetWithDetailsListUseCase @Inject constructor(
             gameRepository.relicSetInfoMap,
             gameRepository.propertyInfoMap,
         ) { characterInfoWithDetailsList, relicSetInfoMap, propertyInfoMap ->
-            val isMatchingPreferences: (CharacterInfoWithDetails) -> Boolean = { details ->
-                details.characterInfo.rarity.isMatching(filteredRarities) &&
-                    details.pathInfo.id.isMatching(filteredPathIds) &&
-                    details.elementInfo.id.isMatching(filteredElementIds)
-            }
-
             val filteredCharacters = characterInfoWithDetailsList
-                .filter(isMatchingPreferences)
+                .filter { details ->
+                    details.characterInfo.rarity.isMatching(filteredRarities) &&
+                        details.pathInfo.id.isMatching(filteredPathIds) &&
+                        details.elementInfo.id.isMatching(filteredElementIds)
+                }
                 .associateBy { it.characterInfo.id }
 
             CharacterFilterResults(
@@ -119,26 +117,12 @@ class GetPresetWithDetailsListUseCase @Inject constructor(
         characterSortField: CharacterSortField,
     ): List<PresetWithDetails> {
         return when (characterSortField) {
-            CharacterSortField.ID_ASC -> {
-                sortedWith { o1, o2 ->
-                    o2.characterId.toAdjustedId() - o1.characterId.toAdjustedId()
-                }
-            }
-            CharacterSortField.ID_DESC -> {
-                sortedWith { o1, o2 ->
-                    o1.characterId.toAdjustedId() - o2.characterId.toAdjustedId()
-                }
-            }
-            CharacterSortField.NAME_ASC -> {
-                sortedBy {
-                    it.characterInfo.name
-                }
-            }
-            CharacterSortField.NAME_DESC -> {
-                sortedByDescending {
-                    it.characterInfo.name
-                }
-            }
+            CharacterSortField.ID_ASC -> sortedWith(compareBy { it.characterId.toAdjustedId() })
+            CharacterSortField.ID_DESC -> sortedWith(
+                compareByDescending { it.characterId.toAdjustedId() },
+            )
+            CharacterSortField.NAME_ASC -> sortedBy { it.characterInfo.name }
+            CharacterSortField.NAME_DESC -> sortedByDescending { it.characterInfo.name }
         }
     }
 

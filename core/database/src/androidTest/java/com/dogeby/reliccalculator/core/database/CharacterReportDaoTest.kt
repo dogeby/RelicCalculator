@@ -9,6 +9,8 @@ import com.dogeby.reliccalculator.core.database.model.hoyo.sampleCharacterEntity
 import com.dogeby.reliccalculator.core.database.model.report.sampleCharacterReportEntity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.minus
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -186,5 +188,57 @@ class CharacterReportDaoTest {
 
         Assert.assertEquals(characters.first(), result.characterEntity)
         Assert.assertEquals(characterReports, result.reports)
+    }
+
+    @Test
+    fun test_characterReportDao_getCharacterReportsByCharacterIds_success() = runTest {
+        val characterReports = List(3) {
+            characterReport.copy(
+                characterId = "$it",
+            )
+        }.run {
+            val ids = characterReportDao.insertOrIgnoreCharacterReports(this)
+            mapIndexed { index, characterReportEntity ->
+                characterReportEntity.copy(id = ids[index].toInt())
+            }
+        }
+        val ids = characterReports.map { it.characterId }
+        val result = characterReportDao.getCharacterReportsByCharacterIds(ids.toSet()).first()
+
+        Assert.assertEquals(characterReports, result)
+    }
+
+    @Test
+    fun test_characterReportDao_getLatestCharacterReports_success() = runTest {
+        val characterReports =
+            List(3) { characterId ->
+                characterReport.copy(
+                    characterId = "$characterId",
+                    generationTime = characterReport.generationTime.minus(
+                        value = characterId,
+                        unit = DateTimeUnit.HOUR,
+                    ),
+                )
+            }
+                .run {
+                    val ids = characterReportDao.insertOrIgnoreCharacterReports(this)
+                    characterReportDao.insertOrIgnoreCharacterReports(
+                        this.map {
+                            it.copy(
+                                generationTime = it.generationTime.minus(
+                                    value = 1,
+                                    unit = DateTimeUnit.HOUR,
+                                ),
+                            )
+                        },
+                    )
+
+                    mapIndexed { index, characterReportEntity ->
+                        characterReportEntity.copy(id = ids[index].toInt())
+                    }
+                }
+
+        val result = characterReportDao.getLatestCharacterReports().first()
+        Assert.assertEquals(characterReports, result)
     }
 }

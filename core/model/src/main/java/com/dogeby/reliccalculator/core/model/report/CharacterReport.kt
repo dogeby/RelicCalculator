@@ -5,6 +5,7 @@ import com.dogeby.reliccalculator.core.model.preset.Preset
 import kotlinx.datetime.Instant
 
 data class CharacterReport(
+    val id: Int = 0,
     val character: Character,
     val preset: Preset,
     val score: Float,

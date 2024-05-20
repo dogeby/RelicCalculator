@@ -1,5 +1,7 @@
 package com.dogeby.reliccalculator.core.data.di
 
+import com.dogeby.reliccalculator.core.data.repository.CharacterReportRepository
+import com.dogeby.reliccalculator.core.data.repository.CharacterReportRepositoryImpl
 import com.dogeby.reliccalculator.core.data.repository.GameRepository
 import com.dogeby.reliccalculator.core.data.repository.GameRepositoryImpl
 import com.dogeby.reliccalculator.core.data.repository.PreferencesRepository
@@ -31,4 +33,10 @@ abstract class DataModule {
     @Binds
     @Singleton
     abstract fun bindsGameRepository(gameRepositoryImpl: GameRepositoryImpl): GameRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindsCharacterReportRepository(
+        characterReportRepositoryImpl: CharacterReportRepositoryImpl,
+    ): CharacterReportRepository
 }
