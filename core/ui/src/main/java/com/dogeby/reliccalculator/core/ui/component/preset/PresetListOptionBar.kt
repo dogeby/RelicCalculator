@@ -12,8 +12,8 @@ import com.dogeby.reliccalculator.core.model.mihomo.index.ElementInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.PathInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.sampleElementInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.samplePathInfo
+import com.dogeby.reliccalculator.core.model.preferences.CharacterListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
-import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesData
 import com.dogeby.reliccalculator.core.ui.component.character.CharacterFilterChip
 import com.dogeby.reliccalculator.core.ui.component.character.CharacterSortFieldChip
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
@@ -38,15 +38,15 @@ fun PresetListOptionBar(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     CharacterSortFieldChip(
-                        selectedSortField = presetListPreferencesData.sortField,
+                        selectedSortField = characterListPreferencesData.sortField,
                         onSetSortField = onSetSortField,
                     )
                     CharacterFilterChip(
                         pathInfoList = pathInfoList,
                         elementInfoList = elementInfoList,
-                        filteredRarities = presetListPreferencesData.filteredRarities,
-                        filteredPathIds = presetListPreferencesData.filteredPathIds,
-                        filteredElementIds = presetListPreferencesData.filteredElementIds,
+                        filteredRarities = characterListPreferencesData.filteredRarities,
+                        filteredPathIds = characterListPreferencesData.filteredPathIds,
+                        filteredElementIds = characterListPreferencesData.filteredElementIds,
                         onConfirmFilters = onConfirmFilters,
                     )
                 }
@@ -62,7 +62,7 @@ sealed interface PresetListOptionBarUiState {
     data class Success(
         val pathInfoList: List<PathInfo>,
         val elementInfoList: List<ElementInfo>,
-        val presetListPreferencesData: PresetListPreferencesData,
+        val characterListPreferencesData: CharacterListPreferencesData,
     ) : PresetListOptionBarUiState
 }
 
@@ -74,7 +74,7 @@ private fun PreviewPresetListOptionBar() {
             presetListOptionBarUiState = PresetListOptionBarUiState.Success(
                 pathInfoList = List(7) { samplePathInfo.copy(id = "$it", name = "$it") },
                 elementInfoList = List(7) { sampleElementInfo.copy(id = "$it", name = "$it") },
-                presetListPreferencesData = PresetListPreferencesData(
+                characterListPreferencesData = CharacterListPreferencesData(
                     filteredRarities = setOf(5),
                     filteredPathIds = setOf("0"),
                     filteredElementIds = setOf("0"),

@@ -1,8 +1,8 @@
-package com.dogeby.reliccalculator.core.datastore.presetlistpreferences
+package com.dogeby.reliccalculator.core.datastore.characterlistpreferences
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
-import com.dogeby.core.datastore.PresetListPreferences
+import com.dogeby.core.datastore.CharacterListPreferences
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
 import com.google.protobuf.InvalidProtocolBufferException
 import java.io.InputStream
@@ -11,24 +11,25 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class PresetListPreferencesSerializer @Inject constructor() : Serializer<PresetListPreferences> {
+class CharacterListPreferencesSerializer @Inject constructor() :
+    Serializer<CharacterListPreferences> {
 
-    override val defaultValue: PresetListPreferences
-        get() = PresetListPreferences.getDefaultInstance()
+    override val defaultValue: CharacterListPreferences
+        get() = CharacterListPreferences.getDefaultInstance()
             .toBuilder()
             .setSortField(CharacterSortField.ID_ASC.name)
             .build()
 
-    override suspend fun readFrom(input: InputStream): PresetListPreferences {
+    override suspend fun readFrom(input: InputStream): CharacterListPreferences {
         return try {
-            PresetListPreferences.parseFrom(input)
+            CharacterListPreferences.parseFrom(input)
         } catch (exception: InvalidProtocolBufferException) {
             throw CorruptionException("Cannot read proto.", exception)
         }
     }
 
     override suspend fun writeTo(
-        t: PresetListPreferences,
+        t: CharacterListPreferences,
         output: OutputStream,
     ) {
         return t.writeTo(output)

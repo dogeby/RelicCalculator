@@ -22,8 +22,8 @@ import com.dogeby.reliccalculator.core.model.mihomo.index.sampleElementInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.samplePathInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.samplePropertyInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.sampleRelicSetInfo
+import com.dogeby.reliccalculator.core.model.preferences.CharacterListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
-import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesData
 import com.dogeby.reliccalculator.core.model.preset.AffixWeight
 import com.dogeby.reliccalculator.core.model.preset.AttrComparison
 import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
@@ -157,7 +157,7 @@ private fun PreviewPresetsScreen() {
             presetListOptionBarUiState = PresetListOptionBarUiState.Success(
                 pathInfoList = List(7) { samplePathInfo.copy(id = "$it", name = "$it") },
                 elementInfoList = List(7) { sampleElementInfo.copy(id = "$it", name = "$it") },
-                presetListPreferencesData = PresetListPreferencesData(
+                characterListPreferencesData = CharacterListPreferencesData(
                     filteredRarities = emptySet(),
                     filteredPathIds = emptySet(),
                     filteredElementIds = emptySet(),

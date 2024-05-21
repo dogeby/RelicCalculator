@@ -1,8 +1,8 @@
 package com.dogeby.reliccalculator.core.domain.preference
 
 import com.dogeby.reliccalculator.core.data.repository.PreferencesRepository
+import com.dogeby.reliccalculator.core.model.preferences.CharacterListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
-import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesData
 import javax.inject.Inject
 
 class SetPresetListPreferencesDataUseCase @Inject constructor(
@@ -16,7 +16,7 @@ class SetPresetListPreferencesDataUseCase @Inject constructor(
         sortField: CharacterSortField,
     ): Result<Unit> {
         return preferencesRepository.setPresetListPreferencesData(
-            PresetListPreferencesData(
+            CharacterListPreferencesData(
                 filteredRarities = filteredRarities,
                 filteredPathIds = filteredPathIds,
                 filteredElementIds = filteredElementIds,

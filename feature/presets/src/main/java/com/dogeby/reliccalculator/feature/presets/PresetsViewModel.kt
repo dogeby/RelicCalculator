@@ -44,7 +44,7 @@ class PresetsViewModel @Inject constructor(
         PresetListOptionBarUiState.Success(
             pathInfoList = pathInfoList.values.toList(),
             elementInfoList = elementInfoList.values.toList(),
-            presetListPreferencesData = presetsPreferencesData,
+            characterListPreferencesData = presetsPreferencesData,
         )
     }
         .onStart<PresetListOptionBarUiState> {
@@ -61,7 +61,7 @@ class PresetsViewModel @Inject constructor(
         .mapNotNull {
             when (it) {
                 PresetListOptionBarUiState.Loading -> null
-                is PresetListOptionBarUiState.Success -> it.presetListPreferencesData
+                is PresetListOptionBarUiState.Success -> it.characterListPreferencesData
             }
         }
         .flatMapLatest { presetListPreferencesData ->
@@ -95,7 +95,7 @@ class PresetsViewModel @Inject constructor(
             when (val uiState = presetsOptionBarUiState.value) {
                 PresetListOptionBarUiState.Loading -> Unit
                 is PresetListOptionBarUiState.Success -> {
-                    with(uiState.presetListPreferencesData) {
+                    with(uiState.characterListPreferencesData) {
                         setPresetListPreferencesDataUseCase(
                             filteredRarities = filteredRarities,
                             filteredPathIds = filteredPathIds,
@@ -117,7 +117,7 @@ class PresetsViewModel @Inject constructor(
             when (val uiState = presetsOptionBarUiState.value) {
                 PresetListOptionBarUiState.Loading -> Unit
                 is PresetListOptionBarUiState.Success -> {
-                    with(uiState.presetListPreferencesData) {
+                    with(uiState.characterListPreferencesData) {
                         setPresetListPreferencesDataUseCase(
                             filteredRarities = selectedRarities,
                             filteredPathIds = selectedPathIds,

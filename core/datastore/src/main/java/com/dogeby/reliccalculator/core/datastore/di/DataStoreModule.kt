@@ -5,16 +5,18 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
 import com.dogeby.core.datastore.AppPreferences
-import com.dogeby.core.datastore.PresetListPreferences
+import com.dogeby.core.datastore.CharacterListPreferences
 import com.dogeby.core.datastore.UpdateChecks
 import com.dogeby.reliccalculator.core.common.dispatcher.Dispatcher
 import com.dogeby.reliccalculator.core.common.dispatcher.RcDispatchers
 import com.dogeby.reliccalculator.core.datastore.apppreferences.AppPreferencesDataSource
 import com.dogeby.reliccalculator.core.datastore.apppreferences.AppPreferencesDataSourceImpl
 import com.dogeby.reliccalculator.core.datastore.apppreferences.AppPreferencesSerializer
+import com.dogeby.reliccalculator.core.datastore.characterlistpreferences.CharacterListPreferencesDataSource
+import com.dogeby.reliccalculator.core.datastore.characterlistpreferences.CharacterListPreferencesDataSourceImpl
+import com.dogeby.reliccalculator.core.datastore.characterlistpreferences.CharacterListPreferencesSerializer
 import com.dogeby.reliccalculator.core.datastore.presetlistpreferences.PresetListPreferencesDataSource
 import com.dogeby.reliccalculator.core.datastore.presetlistpreferences.PresetListPreferencesDataSourceImpl
-import com.dogeby.reliccalculator.core.datastore.presetlistpreferences.PresetListPreferencesSerializer
 import com.dogeby.reliccalculator.core.datastore.updatechecks.UpdateChecksDataSource
 import com.dogeby.reliccalculator.core.datastore.updatechecks.UpdateChecksDataSourceImpl
 import com.dogeby.reliccalculator.core.datastore.updatechecks.UpdateChecksSerializer
@@ -23,6 +25,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Qualifier
 import javax.inject.Singleton
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -34,7 +37,8 @@ object DataStoreModule {
 
     private const val UPDATE_CHECKS_DATA_STORE_FILE = "update_checks.pb"
     private const val APP_PREFERENCES_DATA_STORE_FILE = "app_preferences.pb"
-    private const val PRESET_LIST_PREFERENCES_DATA_STORE_FILE = "preset_list_preferences.pb"
+    private const val PRESET_LIST_CHARACTER_LIST_PREFERENCES_DATA_STORE_FILE =
+        "preset_list_character_list_preferences.pb"
 
     @Provides
     @Singleton
@@ -74,22 +78,36 @@ object DataStoreModule {
         appPreferencesDataSourceImpl: AppPreferencesDataSourceImpl,
     ): AppPreferencesDataSource = appPreferencesDataSourceImpl
 
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class PresetListCharacterListPreferences
+
+    @PresetListCharacterListPreferences
     @Provides
     @Singleton
-    fun providesPresetListPreferencesDataStore(
+    fun providesCharacterListPreferencesDataStore(
         @ApplicationContext context: Context,
         @Dispatcher(RcDispatchers.IO) ioDispatcher: CoroutineDispatcher,
-        presetListPreferencesSerializer: PresetListPreferencesSerializer,
-    ): DataStore<PresetListPreferences> = DataStoreFactory.create(
-        serializer = presetListPreferencesSerializer,
+        characterListPreferencesSerializer: CharacterListPreferencesSerializer,
+    ): DataStore<CharacterListPreferences> = DataStoreFactory.create(
+        serializer = characterListPreferencesSerializer,
         scope = CoroutineScope(ioDispatcher + SupervisorJob()),
     ) {
-        context.dataStoreFile(PRESET_LIST_PREFERENCES_DATA_STORE_FILE)
+        context.dataStoreFile(PRESET_LIST_CHARACTER_LIST_PREFERENCES_DATA_STORE_FILE)
     }
+
+    @PresetListCharacterListPreferences
+    @Provides
+    @Singleton
+    fun providesCharacterListPreferencesDataSource(
+        @PresetListCharacterListPreferences
+        characterListPreferencesDataStore: DataStore<CharacterListPreferences>,
+    ): CharacterListPreferencesDataSource =
+        CharacterListPreferencesDataSourceImpl(characterListPreferencesDataStore)
 
     @Provides
     @Singleton
     fun providesPresetListPreferencesDataSource(
-        preferencesDataSourceImpl: PresetListPreferencesDataSourceImpl,
-    ): PresetListPreferencesDataSource = preferencesDataSourceImpl
+        presetListPreferencesDataSourceImpl: PresetListPreferencesDataSourceImpl,
+    ): PresetListPreferencesDataSource = presetListPreferencesDataSourceImpl
 }
