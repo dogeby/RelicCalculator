@@ -2,8 +2,8 @@ package com.dogeby.reliccalculator.core.data.repository
 
 import com.dogeby.reliccalculator.core.model.GameTextLanguage
 import com.dogeby.reliccalculator.core.model.preferences.AppPreferencesData
+import com.dogeby.reliccalculator.core.model.preferences.CharacterListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
-import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.UpdateChecksData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.Instant
@@ -16,7 +16,7 @@ interface PreferencesRepository {
 
     fun getGameTextLanguage(): Flow<GameTextLanguage>
 
-    fun getPresetListPreferencesData(): Flow<PresetListPreferencesData>
+    fun getPresetListPreferencesData(): Flow<CharacterListPreferencesData>
 
     suspend fun setDefaultPresetLastCheckDate(instant: Instant): Result<Unit>
 
@@ -39,7 +39,7 @@ interface PreferencesRepository {
     ): Result<Unit>
 
     suspend fun setPresetListPreferencesData(
-        presetListPreferencesData: PresetListPreferencesData,
+        presetListPreferencesData: CharacterListPreferencesData,
     ): Result<Unit>
 
     suspend fun clearFilteredData(): Result<Unit>

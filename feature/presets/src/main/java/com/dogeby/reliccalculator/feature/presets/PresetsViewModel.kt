@@ -10,7 +10,7 @@ import com.dogeby.reliccalculator.core.domain.preference.SetPresetListPreference
 import com.dogeby.reliccalculator.core.domain.preset.GetPresetWithDetailsListUseCase
 import com.dogeby.reliccalculator.core.domain.preset.UpdatePresetAutoUpdateUseCase
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
-import com.dogeby.reliccalculator.core.ui.component.preset.PresetListOptionBarUiState
+import com.dogeby.reliccalculator.core.ui.component.preset.CharacterListOptionBarUiState
 import com.dogeby.reliccalculator.core.ui.component.preset.PresetListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -36,32 +36,32 @@ class PresetsViewModel @Inject constructor(
     getPresetWithDetailsListUseCase: GetPresetWithDetailsListUseCase,
 ) : ViewModel() {
 
-    val presetsOptionBarUiState: StateFlow<PresetListOptionBarUiState> = combine(
+    val characterListOptionBarUiState: StateFlow<CharacterListOptionBarUiState> = combine(
         getPathInfoMapUseCase(),
         getElementInfoMapUseCase(),
         getPresetListPreferencesDataUseCase(),
     ) { pathInfoList, elementInfoList, presetsPreferencesData ->
-        PresetListOptionBarUiState.Success(
+        CharacterListOptionBarUiState.Success(
             pathInfoList = pathInfoList.values.toList(),
             elementInfoList = elementInfoList.values.toList(),
-            presetListPreferencesData = presetsPreferencesData,
+            characterListPreferencesData = presetsPreferencesData,
         )
     }
-        .onStart<PresetListOptionBarUiState> {
-            emit(PresetListOptionBarUiState.Loading)
+        .onStart<CharacterListOptionBarUiState> {
+            emit(CharacterListOptionBarUiState.Loading)
         }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = PresetListOptionBarUiState.Loading,
+            initialValue = CharacterListOptionBarUiState.Loading,
         )
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val presetsUiState: StateFlow<PresetListUiState> = presetsOptionBarUiState
+    val presetsUiState: StateFlow<PresetListUiState> = characterListOptionBarUiState
         .mapNotNull {
             when (it) {
-                PresetListOptionBarUiState.Loading -> null
-                is PresetListOptionBarUiState.Success -> it.presetListPreferencesData
+                CharacterListOptionBarUiState.Loading -> null
+                is CharacterListOptionBarUiState.Success -> it.characterListPreferencesData
             }
         }
         .flatMapLatest { presetListPreferencesData ->
@@ -92,10 +92,10 @@ class PresetsViewModel @Inject constructor(
 
     fun setPresetsSortField(newSortField: CharacterSortField) {
         viewModelScope.launch {
-            when (val uiState = presetsOptionBarUiState.value) {
-                PresetListOptionBarUiState.Loading -> Unit
-                is PresetListOptionBarUiState.Success -> {
-                    with(uiState.presetListPreferencesData) {
+            when (val uiState = characterListOptionBarUiState.value) {
+                CharacterListOptionBarUiState.Loading -> Unit
+                is CharacterListOptionBarUiState.Success -> {
+                    with(uiState.characterListPreferencesData) {
                         setPresetListPreferencesDataUseCase(
                             filteredRarities = filteredRarities,
                             filteredPathIds = filteredPathIds,
@@ -114,10 +114,10 @@ class PresetsViewModel @Inject constructor(
         selectedElementIds: Set<String>,
     ) {
         viewModelScope.launch {
-            when (val uiState = presetsOptionBarUiState.value) {
-                PresetListOptionBarUiState.Loading -> Unit
-                is PresetListOptionBarUiState.Success -> {
-                    with(uiState.presetListPreferencesData) {
+            when (val uiState = characterListOptionBarUiState.value) {
+                CharacterListOptionBarUiState.Loading -> Unit
+                is CharacterListOptionBarUiState.Success -> {
+                    with(uiState.characterListPreferencesData) {
                         setPresetListPreferencesDataUseCase(
                             filteredRarities = selectedRarities,
                             filteredPathIds = selectedPathIds,

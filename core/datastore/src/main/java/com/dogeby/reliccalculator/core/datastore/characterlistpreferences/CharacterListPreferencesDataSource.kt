@@ -1,12 +1,12 @@
-package com.dogeby.reliccalculator.core.datastore.presetlistpreferences
+package com.dogeby.reliccalculator.core.datastore.characterlistpreferences
 
 import com.dogeby.reliccalculator.core.model.preferences.CharacterListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
 import kotlinx.coroutines.flow.Flow
 
-interface PresetListPreferencesDataSource {
+interface CharacterListPreferencesDataSource {
 
-    val presetListPreferencesData: Flow<CharacterListPreferencesData>
+    val characterListPreferencesData: Flow<CharacterListPreferencesData>
 
     suspend fun setFilteredRarities(rarities: Set<Int>): Result<Unit>
 
@@ -22,8 +22,8 @@ interface PresetListPreferencesDataSource {
         filteredElementIds: Set<String>,
     ): Result<Unit>
 
-    suspend fun setPresetListPreferencesData(
-        presetListPreferencesData: CharacterListPreferencesData,
+    suspend fun setCharacterListPreferencesData(
+        characterListPreferencesData: CharacterListPreferencesData,
     ): Result<Unit>
 
     suspend fun clearFilteredData(): Result<Unit>

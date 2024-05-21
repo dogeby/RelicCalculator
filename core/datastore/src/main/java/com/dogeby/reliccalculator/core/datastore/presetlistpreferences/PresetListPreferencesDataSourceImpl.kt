@@ -1,113 +1,52 @@
 package com.dogeby.reliccalculator.core.datastore.presetlistpreferences
 
-import androidx.datastore.core.DataStore
-import com.dogeby.core.datastore.PresetListPreferences
-import com.dogeby.core.datastore.copy
+import com.dogeby.reliccalculator.core.datastore.characterlistpreferences.CharacterListPreferencesDataSource
+import com.dogeby.reliccalculator.core.datastore.di.DataStoreModule
+import com.dogeby.reliccalculator.core.model.preferences.CharacterListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
-import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesData
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 @Singleton
 class PresetListPreferencesDataSourceImpl @Inject constructor(
-    private val presetListDataStore: DataStore<PresetListPreferences>,
+    @DataStoreModule.PresetListCharacterListPreferences
+    private val characterListPreferencesDataSource: CharacterListPreferencesDataSource,
 ) : PresetListPreferencesDataSource {
 
-    override val presetListPreferencesData: Flow<PresetListPreferencesData> =
-        presetListDataStore.data
-            .map {
-                PresetListPreferencesData(
-                    filteredRarities = it.filteredRaritiesList.toSet(),
-                    filteredPathIds = it.filteredPathIdsList.toSet(),
-                    filteredElementIds = it.filteredElementIdsList.toSet(),
-                    sortField = CharacterSortField.valueOf(it.sortField),
-                )
-            }
+    override val presetListPreferencesData: Flow<CharacterListPreferencesData> =
+        characterListPreferencesDataSource.characterListPreferencesData
 
-    override suspend fun setFilteredRarities(rarities: Set<Int>): Result<Unit> = runCatching {
-        presetListDataStore.updateData {
-            it.copy {
-                filteredRarities.clear()
-                filteredRarities.addAll(rarities)
-            }
-        }
-    }
+    override suspend fun setFilteredRarities(rarities: Set<Int>): Result<Unit> =
+        characterListPreferencesDataSource.setFilteredRarities(rarities)
 
-    override suspend fun setFilteredPathIds(ids: Set<String>): Result<Unit> = runCatching {
-        presetListDataStore.updateData {
-            it.copy {
-                filteredPathIds.clear()
-                filteredPathIds.addAll(ids)
-            }
-        }
-    }
+    override suspend fun setFilteredPathIds(ids: Set<String>): Result<Unit> =
+        characterListPreferencesDataSource.setFilteredPathIds(ids)
 
-    override suspend fun setFilteredElementIds(ids: Set<String>): Result<Unit> = runCatching {
-        presetListDataStore.updateData {
-            it.copy {
-                filteredElementIds.clear()
-                filteredElementIds.addAll(ids)
-            }
-        }
-    }
+    override suspend fun setFilteredElementIds(ids: Set<String>): Result<Unit> =
+        characterListPreferencesDataSource.setFilteredElementIds(ids)
 
     override suspend fun setSortField(characterSortField: CharacterSortField): Result<Unit> =
-        runCatching {
-            presetListDataStore.updateData {
-                it.copy {
-                    sortField = characterSortField.name
-                }
-            }
-        }
+        characterListPreferencesDataSource.setSortField(characterSortField)
 
     override suspend fun setFilteredData(
         filteredRarities: Set<Int>,
         filteredPathIds: Set<String>,
         filteredElementIds: Set<String>,
-    ): Result<Unit> = runCatching {
-        presetListDataStore.updateData {
-            it.copy {
-                this.filteredRarities.clear()
-                this.filteredRarities.addAll(filteredRarities)
-                this.filteredPathIds.clear()
-                this.filteredPathIds.addAll(filteredPathIds)
-                this.filteredElementIds.clear()
-                this.filteredElementIds.addAll(filteredElementIds)
-            }
-        }
-    }
+    ): Result<Unit> = characterListPreferencesDataSource.setFilteredData(
+        filteredRarities = filteredRarities,
+        filteredPathIds = filteredPathIds,
+        filteredElementIds = filteredElementIds,
+    )
 
     override suspend fun setPresetListPreferencesData(
-        presetListPreferencesData: PresetListPreferencesData,
-    ): Result<Unit> = runCatching {
-        setFilteredData(
-            filteredRarities = presetListPreferencesData.filteredRarities,
-            filteredPathIds = presetListPreferencesData.filteredPathIds,
-            filteredElementIds = presetListPreferencesData.filteredElementIds,
-        )
-        setSortField(presetListPreferencesData.sortField)
-    }
+        presetListPreferencesData: CharacterListPreferencesData,
+    ): Result<Unit> = characterListPreferencesDataSource.setCharacterListPreferencesData(
+        characterListPreferencesData = presetListPreferencesData,
+    )
 
-    override suspend fun clearFilteredData(): Result<Unit> = runCatching {
-        presetListDataStore.updateData {
-            it.copy {
-                filteredRarities.clear()
-                filteredPathIds.clear()
-                filteredElementIds.clear()
-            }
-        }
-    }
+    override suspend fun clearFilteredData(): Result<Unit> =
+        characterListPreferencesDataSource.clearFilteredData()
 
-    override suspend fun clearData(): Result<Unit> = runCatching {
-        presetListDataStore.updateData {
-            it.copy {
-                filteredRarities.clear()
-                filteredPathIds.clear()
-                filteredElementIds.clear()
-                sortField = CharacterSortField.ID_ASC.name
-            }
-        }
-    }
+    override suspend fun clearData(): Result<Unit> = characterListPreferencesDataSource.clearData()
 }

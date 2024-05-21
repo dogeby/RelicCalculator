@@ -5,8 +5,8 @@ import com.dogeby.reliccalculator.core.datastore.presetlistpreferences.PresetLis
 import com.dogeby.reliccalculator.core.datastore.updatechecks.UpdateChecksDataSource
 import com.dogeby.reliccalculator.core.model.GameTextLanguage
 import com.dogeby.reliccalculator.core.model.preferences.AppPreferencesData
+import com.dogeby.reliccalculator.core.model.preferences.CharacterListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
-import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.UpdateChecksData
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -30,7 +30,7 @@ class PreferencesRepositoryImpl @Inject constructor(
     override fun getGameTextLanguage(): Flow<GameTextLanguage> =
         appPreferencesDataSource.appPreferencesData.map { it.gameTextLanguage }
 
-    override fun getPresetListPreferencesData(): Flow<PresetListPreferencesData> =
+    override fun getPresetListPreferencesData(): Flow<CharacterListPreferencesData> =
         presetListPreferencesDataSource.presetListPreferencesData
 
     override suspend fun setDefaultPresetLastCheckDate(instant: Instant): Result<Unit> =
@@ -66,7 +66,7 @@ class PreferencesRepositoryImpl @Inject constructor(
     )
 
     override suspend fun setPresetListPreferencesData(
-        presetListPreferencesData: PresetListPreferencesData,
+        presetListPreferencesData: CharacterListPreferencesData,
     ): Result<Unit> = presetListPreferencesDataSource.setPresetListPreferencesData(
         presetListPreferencesData = presetListPreferencesData,
     )

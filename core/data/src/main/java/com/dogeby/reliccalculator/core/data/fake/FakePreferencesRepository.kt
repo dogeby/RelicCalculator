@@ -3,10 +3,10 @@ package com.dogeby.reliccalculator.core.data.fake
 import com.dogeby.reliccalculator.core.data.repository.PreferencesRepository
 import com.dogeby.reliccalculator.core.model.GameTextLanguage
 import com.dogeby.reliccalculator.core.model.preferences.AppPreferencesData
+import com.dogeby.reliccalculator.core.model.preferences.CharacterListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
-import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.UpdateChecksData
-import com.dogeby.reliccalculator.core.model.preferences.samplePresetListPreferencesData
+import com.dogeby.reliccalculator.core.model.preferences.sampleCharacterListPreferencesData
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -40,12 +40,12 @@ class FakePreferencesRepository : PreferencesRepository {
             tryEmit(AppPreferencesData(GameTextLanguage.EN))
         }
 
-    private val presetListPreferencesDataFlow: MutableSharedFlow<PresetListPreferencesData> =
-        MutableSharedFlow<PresetListPreferencesData>(
+    private val presetListPreferencesDataFlow: MutableSharedFlow<CharacterListPreferencesData> =
+        MutableSharedFlow<CharacterListPreferencesData>(
             replay = 1,
             onBufferOverflow = BufferOverflow.DROP_OLDEST,
         ).apply {
-            tryEmit(samplePresetListPreferencesData)
+            tryEmit(sampleCharacterListPreferencesData)
         }
 
     override fun getUpdateChecksData(): Flow<UpdateChecksData> = updateChecksDataFlow
@@ -56,7 +56,7 @@ class FakePreferencesRepository : PreferencesRepository {
         it.gameTextLanguage
     }
 
-    override fun getPresetListPreferencesData(): Flow<PresetListPreferencesData> =
+    override fun getPresetListPreferencesData(): Flow<CharacterListPreferencesData> =
         presetListPreferencesDataFlow
 
     override suspend fun setDefaultPresetLastCheckDate(instant: Instant): Result<Unit> =
@@ -125,14 +125,14 @@ class FakePreferencesRepository : PreferencesRepository {
     }
 
     override suspend fun setPresetListPreferencesData(
-        presetListPreferencesData: PresetListPreferencesData,
+        characterListPreferencesData: CharacterListPreferencesData,
     ): Result<Unit> = runCatching {
-        presetListPreferencesDataFlow.tryEmit(presetListPreferencesData)
+        presetListPreferencesDataFlow.tryEmit(characterListPreferencesData)
     }
 
     override suspend fun clearFilteredData(): Result<Unit> = runCatching {
         presetListPreferencesDataFlow.tryEmit(
-            PresetListPreferencesData(
+            CharacterListPreferencesData(
                 filteredRarities = emptySet(),
                 filteredPathIds = emptySet(),
                 filteredElementIds = emptySet(),

@@ -4,7 +4,7 @@ syntax = "proto3";
 option java_package = "com.dogeby.core.datastore";
 option java_multiple_files = true;
 
-message PresetListPreferences {
+message CharacterListPreferences {
   repeated int32 filtered_rarities = 1;
   repeated string filtered_path_ids = 2;
   repeated string filtered_element_ids = 3;

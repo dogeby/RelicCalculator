@@ -2,7 +2,7 @@ package com.dogeby.reliccalculator.core.model.preferences
 
 import org.jetbrains.annotations.TestOnly
 
-data class PresetListPreferencesData(
+data class CharacterListPreferencesData(
     val filteredRarities: Set<Int>,
     val filteredPathIds: Set<String>,
     val filteredElementIds: Set<String>,
@@ -10,7 +10,7 @@ data class PresetListPreferencesData(
 )
 
 @TestOnly
-val samplePresetListPreferencesData = PresetListPreferencesData(
+val sampleCharacterListPreferencesData = CharacterListPreferencesData(
     filteredRarities = setOf(5),
     filteredPathIds = emptySet(),
     filteredElementIds = emptySet(),

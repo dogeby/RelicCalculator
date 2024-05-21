@@ -15,7 +15,7 @@ import com.dogeby.reliccalculator.core.model.mihomo.index.samplePathInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.samplePropertyInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.sampleRelicSetInfo
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
-import com.dogeby.reliccalculator.core.model.preferences.samplePresetListPreferencesData
+import com.dogeby.reliccalculator.core.model.preferences.sampleCharacterListPreferencesData
 import com.dogeby.reliccalculator.core.model.preset.samplePreset
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -54,7 +54,7 @@ class GetPresetWithDetailsListUseCaseTest {
     fun test_getPresetWithDetailsListUseCase_success() = runTest {
         presetRepository.insertPresets(listOf(samplePreset))
         insertSampleInfoData()
-        preferencesRepository.setPresetListPreferencesData(samplePresetListPreferencesData)
+        preferencesRepository.setPresetListPreferencesData(sampleCharacterListPreferencesData)
         val listPreferences = preferencesRepository.getPresetListPreferencesData().first()
 
         val mainAffixWeight = samplePreset.pieceMainAffixWeights[RelicPiece.FOOT]?.first()
@@ -105,7 +105,7 @@ class GetPresetWithDetailsListUseCaseTest {
         presetRepository.insertPresets(listOf(samplePreset))
         insertSampleInfoData()
         preferencesRepository.setPresetListPreferencesData(
-            samplePresetListPreferencesData.copy(
+            sampleCharacterListPreferencesData.copy(
                 filteredPathIds = setOf(""),
             ),
         )
@@ -166,7 +166,7 @@ class GetPresetWithDetailsListUseCaseTest {
         }
         gameRepository.sendCharacterInfoWithDetailsList(characterInfoWithDetails)
         preferencesRepository.setPresetListPreferencesData(
-            samplePresetListPreferencesData.copy(
+            sampleCharacterListPreferencesData.copy(
                 sortField = CharacterSortField.NAME_ASC,
             ),
         )
@@ -199,7 +199,7 @@ class GetPresetWithDetailsListUseCaseTest {
         }
         gameRepository.sendCharacterInfoWithDetailsList(characterInfoWithDetails)
         preferencesRepository.setPresetListPreferencesData(
-            samplePresetListPreferencesData.copy(
+            sampleCharacterListPreferencesData.copy(
                 sortField = CharacterSortField.ID_DESC,
             ),
         )
@@ -232,7 +232,7 @@ class GetPresetWithDetailsListUseCaseTest {
         }
         gameRepository.sendCharacterInfoWithDetailsList(characterInfoWithDetails)
         preferencesRepository.setPresetListPreferencesData(
-            samplePresetListPreferencesData.copy(
+            sampleCharacterListPreferencesData.copy(
                 sortField = CharacterSortField.ID_ASC,
             ),
         )

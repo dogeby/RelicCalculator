@@ -12,15 +12,15 @@ import com.dogeby.reliccalculator.core.model.mihomo.index.ElementInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.PathInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.sampleElementInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.samplePathInfo
+import com.dogeby.reliccalculator.core.model.preferences.CharacterListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
-import com.dogeby.reliccalculator.core.model.preferences.PresetListPreferencesData
 import com.dogeby.reliccalculator.core.ui.component.character.CharacterFilterChip
 import com.dogeby.reliccalculator.core.ui.component.character.CharacterSortFieldChip
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 
 @Composable
-fun PresetListOptionBar(
-    presetListOptionBarUiState: PresetListOptionBarUiState,
+fun CharacterListOptionBar(
+    characterListOptionBarUiState: CharacterListOptionBarUiState,
     onSetSortField: (CharacterSortField) -> Unit,
     onConfirmFilters: (
         selectedRarities: Set<Int>,
@@ -29,24 +29,24 @@ fun PresetListOptionBar(
     ) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    when (presetListOptionBarUiState) {
-        PresetListOptionBarUiState.Loading -> Unit
-        is PresetListOptionBarUiState.Success -> {
-            with(presetListOptionBarUiState) {
+    when (characterListOptionBarUiState) {
+        CharacterListOptionBarUiState.Loading -> Unit
+        is CharacterListOptionBarUiState.Success -> {
+            with(characterListOptionBarUiState) {
                 Row(
                     modifier = modifier.horizontalScroll(rememberScrollState()),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     CharacterSortFieldChip(
-                        selectedSortField = presetListPreferencesData.sortField,
+                        selectedSortField = characterListPreferencesData.sortField,
                         onSetSortField = onSetSortField,
                     )
                     CharacterFilterChip(
                         pathInfoList = pathInfoList,
                         elementInfoList = elementInfoList,
-                        filteredRarities = presetListPreferencesData.filteredRarities,
-                        filteredPathIds = presetListPreferencesData.filteredPathIds,
-                        filteredElementIds = presetListPreferencesData.filteredElementIds,
+                        filteredRarities = characterListPreferencesData.filteredRarities,
+                        filteredPathIds = characterListPreferencesData.filteredPathIds,
+                        filteredElementIds = characterListPreferencesData.filteredElementIds,
                         onConfirmFilters = onConfirmFilters,
                     )
                 }
@@ -55,26 +55,26 @@ fun PresetListOptionBar(
     }
 }
 
-sealed interface PresetListOptionBarUiState {
+sealed interface CharacterListOptionBarUiState {
 
-    data object Loading : PresetListOptionBarUiState
+    data object Loading : CharacterListOptionBarUiState
 
     data class Success(
         val pathInfoList: List<PathInfo>,
         val elementInfoList: List<ElementInfo>,
-        val presetListPreferencesData: PresetListPreferencesData,
-    ) : PresetListOptionBarUiState
+        val characterListPreferencesData: CharacterListPreferencesData,
+    ) : CharacterListOptionBarUiState
 }
 
 @Preview(apiLevel = 33)
 @Composable
-private fun PreviewPresetListOptionBar() {
+private fun PreviewCharacterListOptionBar() {
     RelicCalculatorTheme {
-        PresetListOptionBar(
-            presetListOptionBarUiState = PresetListOptionBarUiState.Success(
+        CharacterListOptionBar(
+            characterListOptionBarUiState = CharacterListOptionBarUiState.Success(
                 pathInfoList = List(7) { samplePathInfo.copy(id = "$it", name = "$it") },
                 elementInfoList = List(7) { sampleElementInfo.copy(id = "$it", name = "$it") },
-                presetListPreferencesData = PresetListPreferencesData(
+                characterListPreferencesData = CharacterListPreferencesData(
                     filteredRarities = setOf(5),
                     filteredPathIds = setOf("0"),
                     filteredElementIds = setOf("0"),
