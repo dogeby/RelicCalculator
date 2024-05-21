@@ -30,8 +30,8 @@ import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
 import com.dogeby.reliccalculator.core.ui.component.EmptyState
 import com.dogeby.reliccalculator.core.ui.component.HideableBarLazyVerticalGrid
 import com.dogeby.reliccalculator.core.ui.component.LoadingState
-import com.dogeby.reliccalculator.core.ui.component.preset.PresetListOptionBar
-import com.dogeby.reliccalculator.core.ui.component.preset.PresetListOptionBarUiState
+import com.dogeby.reliccalculator.core.ui.component.preset.CharacterListOptionBar
+import com.dogeby.reliccalculator.core.ui.component.preset.CharacterListOptionBarUiState
 import com.dogeby.reliccalculator.core.ui.component.preset.PresetListUiState
 import com.dogeby.reliccalculator.core.ui.component.preset.presetList
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
@@ -42,13 +42,13 @@ fun PresetsRoute(
     modifier: Modifier = Modifier,
     viewModel: PresetsViewModel = hiltViewModel(),
 ) {
-    val presetsOptionBarUiState by viewModel
-        .presetsOptionBarUiState
+    val characterListOptionBarUiState by viewModel
+        .characterListOptionBarUiState
         .collectAsStateWithLifecycle()
     val presetsUiState by viewModel.presetsUiState.collectAsStateWithLifecycle()
 
     PresetsScreen(
-        presetListOptionBarUiState = presetsOptionBarUiState,
+        characterListOptionBarUiState = characterListOptionBarUiState,
         presetListUiState = presetsUiState,
         onSetSortField = viewModel::setPresetsSortField,
         onConfirmFilters = viewModel::setPresetsFilters,
@@ -60,7 +60,7 @@ fun PresetsRoute(
 
 @Composable
 private fun PresetsScreen(
-    presetListOptionBarUiState: PresetListOptionBarUiState,
+    characterListOptionBarUiState: CharacterListOptionBarUiState,
     presetListUiState: PresetListUiState,
     onSetSortField: (CharacterSortField) -> Unit,
     onConfirmFilters: (
@@ -78,8 +78,8 @@ private fun PresetsScreen(
             HideableBarLazyVerticalGrid(
                 topBar = {
                     Surface {
-                        PresetListOptionBar(
-                            presetListOptionBarUiState = presetListOptionBarUiState,
+                        CharacterListOptionBar(
+                            characterListOptionBarUiState = characterListOptionBarUiState,
                             onSetSortField = onSetSortField,
                             onConfirmFilters = onConfirmFilters,
                             modifier = Modifier
@@ -154,7 +154,7 @@ private fun PreviewPresetsScreen() {
         }
         PresetsScreen(
             presetListUiState = PresetListUiState.Success(presets),
-            presetListOptionBarUiState = PresetListOptionBarUiState.Success(
+            characterListOptionBarUiState = CharacterListOptionBarUiState.Success(
                 pathInfoList = List(7) { samplePathInfo.copy(id = "$it", name = "$it") },
                 elementInfoList = List(7) { sampleElementInfo.copy(id = "$it", name = "$it") },
                 characterListPreferencesData = CharacterListPreferencesData(

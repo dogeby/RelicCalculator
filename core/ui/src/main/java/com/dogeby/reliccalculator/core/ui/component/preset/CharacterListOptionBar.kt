@@ -19,8 +19,8 @@ import com.dogeby.reliccalculator.core.ui.component.character.CharacterSortField
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 
 @Composable
-fun PresetListOptionBar(
-    presetListOptionBarUiState: PresetListOptionBarUiState,
+fun CharacterListOptionBar(
+    characterListOptionBarUiState: CharacterListOptionBarUiState,
     onSetSortField: (CharacterSortField) -> Unit,
     onConfirmFilters: (
         selectedRarities: Set<Int>,
@@ -29,10 +29,10 @@ fun PresetListOptionBar(
     ) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    when (presetListOptionBarUiState) {
-        PresetListOptionBarUiState.Loading -> Unit
-        is PresetListOptionBarUiState.Success -> {
-            with(presetListOptionBarUiState) {
+    when (characterListOptionBarUiState) {
+        CharacterListOptionBarUiState.Loading -> Unit
+        is CharacterListOptionBarUiState.Success -> {
+            with(characterListOptionBarUiState) {
                 Row(
                     modifier = modifier.horizontalScroll(rememberScrollState()),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -55,23 +55,23 @@ fun PresetListOptionBar(
     }
 }
 
-sealed interface PresetListOptionBarUiState {
+sealed interface CharacterListOptionBarUiState {
 
-    data object Loading : PresetListOptionBarUiState
+    data object Loading : CharacterListOptionBarUiState
 
     data class Success(
         val pathInfoList: List<PathInfo>,
         val elementInfoList: List<ElementInfo>,
         val characterListPreferencesData: CharacterListPreferencesData,
-    ) : PresetListOptionBarUiState
+    ) : CharacterListOptionBarUiState
 }
 
 @Preview(apiLevel = 33)
 @Composable
-private fun PreviewPresetListOptionBar() {
+private fun PreviewCharacterListOptionBar() {
     RelicCalculatorTheme {
-        PresetListOptionBar(
-            presetListOptionBarUiState = PresetListOptionBarUiState.Success(
+        CharacterListOptionBar(
+            characterListOptionBarUiState = CharacterListOptionBarUiState.Success(
                 pathInfoList = List(7) { samplePathInfo.copy(id = "$it", name = "$it") },
                 elementInfoList = List(7) { sampleElementInfo.copy(id = "$it", name = "$it") },
                 characterListPreferencesData = CharacterListPreferencesData(
