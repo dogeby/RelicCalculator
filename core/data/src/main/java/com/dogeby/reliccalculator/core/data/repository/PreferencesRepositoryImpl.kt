@@ -71,6 +71,6 @@ class PreferencesRepositoryImpl @Inject constructor(
         presetListPreferencesData = presetListPreferencesData,
     )
 
-    override suspend fun clearFilteredData(): Result<Unit> =
+    override suspend fun clearPresetListFilteredData(): Result<Unit> =
         presetListPreferencesDataSource.clearFilteredData()
 }

@@ -130,7 +130,7 @@ class FakePreferencesRepository : PreferencesRepository {
         presetListPreferencesDataFlow.tryEmit(characterListPreferencesData)
     }
 
-    override suspend fun clearFilteredData(): Result<Unit> = runCatching {
+    override suspend fun clearPresetListFilteredData(): Result<Unit> = runCatching {
         presetListPreferencesDataFlow.tryEmit(
             CharacterListPreferencesData(
                 filteredRarities = emptySet(),

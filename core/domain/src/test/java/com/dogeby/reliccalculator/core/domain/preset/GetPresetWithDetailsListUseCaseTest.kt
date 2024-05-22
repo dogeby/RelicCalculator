@@ -121,7 +121,7 @@ class GetPresetWithDetailsListUseCaseTest {
             ).first(),
         )
 
-        preferencesRepository.clearFilteredData()
+        preferencesRepository.clearPresetListFilteredData()
         preferencesRepository.setPresetListFilteredElementIds(setOf(""))
         val testElementPreferences = preferencesRepository.getPresetListPreferencesData().first()
 
@@ -135,7 +135,7 @@ class GetPresetWithDetailsListUseCaseTest {
             ).first(),
         )
 
-        preferencesRepository.clearFilteredData()
+        preferencesRepository.clearPresetListFilteredData()
         preferencesRepository.setPresetListFilteredRarities(setOf(4))
         val testRaritiesPreferences = preferencesRepository.getPresetListPreferencesData().first()
 

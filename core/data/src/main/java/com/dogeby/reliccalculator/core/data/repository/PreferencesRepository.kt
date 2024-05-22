@@ -42,5 +42,5 @@ interface PreferencesRepository {
         presetListPreferencesData: CharacterListPreferencesData,
     ): Result<Unit>
 
-    suspend fun clearFilteredData(): Result<Unit>
+    suspend fun clearPresetListFilteredData(): Result<Unit>
 }
