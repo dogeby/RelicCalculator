@@ -5,8 +5,10 @@ import com.dogeby.reliccalculator.core.datastore.di.DataStoreModule
 import com.dogeby.reliccalculator.core.model.preferences.CharacterListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
 
+@Singleton
 class CharSimpleReportListPrefsDataSourceImpl @Inject constructor(
     @DataStoreModule.CharSimpleReportListCharListPrefs
     private val characterListPreferencesDataSource: CharacterListPreferencesDataSource,

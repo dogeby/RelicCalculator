@@ -15,6 +15,8 @@ import com.dogeby.reliccalculator.core.datastore.apppreferences.AppPreferencesSe
 import com.dogeby.reliccalculator.core.datastore.characterlistpreferences.CharacterListPreferencesDataSource
 import com.dogeby.reliccalculator.core.datastore.characterlistpreferences.CharacterListPreferencesDataSourceImpl
 import com.dogeby.reliccalculator.core.datastore.characterlistpreferences.CharacterListPreferencesSerializer
+import com.dogeby.reliccalculator.core.datastore.charsimplereportlistprefs.CharSimpleReportListPrefsDataSource
+import com.dogeby.reliccalculator.core.datastore.charsimplereportlistprefs.CharSimpleReportListPrefsDataSourceImpl
 import com.dogeby.reliccalculator.core.datastore.presetlistpreferences.PresetListPreferencesDataSource
 import com.dogeby.reliccalculator.core.datastore.presetlistpreferences.PresetListPreferencesDataSourceImpl
 import com.dogeby.reliccalculator.core.datastore.updatechecks.UpdateChecksDataSource
@@ -139,4 +141,10 @@ object DataStoreModule {
     fun providesPresetListPreferencesDataSource(
         presetListPreferencesDataSourceImpl: PresetListPreferencesDataSourceImpl,
     ): PresetListPreferencesDataSource = presetListPreferencesDataSourceImpl
+
+    @Provides
+    @Singleton
+    fun providesCharSimpleReportListPrefsDataSource(
+        charSimpleReportListPrefsDataSourceImpl: CharSimpleReportListPrefsDataSourceImpl,
+    ): CharSimpleReportListPrefsDataSource = charSimpleReportListPrefsDataSourceImpl
 }
