@@ -1,6 +1,7 @@
 package com.dogeby.reliccalculator.core.data.repository
 
 import com.dogeby.reliccalculator.core.datastore.apppreferences.AppPreferencesDataSource
+import com.dogeby.reliccalculator.core.datastore.charsimplereportlistprefs.CharSimpleReportListPrefsDataSource
 import com.dogeby.reliccalculator.core.datastore.presetlistpreferences.PresetListPreferencesDataSource
 import com.dogeby.reliccalculator.core.datastore.updatechecks.UpdateChecksDataSource
 import com.dogeby.reliccalculator.core.model.GameTextLanguage
@@ -19,6 +20,7 @@ class PreferencesRepositoryImpl @Inject constructor(
     private val updateChecksDataSource: UpdateChecksDataSource,
     private val appPreferencesDataSource: AppPreferencesDataSource,
     private val presetListPreferencesDataSource: PresetListPreferencesDataSource,
+    private val charSimpleReportListPrefsDataSource: CharSimpleReportListPrefsDataSource,
 ) : PreferencesRepository {
 
     override fun getUpdateChecksData(): Flow<UpdateChecksData> =
@@ -32,6 +34,9 @@ class PreferencesRepositoryImpl @Inject constructor(
 
     override fun getPresetListPreferencesData(): Flow<CharacterListPreferencesData> =
         presetListPreferencesDataSource.presetListPreferencesData
+
+    override fun getCharSimpleReportListPrefsData(): Flow<CharacterListPreferencesData> =
+        charSimpleReportListPrefsDataSource.charSimpleReportListPrefsData
 
     override suspend fun setDefaultPresetLastCheckDate(instant: Instant): Result<Unit> =
         updateChecksDataSource.setDefaultPresetLastCheckDate(instant)
@@ -73,4 +78,36 @@ class PreferencesRepositoryImpl @Inject constructor(
 
     override suspend fun clearPresetListFilteredData(): Result<Unit> =
         presetListPreferencesDataSource.clearFilteredData()
+
+    override suspend fun setCharSimpleReportListFilteredRarities(rarities: Set<Int>): Result<Unit> =
+        charSimpleReportListPrefsDataSource.setFilteredRarities(rarities)
+
+    override suspend fun setCharSimpleReportListFilteredPathIds(ids: Set<String>): Result<Unit> =
+        charSimpleReportListPrefsDataSource.setFilteredPathIds(ids)
+
+    override suspend fun setCharSimpleReportListFilteredElementIds(ids: Set<String>): Result<Unit> =
+        charSimpleReportListPrefsDataSource.setFilteredElementIds(ids)
+
+    override suspend fun setCharSimpleReportListSortField(
+        characterSortField: CharacterSortField,
+    ): Result<Unit> = charSimpleReportListPrefsDataSource.setSortField(characterSortField)
+
+    override suspend fun setCharSimpleReportListFilteredData(
+        filteredRarities: Set<Int>,
+        filteredPathIds: Set<String>,
+        filteredElementIds: Set<String>,
+    ): Result<Unit> = charSimpleReportListPrefsDataSource.setFilteredData(
+        filteredRarities = filteredRarities,
+        filteredPathIds = filteredPathIds,
+        filteredElementIds = filteredElementIds,
+    )
+
+    override suspend fun setCharSimpleReportListPrefsData(
+        charSimpleReportListPrefsData: CharacterListPreferencesData,
+    ): Result<Unit> = charSimpleReportListPrefsDataSource.setCharSimpleReportListPrefsData(
+        charSimpleReportListPrefsData = charSimpleReportListPrefsData,
+    )
+
+    override suspend fun clearCharSimpleReportListFilteredData(): Result<Unit> =
+        charSimpleReportListPrefsDataSource.clearFilteredData()
 }
