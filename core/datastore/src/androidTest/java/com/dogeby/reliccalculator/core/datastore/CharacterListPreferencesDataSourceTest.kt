@@ -22,7 +22,7 @@ class CharacterListPreferencesDataSourceTest {
 
     @Before
     fun setUp() {
-        val dataStore = DataStoreModule.providesCharacterListPreferencesDataStore(
+        val dataStore = DataStoreModule.providesPresetListCharListPrefsDataStore(
             context = ApplicationProvider.getApplicationContext(),
             ioDispatcher = testDispatcher,
             characterListPreferencesSerializer = CharacterListPreferencesSerializer(),

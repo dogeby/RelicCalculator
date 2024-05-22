@@ -1,4 +1,4 @@
-package com.dogeby.reliccalculator.core.datastore.presetlistpreferences
+package com.dogeby.reliccalculator.core.datastore.charsimplereportlistprefs
 
 import com.dogeby.reliccalculator.core.datastore.characterlistpreferences.CharacterListPreferencesDataSource
 import com.dogeby.reliccalculator.core.datastore.di.DataStoreModule
@@ -9,12 +9,12 @@ import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
 
 @Singleton
-class PresetListPreferencesDataSourceImpl @Inject constructor(
-    @DataStoreModule.PresetListCharListPrefs
+class CharSimpleReportListPrefsDataSourceImpl @Inject constructor(
+    @DataStoreModule.CharSimpleReportListCharListPrefs
     private val characterListPreferencesDataSource: CharacterListPreferencesDataSource,
-) : PresetListPreferencesDataSource {
+) : CharSimpleReportListPrefsDataSource {
 
-    override val presetListPreferencesData: Flow<CharacterListPreferencesData> =
+    override val charSimpleReportListPrefsData: Flow<CharacterListPreferencesData> =
         characterListPreferencesDataSource.characterListPreferencesData
 
     override suspend fun setFilteredRarities(rarities: Set<Int>): Result<Unit> =
@@ -39,10 +39,10 @@ class PresetListPreferencesDataSourceImpl @Inject constructor(
         filteredElementIds = filteredElementIds,
     )
 
-    override suspend fun setPresetListPreferencesData(
-        presetListPreferencesData: CharacterListPreferencesData,
+    override suspend fun setCharSimpleReportListPrefsData(
+        charSimpleReportListPrefsData: CharacterListPreferencesData,
     ): Result<Unit> = characterListPreferencesDataSource.setCharacterListPreferencesData(
-        characterListPreferencesData = presetListPreferencesData,
+        characterListPreferencesData = charSimpleReportListPrefsData,
     )
 
     override suspend fun clearFilteredData(): Result<Unit> =

@@ -15,6 +15,8 @@ import com.dogeby.reliccalculator.core.datastore.apppreferences.AppPreferencesSe
 import com.dogeby.reliccalculator.core.datastore.characterlistpreferences.CharacterListPreferencesDataSource
 import com.dogeby.reliccalculator.core.datastore.characterlistpreferences.CharacterListPreferencesDataSourceImpl
 import com.dogeby.reliccalculator.core.datastore.characterlistpreferences.CharacterListPreferencesSerializer
+import com.dogeby.reliccalculator.core.datastore.charsimplereportlistprefs.CharSimpleReportListPrefsDataSource
+import com.dogeby.reliccalculator.core.datastore.charsimplereportlistprefs.CharSimpleReportListPrefsDataSourceImpl
 import com.dogeby.reliccalculator.core.datastore.presetlistpreferences.PresetListPreferencesDataSource
 import com.dogeby.reliccalculator.core.datastore.presetlistpreferences.PresetListPreferencesDataSourceImpl
 import com.dogeby.reliccalculator.core.datastore.updatechecks.UpdateChecksDataSource
@@ -37,8 +39,10 @@ object DataStoreModule {
 
     private const val UPDATE_CHECKS_DATA_STORE_FILE = "update_checks.pb"
     private const val APP_PREFERENCES_DATA_STORE_FILE = "app_preferences.pb"
-    private const val PRESET_LIST_CHARACTER_LIST_PREFERENCES_DATA_STORE_FILE =
-        "preset_list_character_list_preferences.pb"
+    private const val PRESET_LIST_CHAR_LIST_PREFS_DATA_STORE_FILE =
+        "preset_list_char_list_prefs.pb"
+    private const val CHAR_SIMPLE_REPORT_LIST_CHAR_LIST_PREFS_DATA_STORE_FILE =
+        "char_simple_report_list_char_list_prefs.pb"
 
     @Provides
     @Singleton
@@ -80,12 +84,16 @@ object DataStoreModule {
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
-    annotation class PresetListCharacterListPreferences
+    annotation class PresetListCharListPrefs
 
-    @PresetListCharacterListPreferences
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class CharSimpleReportListCharListPrefs
+
+    @PresetListCharListPrefs
     @Provides
     @Singleton
-    fun providesCharacterListPreferencesDataStore(
+    fun providesPresetListCharListPrefsDataStore(
         @ApplicationContext context: Context,
         @Dispatcher(RcDispatchers.IO) ioDispatcher: CoroutineDispatcher,
         characterListPreferencesSerializer: CharacterListPreferencesSerializer,
@@ -93,14 +101,37 @@ object DataStoreModule {
         serializer = characterListPreferencesSerializer,
         scope = CoroutineScope(ioDispatcher + SupervisorJob()),
     ) {
-        context.dataStoreFile(PRESET_LIST_CHARACTER_LIST_PREFERENCES_DATA_STORE_FILE)
+        context.dataStoreFile(PRESET_LIST_CHAR_LIST_PREFS_DATA_STORE_FILE)
     }
 
-    @PresetListCharacterListPreferences
+    @CharSimpleReportListCharListPrefs
     @Provides
     @Singleton
-    fun providesCharacterListPreferencesDataSource(
-        @PresetListCharacterListPreferences
+    fun providesCharSimpleReportListCharListPrefsDataStore(
+        @ApplicationContext context: Context,
+        @Dispatcher(RcDispatchers.IO) ioDispatcher: CoroutineDispatcher,
+        characterListPreferencesSerializer: CharacterListPreferencesSerializer,
+    ): DataStore<CharacterListPreferences> = DataStoreFactory.create(
+        serializer = characterListPreferencesSerializer,
+        scope = CoroutineScope(ioDispatcher + SupervisorJob()),
+    ) {
+        context.dataStoreFile(CHAR_SIMPLE_REPORT_LIST_CHAR_LIST_PREFS_DATA_STORE_FILE)
+    }
+
+    @PresetListCharListPrefs
+    @Provides
+    @Singleton
+    fun providesPresetListCharListPrefsDataSource(
+        @PresetListCharListPrefs
+        characterListPreferencesDataStore: DataStore<CharacterListPreferences>,
+    ): CharacterListPreferencesDataSource =
+        CharacterListPreferencesDataSourceImpl(characterListPreferencesDataStore)
+
+    @CharSimpleReportListCharListPrefs
+    @Provides
+    @Singleton
+    fun providesCharSimpleReportListCharListPrefsDataSource(
+        @PresetListCharListPrefs
         characterListPreferencesDataStore: DataStore<CharacterListPreferences>,
     ): CharacterListPreferencesDataSource =
         CharacterListPreferencesDataSourceImpl(characterListPreferencesDataStore)
@@ -110,4 +141,10 @@ object DataStoreModule {
     fun providesPresetListPreferencesDataSource(
         presetListPreferencesDataSourceImpl: PresetListPreferencesDataSourceImpl,
     ): PresetListPreferencesDataSource = presetListPreferencesDataSourceImpl
+
+    @Provides
+    @Singleton
+    fun providesCharSimpleReportListPrefsDataSource(
+        charSimpleReportListPrefsDataSourceImpl: CharSimpleReportListPrefsDataSourceImpl,
+    ): CharSimpleReportListPrefsDataSource = charSimpleReportListPrefsDataSourceImpl
 }

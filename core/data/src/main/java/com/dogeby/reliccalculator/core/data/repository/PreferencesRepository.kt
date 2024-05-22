@@ -18,6 +18,8 @@ interface PreferencesRepository {
 
     fun getPresetListPreferencesData(): Flow<CharacterListPreferencesData>
 
+    fun getCharSimpleReportListPrefsData(): Flow<CharacterListPreferencesData>
+
     suspend fun setDefaultPresetLastCheckDate(instant: Instant): Result<Unit>
 
     suspend fun setDefaultPresetCheckIntervalSecond(second: Int): Result<Unit>
@@ -42,5 +44,27 @@ interface PreferencesRepository {
         presetListPreferencesData: CharacterListPreferencesData,
     ): Result<Unit>
 
-    suspend fun clearFilteredData(): Result<Unit>
+    suspend fun clearPresetListFilteredData(): Result<Unit>
+
+    suspend fun setCharSimpleReportListFilteredRarities(rarities: Set<Int>): Result<Unit>
+
+    suspend fun setCharSimpleReportListFilteredPathIds(ids: Set<String>): Result<Unit>
+
+    suspend fun setCharSimpleReportListFilteredElementIds(ids: Set<String>): Result<Unit>
+
+    suspend fun setCharSimpleReportListSortField(
+        characterSortField: CharacterSortField,
+    ): Result<Unit>
+
+    suspend fun setCharSimpleReportListFilteredData(
+        filteredRarities: Set<Int>,
+        filteredPathIds: Set<String>,
+        filteredElementIds: Set<String>,
+    ): Result<Unit>
+
+    suspend fun setCharSimpleReportListPrefsData(
+        charSimpleReportListPrefsData: CharacterListPreferencesData,
+    ): Result<Unit>
+
+    suspend fun clearCharSimpleReportListFilteredData(): Result<Unit>
 }

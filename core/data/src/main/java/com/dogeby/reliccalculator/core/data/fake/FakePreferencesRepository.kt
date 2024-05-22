@@ -48,6 +48,14 @@ class FakePreferencesRepository : PreferencesRepository {
             tryEmit(sampleCharacterListPreferencesData)
         }
 
+    private val charSimpleReportListPrefsDataFlow: MutableSharedFlow<CharacterListPreferencesData> =
+        MutableSharedFlow<CharacterListPreferencesData>(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST,
+        ).apply {
+            tryEmit(sampleCharacterListPreferencesData)
+        }
+
     override fun getUpdateChecksData(): Flow<UpdateChecksData> = updateChecksDataFlow
 
     override fun getAppPreferencesData(): Flow<AppPreferencesData> = appPreferencesDataFlow
@@ -58,6 +66,9 @@ class FakePreferencesRepository : PreferencesRepository {
 
     override fun getPresetListPreferencesData(): Flow<CharacterListPreferencesData> =
         presetListPreferencesDataFlow
+
+    override fun getCharSimpleReportListPrefsData(): Flow<CharacterListPreferencesData> =
+        charSimpleReportListPrefsDataFlow
 
     override suspend fun setDefaultPresetLastCheckDate(instant: Instant): Result<Unit> =
         runCatching {
@@ -125,13 +136,75 @@ class FakePreferencesRepository : PreferencesRepository {
     }
 
     override suspend fun setPresetListPreferencesData(
-        characterListPreferencesData: CharacterListPreferencesData,
+        presetListPreferencesData: CharacterListPreferencesData,
     ): Result<Unit> = runCatching {
-        presetListPreferencesDataFlow.tryEmit(characterListPreferencesData)
+        presetListPreferencesDataFlow.tryEmit(presetListPreferencesData)
     }
 
-    override suspend fun clearFilteredData(): Result<Unit> = runCatching {
+    override suspend fun clearPresetListFilteredData(): Result<Unit> = runCatching {
         presetListPreferencesDataFlow.tryEmit(
+            CharacterListPreferencesData(
+                filteredRarities = emptySet(),
+                filteredPathIds = emptySet(),
+                filteredElementIds = emptySet(),
+                sortField = CharacterSortField.ID_ASC,
+            ),
+        )
+    }
+
+    override suspend fun setCharSimpleReportListFilteredRarities(rarities: Set<Int>): Result<Unit> =
+        runCatching {
+            charSimpleReportListPrefsDataFlow.run {
+                tryEmit(first().copy(filteredRarities = rarities))
+            }
+        }
+
+    override suspend fun setCharSimpleReportListFilteredPathIds(ids: Set<String>): Result<Unit> =
+        runCatching {
+            charSimpleReportListPrefsDataFlow.run {
+                tryEmit(first().copy(filteredPathIds = ids))
+            }
+        }
+
+    override suspend fun setCharSimpleReportListFilteredElementIds(ids: Set<String>): Result<Unit> =
+        runCatching {
+            charSimpleReportListPrefsDataFlow.run {
+                tryEmit(first().copy(filteredElementIds = ids))
+            }
+        }
+
+    override suspend fun setCharSimpleReportListSortField(
+        characterSortField: CharacterSortField,
+    ): Result<Unit> = runCatching {
+        charSimpleReportListPrefsDataFlow.run {
+            tryEmit(first().copy(sortField = characterSortField))
+        }
+    }
+
+    override suspend fun setCharSimpleReportListFilteredData(
+        filteredRarities: Set<Int>,
+        filteredPathIds: Set<String>,
+        filteredElementIds: Set<String>,
+    ): Result<Unit> = runCatching {
+        charSimpleReportListPrefsDataFlow.run {
+            tryEmit(
+                first().copy(
+                    filteredRarities = filteredRarities,
+                    filteredPathIds = filteredPathIds,
+                    filteredElementIds = filteredElementIds,
+                ),
+            )
+        }
+    }
+
+    override suspend fun setCharSimpleReportListPrefsData(
+        charSimpleReportListPrefsData: CharacterListPreferencesData,
+    ): Result<Unit> = runCatching {
+        charSimpleReportListPrefsDataFlow.tryEmit(charSimpleReportListPrefsData)
+    }
+
+    override suspend fun clearCharSimpleReportListFilteredData(): Result<Unit> = runCatching {
+        charSimpleReportListPrefsDataFlow.tryEmit(
             CharacterListPreferencesData(
                 filteredRarities = emptySet(),
                 filteredPathIds = emptySet(),
