@@ -12,7 +12,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 
-class GetCharacterSimpleReportsUseCase @Inject constructor(
+class GetCharSimpleReportsUseCase @Inject constructor(
     private val characterReportRepository: CharacterReportRepository,
     private val gameRepository: GameRepository,
 ) {
