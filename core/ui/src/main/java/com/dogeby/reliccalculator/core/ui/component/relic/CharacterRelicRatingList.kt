@@ -13,19 +13,19 @@ import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 
 @Composable
 fun CharacterRelicRatingList(
-    characterRelicRatingListUiState: CharacterRelicRatingListUiState,
+    charRelicRatingListUiState: CharRelicRatingListUiState,
     modifier: Modifier = Modifier,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(16.dp),
 ) {
-    when (characterRelicRatingListUiState) {
-        CharacterRelicRatingListUiState.Loading -> Unit
-        is CharacterRelicRatingListUiState.Success -> {
+    when (charRelicRatingListUiState) {
+        CharRelicRatingListUiState.Loading -> Unit
+        is CharRelicRatingListUiState.Success -> {
             LazyRow(
                 horizontalArrangement = horizontalArrangement,
                 modifier = modifier,
             ) {
                 items(
-                    items = characterRelicRatingListUiState.cavernRelics,
+                    items = charRelicRatingListUiState.cavernRelics,
                     key = { it.id },
                 ) {
                     VerticalGameImageText(
@@ -35,7 +35,7 @@ fun CharacterRelicRatingList(
                     )
                 }
                 items(
-                    items = characterRelicRatingListUiState.planarOrnaments,
+                    items = charRelicRatingListUiState.planarOrnaments,
                     key = { it.id },
                 ) {
                     VerticalGameImageText(
@@ -49,14 +49,14 @@ fun CharacterRelicRatingList(
     }
 }
 
-sealed interface CharacterRelicRatingListUiState {
+sealed interface CharRelicRatingListUiState {
 
-    data object Loading : CharacterRelicRatingListUiState
+    data object Loading : CharRelicRatingListUiState
 
     data class Success(
         val cavernRelics: List<RelicRatingUiState>,
         val planarOrnaments: List<RelicRatingUiState>,
-    ) : CharacterRelicRatingListUiState
+    ) : CharRelicRatingListUiState
 }
 
 data class RelicRatingUiState(
@@ -70,7 +70,7 @@ data class RelicRatingUiState(
 private fun PreviewCharacterRelicRatingList() {
     RelicCalculatorTheme {
         CharacterRelicRatingList(
-            characterRelicRatingListUiState = CharacterRelicRatingListUiState.Success(
+            charRelicRatingListUiState = CharRelicRatingListUiState.Success(
                 cavernRelics = List(4) {
                     RelicRatingUiState(
                         id = "cavernRelics$it",

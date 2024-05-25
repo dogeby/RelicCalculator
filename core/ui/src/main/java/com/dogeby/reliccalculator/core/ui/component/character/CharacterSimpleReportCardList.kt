@@ -11,26 +11,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dogeby.reliccalculator.core.ui.component.relic.CharacterRelicRatingListUiState
+import com.dogeby.reliccalculator.core.ui.component.relic.CharRelicRatingListUiState
 import com.dogeby.reliccalculator.core.ui.component.relic.RelicRatingUiState
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 import kotlinx.datetime.Clock
 
 fun LazyGridScope.characterSimpleReportCardList(
-    characterSimpleReportCardListUiState: CharacterSimpleReportCardListUiState,
-    onCardClick: (id: String) -> Unit,
+    charSimpleReportCardListUiState: CharSimpleReportCardListUiState,
+    onCardClick: (id: Int, characterId: String) -> Unit,
 ) {
-    when (characterSimpleReportCardListUiState) {
-        CharacterSimpleReportCardListUiState.Loading -> Unit
-        is CharacterSimpleReportCardListUiState.Success -> {
+    when (charSimpleReportCardListUiState) {
+        CharSimpleReportCardListUiState.Loading -> Unit
+        is CharSimpleReportCardListUiState.Success -> {
             items(
-                items = characterSimpleReportCardListUiState.characterSimpleReportCards,
+                items = charSimpleReportCardListUiState.characterSimpleReportCards,
                 key = { it.id },
             ) {
                 CharacterSimpleReportCard(
-                    characterSimpleReportCardUiState = it,
+                    charSimpleReportCardUiState = it,
                     modifier = Modifier.clickable {
-                        onCardClick(it.id)
+                        onCardClick(it.id, it.characterId)
                     },
                 )
             }
@@ -38,26 +38,27 @@ fun LazyGridScope.characterSimpleReportCardList(
     }
 }
 
-sealed interface CharacterSimpleReportCardListUiState {
+sealed interface CharSimpleReportCardListUiState {
 
-    data object Loading : CharacterSimpleReportCardListUiState
+    data object Loading : CharSimpleReportCardListUiState
 
     data class Success(
-        val characterSimpleReportCards: List<CharacterSimpleReportCardUiState>,
-    ) : CharacterSimpleReportCardListUiState
+        val characterSimpleReportCards: List<CharSimpleReportCardUiState>,
+    ) : CharSimpleReportCardListUiState
 }
 
 @Preview(apiLevel = 33)
 @Composable
 private fun PreviewCharacterSimpleReportCardList() {
     val characterSimpleReportCards = List(6) {
-        CharacterSimpleReportCardUiState(
-            id = "$it",
+        CharSimpleReportCardUiState(
+            id = it,
+            characterId = "$it",
             characterName = "name $it",
             characterIcon = "icon/character/1107.png",
             updatedDate = Clock.System.now(),
             score = 5.0f,
-            characterRelicRatingListUiState = CharacterRelicRatingListUiState.Success(
+            charRelicRatingListUiState = CharRelicRatingListUiState.Success(
                 cavernRelics = List(4) {
                     RelicRatingUiState(
                         id = "cavernRelics$it",
@@ -83,9 +84,9 @@ private fun PreviewCharacterSimpleReportCardList() {
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             characterSimpleReportCardList(
-                characterSimpleReportCardListUiState = CharacterSimpleReportCardListUiState
+                charSimpleReportCardListUiState = CharSimpleReportCardListUiState
                     .Success(characterSimpleReportCards),
-                onCardClick = {},
+                onCardClick = { _, _ -> },
             )
         }
     }
