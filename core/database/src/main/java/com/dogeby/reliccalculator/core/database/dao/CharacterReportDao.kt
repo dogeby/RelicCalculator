@@ -71,4 +71,20 @@ interface CharacterReportDao {
         """,
     )
     fun getLatestCharacterReports(): Flow<List<CharacterReportEntity>>
+
+    @Query(
+        value = """
+        SELECT cr.*
+        FROM character_reports AS cr
+        INNER JOIN (
+            SELECT character_id, MAX(generationTime) AS latestTime
+            FROM character_reports
+            WHERE character_id IN (:ids)
+            GROUP BY character_id
+        ) AS latestReports
+        ON cr.character_id = latestReports.character_id
+        AND cr.generationTime = latestReports.latestTime
+        """,
+    )
+    fun getLatestCharReportsByCharIds(ids: Set<String>): Flow<List<CharacterReportEntity>>
 }

@@ -41,6 +41,19 @@ class FakeCharacterReportRepository : CharacterReportRepository {
         }
     }
 
+    override fun getLatestCharReportsByCharIds(ids: Set<String>): Flow<List<CharacterReport>> {
+        return characterReportsFlow.map { reports ->
+            reports
+                .filter { it.character.id in ids }
+                .groupBy { it.character.id }
+                .mapValues { entry ->
+                    entry.value.maxByOrNull { it.generationTime }
+                }
+                .values
+                .filterNotNull()
+        }
+    }
+
     override suspend fun insertCharacterReports(
         reports: List<CharacterReport>,
     ): Result<List<Long>> {

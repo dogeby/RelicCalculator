@@ -11,6 +11,8 @@ interface CharacterReportRepository {
 
     fun getLatestCharacterReports(): Flow<List<CharacterReport>>
 
+    fun getLatestCharReportsByCharIds(ids: Set<String>): Flow<List<CharacterReport>>
+
     suspend fun insertCharacterReports(reports: List<CharacterReport>): Result<List<Long>>
 
     suspend fun updateCharacterReports(reports: List<CharacterReport>): Result<Int>
