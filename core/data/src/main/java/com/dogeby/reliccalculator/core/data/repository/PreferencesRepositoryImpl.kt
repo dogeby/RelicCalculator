@@ -1,13 +1,13 @@
 package com.dogeby.reliccalculator.core.data.repository
 
-import com.dogeby.reliccalculator.core.datastore.apppreferences.AppPreferencesDataSource
 import com.dogeby.reliccalculator.core.datastore.charsimplereportlistprefs.CharSimpleReportListPrefsDataSource
+import com.dogeby.reliccalculator.core.datastore.gamepreferences.GamePreferencesDataSource
 import com.dogeby.reliccalculator.core.datastore.presetlistpreferences.PresetListPreferencesDataSource
 import com.dogeby.reliccalculator.core.datastore.updatechecks.UpdateChecksDataSource
 import com.dogeby.reliccalculator.core.model.GameTextLanguage
-import com.dogeby.reliccalculator.core.model.preferences.AppPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.CharacterListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
+import com.dogeby.reliccalculator.core.model.preferences.GamePreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.UpdateChecksData
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -18,7 +18,7 @@ import kotlinx.datetime.Instant
 @Singleton
 class PreferencesRepositoryImpl @Inject constructor(
     private val updateChecksDataSource: UpdateChecksDataSource,
-    private val appPreferencesDataSource: AppPreferencesDataSource,
+    private val gamePreferencesDataSource: GamePreferencesDataSource,
     private val presetListPreferencesDataSource: PresetListPreferencesDataSource,
     private val charSimpleReportListPrefsDataSource: CharSimpleReportListPrefsDataSource,
 ) : PreferencesRepository {
@@ -26,11 +26,11 @@ class PreferencesRepositoryImpl @Inject constructor(
     override fun getUpdateChecksData(): Flow<UpdateChecksData> =
         updateChecksDataSource.updateChecksData
 
-    override fun getAppPreferencesData(): Flow<AppPreferencesData> =
-        appPreferencesDataSource.appPreferencesData
+    override fun getGamePreferencesData(): Flow<GamePreferencesData> =
+        gamePreferencesDataSource.gamePreferencesData
 
     override fun getGameTextLanguage(): Flow<GameTextLanguage> =
-        appPreferencesDataSource.appPreferencesData.map { it.gameTextLanguage }
+        gamePreferencesDataSource.gamePreferencesData.map { it.gameTextLanguage }
 
     override fun getPresetListPreferencesData(): Flow<CharacterListPreferencesData> =
         presetListPreferencesDataSource.presetListPreferencesData
@@ -45,7 +45,7 @@ class PreferencesRepositoryImpl @Inject constructor(
         updateChecksDataSource.setDefaultPresetCheckIntervalSecond(second)
 
     override suspend fun setGameTextLanguage(lang: GameTextLanguage): Result<Unit> =
-        appPreferencesDataSource.setGameTextLanguage(lang)
+        gamePreferencesDataSource.setGameTextLanguage(lang)
 
     override suspend fun setPresetListFilteredRarities(rarities: Set<Int>): Result<Unit> =
         presetListPreferencesDataSource.setFilteredRarities(rarities)
