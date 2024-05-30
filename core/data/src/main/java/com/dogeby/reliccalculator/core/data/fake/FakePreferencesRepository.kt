@@ -37,7 +37,7 @@ class FakePreferencesRepository : PreferencesRepository {
             replay = 1,
             onBufferOverflow = BufferOverflow.DROP_OLDEST,
         ).apply {
-            tryEmit(GamePreferencesData(GameTextLanguage.EN))
+            tryEmit(GamePreferencesData(GameTextLanguage.EN, ""))
         }
 
     private val presetListPreferencesDataFlow: MutableSharedFlow<CharacterListPreferencesData> =
@@ -87,6 +87,12 @@ class FakePreferencesRepository : PreferencesRepository {
     override suspend fun setGameTextLanguage(lang: GameTextLanguage): Result<Unit> = runCatching {
         gamePreferencesDataFlow.run {
             tryEmit(first().copy(gameTextLanguage = lang))
+        }
+    }
+
+    override suspend fun setUid(uid: String): Result<Unit> = runCatching {
+        gamePreferencesDataFlow.run {
+            tryEmit(first().copy(uid = uid))
         }
     }
 

@@ -16,13 +16,14 @@ class GamePreferencesDataSourceImpl @Inject constructor(
 ) : GamePreferencesDataSource {
 
     override val gamePreferencesData: Flow<GamePreferencesData> =
-        gamePreferencesDataStore.data.map { appPreferences ->
+        gamePreferencesDataStore.data.map { gamePreferences ->
             GamePreferencesData(
-                GameTextLanguage
+                gameTextLanguage = GameTextLanguage
                     .entries
                     .find {
-                        it.code == appPreferences.gameTextLanguage
+                        it.code == gamePreferences.gameTextLanguage
                     } ?: GameTextLanguage.EN,
+                uid = gamePreferences.uid,
             )
         }
 
@@ -30,6 +31,14 @@ class GamePreferencesDataSourceImpl @Inject constructor(
         gamePreferencesDataStore.updateData {
             it.copy {
                 this.gameTextLanguage = lang.code
+            }
+        }
+    }
+
+    override suspend fun setUid(uid: String): Result<Unit> = runCatching {
+        gamePreferencesDataStore.updateData {
+            it.copy {
+                this.uid = uid
             }
         }
     }

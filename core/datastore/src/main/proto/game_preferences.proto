@@ -6,4 +6,5 @@ option java_multiple_files = true;
 
 message GamePreferences {
   string game_text_language = 1;
+  string uid = 2;
 }

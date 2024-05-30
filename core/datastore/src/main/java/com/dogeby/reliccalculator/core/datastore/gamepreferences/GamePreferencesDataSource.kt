@@ -9,4 +9,6 @@ interface GamePreferencesDataSource {
     val gamePreferencesData: Flow<GamePreferencesData>
 
     suspend fun setGameTextLanguage(lang: GameTextLanguage): Result<Unit>
+
+    suspend fun setUid(uid: String): Result<Unit>
 }

@@ -26,6 +26,8 @@ interface PreferencesRepository {
 
     suspend fun setGameTextLanguage(lang: GameTextLanguage): Result<Unit>
 
+    suspend fun setUid(uid: String): Result<Unit>
+
     suspend fun setPresetListFilteredRarities(rarities: Set<Int>): Result<Unit>
 
     suspend fun setPresetListFilteredPathIds(ids: Set<String>): Result<Unit>

@@ -4,4 +4,5 @@ import com.dogeby.reliccalculator.core.model.GameTextLanguage
 
 data class GamePreferencesData(
     val gameTextLanguage: GameTextLanguage,
+    val uid: String,
 )

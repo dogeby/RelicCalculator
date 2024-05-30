@@ -47,6 +47,8 @@ class PreferencesRepositoryImpl @Inject constructor(
     override suspend fun setGameTextLanguage(lang: GameTextLanguage): Result<Unit> =
         gamePreferencesDataSource.setGameTextLanguage(lang)
 
+    override suspend fun setUid(uid: String): Result<Unit> = gamePreferencesDataSource.setUid(uid)
+
     override suspend fun setPresetListFilteredRarities(rarities: Set<Int>): Result<Unit> =
         presetListPreferencesDataSource.setFilteredRarities(rarities)
 
