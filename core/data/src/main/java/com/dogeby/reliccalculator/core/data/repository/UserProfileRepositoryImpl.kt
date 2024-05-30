@@ -5,6 +5,7 @@ import com.dogeby.reliccalculator.core.data.model.toUserProfileEntity
 import com.dogeby.reliccalculator.core.database.dao.UserProfileDao
 import com.dogeby.reliccalculator.core.database.model.user.UserProfileEntity
 import com.dogeby.reliccalculator.core.database.model.user.toUserProfile
+import com.dogeby.reliccalculator.core.model.GameTextLanguage
 import com.dogeby.reliccalculator.core.model.mihomo.Profile
 import com.dogeby.reliccalculator.core.model.user.UserProfile
 import com.dogeby.reliccalculator.core.network.ProfileNetworkDataSource
@@ -33,9 +34,9 @@ class UserProfileRepositoryImpl @Inject constructor(
 
     override suspend fun fetchUserProfile(
         uid: String,
-        language: String,
+        language: GameTextLanguage,
     ): Result<UserProfile> {
-        return profileNetworkDataSource.getProfile(uid, language).map(Profile::toUserProfile)
+        return profileNetworkDataSource.getProfile(uid, language.code).map(Profile::toUserProfile)
     }
 
     override suspend fun insertUserProfiles(profiles: List<UserProfile>): Result<List<Long>> =

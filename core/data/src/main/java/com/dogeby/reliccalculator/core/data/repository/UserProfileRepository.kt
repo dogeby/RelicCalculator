@@ -1,5 +1,6 @@
 package com.dogeby.reliccalculator.core.data.repository
 
+import com.dogeby.reliccalculator.core.model.GameTextLanguage
 import com.dogeby.reliccalculator.core.model.user.UserProfile
 import kotlinx.coroutines.flow.Flow
 
@@ -11,7 +12,7 @@ interface UserProfileRepository {
 
     suspend fun fetchUserProfile(
         uid: String,
-        language: String,
+        language: GameTextLanguage,
     ): Result<UserProfile>
 
     suspend fun insertUserProfiles(profiles: List<UserProfile>): Result<List<Long>>
