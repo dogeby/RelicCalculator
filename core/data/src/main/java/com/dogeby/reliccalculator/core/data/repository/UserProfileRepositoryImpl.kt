@@ -32,22 +32,27 @@ class UserProfileRepositoryImpl @Inject constructor(
             it.map(UserProfileEntity::toUserProfile)
         }
 
-    override suspend fun fetchUserProfile(
+    override suspend fun fetchProfile(
         uid: String,
         language: GameTextLanguage,
-    ): Result<UserProfile> {
-        return profileNetworkDataSource.getProfile(uid, language.code).map(Profile::toUserProfile)
+    ): Result<Profile> {
+        return profileNetworkDataSource.getProfile(uid, language.code)
     }
 
-    override suspend fun insertUserProfiles(profiles: List<UserProfile>): Result<List<Long>> =
+    override suspend fun insertUserProfiles(profiles: List<Profile>): Result<List<Long>> =
         runCatching {
             userProfileDao.insertOrIgnoreUserProfiles(
-                profiles.map(UserProfile::toUserProfileEntity),
+                profiles
+                    .map(Profile::toUserProfile)
+                    .map(UserProfile::toUserProfileEntity),
             )
         }
 
-    override suspend fun updateUserProfiles(profiles: List<UserProfile>): Result<Int> =
-        runCatching {
-            userProfileDao.updateUserProfiles(profiles.map(UserProfile::toUserProfileEntity))
-        }
+    override suspend fun updateUserProfiles(profiles: List<Profile>): Result<Int> = runCatching {
+        userProfileDao.updateUserProfiles(
+            profiles
+                .map(Profile::toUserProfile)
+                .map(UserProfile::toUserProfileEntity),
+        )
+    }
 }
