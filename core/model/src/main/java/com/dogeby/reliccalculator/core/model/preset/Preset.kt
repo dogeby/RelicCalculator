@@ -3,7 +3,6 @@ package com.dogeby.reliccalculator.core.model.preset
 import com.dogeby.reliccalculator.core.model.mihomo.index.RelicPiece
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import org.jetbrains.annotations.TestOnly
 
 @Serializable
@@ -13,7 +12,7 @@ data class Preset(
     @SerialName("piece_main_affix_weights")
     val pieceMainAffixWeights: Map<RelicPiece, List<AffixWeight>>,
     @SerialName("sub_affix_weights") val subAffixWeights: List<AffixWeight>,
-    @Transient val isAutoUpdate: Boolean = true,
+    @SerialName("is_auto_update") val isAutoUpdate: Boolean = true,
     @SerialName("attr_comparisons") val attrComparisons: List<AttrComparison>,
 )
 
