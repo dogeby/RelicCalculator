@@ -26,9 +26,9 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
-class GetCharacterSimpleReportUseCaseTest {
+class GetCharacterSimpleReportsUseCaseTest {
 
-    private lateinit var getCharacterSimpleReportUseCase: GetCharacterSimpleReportUseCase
+    private lateinit var getCharacterSimpleReportsUseCase: GetCharacterSimpleReportsUseCase
     private lateinit var gameRepository: FakeGameRepository
     private lateinit var characterReportRepository: FakeCharacterReportRepository
 
@@ -41,7 +41,7 @@ class GetCharacterSimpleReportUseCaseTest {
         gameRepository = FakeGameRepository()
         characterReportRepository = FakeCharacterReportRepository()
 
-        getCharacterSimpleReportUseCase = GetCharacterSimpleReportUseCase(
+        getCharacterSimpleReportsUseCase = GetCharacterSimpleReportsUseCase(
             characterReportRepository = characterReportRepository,
             gameRepository = gameRepository,
         )
@@ -62,7 +62,7 @@ class GetCharacterSimpleReportUseCaseTest {
 
         characterReportRepository.sendCharacterReports(allCharacterReports)
 
-        val actualCharacterSimpleReports = getCharacterSimpleReportUseCase(
+        val actualCharacterSimpleReports = getCharacterSimpleReportsUseCase(
             filteredRarities = emptySet(),
             filteredPathIds = emptySet(),
             filteredElementIds = emptySet(),

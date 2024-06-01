@@ -2,9 +2,9 @@ package com.dogeby.reliccalculator.core.data.fake
 
 import com.dogeby.reliccalculator.core.data.repository.PreferencesRepository
 import com.dogeby.reliccalculator.core.model.GameTextLanguage
-import com.dogeby.reliccalculator.core.model.preferences.AppPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.CharacterListPreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.CharacterSortField
+import com.dogeby.reliccalculator.core.model.preferences.GamePreferencesData
 import com.dogeby.reliccalculator.core.model.preferences.UpdateChecksData
 import com.dogeby.reliccalculator.core.model.preferences.sampleCharacterListPreferencesData
 import kotlinx.coroutines.channels.BufferOverflow
@@ -32,12 +32,12 @@ class FakePreferencesRepository : PreferencesRepository {
             )
         }
 
-    private val appPreferencesDataFlow: MutableSharedFlow<AppPreferencesData> =
-        MutableSharedFlow<AppPreferencesData>(
+    private val gamePreferencesDataFlow: MutableSharedFlow<GamePreferencesData> =
+        MutableSharedFlow<GamePreferencesData>(
             replay = 1,
             onBufferOverflow = BufferOverflow.DROP_OLDEST,
         ).apply {
-            tryEmit(AppPreferencesData(GameTextLanguage.EN))
+            tryEmit(GamePreferencesData(GameTextLanguage.EN, ""))
         }
 
     private val presetListPreferencesDataFlow: MutableSharedFlow<CharacterListPreferencesData> =
@@ -58,9 +58,9 @@ class FakePreferencesRepository : PreferencesRepository {
 
     override fun getUpdateChecksData(): Flow<UpdateChecksData> = updateChecksDataFlow
 
-    override fun getAppPreferencesData(): Flow<AppPreferencesData> = appPreferencesDataFlow
+    override fun getGamePreferencesData(): Flow<GamePreferencesData> = gamePreferencesDataFlow
 
-    override fun getGameTextLanguage(): Flow<GameTextLanguage> = appPreferencesDataFlow.map {
+    override fun getGameTextLanguage(): Flow<GameTextLanguage> = gamePreferencesDataFlow.map {
         it.gameTextLanguage
     }
 
@@ -85,8 +85,14 @@ class FakePreferencesRepository : PreferencesRepository {
         }
 
     override suspend fun setGameTextLanguage(lang: GameTextLanguage): Result<Unit> = runCatching {
-        appPreferencesDataFlow.run {
+        gamePreferencesDataFlow.run {
             tryEmit(first().copy(gameTextLanguage = lang))
+        }
+    }
+
+    override suspend fun setUid(uid: String): Result<Unit> = runCatching {
+        gamePreferencesDataFlow.run {
+            tryEmit(first().copy(uid = uid))
         }
     }
 

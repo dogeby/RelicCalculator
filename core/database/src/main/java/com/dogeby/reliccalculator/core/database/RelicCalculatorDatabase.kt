@@ -6,6 +6,7 @@ import com.dogeby.reliccalculator.core.database.dao.CharacterDao
 import com.dogeby.reliccalculator.core.database.dao.CharacterReportDao
 import com.dogeby.reliccalculator.core.database.dao.GameInfoDao
 import com.dogeby.reliccalculator.core.database.dao.PresetDao
+import com.dogeby.reliccalculator.core.database.dao.UserProfileDao
 import com.dogeby.reliccalculator.core.database.model.hoyo.CharacterEntity
 import com.dogeby.reliccalculator.core.database.model.hoyo.index.AffixDataEntity
 import com.dogeby.reliccalculator.core.database.model.hoyo.index.CharacterInfoEntity
@@ -17,6 +18,7 @@ import com.dogeby.reliccalculator.core.database.model.hoyo.index.RelicInfoEntity
 import com.dogeby.reliccalculator.core.database.model.hoyo.index.RelicSetInfoEntity
 import com.dogeby.reliccalculator.core.database.model.preset.PresetEntity
 import com.dogeby.reliccalculator.core.database.model.report.CharacterReportEntity
+import com.dogeby.reliccalculator.core.database.model.user.UserProfileEntity
 
 @Database(
     entities = [
@@ -31,6 +33,7 @@ import com.dogeby.reliccalculator.core.database.model.report.CharacterReportEnti
         RelicInfoEntity::class,
         RelicSetInfoEntity::class,
         AffixDataEntity::class,
+        UserProfileEntity::class,
     ],
     version = 1,
 )
@@ -43,4 +46,6 @@ abstract class RelicCalculatorDatabase : RoomDatabase() {
     abstract fun characterReportDao(): CharacterReportDao
 
     abstract fun gameInfoDao(): GameInfoDao
+
+    abstract fun userProfileDao(): UserProfileDao
 }

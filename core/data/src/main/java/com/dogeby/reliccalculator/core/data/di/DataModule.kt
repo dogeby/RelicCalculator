@@ -8,6 +8,8 @@ import com.dogeby.reliccalculator.core.data.repository.PreferencesRepository
 import com.dogeby.reliccalculator.core.data.repository.PreferencesRepositoryImpl
 import com.dogeby.reliccalculator.core.data.repository.PresetRepository
 import com.dogeby.reliccalculator.core.data.repository.PresetRepositoryImpl
+import com.dogeby.reliccalculator.core.data.repository.UserProfileRepository
+import com.dogeby.reliccalculator.core.data.repository.UserProfileRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -39,4 +41,10 @@ abstract class DataModule {
     abstract fun bindsCharacterReportRepository(
         characterReportRepositoryImpl: CharacterReportRepositoryImpl,
     ): CharacterReportRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindsUserProfileRepository(
+        userProfileRepositoryImpl: UserProfileRepositoryImpl,
+    ): UserProfileRepository
 }

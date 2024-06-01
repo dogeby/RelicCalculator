@@ -1,10 +1,10 @@
 package com.dogeby.reliccalculator.core.datastore
 
 import androidx.test.core.app.ApplicationProvider
-import com.dogeby.reliccalculator.core.datastore.apppreferences.AppPreferencesDataSource
-import com.dogeby.reliccalculator.core.datastore.apppreferences.AppPreferencesDataSourceImpl
-import com.dogeby.reliccalculator.core.datastore.apppreferences.AppPreferencesSerializer
 import com.dogeby.reliccalculator.core.datastore.di.DataStoreModule
+import com.dogeby.reliccalculator.core.datastore.gamepreferences.GamePreferencesDataSource
+import com.dogeby.reliccalculator.core.datastore.gamepreferences.GamePreferencesDataSourceImpl
+import com.dogeby.reliccalculator.core.datastore.gamepreferences.GamePreferencesSerializer
 import com.dogeby.reliccalculator.core.model.GameTextLanguage
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -13,19 +13,19 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
-class AppPreferencesDataSourceTest {
+class GamePreferencesDataSourceTest {
 
-    private lateinit var appPreferencesDataSource: AppPreferencesDataSource
+    private lateinit var gamePreferencesDataSource: GamePreferencesDataSource
     private val testDispatcher = StandardTestDispatcher()
 
     @Before
     fun setUp() {
-        val dataStore = DataStoreModule.providesAppPreferencesDataStore(
+        val dataStore = DataStoreModule.providesGamePreferencesDataStore(
             context = ApplicationProvider.getApplicationContext(),
             ioDispatcher = testDispatcher,
-            appPreferencesSerializer = AppPreferencesSerializer(),
+            gamePreferencesSerializer = GamePreferencesSerializer(),
         )
-        appPreferencesDataSource = AppPreferencesDataSourceImpl(
+        gamePreferencesDataSource = GamePreferencesDataSourceImpl(
             dataStore,
         )
     }
@@ -33,14 +33,14 @@ class AppPreferencesDataSourceTest {
     @Test
     fun test_setGameTextLanguage_success() = runTest(testDispatcher) {
         val inputLang1 = GameTextLanguage.KR
-        appPreferencesDataSource.setGameTextLanguage(inputLang1)
-        val newLang1 = appPreferencesDataSource.appPreferencesData.first().gameTextLanguage
+        gamePreferencesDataSource.setGameTextLanguage(inputLang1)
+        val newLang1 = gamePreferencesDataSource.gamePreferencesData.first().gameTextLanguage
 
         Assert.assertEquals(inputLang1, newLang1)
 
         val inputLang2 = GameTextLanguage.EN
-        appPreferencesDataSource.setGameTextLanguage(inputLang2)
-        val newLang2 = appPreferencesDataSource.appPreferencesData.first().gameTextLanguage
+        gamePreferencesDataSource.setGameTextLanguage(inputLang2)
+        val newLang2 = gamePreferencesDataSource.gamePreferencesData.first().gameTextLanguage
 
         Assert.assertEquals(inputLang2, newLang2)
     }

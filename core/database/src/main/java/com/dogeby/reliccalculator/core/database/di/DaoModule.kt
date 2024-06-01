@@ -5,6 +5,7 @@ import com.dogeby.reliccalculator.core.database.dao.CharacterDao
 import com.dogeby.reliccalculator.core.database.dao.CharacterReportDao
 import com.dogeby.reliccalculator.core.database.dao.GameInfoDao
 import com.dogeby.reliccalculator.core.database.dao.PresetDao
+import com.dogeby.reliccalculator.core.database.dao.UserProfileDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,4 +28,8 @@ object DaoModule {
 
     @Provides
     fun providesGameInfoDao(database: RelicCalculatorDatabase): GameInfoDao = database.gameInfoDao()
+
+    @Provides
+    fun providesUserProfileDao(database: RelicCalculatorDatabase): UserProfileDao =
+        database.userProfileDao()
 }

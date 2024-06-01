@@ -33,6 +33,12 @@ class CharacterReportRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getLatestCharReportsByCharIds(ids: Set<String>): Flow<List<CharacterReport>> {
+        return characterReportDao.getLatestCharReportsByCharIds(ids).map {
+            it.map(CharacterReportEntity::toCharacterReport)
+        }
+    }
+
     override suspend fun insertCharacterReports(
         reports: List<CharacterReport>,
     ): Result<List<Long>> = runCatching {
