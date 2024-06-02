@@ -1,10 +1,13 @@
 package com.dogeby.reliccalculator.feature.presets
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -78,14 +81,19 @@ private fun PresetsScreen(
             HideableBarLazyVerticalGrid(
                 topBar = {
                     Surface {
-                        CharacterListOptionBar(
-                            characterListOptionBarUiState = characterListOptionBarUiState,
-                            onSetSortField = onSetSortField,
-                            onConfirmFilters = onConfirmFilters,
-                            modifier = Modifier
+                        Row(
+                            modifier = modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 8.dp),
-                        )
+                                .padding(horizontal = 8.dp)
+                                .horizontalScroll(rememberScrollState()),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        ) {
+                            CharacterListOptionBar(
+                                characterListOptionBarUiState = characterListOptionBarUiState,
+                                onSetSortField = onSetSortField,
+                                onConfirmFilters = onConfirmFilters,
+                            )
+                        }
                     }
                 },
                 topBarHeight = 48.dp,
