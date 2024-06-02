@@ -131,7 +131,7 @@ object DataStoreModule {
     @Provides
     @Singleton
     fun providesCharSimpleReportListCharListPrefsDataSource(
-        @PresetListCharListPrefs
+        @CharSimpleReportListCharListPrefs
         characterListPreferencesDataStore: DataStore<CharacterListPreferences>,
     ): CharacterListPreferencesDataSource =
         CharacterListPreferencesDataSourceImpl(characterListPreferencesDataStore)
