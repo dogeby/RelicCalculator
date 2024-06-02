@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="refresh">Refresh</string>
+
+    <string name="reports_refresh_failed">Failed to refresh character.</string>
+    <string name="reports_refresh_empty">No refreshed characters available.</string>
+    <string name="reports_refreshed">%1$d characters refreshed successfully.</string>
+</resources>

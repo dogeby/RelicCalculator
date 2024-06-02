@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="refresh">새로고침</string>
+
+    <string name="reports_refresh_failed">캐릭터 정보를 새로고침하는 데 문제가 발생했습니다.</string>
+    <string name="reports_refresh_empty">새로고침된 캐릭터가 없습니다.</string>
+    <string name="reports_refreshed">%1$d개의 캐릭터가 새로고침되었습니다.</string>
+</resources>
