@@ -3,18 +3,17 @@ package com.dogeby.reliccalculator.core.ui.component.character
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.dogeby.reliccalculator.core.ui.component.relic.CharRelicRatingListUiState
 import com.dogeby.reliccalculator.core.ui.component.relic.CharacterRelicRatingList
-import com.dogeby.reliccalculator.core.ui.component.relic.CharacterRelicRatingListUiState
 import com.dogeby.reliccalculator.core.ui.component.relic.RelicRatingUiState
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 import kotlinx.datetime.Clock
@@ -22,15 +21,15 @@ import kotlinx.datetime.Instant
 
 @Composable
 fun CharacterSimpleReportCard(
-    characterSimpleReportCardUiState: CharacterSimpleReportCardUiState,
+    charSimpleReportCardUiState: CharSimpleReportCardUiState,
     modifier: Modifier = Modifier,
-    shape: Shape = RoundedCornerShape(4.dp),
-    color: Color = MaterialTheme.colorScheme.surface,
+    shape: Shape = CardDefaults.shape,
+    colors: CardColors = CardDefaults.cardColors(),
 ) {
-    Surface(
+    Card(
         modifier = modifier,
         shape = shape,
-        color = color,
+        colors = colors,
     ) {
         Column(
             modifier = Modifier.padding(8.dp),
@@ -38,26 +37,27 @@ fun CharacterSimpleReportCard(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             CharacterListItemWithRating(
-                characterName = characterSimpleReportCardUiState.characterName,
-                characterIcon = characterSimpleReportCardUiState.characterIcon,
-                updatedDate = characterSimpleReportCardUiState.updatedDate,
-                score = characterSimpleReportCardUiState.score,
+                characterName = charSimpleReportCardUiState.characterName,
+                characterIcon = charSimpleReportCardUiState.characterIcon,
+                updatedDate = charSimpleReportCardUiState.updatedDate,
+                score = charSimpleReportCardUiState.score,
             )
             CharacterRelicRatingList(
-                characterRelicRatingListUiState = characterSimpleReportCardUiState
-                    .characterRelicRatingListUiState,
+                charRelicRatingListUiState = charSimpleReportCardUiState
+                    .charRelicRatingListUiState,
             )
         }
     }
 }
 
-data class CharacterSimpleReportCardUiState(
-    val id: String,
+data class CharSimpleReportCardUiState(
+    val id: Int,
+    val characterId: String,
     val characterName: String,
     val characterIcon: String,
     val updatedDate: Instant,
     val score: Float,
-    val characterRelicRatingListUiState: CharacterRelicRatingListUiState,
+    val charRelicRatingListUiState: CharRelicRatingListUiState,
 )
 
 @Preview(apiLevel = 33)
@@ -65,13 +65,14 @@ data class CharacterSimpleReportCardUiState(
 private fun PreviewCharacterSimpleReportCard() {
     RelicCalculatorTheme {
         CharacterSimpleReportCard(
-            characterSimpleReportCardUiState = CharacterSimpleReportCardUiState(
-                id = "",
+            charSimpleReportCardUiState = CharSimpleReportCardUiState(
+                id = 0,
+                characterId = "",
                 characterName = "name",
                 characterIcon = "icon/character/1107.png",
                 updatedDate = Clock.System.now(),
                 score = 5.0f,
-                characterRelicRatingListUiState = CharacterRelicRatingListUiState.Success(
+                charRelicRatingListUiState = CharRelicRatingListUiState.Success(
                     cavernRelics = List(4) {
                         RelicRatingUiState(
                             id = "cavernRelics$it",

@@ -1,13 +1,9 @@
 package com.dogeby.reliccalculator.core.ui.component.preset
 
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.dogeby.reliccalculator.core.model.mihomo.index.ElementInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.PathInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.sampleElementInfo
@@ -19,7 +15,7 @@ import com.dogeby.reliccalculator.core.ui.component.character.CharacterSortField
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 
 @Composable
-fun CharacterListOptionBar(
+fun RowScope.CharacterListOptionBar(
     characterListOptionBarUiState: CharacterListOptionBarUiState,
     onSetSortField: (CharacterSortField) -> Unit,
     onConfirmFilters: (
@@ -27,29 +23,23 @@ fun CharacterListOptionBar(
         selectedPathIds: Set<String>,
         selectedElementIds: Set<String>,
     ) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     when (characterListOptionBarUiState) {
         CharacterListOptionBarUiState.Loading -> Unit
         is CharacterListOptionBarUiState.Success -> {
             with(characterListOptionBarUiState) {
-                Row(
-                    modifier = modifier.horizontalScroll(rememberScrollState()),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    CharacterSortFieldChip(
-                        selectedSortField = characterListPreferencesData.sortField,
-                        onSetSortField = onSetSortField,
-                    )
-                    CharacterFilterChip(
-                        pathInfoList = pathInfoList,
-                        elementInfoList = elementInfoList,
-                        filteredRarities = characterListPreferencesData.filteredRarities,
-                        filteredPathIds = characterListPreferencesData.filteredPathIds,
-                        filteredElementIds = characterListPreferencesData.filteredElementIds,
-                        onConfirmFilters = onConfirmFilters,
-                    )
-                }
+                CharacterSortFieldChip(
+                    selectedSortField = characterListPreferencesData.sortField,
+                    onSetSortField = onSetSortField,
+                )
+                CharacterFilterChip(
+                    pathInfoList = pathInfoList,
+                    elementInfoList = elementInfoList,
+                    filteredRarities = characterListPreferencesData.filteredRarities,
+                    filteredPathIds = characterListPreferencesData.filteredPathIds,
+                    filteredElementIds = characterListPreferencesData.filteredElementIds,
+                    onConfirmFilters = onConfirmFilters,
+                )
             }
         }
     }
@@ -70,19 +60,21 @@ sealed interface CharacterListOptionBarUiState {
 @Composable
 private fun PreviewCharacterListOptionBar() {
     RelicCalculatorTheme {
-        CharacterListOptionBar(
-            characterListOptionBarUiState = CharacterListOptionBarUiState.Success(
-                pathInfoList = List(7) { samplePathInfo.copy(id = "$it", name = "$it") },
-                elementInfoList = List(7) { sampleElementInfo.copy(id = "$it", name = "$it") },
-                characterListPreferencesData = CharacterListPreferencesData(
-                    filteredRarities = setOf(5),
-                    filteredPathIds = setOf("0"),
-                    filteredElementIds = setOf("0"),
-                    sortField = CharacterSortField.ID_ASC,
+        Row {
+            CharacterListOptionBar(
+                characterListOptionBarUiState = CharacterListOptionBarUiState.Success(
+                    pathInfoList = List(7) { samplePathInfo.copy(id = "$it", name = "$it") },
+                    elementInfoList = List(7) { sampleElementInfo.copy(id = "$it", name = "$it") },
+                    characterListPreferencesData = CharacterListPreferencesData(
+                        filteredRarities = setOf(5),
+                        filteredPathIds = setOf("0"),
+                        filteredElementIds = setOf("0"),
+                        sortField = CharacterSortField.ID_ASC,
+                    ),
                 ),
-            ),
-            onSetSortField = {},
-            onConfirmFilters = { _, _, _ -> },
-        )
+                onSetSortField = {},
+                onConfirmFilters = { _, _, _ -> },
+            )
+        }
     }
 }

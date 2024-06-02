@@ -9,7 +9,7 @@ import com.dogeby.reliccalculator.game.rating.CharacterRelicCalculator
 import javax.inject.Inject
 import kotlinx.coroutines.flow.first
 
-typealias RefreshCharReportCount = Int
+internal typealias RefreshCharReportCount = Int
 
 class RefreshCharReportsUseCase @Inject constructor(
     private val preferencesRepository: PreferencesRepository,
