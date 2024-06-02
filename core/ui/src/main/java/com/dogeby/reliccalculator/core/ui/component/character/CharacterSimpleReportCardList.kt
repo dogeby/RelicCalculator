@@ -7,8 +7,10 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dogeby.reliccalculator.core.ui.component.relic.CharRelicRatingListUiState
@@ -29,9 +31,11 @@ fun LazyGridScope.characterSimpleReportCardList(
             ) {
                 CharacterSimpleReportCard(
                     charSimpleReportCardUiState = it,
-                    modifier = Modifier.clickable {
-                        onCardClick(it.id, it.characterId)
-                    },
+                    modifier = Modifier
+                        .clip(CardDefaults.shape)
+                        .clickable {
+                            onCardClick(it.id, it.characterId)
+                        },
                 )
             }
         }
