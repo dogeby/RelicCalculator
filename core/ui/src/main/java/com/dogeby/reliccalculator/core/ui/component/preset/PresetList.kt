@@ -33,7 +33,6 @@ fun LazyGridScope.presetList(
         is PresetListUiState.Success -> {
             items(
                 items = presetListUiState.presets,
-                key = { it.characterId },
             ) { presetWithDetails ->
                 PresetCard(
                     presetWithDetails = presetWithDetails,
