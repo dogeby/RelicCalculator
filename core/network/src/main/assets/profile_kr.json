@@ -26,6 +26,9 @@
       "light_cone": {
         "id": "20002",
         "name": "천경",
+        "rarity": 3,
+        "rank": 1,
+        "level": 80,
         "icon":"icon/light_cone/20002.png",
         "portrait": "image/light_cone_portrait/20002.png"
       },
