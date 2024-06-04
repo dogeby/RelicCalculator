@@ -5,9 +5,7 @@ import com.dogeby.reliccalculator.core.data.fake.FakeGameRepository
 import com.dogeby.reliccalculator.core.domain.model.CharacterSimpleReport
 import com.dogeby.reliccalculator.core.domain.model.toSimpleRelicRatingReport
 import com.dogeby.reliccalculator.core.model.mihomo.Character
-import com.dogeby.reliccalculator.core.model.mihomo.Element
 import com.dogeby.reliccalculator.core.model.mihomo.LightCone
-import com.dogeby.reliccalculator.core.model.mihomo.Path
 import com.dogeby.reliccalculator.core.model.mihomo.index.RelicInfo
 import com.dogeby.reliccalculator.core.model.mihomo.index.RelicPiece
 import com.dogeby.reliccalculator.core.model.mihomo.index.sampleCharacterInfo
@@ -74,13 +72,7 @@ class GetCharSimpleReportsUseCaseTest {
 
     private fun createCharacterSample() = Character(
         id = "1212",
-        name = "경류",
-        icon = "icon/character/1212.png",
-        preview = "",
-        portrait = "",
-        path = Path("", "", ""),
-        element = Element("", "", ""),
-        lightCone = LightCone("", "", "", ""),
+        lightCone = LightCone("", 5, 1, 80),
         relics = emptyList(),
         relicSets = emptyList(),
         attributes = emptyList(),
@@ -166,8 +158,8 @@ class GetCharSimpleReportsUseCaseTest {
             CharacterSimpleReport(
                 id = characterReport.id,
                 characterId = characterReport.character.id,
-                name = characterSample.name,
-                icon = characterSample.icon,
+                name = "경류",
+                icon = "icon/character/1212.png",
                 updatedDate = characterReport.generationTime,
                 totalScore = characterReport.score,
                 cavernRelics = listOf(

@@ -8,5 +8,6 @@ data class LightConeInfo(
     val name: String,
     val rarity: Int,
     val path: String,
+    val icon: String,
     val portrait: String,
 )

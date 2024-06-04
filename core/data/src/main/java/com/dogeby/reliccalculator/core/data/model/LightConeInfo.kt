@@ -8,5 +8,6 @@ fun LightConeInfo.toLightConeInfoEntity() = LightConeInfoEntity(
     name = name,
     rarity = rarity,
     path = path,
+    icon = icon,
     portrait = portrait,
 )

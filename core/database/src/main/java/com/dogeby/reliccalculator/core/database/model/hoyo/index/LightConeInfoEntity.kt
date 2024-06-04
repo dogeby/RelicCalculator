@@ -11,6 +11,7 @@ data class LightConeInfoEntity(
     val name: String,
     val rarity: Int,
     val path: String,
+    val icon: String,
     val portrait: String,
 )
 
@@ -19,6 +20,7 @@ fun LightConeInfoEntity.toLightConeInfo() = LightConeInfo(
     name = name,
     rarity = rarity,
     path = path,
+    icon = icon,
     portrait = portrait,
 )
 
@@ -28,5 +30,6 @@ val sampleLightConeInfoEntity = LightConeInfoEntity(
     name = "이 몸이 검이니",
     rarity = 5,
     path = "Warrior",
+    icon = "icon/light_cone/23014.png",
     portrait = "image/light_cone_portrait/23014.png",
 )

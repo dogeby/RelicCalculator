@@ -5,6 +5,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.dogeby.reliccalculator.core.database.dao.CharacterDao
 import com.dogeby.reliccalculator.core.database.model.hoyo.sampleCharacterEntity
+import com.dogeby.reliccalculator.core.model.mihomo.Attribute
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -46,8 +47,21 @@ class CharacterDaoTest {
 
     @Test
     fun test_characterDao_update_success() = runTest {
-        characterDao.insertOrIgnoreCharacters(listOf(character.copy(name = "oldName")))
-        val result = characterDao.updateCharacters(listOf(character.copy(name = "newName")))
+        characterDao.insertOrIgnoreCharacters(listOf(character))
+        val result = characterDao.updateCharacters(
+            listOf(
+                character.copy(
+                    attributes = listOf(
+                        Attribute(
+                            field = "",
+                            value = 1000.0,
+                            display = "1000",
+                            percent = false,
+                        ),
+                    ),
+                ),
+            ),
+        )
 
         Assert.assertEquals(1, result)
     }
@@ -60,7 +74,16 @@ class CharacterDaoTest {
 
         Assert.assertEquals(List(initialCharactersSize) { it + 1L }, insertRowIds)
 
-        val updatedCharacter = initialCharacters.last().copy(name = "newName")
+        val updatedCharacter = initialCharacters.last().copy(
+            attributes = listOf(
+                Attribute(
+                    field = "",
+                    value = 1000.0,
+                    display = "1000",
+                    percent = false,
+                ),
+            ),
+        )
         val newCharacter = character.copy(id = "newCharacterId")
         val charactersToUpsert = initialCharacters.dropLast(1) +
             updatedCharacter + newCharacter

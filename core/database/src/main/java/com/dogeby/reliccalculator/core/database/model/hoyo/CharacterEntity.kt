@@ -23,12 +23,6 @@ data class CharacterEntity(
     @PrimaryKey
     @ColumnInfo(name = "character_id")
     val id: String,
-    @ColumnInfo(name = "character_name") val name: String,
-    @ColumnInfo(name = "character_icon") val icon: String,
-    @ColumnInfo(name = "character_preview") val preview: String,
-    @ColumnInfo(name = "character_portrait") val portrait: String,
-    @Embedded val path: DatabasePath,
-    @Embedded val element: DatabaseElement,
     @Embedded val lightCone: DatabaseLightCone,
     @ColumnInfo(name = "character_relics") val relics: List<Relic>,
     @ColumnInfo(name = "character_relic_sets") val relicSets: List<RelicSet>,
@@ -39,25 +33,11 @@ data class CharacterEntity(
 @TestOnly
 val sampleCharacterEntity = CharacterEntity(
     id = "1212",
-    name = "Jingliu",
-    icon = "",
-    preview = "",
-    portrait = "",
-    path = DatabasePath(
-        id = "Warrior",
-        name = "Destruction",
-        icon = "",
-    ),
-    element = DatabaseElement(
-        id = "Ice",
-        name = "Ice",
-        icon = "",
-    ),
     lightCone = DatabaseLightCone(
         id = "24000",
-        name = "On the Fall of an Aeon",
-        icon = "",
-        portrait = "",
+        rarity = 5,
+        rank = 1,
+        level = 80,
     ),
     relics = emptyList(),
     relicSets = emptyList(),

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class LightCone(
     val id: String,
-    val name: String,
-    val icon: String,
-    val portrait: String,
+    val rarity: Int,
+    val rank: Int,
+    val level: Int,
 )

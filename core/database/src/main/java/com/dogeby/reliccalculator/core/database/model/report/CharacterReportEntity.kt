@@ -11,9 +11,7 @@ import com.dogeby.reliccalculator.core.database.util.InstantConverter
 import com.dogeby.reliccalculator.core.database.util.PresetConverter
 import com.dogeby.reliccalculator.core.database.util.RelicReportListConverter
 import com.dogeby.reliccalculator.core.model.mihomo.Character
-import com.dogeby.reliccalculator.core.model.mihomo.Element
 import com.dogeby.reliccalculator.core.model.mihomo.LightCone
-import com.dogeby.reliccalculator.core.model.mihomo.Path
 import com.dogeby.reliccalculator.core.model.preset.ComparisonOperator
 import com.dogeby.reliccalculator.core.model.preset.Preset
 import com.dogeby.reliccalculator.core.model.report.AffixCount
@@ -22,7 +20,6 @@ import com.dogeby.reliccalculator.core.model.report.AttrComparisonReport
 import com.dogeby.reliccalculator.core.model.report.CharacterReport
 import com.dogeby.reliccalculator.core.model.report.RelicReport
 import kotlinx.datetime.Instant
-import kotlinx.datetime.toInstant
 import org.jetbrains.annotations.TestOnly
 
 @Entity(tableName = "character_reports")
@@ -67,13 +64,7 @@ val sampleCharacterReportEntity = CharacterReportEntity(
     characterId = "1212",
     character = Character(
         id = "1212",
-        name = "",
-        icon = "",
-        preview = "",
-        portrait = "",
-        path = Path("", "", ""),
-        element = Element("", "", ""),
-        lightCone = LightCone("", "", "", ""),
+        lightCone = LightCone("", 5, 1, 80),
         relics = emptyList(),
         relicSets = emptyList(),
         attributes = emptyList(),
@@ -118,5 +109,5 @@ val sampleCharacterReportEntity = CharacterReportEntity(
             count = it,
         )
     },
-    generationTime = "2024-02-11T00:04:07.553347500Z".toInstant(),
+    generationTime = Instant.parse("2024-02-11T00:04:07.553347500Z"),
 )
