@@ -27,7 +27,6 @@ fun LazyGridScope.characterSimpleReportCardList(
         is CharSimpleReportCardListUiState.Success -> {
             items(
                 items = charSimpleReportCardListUiState.characterSimpleReportCards,
-                key = { it.id },
             ) {
                 CharacterSimpleReportCard(
                     charSimpleReportCardUiState = it,
