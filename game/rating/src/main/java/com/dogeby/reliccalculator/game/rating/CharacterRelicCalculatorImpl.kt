@@ -127,6 +127,7 @@ class CharacterRelicCalculatorImpl @Inject constructor() : CharacterRelicCalcula
             type = attrComparison.type,
             field = attrComparison.field,
             comparedValue = attrComparison.comparedValue,
+            display = attrComparison.display,
             comparisonOperator = attrComparison.comparisonOperator,
             isPass = isPass,
         )

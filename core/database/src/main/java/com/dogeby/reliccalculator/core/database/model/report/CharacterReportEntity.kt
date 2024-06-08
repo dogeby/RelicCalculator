@@ -99,6 +99,7 @@ val sampleCharacterReportEntity = CharacterReportEntity(
             type = "AttackDelta",
             field = "atk",
             comparedValue = 500.0f,
+            display = "500.0",
             comparisonOperator = ComparisonOperator.GREATER_THAN,
             isPass = false,
         ),

@@ -9,6 +9,7 @@ data class AttrComparisonReport(
     val type: String,
     val field: String,
     @SerialName("compared_value") val comparedValue: Float,
+    val display: String,
     @SerialName("comparison_operator") val comparisonOperator: ComparisonOperator,
     @SerialName("is_pass") val isPass: Boolean,
 )
