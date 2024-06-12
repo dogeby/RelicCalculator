@@ -49,14 +49,12 @@ fun RelicMainStatRow(
                     modifier = Modifier.weight(1f),
                     color = colors.textColor,
                     maxLines = 1,
-                    style = MaterialTheme.typography.bodyLarge,
                 )
                 Text(
                     text = display,
                     modifier = Modifier.widthIn(min = 75.dp),
                     color = colors.textColor,
                     maxLines = 1,
-                    style = MaterialTheme.typography.bodyLarge,
                 )
             }
         }
@@ -98,6 +96,7 @@ fun RelicSubStatRow(
                     text = name,
                     modifier = Modifier.weight(1f),
                     color = colors.textColor,
+                    style = MaterialTheme.typography.bodyMedium,
                 )
                 Text(
                     text = "+$count",
@@ -112,6 +111,7 @@ fun RelicSubStatRow(
                     modifier = Modifier.widthIn(min = 75.dp),
                     maxLines = 1,
                     color = colors.textColor,
+                    style = MaterialTheme.typography.bodyMedium,
                 )
             }
         }
