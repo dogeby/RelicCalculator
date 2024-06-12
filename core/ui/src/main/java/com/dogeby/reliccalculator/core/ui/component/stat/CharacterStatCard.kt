@@ -74,8 +74,7 @@ private fun PreviewCharacterStatCard() {
                 CharacterStatRowUiState(
                     iconSrc = "icon/property/IconCriticalChance.png",
                     name = "CRIT Rate",
-                    display = "5.0",
-                    isPercent = true,
+                    display = "5.0%",
                     comparedDisplay = "3.0",
                     comparisonOperatorSymbol = ">=",
                     isComparisonPass = true,
