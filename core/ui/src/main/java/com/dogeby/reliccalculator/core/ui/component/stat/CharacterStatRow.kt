@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PlainTooltip
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TooltipBox
@@ -68,15 +69,17 @@ fun CharacterStatRow(
                         modifier = Modifier.size(24.dp),
                         colorFilter = ColorFilter.tint(iconColor),
                     )
-                    Text(
-                        text = name,
-                        modifier = Modifier.weight(1f),
-                        color = textColor,
-                    )
-                    Text(
-                        text = display,
-                        color = textColor,
-                    )
+                    ProvideTextStyle(value = MaterialTheme.typography.bodyMedium) {
+                        Text(
+                            text = name,
+                            modifier = Modifier.weight(1f),
+                            color = textColor,
+                        )
+                        Text(
+                            text = display,
+                            color = textColor,
+                        )
+                    }
                 }
             }
         }
