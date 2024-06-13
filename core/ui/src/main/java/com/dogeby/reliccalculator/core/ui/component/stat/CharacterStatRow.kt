@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PlainTooltip
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TooltipBox
@@ -20,7 +21,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dogeby.reliccalculator.core.ui.component.PercentableText
 import com.dogeby.reliccalculator.core.ui.component.image.GameImage
 import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 import com.dogeby.reliccalculator.core.ui.theme.comparisonFailureColor
@@ -69,16 +69,17 @@ fun CharacterStatRow(
                         modifier = Modifier.size(24.dp),
                         colorFilter = ColorFilter.tint(iconColor),
                     )
-                    Text(
-                        text = name,
-                        modifier = Modifier.weight(1f),
-                        color = textColor,
-                    )
-                    PercentableText(
-                        text = display,
-                        isPercent = isPercent,
-                        color = textColor,
-                    )
+                    ProvideTextStyle(value = MaterialTheme.typography.bodyMedium) {
+                        Text(
+                            text = name,
+                            modifier = Modifier.weight(1f),
+                            color = textColor,
+                        )
+                        Text(
+                            text = display,
+                            color = textColor,
+                        )
+                    }
                 }
             }
         }
@@ -89,7 +90,6 @@ data class CharacterStatRowUiState(
     val iconSrc: String,
     val name: String,
     val display: String,
-    val isPercent: Boolean,
     val comparedDisplay: String? = null,
     val comparisonOperatorSymbol: String? = null,
     val isComparisonPass: Boolean? = null,
@@ -131,8 +131,7 @@ fun PreviewCharacterStatRow_default() {
             characterStatRowUiState = CharacterStatRowUiState(
                 iconSrc = "icon/property/IconCriticalChance.png",
                 name = "CRIT Rate",
-                display = "5.0",
-                isPercent = true,
+                display = "5.0%",
             ),
             modifier = Modifier.width(160.dp),
         )
@@ -147,9 +146,8 @@ fun PreviewCharacterStatRow_attrComparison_success() {
             characterStatRowUiState = CharacterStatRowUiState(
                 iconSrc = "icon/property/IconCriticalChance.png",
                 name = "CRIT Rate",
-                display = "5.0",
-                isPercent = true,
-                comparedDisplay = "3.0",
+                display = "5.0%",
+                comparedDisplay = "3.0%",
                 comparisonOperatorSymbol = ">=",
                 isComparisonPass = true,
             ),
@@ -166,9 +164,8 @@ fun PreviewCharacterStatRow_attrComparison_fail() {
             characterStatRowUiState = CharacterStatRowUiState(
                 iconSrc = "icon/property/IconCriticalChance.png",
                 name = "CRIT Rate",
-                display = "5.0",
-                isPercent = true,
-                comparedDisplay = "6.0",
+                display = "5.0%",
+                comparedDisplay = "6.0%",
                 comparisonOperatorSymbol = ">=",
                 isComparisonPass = false,
             ),
