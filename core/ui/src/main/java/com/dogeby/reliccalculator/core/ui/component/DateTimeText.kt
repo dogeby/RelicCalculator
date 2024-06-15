@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextLayoutResult
@@ -28,12 +29,14 @@ import kotlinx.datetime.format.FormatStringsInDatetimeFormats
 import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.datetime.toLocalDateTime
 
+private const val DEFAULT_FORMAT_PATTERN = "yy-MM-dd"
+
 @OptIn(FormatStringsInDatetimeFormats::class)
 @Composable
 fun DateTimeText(
     instant: Instant,
-    formatPattern: String,
     modifier: Modifier = Modifier,
+    formatPattern: String = DEFAULT_FORMAT_PATTERN,
     color: Color = Color.Unspecified,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
@@ -50,7 +53,7 @@ fun DateTimeText(
     onTextLayout: ((TextLayoutResult) -> Unit)? = null,
     style: TextStyle = LocalTextStyle.current,
 ) {
-    val dateTimeFormat by remember(formatPattern) {
+    var dateTimeFormat by remember(formatPattern) {
         mutableStateOf(
             LocalDateTime.Format {
                 byUnicodePattern(formatPattern)
@@ -76,7 +79,16 @@ fun DateTimeText(
         softWrap = softWrap,
         maxLines = maxLines,
         minLines = minLines,
-        onTextLayout = onTextLayout,
+        onTextLayout = {
+            if (it.hasVisualOverflow) {
+                dateTimeFormat = LocalDateTime.Format {
+                    byUnicodePattern(DEFAULT_FORMAT_PATTERN)
+                }
+            }
+            if (onTextLayout != null) {
+                onTextLayout(it)
+            }
+        },
         style = style,
     )
 }
