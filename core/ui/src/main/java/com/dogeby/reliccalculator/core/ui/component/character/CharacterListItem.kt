@@ -91,14 +91,14 @@ fun CharacterListItemWithUpdatedDate(
                     text = "${stringResource(id = R.string.updated)}: ",
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.labelSmall,
                 )
                 DateTimeText(
                     instant = updatedDate,
                     formatPattern = UPDATED_DATE_FORMAT_PATTERN,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.labelSmall,
                 )
             }
         },
