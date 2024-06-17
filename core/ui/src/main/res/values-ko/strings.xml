@@ -25,4 +25,6 @@
     <string name="updated">Updated</string>
 
     <string name="record">기록</string>
+    <string name="total">총합</string>
+    <string name="effective_sub_stats">유효 보조 속성</string>
 </resources>
