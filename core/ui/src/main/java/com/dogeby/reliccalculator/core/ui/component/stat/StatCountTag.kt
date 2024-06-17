@@ -23,9 +23,7 @@ import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 
 @Composable
 fun StatCountTag(
-    iconSrc: String,
-    name: String,
-    count: Int,
+    statCountTagUiState: StatCountTagUiState,
     modifier: Modifier = Modifier,
     shape: Shape = RoundedCornerShape(8.dp),
     color: Color = MaterialTheme.colorScheme.surface,
@@ -40,27 +38,37 @@ fun StatCountTag(
             horizontalArrangement = Arrangement.spacedBy(4.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            GameImage(
-                src = iconSrc,
-                modifier = Modifier.size(16.dp),
-                colorFilter = ColorFilter.tint(contentColorFor(color)),
-            )
-            Text(
-                text = "$name · $count",
-                style = MaterialTheme.typography.labelMedium,
-            )
+            with(statCountTagUiState) {
+                GameImage(
+                    src = iconSrc,
+                    modifier = Modifier.size(16.dp),
+                    colorFilter = ColorFilter.tint(contentColorFor(color)),
+                )
+                Text(
+                    text = "$name · $count",
+                    style = MaterialTheme.typography.labelMedium,
+                )
+            }
         }
     }
 }
+
+data class StatCountTagUiState(
+    val iconSrc: String,
+    val name: String,
+    val count: Int,
+)
 
 @Preview(apiLevel = 33)
 @Composable
 private fun PreviewStatCountTag() {
     RelicCalculatorTheme {
         StatCountTag(
-            iconSrc = "icon/property/IconCriticalChance.png",
-            name = "CRIT Rate",
-            count = 32,
+            StatCountTagUiState(
+                iconSrc = "icon/property/IconCriticalChance.png",
+                name = "CRIT Rate",
+                count = 32,
+            ),
             color = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
         )
     }
