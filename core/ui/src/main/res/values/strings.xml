@@ -27,5 +27,5 @@
     <string name="record">Record</string>
     <string name="total">Total</string>
     <string name="effective_sub_stats">Effective Sub Stats</string>
-
+    <string name="superimposition">Superimposition Lv.%1$d</string>
 </resources>

@@ -12,3 +12,7 @@ val Pink40 = Color(0xFF7D5260)
 
 val comparisonSuccessColor = Color(0xFF10B981)
 val comparisonFailureColor = Color(0xFFEF4444)
+
+val ThreeStarRarityColor = Color(0xFF73b0f4)
+val FourStarRarityColor = Color(0xFFc197ff)
+val FiveStarRarityColor = Color(0xFFffcf70)
