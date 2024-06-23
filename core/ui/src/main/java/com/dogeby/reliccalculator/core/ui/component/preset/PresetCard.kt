@@ -170,6 +170,7 @@ fun PresetCard(
             HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
             SubAffixWeightsWithInfoList(
                 subAffixWeightsWithInfo = presetWithDetails.subAffixWeightsWithInfo,
+                modifier = Modifier.padding(16.dp),
             )
         }
     }
@@ -398,9 +399,7 @@ internal fun SubAffixWeightsWithInfoList(
 ) {
     val backgroundColor = MaterialTheme.colorScheme.surface
     LazyRow(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp),
+        modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(
             space = 8.dp,
             alignment = Alignment.CenterHorizontally,
