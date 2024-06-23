@@ -76,11 +76,11 @@ import com.dogeby.reliccalculator.core.ui.theme.RelicCalculatorTheme
 @Composable
 fun PresetCard(
     presetWithDetails: PresetWithDetails,
-    onEditMenuItemClick: (id: String) -> Unit,
-    onAutoUpdateChanged: (id: String, isAutoUpdate: Boolean) -> Unit,
     modifier: Modifier = Modifier,
     shape: Shape = CardDefaults.shape,
     colors: CardColors = CardDefaults.cardColors(),
+    onEditMenuItemClick: ((id: String) -> Unit)? = null,
+    onAutoUpdateChanged: ((id: String, isAutoUpdate: Boolean) -> Unit)? = null,
 ) {
     Card(
         modifier = modifier.size(360.dp, 420.dp),
@@ -100,48 +100,61 @@ fun PresetCard(
                             mutableStateOf(false)
                         }
 
-                        IconButton(
-                            onClick = { expanded = true },
-                            modifier = Modifier.size(48.dp),
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.MoreVert,
-                                contentDescription = null,
-                            )
+                        if (onEditMenuItemClick != null || onAutoUpdateChanged != null) {
+                            IconButton(
+                                onClick = { expanded = true },
+                                modifier = Modifier.size(48.dp),
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.MoreVert,
+                                    contentDescription = null,
+                                )
+                            }
                         }
                         DropdownMenu(
                             expanded = expanded,
                             onDismissRequest = { expanded = !expanded },
                         ) {
-                            DropdownMenuItem(
-                                text = {
-                                    Text(text = stringResource(id = R.string.edit))
-                                },
-                                onClick = { onEditMenuItemClick(presetWithDetails.characterId) },
-                            )
-                            DropdownMenuItem(
-                                text = {
-                                    Text(
-                                        text = stringResource(
-                                            id = R.string.default_preset_auto_update,
-                                        ),
-                                    )
-                                },
-                                onClick = {
-                                    onAutoUpdateChanged(
-                                        presetWithDetails.characterId,
-                                        !presetWithDetails.isAutoUpdate,
-                                    )
-                                },
-                                trailingIcon = {
-                                    Switch(
-                                        checked = presetWithDetails.isAutoUpdate,
-                                        onCheckedChange = {
-                                            onAutoUpdateChanged(presetWithDetails.characterId, it)
-                                        },
-                                    )
-                                },
-                            )
+                            onEditMenuItemClick?.let {
+                                DropdownMenuItem(
+                                    text = {
+                                        Text(text = stringResource(id = R.string.edit))
+                                    },
+                                    onClick = {
+                                        onEditMenuItemClick(
+                                            presetWithDetails.characterId,
+                                        )
+                                    },
+                                )
+                            }
+                            onAutoUpdateChanged?.let {
+                                DropdownMenuItem(
+                                    text = {
+                                        Text(
+                                            text = stringResource(
+                                                id = R.string.default_preset_auto_update,
+                                            ),
+                                        )
+                                    },
+                                    onClick = {
+                                        onAutoUpdateChanged(
+                                            presetWithDetails.characterId,
+                                            !presetWithDetails.isAutoUpdate,
+                                        )
+                                    },
+                                    trailingIcon = {
+                                        Switch(
+                                            checked = presetWithDetails.isAutoUpdate,
+                                            onCheckedChange = {
+                                                onAutoUpdateChanged(
+                                                    presetWithDetails.characterId,
+                                                    it,
+                                                )
+                                            },
+                                        )
+                                    },
+                                )
+                            }
                         }
                     }
                 }
@@ -157,6 +170,7 @@ fun PresetCard(
             HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
             SubAffixWeightsWithInfoList(
                 subAffixWeightsWithInfo = presetWithDetails.subAffixWeightsWithInfo,
+                modifier = Modifier.padding(16.dp),
             )
         }
     }
@@ -379,19 +393,14 @@ private fun MainPieceAffixWeightItem(
 }
 
 @Composable
-private fun SubAffixWeightsWithInfoList(
+internal fun SubAffixWeightsWithInfoList(
     subAffixWeightsWithInfo: List<AffixWeightWithInfo>,
     modifier: Modifier = Modifier,
 ) {
     val backgroundColor = MaterialTheme.colorScheme.surface
     LazyRow(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(
-            space = 8.dp,
-            alignment = Alignment.CenterHorizontally,
-        ),
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         if (subAffixWeightsWithInfo.isEmpty()) {
             item {
@@ -461,11 +470,11 @@ private fun PreviewPresetCard() {
                     )
                 },
             ),
+            modifier = Modifier.padding(8.dp),
             onEditMenuItemClick = {},
             onAutoUpdateChanged = { _, autoUpdate ->
                 isAutoUpdate = autoUpdate
             },
-            modifier = Modifier.padding(8.dp),
         )
     }
 }

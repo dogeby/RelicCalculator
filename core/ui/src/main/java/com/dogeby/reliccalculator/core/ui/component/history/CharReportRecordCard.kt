@@ -78,7 +78,7 @@ fun CharReportRecordCard(
                     ) {
                         Text(
                             text = stringResource(id = R.string.record),
-                            style = MaterialTheme.typography.titleLarge,
+                            style = MaterialTheme.typography.titleMedium,
                         )
                         Icon(
                             imageVector = Icons.AutoMirrored.Default.ArrowForward,

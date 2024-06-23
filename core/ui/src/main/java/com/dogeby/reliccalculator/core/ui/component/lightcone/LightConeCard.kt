@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,50 +33,57 @@ import com.dogeby.reliccalculator.core.ui.theme.ThreeStarRarityColor
 fun LightConeCard(
     lightConeCardUiState: LightConeCardUiState,
     modifier: Modifier = Modifier,
+    shape: Shape = CardDefaults.shape,
+    colors: CardColors = CardDefaults.cardColors(),
 ) {
-    Row(
-        modifier = modifier
-            .padding(
-                horizontal = 16.dp,
-                vertical = 8.dp,
-            ),
-        verticalAlignment = Alignment.CenterVertically,
+    Card(
+        shape = shape,
+        colors = colors,
     ) {
-        with(lightConeCardUiState) {
-            GameImage(
-                src = lightConeCardUiState.iconSrc,
-                modifier = Modifier
-                    .size(54.dp)
-                    .clip(CircleShape),
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-            Column(Modifier.weight(1f)) {
-                Text(
-                    text = lightConeCardUiState.name,
-                    color = when (rarity) {
-                        3 -> {
-                            ThreeStarRarityColor
-                        }
-                        4 -> {
-                            FourStarRarityColor
-                        }
-                        5 -> {
-                            FiveStarRarityColor
-                        }
-                        else -> {
-                            Color.Unspecified
-                        }
-                    },
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 2,
-                    style = MaterialTheme.typography.titleMedium,
+        Row(
+            modifier = modifier
+                .padding(
+                    horizontal = 16.dp,
+                    vertical = 8.dp,
+                ),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            with(lightConeCardUiState) {
+                GameImage(
+                    src = lightConeCardUiState.iconSrc,
+                    modifier = Modifier
+                        .size(54.dp)
+                        .clip(CircleShape),
                 )
-                Text(
-                    text = "Lv.$level ${stringResource(id = R.string.superimposition, rank)} ",
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1,
-                    style = MaterialTheme.typography.labelSmall,
-                )
+                Spacer(modifier = Modifier.width(16.dp))
+                Column(Modifier.weight(1f)) {
+                    Text(
+                        text = lightConeCardUiState.name,
+                        color = when (rarity) {
+                            3 -> {
+                                ThreeStarRarityColor
+                            }
+                            4 -> {
+                                FourStarRarityColor
+                            }
+                            5 -> {
+                                FiveStarRarityColor
+                            }
+                            else -> {
+                                Color.Unspecified
+                            }
+                        },
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 2,
+                        style = MaterialTheme.typography.titleMedium,
+                    )
+                    Text(
+                        text = "Lv.$level ${stringResource(id = R.string.superimposition, rank)} ",
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1,
+                        style = MaterialTheme.typography.labelSmall,
+                    )
+                }
             }
         }
     }

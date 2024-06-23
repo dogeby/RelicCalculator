@@ -28,4 +28,5 @@
     <string name="total">총합</string>
     <string name="effective_sub_stats">유효 보조 속성</string>
     <string name="superimposition">중첩 %1$d단계</string>
+    <string name="preset">프리셋</string>
 </resources>
