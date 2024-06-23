@@ -73,7 +73,7 @@ fun CharSimplePresetCard(
                 ) {
                     Text(
                         text = stringResource(id = R.string.preset),
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.titleMedium,
                     )
                     Icon(
                         imageVector = Icons.AutoMirrored.Default.ArrowForward,
