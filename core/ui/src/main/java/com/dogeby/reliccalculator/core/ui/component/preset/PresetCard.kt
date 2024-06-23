@@ -400,10 +400,7 @@ internal fun SubAffixWeightsWithInfoList(
     val backgroundColor = MaterialTheme.colorScheme.surface
     LazyRow(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(
-            space = 8.dp,
-            alignment = Alignment.CenterHorizontally,
-        ),
+        horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         if (subAffixWeightsWithInfo.isEmpty()) {
             item {
